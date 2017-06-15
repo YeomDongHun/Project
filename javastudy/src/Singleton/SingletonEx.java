@@ -21,6 +21,6 @@ public class SingletonEx {
 	}
 }
 
-sssss
+
 
 
