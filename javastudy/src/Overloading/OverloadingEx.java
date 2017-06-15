@@ -21,7 +21,7 @@ public class OverloadingEx {
 		ol.add(3, 5.5);
 	}
 
-    public static
+    public static String str;
 }
 
 
