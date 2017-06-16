@@ -8,7 +8,12 @@ class Singleton{
 	}
 }
 
+class git{
+	
+}
+
 public class SingletonEx {
+	
 	public static void main(String[] args) {
 		Singleton st1 = Singleton.getInstance(); // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ »£√‚
 		Singleton st2 = Singleton.getInstance();
@@ -19,6 +24,7 @@ public class SingletonEx {
 			System.out.println("¥Ÿ∏• ∞¥√º");
 		}
 	}
+	
 }
 
 
