@@ -24,6 +24,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
+<<<<<<< HEAD
 	<definition name="goodsList_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsList.jsp"/>
 	</definition>
@@ -45,6 +46,17 @@
 	<definition name="memberDiyList" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
 	</definition>
+=======
+	<definition name="main_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	</definition>
+	
+	<definition name="joinEmail" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	</definition>
+	
+	
+>>>>>>> 0fcb6699447416b9557c4b133261fa64c9793b3c
 
 
 </tiles-definitions>
