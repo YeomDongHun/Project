@@ -20,11 +20,14 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
 	</definition>
 	
+	<definition name="main_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	</definition>
+	
 	<definition name="joinEmail" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step1.jsp"/>
 	</definition>
 	
-<<<<<<< HEAD
 	<definition name="joinForm" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step2.jsp"/>
 	</definition>
@@ -43,34 +46,6 @@
 	
 	<definition name="findform" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/find_form.jsp"/>
-=======
-	<definition name="goodsList_tiles" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsList.jsp"/>
-	</definition>
-	
-	<definition name="goodsDIY_tiles" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Goods/Diy/goodsDIY.jsp"/>
-	</definition>
-	
-
-
-	<definition name="memberNoticeList" extends="layoutBoard">
-		
-		<put-attribute name="body2" value="/WEB-INF/views/Board/NoticBoard/memberNoticeList.jsp"/>
-		<put-attribute name="body1" value="/WEB-INF/views/Board/BoardCategory.jsp"/>
-		
-	</definition>
-	
-	
-	<definition name="memberDiyList" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
-	</definition>
-
-
-	
-	<definition name="joinEmail" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
->>>>>>> 8370cda667c6f7d801250ee1591c064536d6d578
 	</definition>
 	
 	<definition name="mypage" extends="layout">
@@ -96,6 +71,36 @@
 	<definition name="mypoint" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/myPoint.jsp"/>
 	</definition>
+	
+	<definition name="mybasket" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/myBasket.jsp"/>
+	</definition>
+	
+	
+	<definition name="goodsList_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsList.jsp"/>
+	</definition>
+	
+	<definition name="goodsDIY_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Goods/Diy/goodsDIY.jsp"/>
+	</definition>
+	
+
+	<definition name="memberNoticeList" extends="layoutBoard">
+		
+		<put-attribute name="body2" value="/WEB-INF/views/Board/NoticBoard/memberNoticeList.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/views/Board/BoardCategory.jsp"/>
+		
+	</definition>
+	
+	
+	<definition name="memberDiyList" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
+	</definition>
+
+
+	
+	
 	
 	
 	
