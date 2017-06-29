@@ -10,10 +10,12 @@
   
   <li><a href="#">장바구니</a></li>
   
-  <li><a href="#">위시리스트</a>
+  <li><a href="#">위시리스트</a></li>
   
-  <li><a href="#">나만의 레시피</a>
+  <li><a href="memberDiyList">나만의 레시피</a></li>
   
-  <li><a href="#">고객 센터</a>
+  <li><a href="#">고객 센터</a></li>
+  
+   <li><a href="memberNoticeList">공지 사항</a></li>
 </ul>
 
