@@ -53,6 +53,21 @@
 	</definition>
 	
 	
+	<definition name="memberQnAList" extends="layoutBoard">
+		
+		<put-attribute name="body2" value="/WEB-INF/views/Board/QnABoard/memberQnAList.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/views/Board/FAQandQnACategory.jsp"/>
+		
+	</definition>
+	
+	
+	
+	<definition name="memberFaqList" extends="layoutBoard">
+		
+		<put-attribute name="body2" value="/WEB-INF/views/Board/FAQBoard/memberFaqList.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/views/Board/FAQandQnACategory.jsp"/>
+		
+	</definition>
 
 
 </tiles-definitions>
