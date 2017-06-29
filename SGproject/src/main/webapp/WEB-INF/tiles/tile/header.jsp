@@ -1,21 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <ul>
-  <li><a href="goodsList"> »óÇ° ¸®½ºÆ® </a> </li>
+  <li><a href="goodsList"> ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ </a> </li>
   
   <li> <a href="goodsDIY">DIY</a> </li>
   
-  <li><a href="#">¸¶ÀÌÆäÀÌÁö</a></li>
+  <li><a href="mypage">ë§ˆì´íŽ˜ì´ì§€</a></li>
   
-  <li><a href="#">Àå¹Ù±¸´Ï</a></li>
+  <li><a href="myBasketList">ìž¥ë°”êµ¬ë‹ˆ</a></li>
   
-  <li><a href="#">À§½Ã¸®½ºÆ®</a></li>
+  <li><a href="wishList">ìœ„ì‹œë¦¬ìŠ¤íŠ¸</a></li>
   
-  <li><a href="memberDiyList">³ª¸¸ÀÇ ·¹½ÃÇÇ</a></li>
+  <li><a href="memberDiyList">ë‚˜ë§Œì˜ ë ˆì‹œí”¼</a></li>
   
-  <li><a href="memberFaqList">°í°´ ¼¾ÅÍ</a></li>
+  <li><a href="memberFaqList">ê³ ê° ì„¼í„°</a></li>
   
-   <li><a href="memberNoticeList">°øÁö »çÇ×</a></li>
+   <li><a href="memberNoticeList">ê³µì§€ ì‚¬í•­</a></li>
 </ul>
 
