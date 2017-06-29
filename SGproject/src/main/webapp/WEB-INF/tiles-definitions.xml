@@ -17,13 +17,54 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
-	<definition name="main_tiles" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<definition name="joinEmail" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step1.jsp"/>
 	</definition>
 	
-	<definition name="joinEmail" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<definition name="joinForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step2.jsp"/>
 	</definition>
+	
+	<definition name="joinBody" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step3.jsp"/>
+	</definition>
+	
+	<definition name="joinSuccess" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_complete.jsp"/>
+	</definition>
+	
+	<definition name="loginForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/login_Form.jsp"/>
+	</definition>
+	
+	<definition name="findform" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/find_form.jsp"/>
+	</definition>
+	
+	<definition name="mypage" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/mypage.jsp"/>
+	</definition>
+	
+	<definition name="memberInfo" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/member_Info.jsp"/>
+	</definition>
+	
+	<definition name="memUpdateForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/mem_update_Form.jsp"/>
+	</definition>
+	
+	<definition name="memUpdateAction" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/mem_update_Action.jsp"/>
+	</definition>
+	
+	<definition name="memDeleteForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/mem_delete_Form.jsp"/>
+	</definition>
+	
+	<definition name="mypoint" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/myPoint.jsp"/>
+	</definition>
+	
 	
 	
 
