@@ -24,7 +24,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step1.jsp"/>
 	</definition>
 	
-<<<<<<< HEAD
+
 	<definition name="joinForm" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step2.jsp"/>
 	</definition>
@@ -43,7 +43,8 @@
 	
 	<definition name="findform" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/find_form.jsp"/>
-=======
+	</definition>
+	
 	<definition name="goodsList_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsList.jsp"/>
 	</definition>
@@ -67,11 +68,7 @@
 	</definition>
 
 
-	
-	<definition name="joinEmail" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
->>>>>>> 8370cda667c6f7d801250ee1591c064536d6d578
-	</definition>
+
 	
 	<definition name="mypage" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/mypage.jsp"/>
