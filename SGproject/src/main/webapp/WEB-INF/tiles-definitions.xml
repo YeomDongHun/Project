@@ -13,8 +13,37 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
 	</definition>
 	
+	<definition name="layoutBoard" template="/WEB-INF/tiles/Layout/layout-Board.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/header.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/tiles/tile/body.jsp"/>
+		<put-attribute name="body2" value="/WEB-INF/tiles/tile/body2.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
+	</definition>
+	
 	<definition name="main_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	</definition>
+	
+	<definition name="goodsList_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsList.jsp"/>
+	</definition>
+	
+	<definition name="goodsDIY_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Goods/Diy/goodsDIY.jsp"/>
+	</definition>
+	
+
+
+	<definition name="memberNoticeList" extends="layoutBoard">
+		
+		<put-attribute name="body2" value="/WEB-INF/views/Board/NoticBoard/memberNoticeList.jsp"/>
+		<put-attribute name="body1" value="/WEB-INF/views/Board/BoardCategory.jsp"/>
+		
+	</definition>
+	
+	
+	<definition name="memberDiyList" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
 	</definition>
 
 
