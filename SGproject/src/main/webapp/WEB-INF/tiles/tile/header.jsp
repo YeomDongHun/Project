@@ -14,7 +14,7 @@
   
   <li><a href="memberDiyList">나만의 레시피</a></li>
   
-  <li><a href="#">고객 센터</a></li>
+  <li><a href="memberFaqList">고객 센터</a></li>
   
    <li><a href="memberNoticeList">공지 사항</a></li>
 </ul>
