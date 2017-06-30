@@ -115,10 +115,18 @@
 		
 	</definition>
 	
-	
-	
+
 	<definition name="mywish" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Member/myWish.jsp"/>
+	</definition>
+	
+	
+	<definition name="tradeInfo" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/myTrade.jsp"/>
+	</definition>
+	
+	<definition name="tradeInfoView" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/myTrade_View.jsp"/>
 	</definition>
 	
 	
