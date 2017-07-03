@@ -15,7 +15,7 @@ html,body{
 </style>
 <title>샐러드구쁘다</title>
 </head>
-<body>
+<body style="overflower-x:hidden;">
 
 <div>
 <tiles:insertAttribute name="header" />
