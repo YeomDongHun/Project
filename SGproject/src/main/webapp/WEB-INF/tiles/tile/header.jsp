@@ -126,7 +126,8 @@
     <div id="logoWrap">
     	<a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
     </div>
-	<div id="topMenu">
+    
+	<div id="topMenu" style="z-index:0;">
 		<ul>
   			<li class="topMenuLi">
   				<a class="menuLink" href="goodsList"> 상품 리스트 </a>

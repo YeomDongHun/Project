@@ -28,7 +28,7 @@
 <body>
 
 <!-- Place somewhere in the <body> of your page -->
-<div class="flexslider" style="width: 100%; margin:auto; ">
+<div class="flexslider" style="width: 100%; margin:auto; z-index: -10;">
 
   <ul class="slides">
     <li>
