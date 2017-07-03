@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-sdfasdfsdfasdfdsaf
-</body>
+<form>
+이름 : <input type="text">
+<br>
+주민 번호 : <input type="text">
+</form></body>
 </html>

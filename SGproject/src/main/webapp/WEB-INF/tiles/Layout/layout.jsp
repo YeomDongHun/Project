@@ -11,14 +11,13 @@
      html, body{width:100%; height:100%; padding:0px; margin:0px;}
    </style>
 </head>
-<body style="overflower-x:hidden;">
-
- <div style="background-color:#D9E5FF; height:20%;">
+<body>
+ <div style="background-color:#D9E5FF; height:20%; margin:auto; ">
 <tiles:insertAttribute name="header" />
 </div>
 
 
-<div style="background-color:#FFD8D8; height:70%;">
+<div style="background-color:#FFD8D8; height:70%; overflow-x:hidden; ">
  
 <tiles:insertAttribute name="body" />
 </div>
@@ -27,5 +26,7 @@
 
 <tiles:insertAttribute name="footer" />
 </div>
+
+
 </body>
 </html>

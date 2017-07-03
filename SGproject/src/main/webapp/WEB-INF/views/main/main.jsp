@@ -18,22 +18,24 @@
 <script type="text/javascript" charset="utf-8">
   $(window).load(function() {
     $('.flexslider').flexslider({
-    	animation: "fade"
+    	animation: "slider"
     });
   });
 </script>
 	 
 </head>
-<body style="overflower-x:hidden;">
+<body>
 
 <!-- Place somewhere in the <body> of your page -->
 <div class="flexslider" style="width: 100%; margin:auto; ">
+
   <ul class="slides">
     <li>
     <center>
      <iframe width="560" height="315" src="https://www.youtube.com/embed/vwi9Kq7w8Xw" frameborder="0" ></iframe>
     </center></li>
     <li>
+                       <img src="resources/images/2.jpg" style="height: 250px"/>
                  
     </li>
     <li>
