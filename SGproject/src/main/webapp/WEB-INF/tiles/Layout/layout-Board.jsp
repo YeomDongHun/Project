@@ -15,7 +15,10 @@
      }
      
      .div2{
-     	float:right;
+     	float:left;
+     }
+     .div3{
+     	clear:both;
      }
    </style>
 </head>
@@ -36,7 +39,7 @@
 <tiles:insertAttribute name="body2" />
 </div>
 
-<div style="background-color:#CEFBC9; height:10%;">
+<div class="div3" style="background-color:#CEFBC9; height:10%;">
 
 <tiles:insertAttribute name="footer" />
 </div>

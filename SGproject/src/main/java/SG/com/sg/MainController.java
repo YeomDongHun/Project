@@ -1,4 +1,4 @@
-package SG.com.SG;
+package SG.com.sg;
 
 
 import org.springframework.stereotype.Controller;

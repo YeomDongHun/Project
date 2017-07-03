@@ -8,9 +8,10 @@
 
 <!-- Place somewhere in the <head> of your document -->
 
-<link rel="stylesheet" href="resources/flexslider.css" type="text/css">
+<link rel="stylesheet" href="resources/file/css/flexslider.css" type="text/css">
+<link rel="stylesheet" href="resources/file/css/main.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="resources/jquery.flexslider.js"></script>
+<script src="resources/file/js/jquery.flexslider.js"></script>
 
 
 
@@ -31,24 +32,23 @@
 
   <ul class="slides">
     <li>
-    <center>
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/vwi9Kq7w8Xw" frameborder="0" ></iframe>
-    </center></li>
+   		 <img src="resources/file/img/Slide4.jpg" style="height: 300px"/>
+   </li>
+    
     <li>
-                       <img src="resources/images/2.jpg" style="height: 250px"/>
+         <img src="resources/file/img/Slide2.jpg" style="height: 300px"/>
                  
     </li>
     <li>
-      <img src="resources/images/3.jpg" style="height: 250px"/>
+      <img src="resources/file/img/Slide3.jpg" style="height: 300px"/>
     </li>
   </ul>
 </div>
-<div>
-리스트?
-
-
+<div id="wrap">
+  <div id="best_main">best상품</div>
+  <div id="event_main">event메인</div>
+  <div id="review_main">review메인</div>
 </div>
-
 
 
 </body>
