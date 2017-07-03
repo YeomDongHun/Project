@@ -1,4 +1,4 @@
-package SG.com.Board;
+package SG.com.board;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
