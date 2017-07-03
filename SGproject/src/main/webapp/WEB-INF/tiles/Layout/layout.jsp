@@ -6,25 +6,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
- <style type="text/css">
-     html, body{width:100%; height:100%; padding:0px; margin:0px;}
-   </style>
+<style>
+html,body{
+	height:100%;
+	margin:0;
+	padding:0;
+	}
+</style>
+<title>샐러드구쁘다</title>
 </head>
 <body>
 
- <div style="background-color:#D9E5FF; height:20%;">
+<div>
 <tiles:insertAttribute name="header" />
 </div>
 
 
-<div style="background-color:#FFD8D8; height:70%;">
- 
+<div style=height:auto;">
 <tiles:insertAttribute name="body" />
 </div>
 
-<div style="background-color:#CEFBC9; height:10%;">
-
+<div>
 <tiles:insertAttribute name="footer" />
 </div>
 </body>
