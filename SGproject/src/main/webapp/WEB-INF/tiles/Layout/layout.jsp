@@ -11,7 +11,7 @@
      html, body{width:100%; height:100%; padding:0px; margin:0px;}
    </style>
 </head>
-<body>
+<body style="overflower-x:hidden;">
 
  <div style="background-color:#D9E5FF; height:20%;">
 <tiles:insertAttribute name="header" />
