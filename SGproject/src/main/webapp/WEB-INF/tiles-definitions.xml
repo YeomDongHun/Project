@@ -130,6 +130,10 @@
 	</definition>
 	
 	
+	<definition name="goodsDetail_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsDetail.jsp"/>
+	</definition>
+	
 	
 
 

@@ -18,6 +18,11 @@ public class GoodsController {
 		return "goodsDIY_tiles";
 	}
 	
+	@RequestMapping(value="/goodsDetail")
+	public String goodsDetail(Model model){
+		return "goodsDetail_tiles";
+	}
+	
 	
 	
 	
