@@ -5,8 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/webTest/test/css/css3.css" type="text/css">
 </head>
 <body>
-DIY
+<div class="goods">
+<div class="goodsimg">
+<img src="/webTest/test/img/SG_LOGO.png" width="600" height="300" >
+</div>
+</div>
+<div class="diy" >
+<div class="diylist"></div>
+<div class="diylist"></div>
+<div class="diylist"></div>
+<div class="diylist"></div>
+<div class="diylist"></div>
+<div class="diylist"></div>
+<div class="diylist"></div>
+
+</div>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 로그인 SQL -->
+<mapper namespace="login">
+<select id="loginSuccess" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		SELECT * FROM SG_MEMBER WHERE MEMBER_ID = #{MEMBER_ID} 
+	]]>
+	</select>
+	
+	<select id="findId" parameterType="hashmap" resultType="string">
+		<![CDATA[
+			select member_id                        
+			from sg_member                           
+			where member_name=#{MEMBER_NAME_FIND}   
+			and member_email=#{MEMBER_EMAIL_FIND}    
+		]]>
+	</select>
+	
+	  <select id="findPw" parameterType="hasmap" resultType="String">
+	  <![CDATA[
+	  select member_password                 
+	  from sg_member                           
+	  where member_id = #{MEMBER_ID_FIND}   
+	  and member_name=#{MEMBER_NAME_FIND}    
+	  and member_email=#{MEMBER_EMAIL_FIND}   
+		]]>
+		
+		</select>
+</mapper>

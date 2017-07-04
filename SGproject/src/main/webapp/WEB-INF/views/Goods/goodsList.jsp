@@ -1,82 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <script type="text/javascript">
-/* 숫자 , 표시 함수 */
-	var funcSetCurrency = function($) {
-		$('.price-prdc').each(
-				function() {
-					if (!isNaN(Number($(this).text())) && $(this).text())
-						$(this).text(
-								Number($(this).text()).toLocaleString().split('.')[0]);
-				});
-	};
 
-	$(document).ready(function() {
-		funcSetCurrency($);
-	});
-	
-/* 위시리스트 checked  */
-$(document).ready(function(){
-	$('#wish').toggle(function(){
-		$(this).parent().css('height', 'auto');
-	}, function(){
-		$(this).parent().css('height', '18px');
-	});
-});
-	
+function basket(){
+	alert("장바구니에 담았셈");
+}
+
+
+function imgToggle(test){
+var wish = document.getElementById(test.getAttribute("id")).getAttribute("src");
+
+
+if(wish=="/test/img/wishoff.ico"){
+	test.setAttribute( "src", "/test/img/wishon.ico" );
+alert("위시리스트에 담았셈");
+}else{
+test.setAttribute( "src", "/test/img/wishoff.ico" );
+alert("위시리스트에서 삭제");
+}
+
+
+
+}
+
 
 </script>
 </head>
+<div class="searchBar" style="width:1000px; height:100px; padding:auto; margin:auto;">
+<form action="goodsSearch?keyword=${keyword}" method="GET">
+<center>
+<input type="text" name="keyword">
+<input type ="submit" value="상품검색">
+</center>
+</form>
+</div>
 
-
-<div class="goods_list">
-
+<div class="goods_list" style="width:1000px; height:3000px; padding:auto; margin:10px;">
 	
-<c:forEach var="goodsList"  items="${goodsList}" varStatus="stat">	
-<c:url var="viewURL" value="goodsView">
-<c:param name="GOODS_NO" value="${goodsList.GOODS_NO}"/>
-<c:param name="currentPage" value="${currentPage}"/>
-</c:url>	
+	<div class="box" style="border:1px solid black; list-style:none; width:300px; height:370px; float:left; margin:auto;">	
+			
+			<div class="box_image"  style=" width:300px; height:300px; margin:auto;">
+			<img src="/test/img/94_shop1_490874.jpg" width="284" height="284" onclick="javascript:location.href='/test/goodsDetail.jsp'"/></div>
+			<center>
+			<div class="name">상품이름</div>
+			<div class="price">500원</div>
+			</center>
+			
+			<div class="basketWish" style="float:left;">
+			<div class="basket" style="margin:auto; padding-left:10px;float:left;">
+			<img src="/test/img/Elegantthemes-Beautiful-Flat-Cart.ico" width="20" height="20" onclick="basket()"/>
+			</div>
+			<div class="wish" style="margin:auto; padding-left:10px;float:left">
+			<img id="wishoff1" src="/test/img/wishoff.ico" width="20" height="20" onclick="imgToggle(this)"/>
+			</div>
+			</div>
 
-<ul>
-<li class="box">
-<a href="${viewURL}"> 
-<div class="box_image">
-<img src="/resources/goods_upload/${goodsList.GOODS_THUMBNAIL}" width="100" height="100" />
-</a>
+	</div>
+	
+	
+	<div class="box" style="border:1px solid black; list-style:none; width:300px; height:370px; float:left; margin:10px;">	
+			<div class="box_image"  style=" width:300px; height:300px; margin:auto;"><img src="/test/img/94_shop1_490874.jpg" width="284" height="284" onclick="javascript:location.href='/test/goodsDetail.jsp'"/></div>
+			<center>
+			<div class="name">상품이름</div>
+			<div class="price">500원</div>
+			</center>
+			
+			<div class="basketWish" style="float:left;">
+			<div class="basket" style="margin:auto; padding-left:10px;float:left;">
+			<img src="/test/img/Elegantthemes-Beautiful-Flat-Cart.ico" width="20" height="20" onclick="basket()"/>
+			</div>
+			<div class="wish" style="margin:auto; padding-left:10px;float:left">
+			<img id="wishoff2" src="/test/img/wishoff.ico" width="20" height="20" onclick="imgToggle(this)"/>
+			</div>
+			</div>
 
-<dl class="name">
-<dt class="name">>${goodsList.GOODS_NAME}</dt>
-</dl>
+	</div>
+	
+	<div class="box" style="border:1px solid black; list-style:none; width:300px; height:370px; float:left; margin:10px;">	
+			<div class="box_image"  style=" width:300px; height:300px; margin:auto;"><img src="/test/img/94_shop1_490874.jpg" width="284" height="284" onclick="javascript:location.href='/test/goodsDetail.jsp'"/></div>
+			<center>
+			<div class="name">상품이름</div>
+			<div class="price">500원</div>
+			</center>
+			
+			<div class="basketWish" style="float:left;">
+			<div class="basket" style="margin:auto; padding-left:10px;float:left;">
+			<img src="/test/img/Elegantthemes-Beautiful-Flat-Cart.ico" width="20" height="20" onclick="basket()"/>
+			</div>
+			<div class="wish" style="margin:auto; padding-left:10px;float:left">
+			<img id="wishoff3" src="/test/img/wishoff.ico" width="20" height="20" onclick="imgToggle(this)"/>
+			</div>
+			</div>
 
-<dd class="price">
-<p>${goodsList.GOODS_PRICE}원</p> 
-</dd>
+	</div>
+	
+	<div class="box" style="border:1px solid black; list-style:none; width:300px; height:370px; float:left; margin:10px;">	
+			<div class="box_image"  style=" width:300px; height:300px; margin:auto;"><img src="/test/img/94_shop1_490874.jpg" width="284" height="284" onclick="javascript:location.href='/test/goodsDetail.jsp'"/></div>
+			<center>
+			<div class="name">상품이름</div>
+			<div class="price">500원</div>
+			</center>
+			
+			<div class="basketWish" style="float:left;">
+			<div class="basket" style="margin:auto; padding-left:10px;float:left;">
+			<img src="/test/img/Elegantthemes-Beautiful-Flat-Cart.ico" width="20" height="20" onclick="basket()"/>
+			</div>
+			<div class="wish" style="margin:auto; padding-left:10px;float:left">
+			<img id="wishoff4" src="/test/img/wishoff.ico" width="20" height="20" onclick="imgToggle(this)"/>
+			</div>
+			</div>
+
+	</div>
+	
+	
 
 </div>
-</li>
-</ul>
-
-<ul>
-<!-- 구매평갯수  -->
-
-<!-- wish -->
-
-<!-- basket -->
-</ul>
 
 
-</c:forEach>
 
-<!--  등록된 상품이 없을때 -->
-<c:if test="${fn:length(goodsList) le 0}">
-	등록된 상품이 없습니다
-</c:if> 
-</div>
+
+
 
 </html>
