@@ -33,42 +33,35 @@ $(document).ready(function(){
 </script>
 </head>
 
-
 <div class="goods_list">
 
-	
+
 <c:forEach var="goodsList"  items="${goodsList}" varStatus="stat">	
-<c:url var="viewURL" value="goodsView">
+<c:url var="viewURL" value="goodsDetail">
 <c:param name="GOODS_NO" value="${goodsList.GOODS_NO}"/>
 <c:param name="currentPage" value="${currentPage}"/>
 </c:url>	
 
-<ul>
-<li class="box">
+<div class="box">
 <a href="${viewURL}"> 
 <div class="box_image">
-<img src="/resources/goods_upload/${goodsList.GOODS_THUMBNAIL}" width="100" height="100" />
+<img src="/resources/goods_upload/${goodsList.GOODS_THUMBNAIL}" width="284" height="284" />
 </a>
+<center>
+<div class="name">${goodsList.GOODS_NAME}</div>
+<div class="price">${goodsList.GOODS_PRICE}원</div>
+</center>
 
-<dl class="name">
-<dt class="name">>${goodsList.GOODS_NAME}</dt>
-</dl>
-
-<dd class="price">
-<p>${goodsList.GOODS_PRICE}원</p> 
-</dd>
+<div class="basketWish" style="float:left;">
+	<div class="basket">
+	<img src="/test/img/Elegantthemes-Beautiful-Flat-Cart.ico" width="20" height="20" onclick="basket()"/>
+	</div>
+	<div class="wish">
+	<img src="/test/img/Elegantthemes-Beautiful-Flat-Heart.ico" width="20" height="20" onclick="wish()"/>
+	</div>
+</div>
 
 </div>
-</li>
-</ul>
-
-<ul>
-<!-- 구매평갯수  -->
-
-<!-- wish -->
-
-<!-- basket -->
-</ul>
 
 
 </c:forEach>
