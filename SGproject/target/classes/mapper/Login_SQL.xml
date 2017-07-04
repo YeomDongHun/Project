@@ -18,7 +18,7 @@
 		]]>
 	</select>
 	
-	  <select id="findPw" parameterType="hasmap" resultType="String">
+	  <select id="findPw" parameterType="hashmap" resultType="String">
 	  <![CDATA[
 	  select member_password                 
 	  from sg_member                           
