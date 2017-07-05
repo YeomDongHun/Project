@@ -4,4 +4,11 @@
 <!-- 상품 SQL -->
 <mapper namespace="goods">
 
+<select id="goodsList" resultType="hashmap">
+	<![CDATA[
+		
+		SELECT * FROM SG_GOODS where GOODS_ONOFF=0
+	]]>
+	</select>
+
 </mapper>
