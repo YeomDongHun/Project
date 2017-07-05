@@ -22,4 +22,16 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.goodsList();
 	}
 
+	@Override
+	public Map<String, Object> selectOneGoods(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.selectOneGoods(num);
+	}
+
+	@Override
+	public String imageList(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.imageList(num);
+	}
+
 }

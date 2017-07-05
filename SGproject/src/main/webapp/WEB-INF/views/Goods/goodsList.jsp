@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="resources/file/css/css3.css" type="text/css" />
+
 <script type="text/javascript">
 
 function basket(){
@@ -48,31 +51,36 @@ alert("위시리스트에서 삭제");
  <c:choose>
       	  <c:when test="${fn:length(goodsList) > 0}">
 
-			<c:forEach var="list" items="${goodsList}" varStatus="stat">
+			<c:forEach var="goodsList" items="${goodsList}" varStatus="stat">
 						<c:url var="viewURL" value="view" >
-							<c:param name="no" value="${list.GOODS_NO}" />
+							<c:param name="no" value="${goodsList.GOODS_NO}" />
 						    <c:param name="currentPage" value="${currentPage}" />
 						</c:url>
 	
-	
-		<div class="box" style="border:1px solid black; list-style:none; width:300px; height:370px; float:left; margin:auto;">	
-			
-			<div class="box_image"  style=" width:300px; height:300px; margin:auto;">
-			<img src="/test/img/94_shop1_490874.jpg" width="284" height="284" onclick="javascript:location.href='/goodsDetail?goodsNo=${list.GOODS_NO}&currentPage=${currentPage}'"/></div>
+		
+		<div class="box" style="border:0px solid black; list-style:none; width:300px; height:370px; float:left; margin-left: 20;margin-right: 20px; margin-bottom: 50px;">	
+			<hr>
+			<div class="box_image"  style=" width:300px; height:300px; margin:auto; padding-left:8px; margin-top: 10px;">
+			<img src="resources/file/img/${goodsList.GOODS_THUMBNAIL}" width="284" height="284" onclick="javascript:location.href='goodsDetail?goodsNo=${goodsList.GOODS_NO}&currentPage=${currentPage}'"/></div>
+		
 			<center>
-			<div class="name">${list.GOODS_NAME}</div>
-			<div class="price">${list.GOODS_PRICE }</div>
+			<div class="name" style="font-family: PureunJeonnam;">${goodsList.GOODS_NAME}</div>
+			<div class="price"  style="font-family: PureunJeonnam;">${goodsList.GOODS_PRICE }</div>
 			</center>
 			
 			<div class="basketWish" style="float:left;">
-			<div class="basket" style="margin:auto; padding-left:10px;float:left;">
+			
+			<div class="basket" style="margin:auto;float:left;margin-left: 10px;">
 			<img src="resources/file/img/basket.ico" width="20" height="20" onclick="basket()"/>
 			</div>
 			<div class="wish" style="margin:auto; padding-left:10px;float:left">
 			<img id="wishoff${stat.index}" src="resources/file/img/wishoff.png" width="20" height="20" onclick="imgToggle(this)"/>
 			</div>
 			</div>
-
+			<br>
+			
+			
+	
 	</div>
 	
 			

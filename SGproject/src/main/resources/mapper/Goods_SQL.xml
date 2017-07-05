@@ -10,5 +10,24 @@
 		SELECT * FROM SG_GOODS where GOODS_ONOFF=0
 	]]>
 	</select>
+	
+<select id="selectOneGoods" parameterType="int" resultType="hashmap">
+	<![CDATA[
+		
+	select * from SG_GOODS
+	where GOODS_NO = #{GOODS_NO}
+	]]>
+	</select>
+	
+	<select id="imageList" parameterType="int" resultType="string">
+	<![CDATA[
+		
+	SELECT IMAGE_IMAGE FROM SG_IMAGE
+	where IMAGE_GOODS_NO = #{GOODS_NO}
+	
+	]]>
+	</select>
+	
+	
 
 </mapper>

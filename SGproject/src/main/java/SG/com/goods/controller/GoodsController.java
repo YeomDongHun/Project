@@ -17,11 +17,14 @@ public class GoodsController {
 	@Resource
 	GoodsServiceImpl goodsService;
 	
+	int currentPage=1;
+	
 	@RequestMapping(value = "/goodsList")
 	public String goodsList(Model model) throws Exception {
 		List<Map<String, Object>> list = goodsService.goodsList();
 		model.addAttribute("goodsList",list);
-		System.out.println(list);
+		model.addAttribute("currentPage",currentPage);
+		
 		return "goodsList_tiles";
 	}
 	
@@ -30,8 +33,16 @@ public class GoodsController {
 		return "goodsDIY_tiles";
 	}
 	
-	@RequestMapping(value="/goodsDetail")
-	public String goodsDetail(Model model){
+	@RequestMapping(value="/goodsDetail",method = RequestMethod.GET )
+	public String goodsDetail(Model model,int goodsNo,int currentPage) throws Exception{
+		Map<String,Object> list = goodsService.selectOneGoods(goodsNo);
+		int point =Integer.parseInt(list.get("GOODS_PRICE").toString());
+		String image = goodsService.imageList(goodsNo);
+		
+		model.addAttribute("image",image);
+		model.addAttribute("goodsDetail",list);
+		model.addAttribute("point", point/100);
+		System.out.println(list);
 		return "goodsDetail_tiles";
 	}
 	
