@@ -29,11 +29,11 @@
 	</definition>
 	
 	<definition name="joinForm" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step2.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step3.jsp"/>
 	</definition>
 	
-	<definition name="joinBody" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step3.jsp"/>
+	<definition name="joinAgree" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step2.jsp"/>
 	</definition>
 	
 	<definition name="joinSuccess" extends="layout">
@@ -133,6 +133,7 @@
 	<definition name="goodsDetail_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsDetail.jsp"/>
 	</definition>
+	
 	
 	
 

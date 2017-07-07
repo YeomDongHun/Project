@@ -12,7 +12,7 @@ import SG.com.member.dao.JoinDao;
 public class JoinServiceImpl implements JoinService {
 	
 
-	@Resource(name="JoinDao")
+	@Resource(name="joinDAO")
 	private JoinDao JoinDao;
 	
 	@Override
