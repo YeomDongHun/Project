@@ -132,7 +132,7 @@
   			<li class="topMenuLi">
   				<a class="menuLink" href="goodsList"> 상품 리스트 </a>
   				<ul class="submenu">
-  					<li><a class="submenuLink" href="#">완제품</a></li>
+  					<li><a class="submenuLink" href="goodsList">완제품</a></li>
   					<li><a class="submenuLink" href="#">육류</a></li>
   				</ul>
   			</li> 			
