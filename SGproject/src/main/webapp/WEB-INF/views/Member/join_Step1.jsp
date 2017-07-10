@@ -1,7 +1,18 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<head><link rel="stylesheet" type="text/css" href="/SG/resources/file/css/emailauth.css" /> </head>
+<head><link rel="stylesheet" type="text/css" href="/SG/resources/file/css/emailauth.css" /> 
+<script type="text/javascript">
+function modal_email()
+{
+	//부모창에서 이동할 경로 설정
+	window.name="/SG/joinAgree";
+	
+	//팝업창(자식창) 경로 설정
+	window.open('/SG/modal_email','','toolbar=no,menubar=no,location=no,height=650,width=600'); 
+} 
+</script>
+</head>
 
 <body>
 <div class="title">
@@ -21,7 +32,8 @@
 		</div>
 	</div>
 	<div class="btnArea">   
-    <a href="/SG/modal_email" class="effect effect-5" target="modal" data-size="sm" data-label="이메일 인증">
+    <%--<a href="/SG/modal_email" class="effect effect-5" target="modal" data-size="sm" data-label="이메일 인증"> --%>
+    <a href="javascript:modal_email();" class="effect effect-5">	
 	이메일 인증
 	</a>
 	</div>

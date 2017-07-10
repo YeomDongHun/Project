@@ -27,8 +27,8 @@ public class JoinServiceImpl implements JoinService {
 		
 	
 	@Override
-	public int chekcId(String mem_id) throws Exception {
-		return JoinDao.checkId(mem_id);
+	public int chekcId(Map<String, Object> map) throws Exception {
+		return JoinDao.checkId(map);
 	}   //회원가입 id중복체크
 
 		

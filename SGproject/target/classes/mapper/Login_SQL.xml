@@ -11,7 +11,7 @@
 </select>
 	
 <!-- 아이디 찾기 -->
-<select id="findId" parameterType="hashmap" resultType="hashmap">
+<select id="findId" parameterType="hashmap" resultType="string">
   <![CDATA[
       SELECT MEMBER_ID
       FROM SG_MEMBER
@@ -21,7 +21,7 @@
 </select>
 	
 <!-- 비밀번호 찾기 -->
-<select id="findPw" parameterType="hashmap" resultType="hashmap">
+<select id="findPw" parameterType="hashmap" resultType="string">
   <![CDATA[
 	SELECT MEMBER_PASSWORD
 	FROM SG_MEMBER
