@@ -16,7 +16,7 @@ public interface JoinService
 	 int checkEmail(Map<String, Object> map) throws Exception;
 
 	//회원가입 id중복체크
-	 int chekcId(String mem_id) throws Exception;
+	 int chekcId(Map<String, Object> map) throws Exception;
 	
 
 }
