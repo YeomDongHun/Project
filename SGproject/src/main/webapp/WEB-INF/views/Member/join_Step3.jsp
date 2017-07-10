@@ -9,13 +9,17 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
+<link rel="stylesheet" href="/SG/resources/file/css/joinForm.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
 <script type="text/javascript">
-    function zipfind() {
-        new daum.Postcode({
-            oncomplete: function(data) {
+    function zipfind() 
+    {
+        new daum.Postcode
+        ({
+            oncomplete: function(data) 
+            {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -24,21 +28,27 @@
                 var extraAddr = ''; // 조합형 주소 변수
 
                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                if (data.userSelectedType === 'R') 
+                { // 사용자가 도로명 주소를 선택했을 경우
                     fullAddr = data.roadAddress;
 
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                } 
+                else 
+                { // 사용자가 지번 주소를 선택했을 경우(J)
                     fullAddr = data.jibunAddress;
                 }
 
                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
-                if(data.userSelectedType === 'R'){
+                if(data.userSelectedType === 'R')
+                {
                     //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
+                    if(data.bname !== '')
+                    {
                         extraAddr += data.bname;
                     }
                     // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
+                    if(data.buildingName !== '')
+                    {
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
@@ -64,7 +74,7 @@ function checkId()
 	
 	if(mem_id == '')
 		{
-		alert("id를 입력하세요");
+		alert("아이디를 입력하세요");
 		}
 	else
 		{
@@ -82,12 +92,12 @@ function checkId()
 				
 				if(data != 0)
 					{
-					alert("사용중인 ID입니다. 다른 ID를 입력해 주세요");
+					alert("사용중인 아이디입니다. 다른 아이디를 입력해 주세요");
 					}
 				else
 					{
 					alert("사용가능한 아이디 입니다.");
-					}
+					} 
 			
 		},
 		error: function(e)
@@ -114,104 +124,18 @@ function checkpw()
 	 return false;
   }
   
-  f.action="/SG/joinSuccess";
-  f.submit();
+ /*  f.action="/SG/joinSuccess";
+  f.submit(); */
   return true;
   
 }
 </script>
-<style type="text/css">
-@import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css'); 
 
-.body_center {
- width:900px;
- height:1000px;
- margin-left:auto;
- margin-right:auto;
- padding-top:50px;
- font-family: PureunJeonnam;
-
-}
-.main_subject {
- color:000000;
- text-align:left;
- margin-left:10px;
- margin-bottom:10px;
-}
-.join_submit {
-   float:left;
-   width: 150px;
-   height:40px;
-   background-color:#00CCCF;
-   margin-bottom: 10px;
-   margin-right:auto;
-   margin-left:370px;
-   margin-top: 10px;
-   text-align: right;
-   line-height: 1%;
-   font-family: PureunJeonnam;
-}
-
-
-.effect {
-  text-align: center;
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: #fff;
-  text-transform: capitalize;
-  background-color: #00CCCF;;
-  font-size: 18px; 
-  padding: 20px 0px;
-  width: 150px;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-left:700px;
-  font-family: PureunJeonnam;
-}
-.effect.effect-5 {
-  -webkit-transition: all 0.2s linear 0s;
-  transition: all 0.2s linear 0s;
-}
-.effect.effect-5:before {
-  content: ">"; 
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0px;
-  height: 100%;
-  width: 30px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 0 50% 50% 0;
-  -webkit-transform: scale(0, 1);
-          transform: scale(0, 1);
-  -webkit-transform-origin: left center;
-          transform-origin: left center;
-  -webkit-transition: all 0.2s linear 0s;
-  transition: all 0.2s linear 0s;
-}
- .effect.effect-5:hover {
-  text-indent: 15px;
-} 
-.effect.effect-5:hover:before {
-  -webkit-transform: scale(3, 1);
-          transform: scale(1, 1);
-  text-indent:0px;
-  }
-
-</style>
 </head>
 
 <body>
 <div class="body_center">
-<form name="frm" action="" method="post" >
+<form name="frm" action="/SG/joinSuccess" method="post" >
 <section class="input-horizontal list-horizontal section box-shadow">
             <div class="main_subject">
                <h2>회원정보</h2>
@@ -228,6 +152,7 @@ function checkpw()
          <input type="text" name="MEMBER_ID" id="MEMBER_ID" value="" maxlength="20" class="xx-control" label="아이디" required="required">
          <p class="alert alert-positive"></p>
          <input type="button" value="중복확인" onclick="javascript:checkId()"/>
+         ${message}
       </div>
       
    </li>
@@ -347,15 +272,13 @@ function checkpw()
          <div class="input-box">
                <input type="text" id="weight" name="MEMBER_WEIGHT" value="" maxlength="8" placeholder="예)180" class="xx-control">
          </div>
-      </div>
-	  
-      <div class="btnArea">
-       <a class="effect effect-5" title="가입완료" onclick="checkpw();">가입완료</a>
-       </div>
-         
+      </div>        
    </li>
 </ul>
-
+ <div class="btnArea">
+  <!-- <a class="effect effect-5" title="가입완료" onclick="checkpw();">가입완료</a> -->
+  <input class="effect effect-5" type="submit" onclick="checkpw();" value="가입완료"/>
+ </div>
 </section>
 </form>
 </div>

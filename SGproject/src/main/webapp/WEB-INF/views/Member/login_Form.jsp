@@ -4,9 +4,12 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
 <head>
+<%--css 사용 --%>
 <link rel="stylesheet" type="text/css" href="./resources/file/css/loginForm.css"/>
 
+<%--쿠키 스크립트 파일 불러오기 --%>
 <script src="<c:url value='./resources/file/js/cookie.js'/>" charset="utf-8"></script>
+<%--ajax --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
 </script>
 
