@@ -119,8 +119,8 @@
 	<div id="loginWrap">
 		<ul>
 			<li><a class="loginLink" href="#">마이페이지</a></li>
-			<li><a class="loginLink" href="#">회원가입</a></li>
-			<li><a class="loginLink" href="#">로그인</a></li>
+			<li><a class="loginLink" href="joinEmail">회원가입</a></li>
+			<li><a class="loginLink" href="loginForm">로그인</a></li>
 		</ul>
 	</div>
     <div id="logoWrap">

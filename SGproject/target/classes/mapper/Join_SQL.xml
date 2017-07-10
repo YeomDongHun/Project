@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 회원 SQL -->
-<mapper namespace="member">
+<mapper namespace="join">
 
-<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MEMBER_No"> 
-		<selectKey keyProperty="MEMBER_No" resultType="integer" order="BEFORE">  
+<insert id="insertMember" parameterType="hashmap" useGeneratedKeys="true" keyProperty="MEMBER_NO"> 
+		<selectKey keyProperty="MEMBER_NO" resultType="integer" order="BEFORE">  
 			SELECT SG_MEMBER_NO_SEQ.NEXTVAL FROM DUAL    
 		</selectKey>   
 		<![CDATA[
@@ -52,7 +52,7 @@
 	]]>
 	</select>
 	
-	<select id="checkId" parameterType="String" resultType="int">
+	<select id="checkId" parameterType="hashmap" resultType="int">
 	<![CDATA[
 		SELECT COUNT(MEMBER_ID)  
 		FROM SG_MEMBER 

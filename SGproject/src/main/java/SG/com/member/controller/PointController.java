@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class PointController {
+public class PointController 
+{
 	
 	@RequestMapping(value = "/myPoint")
-	public String mypoint(Model model) {
+	public String mypoint(Model model) 
+	{
 		return "mypoint";
 	}
 	

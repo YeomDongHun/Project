@@ -16,23 +16,23 @@ import SG.com.member.dao.LoginDao;
 	
 	//아이디 찾기
 	@Override
-	 public String findId(Map<String, Object> map) throws Exception{
-		return null;
+	public Map<String, Object> findId(Map<String, Object> map) throws Exception
+	{
+		return loginDao.findId(map);
 	}
 		
-	
-	
 	//비번 찾기
 	@Override
-	public String findPw(Map<String, Object> map) throws Exception{
-		return null;
+	public Map<String, Object> findPw(Map<String, Object> map) throws Exception
+	{
+		return loginDao.findPw(map);
 	}
 	
 	
-	//로그인 정보 불러오기
-	
-	public Map<String, Object> selectId(Map<String, Object> map) throws Exception{
-		return null;
+	//로그인 정보 불러오기	
+	public Map<String, Object> selectId(Map<String, Object> map) throws Exception
+	{
+		return loginDao.selectId(map);
 	}
 
 }
