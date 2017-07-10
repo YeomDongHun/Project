@@ -12,14 +12,13 @@
 		(POINT_NO, 
 		POINT_MONEY, 
 		POINT_CONTENT,
-		POINT_DATE, 
-		POINT_TRADE_NO, 
+		POINT_DATE,  
 		POINT_MEMBER_NO 
 		)
         VALUES 
 		( SG_POINT_NO_SEQ.NEXTVAL, 
-		  2000, default, 
-		   SYSDATE, NULL, #{MEMBER_NO})		
+		  2000, DEFAULT, 
+		   SYSDATE, #{MEMBER_NO})		
 	]]> 
 	</insert>
 	

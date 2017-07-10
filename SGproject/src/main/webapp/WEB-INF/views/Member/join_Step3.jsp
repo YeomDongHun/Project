@@ -7,12 +7,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<!-- <link rel="stylesheet" href="/SG/resources/file/css/owl.theme.default.min.css"> -->
+   <!-- <script src="/SG/resources/file/css/owl.carousel.min.js"></script>
+   <script src="/SG/resources/file/css/owl.js"></script> -->
+<!-- <link rel="stylesheet" href="/SG/resources/file/css/ui.css"> -->
+
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
-<script>
-    //zipcode api 
+<script type="text/javascript">
     function zipfind() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -55,8 +60,71 @@
         }).open();
     }
 
-</script>
+//아이디 중복 확인
+function checkId()
+{
+	var f = document.frm;
+	
+	var mem_id = f.MEMBER_ID.value;
+	
+	if(mem_id == '')
+		{
+		alert("id를 입력하세요");
+		}
+	else
+		{
+		var total = ({"mem_id":mem_id});
+		$.ajax
+		({
+			
+			type: "POST",
+			url: "/SG/checkId",
+			data : total,
+			
+			success: function(data)
+			{
+				console.log("로그 내용1");
+				
+				if(data != 0)
+					{
+					alert("사용중인 ID입니다. 다른 ID를 입력해 주세요");
+					}
+				else
+					{
+					alert("사용가능한 아이디 입니다.");
+					}
+			
+		},
+		error: function(e)
+		{
+			alert('error'+e);
+		}
+	});
+}
+	
+}
 
+//비밀번호 일치 확인
+function checkpw()
+{
+  var f = document.frm;
+  
+  if(f.MEMBER_PASSWORD.value != f.password_confirm.value)
+  {
+	 alert("비밀번호가 일치하지 않습니다.");
+	 
+	 f.MEMBER_PASSWORD.value = "";
+	 f.password_confirm.value = "";
+	 
+	 return false;
+  }
+  
+  f.action="/SG/joinSuccess";
+  f.submit();
+  return true;
+  
+}
+</script>
 <style type="text/css">
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css'); 
 
@@ -85,33 +153,70 @@
    margin-left:370px;
    margin-top: 10px;
    text-align: right;
-   font-size: 1%;
    line-height: 1%;
    font-family: PureunJeonnam;
 }
-.join_submit input[type='submit'] {
-   width: 150px;
-   border: 0;
-   border-radius: 4px;
-   color: #FFFFFF;
-    background-color:#00CCCF;
-   font-size: 18px;
-   line-height: inherit;
-   text-transform: uppercase;
-   cursor: pointer;
-   height: 40px;
-   padding-right: 20px;
-   margin-bottom: 12px;
-   padding-left: 20px;
-    font-weight: bold;
+
+
+.effect {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize;
+  background-color: #00CCCF;;
+  font-size: 18px; 
+  padding: 20px 0px;
+  width: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-left:700px;
+  font-family: PureunJeonnam;
 }
+.effect.effect-5 {
+  -webkit-transition: all 0.2s linear 0s;
+  transition: all 0.2s linear 0s;
+}
+.effect.effect-5:before {
+  content: ">"; 
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  height: 100%;
+  width: 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0 50% 50% 0;
+  -webkit-transform: scale(0, 1);
+          transform: scale(0, 1);
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  -webkit-transition: all 0.2s linear 0s;
+  transition: all 0.2s linear 0s;
+}
+ .effect.effect-5:hover {
+  text-indent: 15px;
+} 
+.effect.effect-5:hover:before {
+  -webkit-transform: scale(3, 1);
+          transform: scale(1, 1);
+  text-indent:0px;
+  }
 
 </style>
 </head>
-</head>
+
 <body>
 <div class="body_center">
-<form id="frm" action="/SG/joinSuccess">
+<form name="frm" action="" method="post" >
 <section class="input-horizontal list-horizontal section box-shadow">
             <div class="main_subject">
                <h2>회원정보</h2>
@@ -127,8 +232,9 @@
       <div class="col-lg-21 col-md-20">
          <input type="text" name="MEMBER_ID" id="MEMBER_ID" value="" maxlength="20" class="xx-control" label="아이디" required="required">
          <p class="alert alert-positive"></p>
-         <button type="button" onclick="checkId()">중복확인</button>         
+         <input type="button" value="중복확인" onclick="javascript:checkId()"/>
       </div>
+      
    </li>
    
    <li class="password">
@@ -148,7 +254,7 @@
          </label>
       </div>
       <div class="col-lg-21 col-md-20">
-         <input type="password" id="input-password-check" class="xx-control" value="" name="password_confirm" label="비밀번호">
+         <input type="password" id="input-password-check" class="xx-control" value="" name="password_confirm" label="비밀번호" onkeyup="checkPwd()" required="">
       </div>
    </li>
    <li class="name">
@@ -158,7 +264,7 @@
          </label>
       </div>
       <div class="col-lg-21 col-md-20">
-         <input type="text" id="input-name" class="xx-control" name="MEMBER_NAME" value="" required="required" label="이름"><!--disabled="disabled"-->
+         <input type="text" id="input-name" class="xx-control" name="MEMBER_NAME" value="" required="required" label="이름">
       </div>
    </li>
    <li class="cell-phone">
@@ -198,11 +304,24 @@
       </div>
       <div class="col-lg-21 col-md-20">
          <div class="input-box">
-         <input type="text" id="sample6_postcode"  name="MEMBER_ZIP" disabled="disabled" label="우편번호" value="" maxlength="6" required="">
+         <input type="text" id="sample6_postcode"  name="MEMBER_ZIP"  label="우편번호" value="" maxlength="6" required="">
             <span class="button button-dimmed" onclick="zipfind()">주소 찾기</span>
          </div>
-         <input type="text" id="sample6_address" class="xx-control" name="MEMBER_ADDR1" label="주소" value="" size="48" required="">
+         <input type="text" id="sample6_address" class="xx-control" name="MEMBER_ADDR1" label="주소" value="" size="48" readonly="" required="">
          <input type="text" id="sample6_address2" class="xx-control" name="MEMBER_ADDR2" value="" label="주소" required="">
+      </div>
+   </li>
+   
+   <li class="birth input-placeholder">
+      <div class="item-label col-lg-3 col-md-4">
+         <label for="input-birth01">
+            <strong>*생년월일</strong>
+         </label>
+      </div>
+      <div class="col-lg-21 col-md-20">
+         <div class="input-box">
+               <input type="text" id="input-birth01" name="MEMBER_BIRTHDAY" value="" maxlength="8" placeholder="예)19000101" class="xx-control" required="">
+         </div>
       </div>
    </li>
    <li>
@@ -213,25 +332,13 @@
    </li>
    <li class="birth input-placeholder">
       <div class="item-label col-lg-3 col-md-4">
-         <label for="input-birth01">
-            <strong>생년월일</strong>
-         </label>
-      </div>
-      <div class="col-lg-21 col-md-20">
-         <div class="input-box">
-               <input type="text" id="input-birth01" name="MEMBER_BIRTHDAY" value="" maxlength="8" placeholder="예)19000101" class="xx-control" required="">
-         </div>
-      </div>
-   </li>
-   <li class="birth input-placeholder">
-      <div class="item-label col-lg-3 col-md-4">
          <label for="height">
             <strong>키</strong>
          </label>
       </div>
       <div class="col-lg-21 col-md-20">
          <div class="input-box">
-               <input type="text" id="height" name="MEMBER_HEIGHT" value="" maxlength="8" placeholder="예)180" class="xx-control" required="">
+               <input type="text" id="height" name="MEMBER_HEIGHT" value="" maxlength="8" placeholder="예)180" class="xx-control" >
          </div>
       </div>
    </li>
@@ -243,17 +350,19 @@
       </div>
       <div class="col-lg-21 col-md-20">
          <div class="input-box">
-               <input type="text" id="weight" name="MEMBER_WEIGHT" value="" maxlength="8" placeholder="예)180" class="xx-control" required="">
+               <input type="text" id="weight" name="MEMBER_WEIGHT" value="" maxlength="8" placeholder="예)180" class="xx-control">
          </div>
       </div>
-      <div class="join_submit">   
-       <input type="submit" id="submit" value="가입 완료">
-         </div>
+	  
+      <div class="btnArea">
+       <a class="effect effect-5" title="가입완료" onclick="checkpw();">가입완료</a>
+       </div>
+         
    </li>
 </ul>
 
-        </section>
-        </form>
-         </div>
+</section>
+</form>
+</div>
 </body>
 </html>
