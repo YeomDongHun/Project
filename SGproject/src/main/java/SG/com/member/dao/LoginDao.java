@@ -1,6 +1,5 @@
 package SG.com.member.dao;
 
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,19 +16,20 @@ public class LoginDao  extends AbstractDAO  {
 
 	//아이디 찾기
 	public String findId(Map<String, Object> map) throws Exception{
-		return (String) selectOne("login.findId", map);
+		return sqlSession.selectOne("login.findId", map);
 	}
 	
 	//비번 찾기
 	public String findPw(Map<String, Object> map) throws Exception{
-		return (String)selectOne("login.findPw", map);
+		return sqlSession.selectOne("login.findPw", map);
 	}
 	
 	//로그인 정보 불러오기
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectId(Map<String, Object> map) throws Exception{
+	public Map<String, Object> selectId(Map<String, Object> map) throws Exception
+	{
 	  return (Map<String, Object>)selectOne("login.loginSuccess", map);
-		}
+	}
 
 
 }

@@ -12,22 +12,20 @@
 		(POINT_NO, 
 		POINT_MONEY, 
 		POINT_CONTENT,
-		POINT_DATE, 
-		POINT_TRADE_NO, 
+		POINT_DATE,  
 		POINT_MEMBER_NO 
 		)
         VALUES 
 		( SG_POINT_NO_SEQ.NEXTVAL, 
-		  2000, default, 
-		   SYSDATE, NULL, #{MEMBER_NO})		
+		  2000, DEFAULT, 
+		   SYSDATE, #{MEMBER_NO})		
 	]]> 
 	</insert>
 	
 	
-	<!-- 구매시 포인트 적립 -->
-	
-	<insert id="orderPoint" parameterType="hashmap" >
-	<![CDATA[
+<!-- 구매시 1% 포인트 적립 -->
+<insert id="orderPoint" parameterType="hashmap" >
+ <![CDATA[
 		INSERT INTO SG_POINT 
 		(POINT_NO, 
 		 POINT_MONEY, 
@@ -38,17 +36,15 @@
 		 )
         VALUES 
 		( SG_POINT_NO_SEQ.NEXTVAL, 
-		  #{POINT_MONEY}, --POINT_MONEY는 로직 단에서 *0.01로 계산해서 처리
+		  #{POINT_MONEY}, 
 		  '구매 포인트 적립', 
 		   SYSDATE, #{POINT_MEMBER_NO}, #{POINT_TRADE_NO})		
-	]]>
+]]>
 	</insert>
 
 <!-- 포인트 사용 -->
-
-      <insert id="usePoint" parameterType="hashmap" >
+<insert id="usePoint" parameterType="hashmap" >
 	<![CDATA[
-        	<![CDATA[
 		INSERT INTO SG_POINT 
 		(POINT_NO, 
 		 POINT_MONEY, 
@@ -65,11 +61,10 @@
 	]]>
 	</insert>
 	
-	<!-- 수동적립 -이벤트 등 -->
-	 <insert id="savePoint" parameterType="hashmap" >
-	<![CDATA[
-        	<![CDATA[
-		INSERT INTO SG_POINT 
+<!-- 수동적립 이벤트 등 -->
+<insert id="savePoint" parameterType="hashmap" >
+  <![CDATA[
+     INSERT INTO SG_POINT 
 		(POINT_NO, 
 		 POINT_MONEY, 
 		 POINT_CONTENT, 
@@ -87,25 +82,28 @@
 	
 <!--회원별 포인트 총 합계 -->
  <select id="sumPoint" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
-			SELECT 
-				SUM(POINT_MONEY) AS SUM
+	<![CDATA[
+		SELECT 
+			SUM(POINT_MONEY) AS SUM
 			FROM SG_POINT 
 			WHERE POINT_MEMBER_NO = ${MEMBER_NO}
-		]]>
-		</select>
+	]]>
+	</select>
 
-	<!-- 회원별 포인트 내역 조회 -->
-	<select id="myPointList" parameterType="hashmap" resultType="hashmap">
-		<![CDATA[
+<!-- 회원별 포인트 내역 조회 -->
+  <select id="myPointList" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
 		SELECT  
-		     POINT_DATE, POINT_CONTENT, POINT_MONEY, POINT_TRADE_NO
+		     POINT_DATE, 
+		     POINT_CONTENT, 
+		     POINT_MONEY, 
+		     POINT_TRADE_NO
 	    FROM SG_POINT
 		WHERE POINT_MEMBER_NO = ${MEMBER_NO} 
 		      ORDER BY POINT_DATE DESC
 			
-		]]>
-		</select>
+	]]>
+	</select>
 	
 
 </mapper>

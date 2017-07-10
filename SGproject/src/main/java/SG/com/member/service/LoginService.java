@@ -14,7 +14,6 @@ public interface LoginService {
 	//비번 찾기
 	String findPw(Map<String, Object> map) throws Exception;
 		
-		
 	//로그인 정보 불러오기		
 	Map<String, Object> selectId(Map<String, Object> map) throws Exception;
 		  

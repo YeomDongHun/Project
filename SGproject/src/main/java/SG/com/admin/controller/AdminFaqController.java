@@ -30,11 +30,6 @@ public class AdminFaqController {
 	private int searchNum;
 	String isSearch;
 	
-	//관리자 페이지로 이동 *수정사항 흐름도에 넣어야함*
-	@RequestMapping(value = "/admin" )
-	public String list(){
-		return "adminForm";//adminMain.jsp로 이동하게 설정
-	}
 	//FAQ관리자 페이지로 이동(목록이동)
 	@RequestMapping(value="/adminFaq")
 	public String adminFaq(Model model,CommandMap commandMap, HttpServletRequest request)throws Exception{
@@ -65,13 +60,21 @@ public class AdminFaqController {
 			System.out.println(list);
 			model.addAttribute("list",list);
 			
+<<<<<<< HEAD
 			return "admin_faq";
+=======
+			return "/Admin/adminFaq";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 			
 			
 		}else{//검색 값이 없을때
 			
 			model.addAttribute("list",list);
+<<<<<<< HEAD
 			return "admin_faq";
+=======
+			return "/Admin/adminFaq";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		}
 	}
 	

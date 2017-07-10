@@ -3,29 +3,32 @@
 
 <!-- 로그인 SQL -->
 <mapper namespace="login">
+
 <select id="loginSuccess" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[
 		SELECT * FROM SG_MEMBER WHERE MEMBER_ID = #{MEMBER_ID} 
 	]]>
-	</select>
+</select>
 	
-	<select id="findId" parameterType="hashmap" resultType="string">
-		<![CDATA[
-			select member_id                        
-			from sg_member                           
-			where member_name=#{MEMBER_NAME_FIND}   
-			and member_email=#{MEMBER_EMAIL_FIND}    
-		]]>
-	</select>
+<!-- 아이디 찾기 -->
+<select id="findId" parameterType="hashmap" resultType="string">
+  <![CDATA[
+      SELECT MEMBER_ID
+      FROM SG_MEMBER
+      WHERE MEMBER_NAME = #{MEMBER_NAME_FIND}
+            AND MEMBER_EMAIL = #{MEMBER_EMAIL_FIND}
+  ]]>
+</select>
 	
-	  <select id="findPw" parameterType="hashmap" resultType="String">
-	  <![CDATA[
-	  select member_password                 
-	  from sg_member                           
-	  where member_id = #{MEMBER_ID_FIND}   
-	  and member_name=#{MEMBER_NAME_FIND}    
-	  and member_email=#{MEMBER_EMAIL_FIND}   
-		]]>
+<!-- 비밀번호 찾기 -->
+<select id="findPw" parameterType="hashmap" resultType="string">
+  <![CDATA[
+	SELECT MEMBER_PASSWORD
+	FROM SG_MEMBER
+	WHERE MEMBER_ID = #{MEMBER_ID_FIND}
+	AND MEMBER_NAME = #{MEMBER_NAME_FIND}
+	AND MEMBER_EMAIL = #{MEMBER_EMAIL_FIND}   
+  ]]>
 		
-		</select>
+</select>
 </mapper>

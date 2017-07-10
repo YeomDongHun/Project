@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
  <html>
  <head>
  <style>
@@ -39,6 +40,14 @@
 		font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
         font-family: "Nanum Gothic";
+}
+
+.loginname{
+		text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
+		font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
+        font-weight: bold;                  /* 폰트를 굵게 설정 */
+        font-family: "Nanum Gothic";       
+        float : right;
 }
 
 #topMenu {
@@ -117,11 +126,29 @@
 <body>    
 <div id="headerWrap">
 	<div id="loginWrap">
-		<ul>
-			<li><a class="loginLink" href="#">마이페이지</a></li>
-			<li><a class="loginLink" href="#">회원가입</a></li>
-			<li><a class="loginLink" href="#">로그인</a></li>
-		</ul>
+	        세션 확인 : ${sessionScope.MEMBER_ID}
+	        
+		    <c:choose>
+		    
+		    <c:when test="${(sessionScope.MEMBER_NO) == null}">
+		    <ul>		
+		    <li><a class="loginLink" href="loginForm">로그인</a></li>
+		    <li><a class="loginLink" href="joinEmail">회원가입</a></li>
+		   	</ul>	    
+		    </c:when>
+		    
+		    <c:otherwise>
+		    <ul>          		
+		    <li><a class="loginLink" href="logout">로그아웃</a></li>
+		    <li><a class="loginLink" href="mypage">마이페이지</a></li>
+		    <li><a class="loginLink" href="#">장바구니</a></li>
+		    <li><a class="loginLink" href="#">위시리스트</a></li>		    
+		    </ul>
+		    <div class="loginname">${sessionScope.MEMBER_NAME}님 환영합니다!</div>
+		    </c:otherwise>
+		    
+		    </c:choose>
+
 	</div>
     <div id="logoWrap">
     	<a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>

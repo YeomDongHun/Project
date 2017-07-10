@@ -1,2 +1,4 @@
 .metadata/
 Servers/
+.recommenders/
+SGproject/target/classes/log4sql.jar

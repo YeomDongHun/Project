@@ -32,8 +32,13 @@ public class AdminQnAController {
 	private int categoryNum;
 	private String isSearch;
 	
+<<<<<<< HEAD
 @RequestMapping(value="/adminQnA")
 public String adminQnA( CommandMap commandMap, Model model , HttpServletRequest request)throws Exception{	
+=======
+	@RequestMapping(value="/adminQnA")
+	public String adminQnA( CommandMap commandMap, Model model , HttpServletRequest request)throws Exception{	
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		List<Map<String, Object>>list = adminQnAService.adminQnaList(commandMap.getMap());
 		//쿼리문으로 실행되는 리시트로 뽑아낸 데이터를 list 변수로 선언해서 "list"라는 이름으로 쓰기위한
 		//작업
@@ -91,15 +96,24 @@ public String adminQnA( CommandMap commandMap, Model model , HttpServletRequest 
 		    model.addAttribute("categoryNum",categoryNum );
 		    model.addAttribute("list", list);
 		    
+<<<<<<< HEAD
 		    return "admin_QnA";
+=======
+		    return "adminQnA";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 	}
 	//Q&A목록조회(Q&A에 대한전체적인 목록은 관리자페이지에서도 보여아함)
 	//*url mapping=/adminQnA
 	//*메소드 adminQnA()
 	//*tiles adminQnA->adminQnA.jsp
 		    
+<<<<<<< HEAD
  @RequestMapping(value = "/adminAnswerForm")
 public String adminAnswerForm(CommandMap commandMap, Model model, HttpServletRequest request  )throws Exception{
+=======
+		    @RequestMapping(value = "/adminAnswerForm")
+		    public String adminAnswerForm(CommandMap commandMap, Model model, HttpServletRequest request  )throws Exception{
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		    	if(request.getParameter("QNA_NO")!=null){
 		    		//글번호가 있을때
 		    		Map<String, Object> qna=adminQnAService.qnaDetail(commandMap.getMap());
@@ -121,9 +135,16 @@ public String adminAnswerForm(CommandMap commandMap, Model model, HttpServletReq
 	//*tiles adminAnswerForm->adminAnswerForm.jsp
 
 		    //일단보류
+<<<<<<< HEAD
 @RequestMapping(value="/adminAnswer")
 public String adminAnswer(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
 		  adminQnAService.ans(commandMap.getMap());
+=======
+		    @RequestMapping(value="/adminAnswer")
+		    //등록클릭하면 실행되는 URL
+		    public String adminAnswer(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
+		    adminQnAService.ans(commandMap.getMap());
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		   return "adminQnA";
 		    
 		    
@@ -134,10 +155,17 @@ public String adminAnswer(CommandMap commandMap, Model model, HttpServletRequest
 	//*메소드 adminAnswer()
 	//*tiles adminQnA->adminQnA.jsp
 		    
+<<<<<<< HEAD
 @RequestMapping(value="/adminAnswerDelete")
 public String adminAnswerDelete(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
 	adminQnAService.qnaDelete(commandMap.getMap());
 	return "adminQnA";
+=======
+		    @RequestMapping(value="/adminAnswerDelete")
+		    public String adminAnswerDelete(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
+		    adminQnAService.qnaDelete(commandMap.getMap());
+		    return "adminQnA";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		    	
 		    }
 	
