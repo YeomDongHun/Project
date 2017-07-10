@@ -13,13 +13,7 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
 	</definition>
 	
-	<definition name="layoutBoard" template="/WEB-INF/tiles/Layout/layout-Board.jsp">
-		<put-attribute name="header" value="/WEB-INF/tiles/tile/header.jsp"/>
-		<put-attribute name="body1" value="/WEB-INF/tiles/tile/body.jsp"/>
-		<put-attribute name="body2" value="/WEB-INF/tiles/tile/body2.jsp"/>
-		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
-	</definition>
-	
+
 	<definition name="main_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
@@ -29,7 +23,7 @@
 	</definition>
 	
 	<definition name="joinForm" extends="layout">
-		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step3.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/Member/join_Step3.sp"/>
 	</definition>
 	
 	<definition name="joinAgree" extends="layout">
@@ -86,10 +80,9 @@
 	</definition>
 	
 
-	<definition name="memberNoticeList" extends="layoutBoard">
+	<definition name="memberNoticeList" extends="layout">
 		
-		<put-attribute name="body2" value="/WEB-INF/views/Board/NoticBoard/memberNoticeList.jsp"/>
-		<put-attribute name="body1" value="/WEB-INF/views/Board/BoardCategory.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/Board/NoticBoard/memberNoticeList.jsp"/>
 		
 	</definition>
 	
@@ -99,20 +92,16 @@
 	</definition>
 
 
-	<definition name="memberQnAList" extends="layoutBoard">
+	<definition name="memberQnAList" extends="layout">
 		
-		<put-attribute name="body2" value="/WEB-INF/views/Board/QnABoard/memberQnAList.jsp"/>
-		<put-attribute name="body1" value="/WEB-INF/views/Board/FAQandQnACategory.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/Board/QnABoard/memberQnAList.jsp"/>
 		
 	</definition>
 	
 	
 	
-	<definition name="memberFaqList" extends="layoutBoard">
-		
-		<put-attribute name="body2" value="/WEB-INF/views/Board/FAQBoard/memberFaqList.jsp"/>
-		<put-attribute name="body1" value="/WEB-INF/views/Board/FAQandQnACategory.jsp"/>
-		
+	<definition name="memberFaqList_tiles" extends="layout">		
+		<put-attribute name="body" value="/WEB-INF/views/Board/FAQBoard/memberFaqList.jsp"/>		
 	</definition>
 	
 
@@ -135,7 +124,7 @@
 	</definition>
 	
 	
-	
+
 
 
 </tiles-definitions>
