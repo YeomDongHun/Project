@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;//request쓸것
 import org.springframework.stereotype.Controller;//이것이 컨트롤러다
 import org.springframework.web.bind.annotation.RequestMapping;
 //이것이 
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+
 
 import SG.com.common.CommandMap;
 /*import spring.kh.siroragi.Paging;*/
@@ -29,15 +30,10 @@ public class AdminFaqController {
 	private int searchNum;
 	String isSearch;
 	
-	//관리자 페이지로 이동 *수정사항 흐름도에 넣어야함*
-	@RequestMapping(value = "/admin" )
-	public String list(){
-		return "adminForm";//adminMain.jsp로 이동하게 설정
-	}
 	//FAQ관리자 페이지로 이동(목록이동)
 	@RequestMapping(value="/adminFaq")
-	public ModelAndView adminFaq(CommandMap commandMap, HttpServletRequest request)throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public String adminFaq(Model model,CommandMap commandMap, HttpServletRequest request)throws Exception{
+		
 		List<Map<String,Object>> list = adminFaqService.faqList(commandMap.getMap());
 		String search = request.getParameter("isSearch");
 		Map<String, Object> isSearchMap = new HashMap<String, Object>();
@@ -61,82 +57,75 @@ public class AdminFaqController {
 			if(searchNum == 2){//카테고리=2
 				list = adminFaqService.faqSearch2(isSearchMap, isSearch);
 			}
+			System.out.println(list);
+			model.addAttribute("list",list);
 			
-			mv.addObject("isSearch", isSearch);
-			mv.addObject("searchNum", searchNum);
-			mv.addObject("list",list);
-			mv.setViewName("adminFaq");//리스트 뿌려주는 jsp로 tiles로 이동
-			
-			return mv;
+<<<<<<< HEAD
+			return "admin_faq";
+=======
+			return "/Admin/adminFaq";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 			
 			
 		}else{//검색 값이 없을때
 			
-			mv.addObject("list",list);
-			mv.setViewName("adminFaq");
-			
-			return mv;
+			model.addAttribute("list",list);
+<<<<<<< HEAD
+			return "admin_faq";
+=======
+			return "/Admin/adminFaq";
+>>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 		}
 	}
 	
 	//FAQ등록폼
 	@RequestMapping(value="/adminFaqForm")
 	public String adminFaqForm(){
-		return "adminFaqForm";
+		return "/Admin/adminFaqForm";
 	}//jsp에서 등록폼에서 submit해서 db로 insert된것을 아래 FAQ등록에서
 	//맵에서 꺼내와서 리다이렉트로 tiles걸지않고 url에다가 봐로 쏴줌
 	
 	//FAQ등록
 	@RequestMapping(value = "/adminFaqWrite")
-	public ModelAndView adminFaqWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView();
-
+	public String adminFaqWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		adminFaqService.faqWrite(commandMap.getMap(), request);
 		//맵에서 꺼내쓸때 항상 유의할점은 jsp에서 db에서 설정된 type들과 매핑이되는지
 		//를 자세히 봐야한다
-		mv.setViewName("redirect:/adminFaq");
-		//FAQ목록으로 바로 쏴줌 redirect는 tiles 안먹는것같음 질문
 
-		return mv;
+		return "redirect:/adminFaq";
 	}
 	//FAQ 수정폼 이동
 	@RequestMapping(value = "/adminNoticeModifyForm")
-	public ModelAndView adminFaqModifyForm(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String adminFaqModifyForm(Model model,CommandMap commandMap) throws Exception {
 
 		Map<String, Object> map = adminFaqService.faqDetail(commandMap.getMap());
 		//상세보기에 대한 것을 커맨드 맵에서 꺼내옴
-		mv.addObject("map", map.get("map"));
+		model.addAttribute("map", map.get("map"));
 		//상세보기에 들어있는 정보를 꺼내서 map에 다시저장
-		mv.setViewName("adminNoticeModifyForm");
-		//그걸 수정하는 폼으로  tiles를 통해 이동
 
-		return mv;
+		return "adminNoticeModifyForm";
 	}
 	
 
 	// FAQ 수정
 	@RequestMapping(value = "/adminFaqModify")
-	public ModelAndView adminFaqModify(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String adminFaqModify(Model model, CommandMap commandMap) throws Exception {
 
 		adminFaqService.faqModify(commandMap.getMap());
 
-		mv.addObject("FAQ_NO", commandMap.get("FAQ_NO"));
-		mv.setViewName("redirect:/adminFaq");
+		model.addAttribute("FAQ_NO", commandMap.get("FAQ_NO"));
 
-		return mv;
+		return "redirect:/adminFaq";
 	}
 	
 	// FAQ 삭제하기
 	@RequestMapping(value = "/adminFaqDelete")
-	public ModelAndView adminFaqDelete(CommandMap commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String adminFaqDelete(CommandMap commandMap) throws Exception {
+
 
 		adminFaqService.faqDelete(commandMap.getMap());
-		mv.setViewName("redirect:/adminFaq");
 
-		return mv;
+		return "redirect:/adminFaq";
 	}
 
 	

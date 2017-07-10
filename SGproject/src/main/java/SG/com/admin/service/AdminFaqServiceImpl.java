@@ -13,9 +13,10 @@ import org.springframework.stereotype.Service;
 import SG.com.admin.dao.AdminFaqDao;
 import SG.com.admin.service.AdminFaqService;
 
-@Service("adminFaqService")
+
 //아래에 AdminFaqServiceImp이 컴퍼런트 스켄이 되서 사용가능하면
 //@Service를 adminFaqService라는 이름으로 사용하겠다라는 것이다
+@Service("adminFaqService")
 public class AdminFaqServiceImpl implements AdminFaqService {//인터페이스 메뉴판
 	
 /*	@Resource(name="이미지유틸")
