@@ -159,6 +159,9 @@
 		<li>|</li>  
    			 <li class="topMenuLi">
    			 	<a class="menuLink" href="memberNoticeList">공지 사항</a>
+  				<ul class="submenu">
+  					<li><a class="submenuLink" href="memberQnAList">Q&A</a></li>
+  				</ul>
    			 </li>
 		</ul>
 	</div>	
