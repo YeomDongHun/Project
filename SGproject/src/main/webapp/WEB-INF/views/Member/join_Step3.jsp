@@ -8,11 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<!-- <link rel="stylesheet" href="/SG/resources/file/css/owl.theme.default.min.css"> -->
-   <!-- <script src="/SG/resources/file/css/owl.carousel.min.js"></script>
-   <script src="/SG/resources/file/css/owl.js"></script> -->
-<!-- <link rel="stylesheet" href="/SG/resources/file/css/ui.css"> -->
-
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
