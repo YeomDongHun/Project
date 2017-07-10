@@ -14,23 +14,11 @@
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
 <script type="text/javascript">
 
-function basket(test){
-   alert("장바구니에 담았습니다.");
-   
-
-   
-   var GOODS_NO = test.getAttribute("id");
-   var GOODS_AMOUNT=1;
-   var id=$(document).getAttribute("id").getAttribute("id");
-   var MEMBER_NO =60;
-   location.href = 'addBasket?BASKET_GOODS_NO='+GOODS_NO+'&id='+id+'&BASKET_GOODS_AMOUNT='+GOODS_AMOUNT;
-   
-}
 
 
 
 
-    		
+  //장바구니 ajax 처리
     function ajax(test){ 
 
     	var BASKET_GOODS_AMOUNT = 1;
@@ -115,7 +103,6 @@ alert("위시리스트에서 삭제");
          <div class="basketWish" style="float:left;">
          <div class="basket" style="margin:auto; padding-left:10px;float:left;">
          <img id="${goodsList.GOODS_NO}" src="resources/file/img/basket.ico" width="20" height="20" onclick="ajax(this)"/>
-         <input type="hidden" name="id" id="${id}"/>
          </div>
          <div class="wish" style="margin:auto; padding-left:10px;float:left">
          <img id="wishoff${stat.index}" src="resources/file/img/wishoff.png" width="20" height="20" onclick="imgToggle(this)"/>

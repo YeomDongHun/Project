@@ -76,6 +76,8 @@ table.type07 td {
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
 <script type="text/javascript">
 
+//comment by dasol
+//후기 작성 
 $(document).ready(function(){
 	
 	
@@ -109,6 +111,7 @@ $(document).ready(function(){
 
 
 
+//총금액 설정
 function change(num)
 {
 var x  = document.getElementById("amount");
@@ -134,7 +137,7 @@ function cal(){
 	$("#totalprice").html(num);
 	
 };
-
+//comment by dasol
 
 </script>
 
@@ -180,7 +183,7 @@ function cal(){
 	
 	
 	<input type="button" value="BUY" onclick="javascript:location.href='goodsOrder?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
-	<input type="button" value="basket"/>
+	<input type="button" value="basket" onclick="javascript:onBasket()"/>
 	</div>
 </div>
 
