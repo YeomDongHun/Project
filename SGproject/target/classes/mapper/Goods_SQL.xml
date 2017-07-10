@@ -29,5 +29,38 @@
 	</select>
 	
 	
+	<select id="commentList" parameterType="int" resultType="hashmap">
+	
+	<![CDATA[
+		
+	select * 
+	from SG_COMMENT
+	where COMMENT_GOODS_NO= #{GOODS_NO}
+	ORDER BY COMMENT_REGDATE desc
+	
+	]]>
+	
+	</select>
+	
+	
+	<insert id="insertComment" parameterType="hashmap">
+
+		insert into SG_COMMENT 
+		(COMMENT_NO, 
+		COMMENT_ID, 
+		COMMENT_GOODS_NO, 
+		COMMENT_CONTENT, 
+		COMMENT_RATE, 
+		COMMENT_REGDATE)
+		values
+		(SG_COMMENT_NO_SEQ.NEXTVAL,
+		#{COMMENT_ID},
+		#{COMMENT_GOODS_NO},
+		#{COMMENT_CONTENT},
+		#{COMMENT_RATE},
+		SYSDATE)
+				
+			
+	</insert>
 
 </mapper>
