@@ -33,5 +33,19 @@ public class GoodsDao extends AbstractDAO {
 		return sqlSession.selectOne("goods.imageList",num);
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> commentList(int num) throws Exception{
+		return sqlSession.selectList("goods.commentList",num);
+	}
+	
+	public void insertComment(Map<String,Object> map) throws Exception{
+		 sqlSession.insert("goods.insertComment",map);
+	}
+	
+
+	public void basketInsert(Map<String, Object> map) throws Exception{
+	    sqlSession.insert("basket.basketInsert", map);
+	}
 
 }
