@@ -1,13 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: janghoon
-=======
-<<<<<<< HEAD
-Built-By: janghoon
-=======
 Built-By: KyeongCheol
->>>>>>> c7a5f3923364229520ebd99c7e9d9e2ec8106d96
->>>>>>> 61c7fefad0ea96596d86ba271c3f672ab5f78aee
 Build-Jdk: 1.8.0_121
 Created-By: Maven Integration for Eclipse
 
