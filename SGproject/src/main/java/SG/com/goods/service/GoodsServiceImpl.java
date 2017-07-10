@@ -34,4 +34,22 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.imageList(num);
 	}
 
+	@Override
+	public List<Map<String, Object>> commentList(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.commentList(num);
+	}
+
+	@Override
+	public void insertComment(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		goodsDao.insertComment(map);
+	}
+
+	@Override
+	public void basketInsert(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+	    goodsDao.basketInsert(map);
+	}
+
 }

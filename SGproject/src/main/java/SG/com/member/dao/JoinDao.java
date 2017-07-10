@@ -1,6 +1,5 @@
 package SG.com.member.dao;
 
-import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,8 +26,8 @@ public class JoinDao extends AbstractDAO {
 		}
 		
 		//아이디 중복 확인
-		public int checkId(String mem_id) throws Exception{
-			return (int)selectOne("join.checkId", mem_id);
+		public int checkId(Map<String, Object> map) throws Exception{
+			return (int)selectOne("join.checkId", map);
 		}
 		
 

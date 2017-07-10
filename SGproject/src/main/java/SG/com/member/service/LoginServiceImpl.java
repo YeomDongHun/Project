@@ -16,14 +16,14 @@ import SG.com.member.dao.LoginDao;
 	
 	//아이디 찾기
 	@Override
-	public Map<String, Object> findId(Map<String, Object> map) throws Exception
+	public String findId(Map<String, Object> map) throws Exception
 	{
 		return loginDao.findId(map);
 	}
 		
 	//비번 찾기
 	@Override
-	public Map<String, Object> findPw(Map<String, Object> map) throws Exception
+	public String findPw(Map<String, Object> map) throws Exception
 	{
 		return loginDao.findPw(map);
 	}

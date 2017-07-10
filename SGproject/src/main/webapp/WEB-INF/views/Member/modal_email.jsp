@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <head>
+<link rel="stylesheet" type="text/css" href="resources/file/css/modal_email.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -9,6 +10,8 @@ function email_code()
 	  
 	   var f = document.frm;
 	   var email = f.email1.value+"@"+f.email2.value;
+	   var email1 = f.email1.value; //앞 주소 이메일 
+	   var email2 = f.email2.value; //뒤 주소 이메일
 	   
 	      //이메일 주소를 아예 입력하지 않은경우
 	 	  if(email == '@') 
@@ -24,17 +27,17 @@ function email_code()
 	      //둘다 입력한 경우
 	 	  else
 	 	  {
-	 		  
+	 		  var total = {/* "email1":email1, "email2":email2,  */ "email":email};
 	    	  $.ajax
 	    	  ({
 	    	        type: "POST",
 	    	        url: "./joinStep1/modal_email_auth",
-	    	        data: ({mode:"email_code", email:email}),
+	    	        data: total,
 	    	        //contentType: "text/plain; charset=euc-kr",
-	    	        success: function(checkNum) 
+	    	        success: function(data) 
 	    	        {
 	    	        	
-	    	        	if(checkNum != 0)
+	    	        	if(data != 0)
 	    	        	{
 	    	        		alert("이미 가입된 이메일입니다.다른이메일을 입력해주세요");
 	    	        	}
@@ -43,10 +46,6 @@ function email_code()
 	    	        		alert("인증번호를 요청하신 이메일로 발송했습니다.");
 	    	        	}
 	    	        	
-	    	        	if(checkNum != null)    
-	    	        	{
-	    	            	console.log("로그 내용2"+data);
-	    	            }
 	    	        },
 	    	        error: function(e)
 	    	        {
@@ -83,18 +82,18 @@ function member_send()
       	  //contentType: "text/plain; charset=euc-kr",
       	  success: function(data) 
       	  {
-        		 /* alert("auth값받음"+data); */
+        		 
    	     	 console.log("로그 내용1");
         	 //인증번호가 NULL값이 아니면..	 
            	 if(data != null)    
            	 {
-           		    
-            		if(!f.sing_code.value)
+           		    //인증번호를 입력하지 않을 경우
+            		if(!f.auth_code.value)
             		{
         				alert("인증번호를 입력해 주세요");
-        				f.sing_code.focus();
+        				f.auth_code.focus(); //커서 focus
         			}
-            		else if(f.sing_code.value !=  data)
+            		else if(f.auth_code.value !=  data)
             		{
         				alert("인증번호가 맞지 않습니다.");
 
@@ -102,8 +101,15 @@ function member_send()
             		else
             		{
         				//alert("인증번호가 맞습니다.");
-        				f.action = "./joinAgree";
-        				f.submit(); 
+        				f.target = opener.name;
+        				f.submit();
+        				self.close();
+        				/* if(opener != null)
+        				{
+        					opener.insert = null;
+        					
+        					self.close();
+        				} */
         			}
          	   } 
            	    else 
@@ -120,33 +126,35 @@ function member_send()
 	}
 }	
 </script>
-
 </head>
-<form name="frm" method="post" class="form-horizontal">
 
-<section style="padding:30px 20px;">
-	<div class="form-group">
-		<label for="inputEmail3" class="col-xs-4 col-lg-4 control-label">이메일</label>
-		<div>
-			<input name="email1" id="email1" class="form-control" size="10" type="text"> @ 
-			<input name="email2" id="email2" class="form-control" size="10" type="text">  
-			<a href="javascript:email_code();">인증번호받기</a>		
-		</div>
-	</div>
- <div class="form-group">
-		<label for="inputEmail3" class="col-sm-4 control-label">인증번호</label>
-		<div class="col-sm-20">
-		     <%--인증번호 입력 --%>
-			 <input name="sing_code" class="form-control" type="password">
-		</div>
+<body>
+<form name="frm" method="post" action="joinAgree" target="joinAgree">
+<div class="form">
+  <div class="form-toggle"></div>
+  <div class="form-panel one">
+    <div class="form-header">
+      <h2>Email 인증하기</h2>
+    </div>
+    
+    <div>
+        <div class="form-group">
+          <label for="username">이메일</label>
+        <%--이메일 입력 --%>  
+        <input name="email1" id="email1" class="form-control" size="10" type="text"> @ 
+		<input name="email2" id="email2" class="form-control" size="10" type="text"> 
+        <button type="button" onclick="javascript:email_code();">인증번호받기</button>	
+        </div>
+        <div class="form-group">
+          <label for="sing_code">인증번호</label>
+          <input type="password" id="auth_code" name="auth_code"/>
+        </div>
+        <div class="form-group2">
+           <button type="button" onclick="javascript:member_send();">회원가입 하기</button>
+        </div>
+    </div>
   </div>
-
-	<div class="text-center" style="padding-top:10px">
-		 <a href="javascript:member_send();" class="btn btn-default">회원가입하기</a> 
-	</div> 
-
-</section>
+</div>
 </form>
 
-<div class="modal-foot">
-</div>
+</body>
