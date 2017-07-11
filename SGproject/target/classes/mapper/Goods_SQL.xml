@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 상품 SQL -->
+<!-- comment by seo -->
 <mapper namespace="goods">
 
+<!-- 상품 리스트  -->
 <select id="goodsList" resultType="hashmap">
 	<![CDATA[
 		
 		SELECT * FROM SG_GOODS where GOODS_ONOFF=0
 	]]>
 	</select>
-	
+
+<!-- 상품 상세보기 -->
 <select id="selectOneGoods" parameterType="int" resultType="hashmap">
 	<![CDATA[
 		
@@ -19,6 +22,7 @@
 	]]>
 	</select>
 	
+	<!-- 이미지 가져오기 -->
 	<select id="imageList" parameterType="int" resultType="string">
 	<![CDATA[
 		
@@ -28,7 +32,7 @@
 	]]>
 	</select>
 	
-	
+	<!-- 후기 리스트  -->
 	<select id="commentList" parameterType="int" resultType="hashmap">
 	
 	<![CDATA[
@@ -42,7 +46,7 @@
 	
 	</select>
 	
-	
+	<!-- 후기 작성 -->
 	<insert id="insertComment" parameterType="hashmap">
 
 		insert into SG_COMMENT 
@@ -62,5 +66,5 @@
 				
 			
 	</insert>
-
+<!-- comment by seo -->
 </mapper>

@@ -4,6 +4,7 @@
 <!-- 배송 SQL -->
 <mapper namespace="deli">
 
+<!-- comment by seo -->
 
 <!-- 배송 insert -->
 	<insert id="insertDeli" parameterType="hashmap">
@@ -33,5 +34,5 @@
 				
 	</insert>
 	
-	
+<!-- comment by seo -->	
 </mapper>
