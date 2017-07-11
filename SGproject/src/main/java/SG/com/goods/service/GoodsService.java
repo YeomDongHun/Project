@@ -3,6 +3,9 @@ package SG.com.goods.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface GoodsService {
 
 	public List<Map<String, Object>> goodsList() throws Exception ;
@@ -16,5 +19,7 @@ public interface GoodsService {
 	public void insertComment(Map<String,Object> map) throws Exception;
 	
 	public void basketInsert(Map<String,Object> map) throws Exception;
+	
+	
 
 }

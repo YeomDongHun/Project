@@ -47,5 +47,8 @@ public class GoodsDao extends AbstractDAO {
 	public void basketInsert(Map<String, Object> map) throws Exception{
 	    sqlSession.insert("basket.basketInsert", map);
 	}
+	
+	
+	
 
 }

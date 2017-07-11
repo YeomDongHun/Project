@@ -58,7 +58,7 @@
 
 
 <div class="bkgoodsform">
-<div class="bkgoodsname"><strong>Goods Name : ${GOODS_NAME}</strong></div>
+<div class="bkgoodsname"><strong>Goods Name : ${basketList.BASKET_GOODS_NAME}</strong></div>
 <div class="bkdiy"><strong>diy1 : </strong></div>
  
 

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
-    
+<%@ page session = "true" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -127,16 +127,26 @@ function cal(){
 
 	var price = "${goodsDetail.GOODS_PRICE }";
 	
-	var multi = document.getElementById("amount").value;
+	var amount = document.getElementById("amount").value;
 
 	
 	
-	var num = price * multi;
+	var num = price * amount;
 	
-	
+ 	$("#amount_ch").val(amount); 
 	$("#totalprice").html(num);
 	
 };
+
+//장바구니 처리 
+/* function onBasket(){
+	   var GOODS_NO = "${goodsDetail.GOODS_NO}";
+	   var GOODS_AMOUNT=document.getElementById("amount").value;
+	   var MEMBER_NO =document.getElementById("MEMBER_NO").value;
+
+	   var TOPPING_NAME = "토핑 없음";
+	   location.href = 'addBasket?BASKET_GOODS_NO='+GOODS_NO+'&BASKET_MEMBER_NO='+MEMBER_NO+'&BASKET_GOODS_AMOUNT='+GOODS_AMOUNT+'&BASKET_TOPPING_NAME='+TOPPING_NAME;
+} */
 //comment by dasol
 
 </script>
@@ -171,8 +181,10 @@ function cal(){
        </div></td>
     </tr>
     <tr>
+    
     <td>총 가격</td><td><span id="totalprice">${goodsDetail.GOODS_PRICE }</span></td>
     
+ 
     </tr>
 
 
@@ -183,7 +195,14 @@ function cal(){
 	
 	
 	<input type="button" value="BUY" onclick="javascript:location.href='goodsOrder?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
-	<input type="button" value="basket" onclick="javascript:onBasket()"/>
+	
+	<form action="addBasket" method="post">
+	<input type="submit" value="basket"/>
+	<input type="hidden" name="BASKET_MEMBER_NO" value="${sessionScope.MEMBER_NO}"/>
+	<input type="hidden" id=amount_ch name="BASKET_GOODS_AMOUNT" value="1"/>
+	<input type="hidden" name="BASKET_GOODS_NO" value="${goodsDetail.GOODS_NO}"/>
+	<input type="hidden" name="BASKET_TOPPING_NAME" value="토핑 없음"/>	
+	</form>
 	</div>
 </div>
 
@@ -195,6 +214,7 @@ function cal(){
 	</center>
 	
 	
+	세션확인 : ${sessionScope.MEMBER_NO}
 	</div>
 
 

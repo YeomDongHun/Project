@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import SG.com.common.CommandMap;
 import SG.com.goods.service.GoodsServiceImpl;
+import SG.com.member.service.MemberService;
 
 @Controller
 public class GoodsController {
 	@Resource
 	GoodsServiceImpl goodsService;
+	@Resource
+	MemberService memberService;
 	
 	int currentPage=1;
 	//게시판 리스트
@@ -85,53 +88,50 @@ public class GoodsController {
 	
 	
 	
-	//주문확인 
-	@RequestMapping(value="/goodsOrder",method = RequestMethod.GET )
-	public String goodsOrder(Model model,int GOODS_NO) throws Exception{
-		Map<String,Object> list=goodsService.selectOneGoods(GOODS_NO);
-		String member = "1"; //session 에서 아이디 or 아이디 넘버 받아올 부분
-		
-		System.out.println("주문"+list);
-		
-		return "goodsDetail";
-		
-	}
 	
 	
 	
 	//장바구니
 	@RequestMapping(value="/addBasket",method = RequestMethod.POST)
 	public String basket(Model model,HttpServletRequest request, HttpSession session, CommandMap map) throws Exception{
-	      int member_no = Integer.parseInt(request.getParameter("BASKET_MEMBER_NO").toString());
-	      
+	      String member_no=request.getParameter("BASKET_MEMBER_NO");
 	      String tst  = request.getParameter("BASKET_GOODS_NO");
 	      int basket_goods_no = Integer.parseInt(tst);
 	      
 	   /*   session = request.getSession(false);*/
 	      
 	      int basket_goods_amount = Integer.parseInt(request.getParameter("BASKET_GOODS_AMOUNT").toString());
-	      String basket_topping_name="토핑없음";
-	      
-	      if(member_no != 0){
-	    	  System.out.println("==============인설트==============");
+	      String basket_topping_name=request.getParameter("BASKET_TOPPING_NAME");
+	      System.out.println(member_no);
+	      if(member_no.equals("")){
+	    	  System.out.println("진입");
+	    	  return "redirect:loginForm";
+	    	  
+
+	      }else{
+	    	  
+	    	 int login_no = Integer.parseInt(member_no);
+	
 	         map.put("BASKET_GOODS_NO", basket_goods_no);
-	         map.put("BASKET_MEMBER_NO", member_no);
+	         map.put("BASKET_MEMBER_NO", login_no);
 	         map.put("BASKET_GOODS_NAME", goodsService.selectOneGoods(basket_goods_no).get("GOODS_NAME"));
 	         map.put("BASKET_GOODS_AMOUNT", basket_goods_amount);
 	         map.put("BASKET_TOPPING_NAME", basket_topping_name);
-		      System.out.println(map.getMap());
+		     
 
-         goodsService.basketInsert(map.getMap());
-         
-	      }else{
-	         return "redirect:loginForm";
+	         goodsService.basketInsert(map.getMap());
+	         
+	         Map<String,Object> list = map.getMap();
+	         model.addAttribute("basketList", list);
+	         
 	      	}
 	      
-	      return "Goods/goodsList";
+	      return "Goods/Basket/goodsBasket";
 	   }
+	
+	
 	   
-	
-	
+
 	
 	
 	
