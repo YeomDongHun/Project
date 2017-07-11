@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file ="../Common/include_header.jspf" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" >
-
 <head>
+<%--css 사용 --%>
 <link rel="stylesheet" type="text/css" href="./resources/file/css/loginForm.css"/>
 
+<%--쿠키 스크립트 파일 불러오기 --%>
 <script src="<c:url value='./resources/file/js/cookie.js'/>" charset="utf-8"></script>
+<%--ajax --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
 </script>
 
@@ -64,39 +66,6 @@ $(document).ready(function()
 		    });
 		});
 
-//쿠키 세팅
-function setCookie(cookieName, value, exdays)
-{
-   var exdate = new Date();
-   exdate.setDate(exdate.getDate() + exdays);
-   var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-   document.cookie = cookieName + "=" + cookieValue;
-}
-
-//쿠키 삭제
-function deleteCookie(cookieName)
-{
-   var expireDate = new Date();
-   expireDate.setDate(expireDate.getDate() - 1);
-   document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-}
-
-//쿠키 가져오기
-function getCookie(cookieName) 
-{
-   cookieName = cookieName + '=';
-   var cookieData = document.cookie;
-   var start = cookieData.indexOf(cookieName);
-   var cookieValue = '';
-   if(start != -1)
-   {
-       start += cookieName.length;
-       var end = cookieData.indexOf(';', start);
-       if(end == -1)end = cookieData.length;
-       cookieValue = cookieData.substring(start, end);
-   }
-   return unescape(cookieValue);
-}
 //아이디 저장 쿠키 끝
 </script>
 </head>

@@ -208,30 +208,22 @@ public class JoinController
 	   return "joinForm";
 	}
 	
-    //아이디 중복 확인
 	@RequestMapping(value="/checkId")
-	public int checkId(Model model, HttpServletRequest request, HttpServletResponse response, CommandMap commandMap) 
-			throws Exception
+	public @ResponseBody int checkId(HttpServletRequest request, HttpServletResponse response, CommandMap commandMap) throws Exception
 	{
 		//스크립트에 넘겨준id 값을 받음
-				String MEMBER_ID = (String) commandMap.getMap().get("MEMBER_ID");
-				
-				System.out.println(MEMBER_ID);
+		String mem_id = (String) commandMap.getMap().get("mem_id");
 
-				//email을 MEMBER_EMAIL 값으로 map에 다시 넣어줌
-				commandMap.getMap().put("MEMBER_ID", MEMBER_ID);
-				
-				//MEMBER 테이블에 입력한 이메일이 있는지에 대한 여부 체크
-				int checkId = joinService.chekcId(commandMap.getMap());
-				
-				System.out.println("checkNum="+checkId);
-				System.out.println(commandMap.getMap());
-				
-				/*PrintWriter out = response.getWriter();
-				String paramId= (request.getParameter("MEMBER_ID") == null)?"":String.valueOf(request.getParameter("MEMBER_ID"));
-				int checkId = joinService.chekcId(paramId);*/
-				
-			    return checkId;
+		//email을 MEMBER_EMAIL 값으로 map에 다시 넣어줌
+		commandMap.getMap().put("MEMBER_ID", mem_id);
+		
+		//MEMBER 테이블에 입력한 이메일이 있는지에 대한 여부 체크
+		int checkId = joinService.checkId(commandMap.getMap());
+		
+		System.out.println("checkId="+checkId);
+		System.out.println(commandMap.getMap());
+		
+	   return checkId;
 	}
     
 	//회원가입 성공
@@ -239,15 +231,36 @@ public class JoinController
 	public String joinSuccess(Model model, CommandMap commandMap, HttpServletRequest request) throws Exception 
 	{
 		String MEMBER_EMAIL = request.getParameter("MEMBER_EMAIL1")+"@"+request.getParameter("MEMBER_EMAIL2");
+		String MEMBER_HEIGHT = request.getParameter("MEMBER_HEIGHT"); //키
+		String MEMBER_WEIGHT = request.getParameter("MEMBER_WEIGHT"); //몸무게
+		
 		Map<String, Object> memberMap = new HashMap<String, Object>();
-        memberMap=commandMap.getMap();
+		
+        memberMap = commandMap.getMap();
         memberMap.put("MEMBER_EMAIL", MEMBER_EMAIL);
-
+        
         System.out.println(memberMap.get("MEMBER_ADDR1"));
         System.out.println(memberMap.get("MEMBER_ZIP"));
         System.out.println(memberMap);
-        joinService.insertMember(memberMap, request);
-        pointService.joinPoint(memberMap);
+        
+        //몸무게, 키 미입력시 포인트 지급 안되는 부분
+        if(request.getParameter("MEMBER_HEIGHT") == "" && request.getParameter("MEMBER_WEIGHT") == "")
+        {
+        	memberMap.put("MEMBER_HEIGHT", 0);
+            memberMap.put("MEMBER_WEIGHT", 0);
+            System.out.println(memberMap);
+            joinService.insertMember(memberMap, request);
+        }
+        
+        //몸무게, 키 입력시 가입 포인트2000원지급
+        else 
+        {
+        	memberMap.put("MEMBER_HEIGHT", MEMBER_HEIGHT);
+            memberMap.put("MEMBER_WEIGHT", MEMBER_WEIGHT);
+            joinService.insertMember(memberMap, request);
+            pointService.joinPoint(memberMap);
+        }
+        
 		return "joinSuccess";
 	}
 	

@@ -13,51 +13,51 @@ public class AdminFaqDao extends AbstractDAO {
 	//전체 리스트
 	@SuppressWarnings("unchecked")//경고 무시
 	public List<Map<String,Object>> faqList(Map<String,Object>map)throws Exception{
-		return (List<Map<String,Object>>) selectList("faq.faqList, map");
+		return (List<Map<String,Object>>) selectList("faqboard.faqList", map);
 	}
 	//FAQ상세보기
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> faqDetail(Map<String,Object>map)throws Exception{
-		return(Map<String,Object>) selectOne("faq.faqDetail",map);
+		return(Map<String,Object>) selectOne("faqboard.faqDetail",map);
 		
 	}
 	
 	//FAQ검색(제목)=0
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> faqSearch0(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch0("faq.faqSearch0",map, isSearch);
+		return (List<Map<String,Object>>) faqSearch0("faqboard.faqSearch0",map, isSearch);
 		
 	}
 	//FAQ검색(내용)=1
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> faqSearch1(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch1("faq.faqSearch1",map, isSearch);
+		return (List<Map<String,Object>>) faqSearch1("faqboard.faqSearch1",map, isSearch);
 		
 	}
 	//FAQ검색(카테고리)=2
 	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>> faqSearch2(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch2("faq.faqSearch2",map, isSearch);
+		return (List<Map<String,Object>>) faqSearch2("faqboard.faqSearch2",map, isSearch);
 		
 	}
 	
 	//FAQ등록
 	public void faqWrite(Map<String, Object>map) throws Exception{
-		insert("faq.faqWrite",map);
+		insert("faqboard.faqWrite",map);
 	}
 	
 	//FAQ수정	
 	public void faqModify(Map<String, Object>map)throws Exception{
-		update("faq.faqModify",map);
+		update("faqboard.faqModify",map);
 	}
 	
 	//FAQ조회수
 	public void faqUpdateHitCnt(Map<String,Object>map) throws Exception{
-		update("faq.faqUpdateHitCnt",map);
+		update("faqboard.faqUpdateHitCnt",map);
 	}
 	//FAQ삭제
 	public void faqDelete(Map<String, Object>map) throws Exception{
-		delete("faq.faqDelete",map);
+		delete("faqboard.faqDelete",map);
 	}
 			
 	
