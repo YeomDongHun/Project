@@ -14,23 +14,6 @@
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
 <script type="text/javascript">
 
-function basket(test){
-   alert("장바구니에 담았습니다.");
-   
-
-   
-   var GOODS_NO = test.getAttribute("id");
-   var GOODS_AMOUNT=1;
-   var id=$(document).getAttribute("id").getAttribute("id");
-   var MEMBER_NO =60;
-   location.href = 'addBasket?BASKET_GOODS_NO='+GOODS_NO+'&id='+id+'&BASKET_GOODS_AMOUNT='+GOODS_AMOUNT;
-   
-}
-
-
-
-
-    		
     function ajax(test){ 
 
     	var BASKET_GOODS_AMOUNT = 1;
@@ -58,19 +41,75 @@ function basket(test){
     });
     	
     }
+    
+    
+    function WishAdd(test){ 
+
+ 		var WISH_GOODS_NO =test.getAttribute("id");
+ 		var WISH_MEMBER_NO =60;
+    	var theUrl = "addWish";
+
+    
+    	$.ajax({url: theUrl,  
+   		type : "POST", 
+   		data : { 
+   			WISH_GOODS_NO : WISH_GOODS_NO,
+   			WISH_MEMBER_NO : WISH_MEMBER_NO
+   		},
+   		success: function(result){ 
+   			alert("위시리스트 추가");
+   		},
+   		error: function(result){ 
+   			alert("실패"); 
+   		}   
+    	
+    	
+    	
+    });
+    	
+    }
+    
+    function WishDel(test){ 
+
+    	var WISH_GOODS_NO =test.getAttribute("id");
+ 		var WISH_MEMBER_NO =60;
+
+    	var theUrl = "delWish";
+    	
+    
+    	$.ajax({url: theUrl,  
+   		type : "POST", 
+   		data : { 
+   			WISH_GOODS_NO : WISH_GOODS_NO,
+   			WISH_MEMBER_NO : WISH_MEMBER_NO
+   		},
+   		success: function(result){ 
+   			alert("위시리스트 삭제");
+   		},
+   		error: function(result){ 
+   			alert("실패"); 
+   		}   
+    	
+    	
+    	
+    });
+    	
+    }
      
 
 function imgToggle(test){
-   
-var wish = document.getElementById(test.getAttribute("id")).getAttribute("src");
+	
+ 
+	var wish = document.getElementById(test.getAttribute("id")).getAttribute("src");
 
+	if(wish=="resources/file/img/wishoff.png"){
+   		test.setAttribute( "src", "resources/file/img/wish.ico" );
+   		WishAdd(test);
 
-if(wish=="resources/file/img/wishoff.png"){
-   test.setAttribute( "src", "resources/file/img/wish.ico" );
-alert("위시리스트에 담았셈");
-}else{
-test.setAttribute( "src", "resources/file/img/wishoff.png" );
-alert("위시리스트에서 삭제");
+	}else{
+	test.setAttribute( "src", "resources/file/img/wishoff.png" );
+		WishDel(test);
+
 }
 
 
@@ -117,9 +156,24 @@ alert("위시리스트에서 삭제");
          <img id="${goodsList.GOODS_NO}" src="resources/file/img/basket.ico" width="20" height="20" onclick="ajax(this)"/>
          <input type="hidden" name="id" id="${id}"/>
          </div>
-         <div class="wish" style="margin:auto; padding-left:10px;float:left">
-         <img id="wishoff${stat.index}" src="resources/file/img/wishoff.png" width="20" height="20" onclick="imgToggle(this)"/>
-         </div>
+         
+         <c:choose>
+         	<c:when test="${goodsList.WISH_NO==0}">
+         	  	<div class="wish" style="margin:auto; padding-left:10px;float:left">
+       			  <img id="w_${goodsList.GOODS_NO}" src="resources/file/img/wishoff.png" width="20" height="20" onclick="imgToggle(this)"/>
+        		 </div>
+         	</c:when>
+         	<c:otherwise>
+         		<div class="wish" style="margin:auto; padding-left:10px;float:left">
+       			  <img id="w_${goodsList.GOODS_NO}" src="resources/file/img/wish.ico" width="20" height="20" onclick="imgToggle(this)"/>
+        		 </div>
+         	
+         	</c:otherwise>
+         
+         </c:choose>
+       
+         
+         
          </div>
 
          <br>

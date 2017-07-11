@@ -11,6 +11,18 @@
 	]]>
 	</select>
 	
+	
+	<select id="wishGoodsList" resultType="hashmap" parameterType="int">
+	select GOODS_NO,GOODS_NAME,GOODS_PRICE,
+GOODS_DETAIL,GOODS_THUMBNAIL,GOODS_DATE,
+GOODS_ONOFF,GOODS_COUNT,GOODS_KCAL,
+GOODS_TYPE,GOODS_AMOUNT,
+nvl(WISH_GOODS_NO,0) as wish_no
+from SG_GOODS 
+LEFT  OUTER JOIN SG_WISH ON GOODS_NO = WISH_GOODS_NO AND WISH_MEMBER_NO =#{MEMBER_NO}
+where GOODS_ONOFF = 0 
+	</select>
+	
 <select id="selectOneGoods" parameterType="int" resultType="hashmap">
 	<![CDATA[
 		

@@ -22,6 +22,11 @@ public class GoodsDao extends AbstractDAO {
 		return sqlSession.selectList("goods.goodsList");
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> wishGoodsList(int MEMBER_NO) throws Exception{
+		return sqlSession.selectList("goods.wishGoodsList",MEMBER_NO);
+		
+	}
 	
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> selectOneGoods(int num) throws Exception{

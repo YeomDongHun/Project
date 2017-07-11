@@ -97,8 +97,8 @@ $(document).ready(function(){
    			no : commentNo
    		},
    		success: function(result){ 
-   			src.setAttribute("value","");
-           	$("#commentList").html(result); 
+   			$("#commentContents").val("");
+   			$("#commentList").html(result); 
    		},
    		error: function(result){ 
    			alert("실패"); 

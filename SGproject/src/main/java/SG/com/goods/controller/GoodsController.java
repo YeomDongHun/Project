@@ -16,23 +16,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import SG.com.common.CommandMap;
 import SG.com.goods.service.GoodsServiceImpl;
+import SG.com.goods.service.WishServiceImpl;
 
 @Controller
 public class GoodsController {
 	@Resource
 	GoodsServiceImpl goodsService;
 	
+	@Resource
+	WishServiceImpl wishService;
+	
+	
 	int currentPage=1;
 	//게시판 리스트
 	@RequestMapping(value = "/goodsList")
 	public String goodsList(Model model) throws Exception {
-		List<Map<String, Object>> list = goodsService.goodsList();
+		
+		//세션 처리 필요
+		int MEMBER_NO = 60;
+		
+		if(MEMBER_NO ==0){
+		List<Map<String, Object>> list = goodsService.goodsList();	
 		model.addAttribute("goodsList",list);
+		
+		}else{
+			List<Map<String,Object>> list = goodsService.wishGoodsList(MEMBER_NO);
+			model.addAttribute("goodsList",list);
+		}
+		
+		
 		model.addAttribute("currentPage",currentPage);
 		
 		return "goodsList_tiles";
 	}
 	
+	//DIY화면
 	@RequestMapping(value = "/goodsDIY")
 	public String goodsDIY(Model model) {
 		return "goodsDIY_tiles";
