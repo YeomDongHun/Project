@@ -43,11 +43,7 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
-	@Override
-	public void successInsert(Map<String, Object> map) throws Exception {
-		orderDao.successInsert(map);
-		
-	}
+
 
 	
 

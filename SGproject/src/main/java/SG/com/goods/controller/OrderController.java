@@ -77,8 +77,7 @@ public class OrderController {
 	      //주문테이블 update
 	      orderService.updateDeli(map.getMap());// update SG_ORDER set DELI_NO=#{DELI_NO} where orderno=#{orderno}
 	      
-	      //결제테이블 insert
-	      orderService.successInsert(map.getMap());
+	  
 	      
 	      return "goodsOrderSuccess_tiles";
 	   }

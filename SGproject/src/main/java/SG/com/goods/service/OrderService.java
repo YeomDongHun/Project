@@ -18,6 +18,6 @@ public interface OrderService {
 
 	public void updateDeli(Map<String, Object> map) throws Exception;
 
-	public void successInsert(Map<String,Object> map) throws Exception;
+
 
 }

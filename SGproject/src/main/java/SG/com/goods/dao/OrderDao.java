@@ -39,9 +39,6 @@ public class OrderDao extends AbstractDAO {
 	public void updateDeli(Map<String,Object> map) throws Exception{
 		sqlSession.update("order.updateDeli", map);
 	}
-	
-	public void successInsert(Map<String, Object> map) throws Exception{
-		sqlSession.insert("trade.successInsert", map);
-	}
+
 
 }

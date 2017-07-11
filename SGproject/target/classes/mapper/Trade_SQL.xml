@@ -4,7 +4,7 @@
 <!-- 결제 SQL -->
 <mapper namespace="trade">
 
-<!-- 배송 insert -->
+<!-- 결제 insert -->
 	<insert id="successInsert" parameterType="hashmap">
 
 		INSERT INTO SG_TRADE(
