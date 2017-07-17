@@ -49,6 +49,8 @@ width:100%;
         font-weight: bold;                  /* 폰트를 굵게 설정 */
         font-family: "Nanum Gothic";       
         float : right;
+        margin-right:40px;
+        margin-top:10px;
 }
 
 #topMenu {

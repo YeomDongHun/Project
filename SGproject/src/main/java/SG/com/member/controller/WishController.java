@@ -22,10 +22,10 @@ public class WishController {
 	@Resource
 	GoodsServiceImpl goodsService;
 	
-	@RequestMapping(value = "/wishList")
+	/*@RequestMapping(value = "/wishList")
 	public String wishList(Model model) {
 		return "mywish";
-	}
+	}*/
 	
 	
 		//위시 추가
