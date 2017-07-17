@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
  <html>
  <head>
  <style>
 #headerWrap{
-
+width:100%;
 }
 #logoWrap{
 	width:600px;
@@ -13,10 +14,11 @@
 	margin-right:auto;
 }
 #loginWrap{
-	width:100%;
+
 	height:50px;
 /* 	background-color:blue; */
 	font-family:"Nanum Gothic";
+	
 }
 
 #loginWrap ul{
@@ -41,9 +43,17 @@
         font-family: "Nanum Gothic";
 }
 
+.loginname{
+		text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
+		font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
+        font-weight: bold;                  /* 폰트를 굵게 설정 */
+        font-family: "Nanum Gothic";       
+        float : right;
+}
+
 #topMenu {
             height: 50px;  /* 메인 메뉴의 높이 */
-            width:1460px;  /* 메인 메뉴의 넓이 */
+            width:100%;  /* 메인 메뉴의 넓이 */
    			margin-left:auto;
    			margin-right:auto;
     }
@@ -64,7 +74,7 @@
 .menuLink, .submenuLink {           /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
         text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
         display: block;                     /* a 태그의 클릭 범위를 넓힘 */
-        width: 200px;                       /* 기본 넓이를 150px로 설정 */
+        width: 159px;                       /* 기본 넓이를 150px로 설정 */
         font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
         font-family: "Nanum Gothic", Dotum; /* 기본 폰트를 영어/한글 순서대로 설정 */
@@ -112,16 +122,45 @@
        url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
        url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
 }
- </style>   
+ </style>  
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>  
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>    
-<div id="headerWrap">
+
+<div id="sideBar" style="color: #FFFFFF;">
+<jsp:include page="../../views/Goods/Basket/goodsBasket.jsp"></jsp:include>
+</div>
+
+<div class="container">
 	<div id="loginWrap">
-		<ul>
-			<li><a class="loginLink" href="#">마이페이지</a></li>
-			<li><a class="loginLink" href="joinEmail">회원가입</a></li>
-			<li><a class="loginLink" href="loginForm">로그인</a></li>
-		</ul>
+	        세션 확인 : ${sessionScope.MEMBER_ID}
+	        
+		    <c:choose>
+		    
+		    <c:when test="${(sessionScope.MEMBER_NO) == 0}">
+		    <ul>		
+		    <li><a class="loginLink" href="loginForm">로그인</a></li>
+		    <li><a class="loginLink" href="joinEmail">회원가입</a></li>
+		   	</ul>	    
+		    </c:when>
+		    
+		    <c:otherwise>
+		    <ul>          		
+		    <li><a class="loginLink" href="logout">로그아웃</a></li>
+		    <li><a class="loginLink" href="mypage">마이페이지</a></li>
+		    <li><a class="loginLink" href="#">장바구니</a></li>
+		    <li><a class="loginLink" href="#">위시리스트</a></li>		    
+		    </ul>
+		    <div class="loginname">${sessionScope.MEMBER_NAME}님 환영합니다!</div>
+		    </c:otherwise>
+		    
+		    </c:choose>
+
 	</div>
     <div id="logoWrap">
     	<a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
@@ -159,6 +198,9 @@
 		<li>|</li>  
    			 <li class="topMenuLi">
    			 	<a class="menuLink" href="memberNoticeList">공지 사항</a>
+  				<ul class="submenu">
+  					<li><a class="submenuLink" href="memberQnAList">Q&A</a></li>
+  				</ul>
    			 </li>
 		</ul>
 	</div>	

@@ -1,4 +1,8 @@
 .metadata/
 Servers/
 .recommenders/
+<<<<<<< HEAD
 SGproject.zip
+=======
+SGproject/target/classes/log4sql.jar
+>>>>>>> a271e590c4afbf2d5d3b8401c8ab945c7c36a0ab

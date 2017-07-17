@@ -58,21 +58,33 @@ public class JoinController
 	
 	//이메일 인증 로직 시작
 	@RequestMapping(value="/joinStep1/modal_email_auth")
-	public String email_auth(HttpServletResponse response, HttpServletRequest request, Model model, CommandMap Map) throws Exception
+	public String email_auth(HttpServletResponse response, HttpServletRequest request, HttpSession session, Model model, CommandMap commandMap) 
+			throws Exception
 	{
 		
-		//스크립트에 넘겨준 email 값을 받음
-		String email = (String) Map.getMap().get("email");
+		//ajax로 넘겨준 email 값을 받음
+		String email = (String) commandMap.getMap().get("email");
 		
-		System.out.println("email = " + email);
+		//그 값(이메일)이 잘 들어왔는지 확인
+	    System.out.println("email = " + email);
+	    
+		//입력한 email 주소를 @를 기준으로 쪼갬
+		String [] split_email = email.split("@");
+		
+		//세션 영역 저장(이메일) : ex) ykc90831@gmail.com
+	    session.setAttribute("email1", split_email[0].toString()); // ykc90831
+	    session.setAttribute("email2", split_email[1].toString()); // gmail.com
 		
 		//email을 MEMBER_EMAIL 값으로 map에 다시 넣어줌
-		Map.getMap().put("MEMBER_EMAIL", email);
+		commandMap.getMap().put("MEMBER_EMAIL", email);
+		
+		//commandMap에 잘 들어갔는지 확인
+		System.out.println(commandMap.getMap());
 		
 		//MEMBER 테이블에 입력한 이메일이 있는지에 대한 여부 체크
-		int checkNum = joinService.checkEmail(Map.getMap());
+		int checkNum = joinService.checkEmail(commandMap.getMap());
 		
-		System.out.println("checkNum="+checkNum);
+		System.out.println("checkNum="+checkNum); //이메일 유/무 check
 		
 		//등록된 이메일이 없을 경우
 		if(checkNum==0)
@@ -81,10 +93,12 @@ public class JoinController
 		authNum = RandomNum(); //인증번호 생성
 		sendEmail(email.toString(), authNum);
 		System.out.println("메일보냄");
+		System.out.println("인증번호 :"+authNum);
 		}
 		
-		String checkNumString=String.valueOf(checkNum);
+		String checkNumString = String.valueOf(checkNum);
 		PrintWriter writer = response.getWriter();
+		
 		//이메일이 있는지 여부에 대한 checkNum을 write -> joinStep1.jsp 안에 email_code에서 checkNum을 가져다 씀 
 		writer.write(checkNumString);        
 		writer.flush(); //강제성..
@@ -92,9 +106,7 @@ public class JoinController
 				
 		model.addAttribute("email",email);
 		model.addAttribute("authNum", authNum);
-				
-		System.out.println("인증번호"+authNum);
-		
+						
 		return "Member/join_Step1";
 	}
 	
@@ -172,7 +184,7 @@ public class JoinController
     {
          
         String str = authNum;
-        System.out.println("인증번호 검사 : "+authNum);
+        System.out.println("인증번호 검사 : "+ authNum);
         return str;
     }
 	
@@ -185,17 +197,70 @@ public class JoinController
 	
 	//회원가입 폼
 	@RequestMapping(value = "/joinForm")
-	public String joinForm(Model model) 
+	public String joinForm(Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request, CommandMap Map)
+	throws Exception
 	{
-		return "joinForm";
+       String email1 = (String)session.getAttribute("email1");
+	   String email2 = (String)session.getAttribute("email2");
+	   System.out.println("email1 : " +email1);
+	   System.out.println("email2 : " +email2);
+	   
+	   return "joinForm";
 	}
 	
-
-	
-	//회원가입 성공
-	@RequestMapping(value = "/joinSuccess")
-	public String joinSuccess(Model model) 
+	@RequestMapping(value="/checkId")
+	public @ResponseBody int checkId(HttpServletRequest request, HttpServletResponse response, CommandMap commandMap) throws Exception
 	{
+		//스크립트에 넘겨준id 값을 받음
+		String mem_id = (String) commandMap.getMap().get("mem_id");
+
+		//email을 MEMBER_EMAIL 값으로 map에 다시 넣어줌
+		commandMap.getMap().put("MEMBER_ID", mem_id);
+		
+		//MEMBER 테이블에 입력한 이메일이 있는지에 대한 여부 체크
+		int checkId = joinService.checkId(commandMap.getMap());
+		
+		System.out.println("checkId="+checkId);
+		System.out.println(commandMap.getMap());
+		
+	   return checkId;
+	}
+    
+	//회원가입 성공
+	@RequestMapping(value = "/joinSuccess", method = RequestMethod.POST)
+	public String joinSuccess(Model model, CommandMap commandMap, HttpServletRequest request) throws Exception 
+	{
+		String MEMBER_EMAIL = request.getParameter("MEMBER_EMAIL1")+"@"+request.getParameter("MEMBER_EMAIL2");
+		String MEMBER_HEIGHT = request.getParameter("MEMBER_HEIGHT"); //키
+		String MEMBER_WEIGHT = request.getParameter("MEMBER_WEIGHT"); //몸무게
+		
+		Map<String, Object> memberMap = new HashMap<String, Object>();
+		
+        memberMap = commandMap.getMap();
+        memberMap.put("MEMBER_EMAIL", MEMBER_EMAIL);
+        
+        System.out.println(memberMap.get("MEMBER_ADDR1"));
+        System.out.println(memberMap.get("MEMBER_ZIP"));
+        System.out.println(memberMap);
+        
+        //몸무게, 키 미입력시 포인트 지급 안되는 부분
+        if(request.getParameter("MEMBER_HEIGHT") == "" && request.getParameter("MEMBER_WEIGHT") == "")
+        {
+        	memberMap.put("MEMBER_HEIGHT", 0);
+            memberMap.put("MEMBER_WEIGHT", 0);
+            System.out.println(memberMap);
+            joinService.insertMember(memberMap, request);
+        }
+        
+        //몸무게, 키 입력시 가입 포인트2000원지급
+        else 
+        {
+        	memberMap.put("MEMBER_HEIGHT", MEMBER_HEIGHT);
+            memberMap.put("MEMBER_WEIGHT", MEMBER_WEIGHT);
+            joinService.insertMember(memberMap, request);
+            pointService.joinPoint(memberMap);
+        }
+        
 		return "joinSuccess";
 	}
 	

@@ -29,12 +29,12 @@
 </bean>
 
 <!-- 로그 인터셉터 사용 -->
-<mvc:interceptors>
+<!-- <mvc:interceptors>
  <mvc:interceptor>
   <mvc:mapping path="/**" />
   <bean id="loggerIntercepter" class="SG.com.common.LoggerInterceptor"></bean>
  </mvc:interceptor>
-</mvc:interceptors>
+</mvc:interceptors> -->
  
 <!-- 타일즈 뷰 리졸버 선언 -->
 <bean id="viewResolver"
@@ -59,13 +59,9 @@
     
 </bean>
 
-<!-- DefaultAnnotationHandlerMapping -->
-<!-- @RequestMapping 어노테이션을 직접 부여하고 이를 이용하기 위해 사용되는 매핑 -->
-<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> -->
-
 <!-- jsonView -->
 <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
-<property name="contentType" value="text/html;charset=UTF-8"/>
+<property name="contentType" value="text/html; charset=UTF-8"/>
 </bean>
 
 </beans>
