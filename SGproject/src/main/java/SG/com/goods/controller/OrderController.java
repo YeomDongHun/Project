@@ -1,4 +1,4 @@
-package SG.com.goods.controller;
+/*package SG.com.goods.controller;
 
 import java.util.Map;
 
@@ -58,7 +58,7 @@ public class OrderController {
 	   @RequestMapping(value="/goodsOrderSuccess", method=RequestMethod.POST)
 	   public String orderSuccess(CommandMap map) throws Exception{
 	      
-		  /*System.out.println(map.getMap()); */
+		  System.out.println(map.getMap()); 
 		  
 	  
 	      //주문테이블insert
@@ -82,3 +82,4 @@ public class OrderController {
 	      return "goodsOrderSuccess_tiles";
 	   }
 }
+*/
