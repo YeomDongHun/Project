@@ -246,7 +246,7 @@ public class GoodsController {
 				System.out.println("세션 검사====================================================="+list);
 				session.setAttribute("basketList", sessionList);
 				
-				if(!session.getAttribute("MEMBER_NO").equals("0")){
+				if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
 					//DB인설트
 			         goodsService.basketInsert(list);
 
@@ -264,7 +264,7 @@ public class GoodsController {
 				session.setAttribute("basketList", sessionList);
 				System.out.println("세션 검사====================================================="+list);
 
-				if(!session.getAttribute("MEMBER_NO").equals("0")){
+				if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
 					//DB인설트
 			         goodsService.basketInsert(list);
 
