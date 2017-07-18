@@ -53,6 +53,10 @@ public class OrderDao extends AbstractDAO {
 	public List<Map<String,Object>> basketSelectOne(int no) throws Exception{
 		return sqlSession.selectList("basket.basketSelectOne");
 	}
+	
+	public void basketDeleteMem(int member_no) throws Exception{
+		sqlSession.delete("basket.basketDeleteMem");
+	}
 
 
 }

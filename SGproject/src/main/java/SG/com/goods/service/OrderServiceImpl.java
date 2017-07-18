@@ -60,6 +60,13 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.basketSelectOne(no);
 	}
 
+	@Override
+	public void basketDeleteMem(int member_no) throws Exception {
+
+		orderDao.basketDeleteMem(member_no);
+		
+	}
+
 	
 
 

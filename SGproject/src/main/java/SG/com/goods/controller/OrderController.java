@@ -1,6 +1,5 @@
 package SG.com.goods.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,13 +59,17 @@ public class OrderController {
 		    	  
 		      }
 	      
-		    int myPoint=pointService.sumPoint(map.getMap());
+		      
 		    //적립 예정 포인트
 		    int plusPoint = totalMoney/100;
 
 	      //회원 정보 - 주소 가져오기 
 	      Map<String,Object> orderDeli= memberService.myinfoDetail(map.getMap());
-	      //포인트 가져오기 
+	      
+	      //나의 포인트 가져오기 
+	      map.put("MEMBER_NO", session.getAttribute("MEMBER_NO"));
+	      Map<String,Object> myPointMap = pointService.sumPoint(map.getMap());
+	      int myPoint=Integer.parseInt(myPointMap.get("SUM").toString());
 	      
 
 	     
@@ -123,7 +125,10 @@ public class OrderController {
 	      //회원 정보 - 주소 가져오기 
 	      Map<String,Object> orderDeli= memberService.myinfoDetail(map.getMap());
 	      //포인트 가져오기 
-	     int myPoint=pointService.sumPoint(map.getMap());
+	      map.put("MEMBER_NO", session.getAttribute("MEMBER_NO"));
+	      Map<String,Object> myPointMap = pointService.sumPoint(map.getMap());
+	      int myPoint=Integer.parseInt(myPointMap.get("SUM").toString());
+	      
 	     
 	     //총주문금액
 	     int totalMoney = order_goods_amount * Integer.parseInt(orderGoods.get(0).get("GOODS_PRICE").toString());

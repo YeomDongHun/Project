@@ -23,5 +23,7 @@ public interface OrderService {
 	public Map<String, Object> selectOneDeli(Map<String,Object> map) throws Exception;
 
 	public List<Map<String,Object>> basketSelectOne(int no) throws Exception;
+	
+	public void basketDeleteMem(int member_no) throws Exception;
 
 }
