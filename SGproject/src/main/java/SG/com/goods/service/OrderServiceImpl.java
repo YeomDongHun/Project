@@ -43,6 +43,24 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	@Override
+	public void successInsert(Map<String, Object> map) throws Exception {
+		orderDao.successInsert(map);
+		
+	}
+
+	@Override
+	public Map<String, Object> selectOneDeli(Map<String,Object> map) throws Exception {
+		return orderDao.selectOneDeli(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> basketSelectOne(int no) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDao.basketSelectOne(no);
+	}
+
+	
 
 
 	

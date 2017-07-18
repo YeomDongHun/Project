@@ -52,6 +52,12 @@ public class GoodsServiceImpl implements GoodsService {
 	    goodsDao.basketInsert(map);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectOneGoodsList(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.selectOneGoodsList(num);
+	}
+
 	
 	
 	

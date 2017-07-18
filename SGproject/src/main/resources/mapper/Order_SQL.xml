@@ -7,7 +7,7 @@
 <!-- comment by seo  -->
 
 	<!-- 주문 insert -->
-	<insert id="orderInsert" parameterType="hashmap">
+	<insert id="orderInsert" parameterType="hashmap" useGeneratedKeys="true" keyProperty="ORDER_NO">
 
 		INSERT INTO SG_ORDER(
         ORDER_NO,
@@ -47,16 +47,6 @@
 	]]>
 	</select>
 	
-	<!-- 배송테이블에서 최신 레코드 가져오기 -->
-	<select id="selectLastDeli" resultType="hashmap">
-	<![CDATA[
-		
-		SELECT * FROM  
- 		(SELECT * FROM SG_DELI  ORDER BY DELI_NO DESC) 
-		WHERE ROWNUM = 1
-		
-	]]>
-	</select>
 	
 	<!-- 주문테이블 배송번호 update -->
 	<update id="updateDeli" parameterType="hashmap">

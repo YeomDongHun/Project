@@ -33,11 +33,25 @@ public class OrderDao extends AbstractDAO {
 	@SuppressWarnings("unchecked")
 	public Map<String, Object>selectLastDeli() throws Exception {
 		
-		return sqlSession.selectOne("order.selectLastDeli");
+		return sqlSession.selectOne("deli.selectLastDeli");
 	}
 	
 	public void updateDeli(Map<String,Object> map) throws Exception{
 		sqlSession.update("order.updateDeli", map);
+	}
+	
+	public void successInsert(Map<String,Object> map) throws Exception{
+		sqlSession.insert("trade.successInsert", map);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Map<String, Object>selectOneDeli(Map<String,Object> map) throws Exception {
+		
+		return sqlSession.selectOne("deli.selectOneDeli");
+	}
+	
+	public List<Map<String,Object>> basketSelectOne(int no) throws Exception{
+		return sqlSession.selectList("basket.basketSelectOne");
 	}
 
 

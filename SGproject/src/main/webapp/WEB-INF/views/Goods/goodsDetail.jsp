@@ -77,6 +77,34 @@ table.type07 td {
 <script type="text/javascript">
 
 //comment by dasol
+
+//총금액 설정
+function change(num)
+{
+var x  = document.getElementById("amount");
+var y = Number(x.value) + num;
+if(y < 1) y = 1;
+x.value = y;
+
+
+cal();
+};
+
+function cal(){
+
+	var price = "${goodsDetail.GOODS_PRICE }";
+	
+	var amount = document.getElementById("amount").value;
+
+	
+	
+	var num = price * amount;
+	
+ 	$("#amount_ch").val(amount); 
+	$("#totalprice").html(num);
+	
+};
+
 //후기 작성 
 $(document).ready(function(){
 	
@@ -111,42 +139,9 @@ $(document).ready(function(){
 
 
 
-//총금액 설정
-function change(num)
-{
-var x  = document.getElementById("amount");
-var y = Number(x.value) + num;
-if(y < 1) y = 1;
-x.value = y;
 
 
-cal();
-};
 
-function cal(){
-
-	var price = "${goodsDetail.GOODS_PRICE }";
-	
-	var amount = document.getElementById("amount").value;
-
-	
-	
-	var num = price * amount;
-	
- 	$("#amount_ch").val(amount); 
-	$("#totalprice").html(num);
-	
-};
-
-//장바구니 처리 
-/* function onBasket(){
-	   var GOODS_NO = "${goodsDetail.GOODS_NO}";
-	   var GOODS_AMOUNT=document.getElementById("amount").value;
-	   var MEMBER_NO =document.getElementById("MEMBER_NO").value;
-
-	   var TOPPING_NAME = "토핑 없음";
-	   location.href = 'addBasket?BASKET_GOODS_NO='+GOODS_NO+'&BASKET_MEMBER_NO='+MEMBER_NO+'&BASKET_GOODS_AMOUNT='+GOODS_AMOUNT+'&BASKET_TOPPING_NAME='+TOPPING_NAME;
-} */
 //comment by dasol
 
 </script>
@@ -193,15 +188,24 @@ function cal(){
 	
 	<br/>
 	
+	<form action="goodsOrder" method="post">
+	<input type="submit" value="Buy">
+	<input type="hidden" name="GOODS_NO" value="${goodsDetail.GOODS_NO}"/>
+	<input type="hidden" id=amount_ch name="ORDER_GOODS_AMOUNT" value="1"/>
+	<input type="hidden" name="ORDER_TOPPING_NAME" value="토핑없음"/>
+	<input type="hidden" name="GOODS_POINT" value="${point}"/>	
 	
-	<input type="button" value="BUY" onclick="javascript:location.href='goodsOrder?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
+
+	</form>
+	
+
 	
 	<form action="addBasket" method="post">
 	<input type="submit" value="basket"/>
 	<input type="hidden" name="BASKET_MEMBER_NO" value="${sessionScope.MEMBER_NO}"/>
 	<input type="hidden" id=amount_ch name="BASKET_GOODS_AMOUNT" value="1"/>
 	<input type="hidden" name="BASKET_GOODS_NO" value="${goodsDetail.GOODS_NO}"/>
-	<input type="hidden" name="BASKET_TOPPING_NAME" value="토핑 없음"/>	
+	<input type="hidden" name="ORDER_TOPPING_NAME" value="토핑없음"/>	
 	</form>
 	</div>
 </div>

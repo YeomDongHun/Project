@@ -48,7 +48,7 @@ public class PointServiceImpl implements PointService
 		   
 	   //회원별 포인트 총 합계
 	   @Override
-		public Map<String, Object> sumPoint(Map<String, Object> map) throws Exception
+		public int sumPoint(Map<String, Object> map) throws Exception
 	    {
 			return pointDao.sumPoint(map);
 		}

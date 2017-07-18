@@ -81,7 +81,7 @@
 	</insert>
 	
 <!--회원별 포인트 총 합계 -->
- <select id="sumPoint" parameterType="hashmap" resultType="hashmap">
+ <select id="sumPoint" parameterType="hashmap" resultType="int">
 	<![CDATA[
 		SELECT 
 			SUM(POINT_MONEY) AS SUM

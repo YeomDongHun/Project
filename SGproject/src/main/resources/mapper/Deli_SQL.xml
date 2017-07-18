@@ -7,32 +7,60 @@
 <!-- comment by seo -->
 
 <!-- 배송 insert -->
-	<insert id="insertDeli" parameterType="hashmap">
+<insert id="insertDeli" parameterType="hashmap" useGeneratedKeys="true" keyProperty="DELI_NO">
+INSERT INTO SG_DELI
+(
+DELI_NO,
+DELI_MEMBER_ID,
+DELI_ORDER_ZIP,
+DELI_ORDER_ADDR1,
+DELI_ORDER_ADDR2,
+DELI_ORDER_NAME,
+DELI_ORDER_PHONE,
+DELI_RECEIVE_ZIP,
+DELI_RECEIVE_ADDR1,
+DELI_RECEIVE_ADDR2,
+DELI_RECEIVE_NAME,
+DELI_RECEIVE_PHONE
+)
+VALUES
+(
+SG_DELI_NO_SEQ.NEXTVAL,
+#{DELI_MEMBER_ID},
+#{DELI_ORDER_ZIP},
+#{DELI_ORDER_ADDR1},
+#{DELI_ORDER_ADDR2},
+#{DELI_ORDER_NAME},
+#{DELI_ORDER_PHONE},
+#{DELI_RECEIVE_ZIP},
+#{DELI_RECEIVE_ADDR1},
+#{DELI_RECEIVE_ADDR2},
+#{DELI_RECEIVE_NAME},
+#{DELI_RECEIVE_PHONE}
 
-		INSERT INTO SG_ORDER(
-        ORDER_NO,
-        ORDER_GOODS_NO,
-        ORDER_GOODS_AMOUNT,
-        ORDER_MEMBER_ID,
-        ORDER_MONEY,
-        ORDER_TRADE_TYPE,
-        ORDER_DATE,
-        ORDER_STATE,
-        ORDER_TOPPING_NAME)        
+)
+
+</insert>
+	
+	<select id="selectLastDeli" parameterType="int" resultType="hashmap">
+	<![CDATA[
 		
-		VALUES(
-        
-        SG_ORDER_NO_SEQ.NEXTVAL,
-        #{ORDER_GOODS_NO},
-        #{ORDER_GOODS_AMOUNT},
-        #{ORDER_MEMBER_ID},
-        #{ORDER_MONEY},
-        #{ORDER_TRADE_TYPE},
-        SYSDATE,
-        DEFAULT,
-        #{ORDER_TOPPING_NAME})
-				
-	</insert>
+		SELECT * FROM  
+ 		(SELECT * FROM SG_DELI  ORDER BY DELI_NO DESC) 
+		WHERE ROWNUM = 1
+		
+	]]>
+	</select>
+
+
+	
+	<select id="selectOneDeli" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[
+		
+		SELECT * FROM SG_DELI WHERE DELI_NO=#{DELI_NO}
+		
+	]]>
+	</select>
 	
 <!-- comment by seo -->	
 </mapper>
