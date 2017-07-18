@@ -87,7 +87,7 @@ function delGoods(test){
                        BASKET
                     </a>
                 </li>
-		                
+		          
 			  <c:choose>
 						<c:when test="${fn:length(basketList) > 0}">
 							<c:forEach var="basketList" items="${basketList}" varStatus="stat">
@@ -96,7 +96,7 @@ function delGoods(test){
 				                    <div style="background-color: #212121;width250px; float:left; width: 250px;height: 70px; "> 
 					                    <table style="width: 250px;">
 						                    <tr>
-						                    	<td width="200"><div style="font-size: 20px;color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_NAME }</div>&nbsp;&nbsp;${basketList.GOODS_AMOUNT}&nbsp;개<br/><div style="color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_PRICE}원 &nbsp;&nbsp;${basketList.GOODS_KCAL }kcal</div></td><td width="50px;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" id="${stat.index}" aria-hidden="true" style="color: #FFFFFF;" onclick="delGoods(this);"></span></td>
+						                    	<td width="200"><div style="font-size: 20px;color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_NAME }</div>&nbsp;&nbsp;${basketList.BASKET_GOODS_AMOUNT}&nbsp;개<br/><div style="color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_PRICE}원 &nbsp;&nbsp;${basketList.GOODS_KCAL }kcal</div></td><td width="50px;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" id="${stat.index}" aria-hidden="true" style="color: #FFFFFF;" onclick="delGoods(this);"></span></td>
 						                    </tr>
 					                    </table>
 				                    </div>

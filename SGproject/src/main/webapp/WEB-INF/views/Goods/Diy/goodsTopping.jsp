@@ -53,7 +53,7 @@
 									<img  class="img-circle" style=" width: 70px;height: 70px;" alt="" src="resources/file/goodsFile/${toppingList.TOPPING_IMG}"/>
 									</div>
 								</td> 
-								<td><h3>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="javascript:location.href='/BasketDiy';" style="margin-top: 20px;"></span></h3>
+								<td><h3>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="delTopping(this);" style="margin-top: 20px;"></span></h3>
 								
 										
 										<br/>
@@ -94,7 +94,7 @@
 					</table>
 					</center>
 					
-					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="document.getElementById('basketForm').submit();">
+					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="javascript:alert('장바구니에 담았습니다');document.getElementById('basketForm').submit();">
 					  <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>BASKET
 					</button>
 					

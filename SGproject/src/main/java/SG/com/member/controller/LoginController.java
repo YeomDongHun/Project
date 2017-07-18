@@ -1,5 +1,6 @@
 package SG.com.member.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import SG.com.common.CommandMap;
+import SG.com.goods.service.GoodsServiceImpl;
 import SG.com.member.service.LoginService;
 
 @Controller
@@ -19,6 +21,9 @@ public class LoginController
 {
 	@Resource(name="loginService")
 	private LoginService loginService;
+	
+	@Resource
+	GoodsServiceImpl goodsService;
 	
 	//·Î±×ÀÎ Æû
 	@RequestMapping(value = "/loginForm")
@@ -59,6 +64,8 @@ public class LoginController
 		    	session.setAttribute("MEMBER_ID", commandMap.get("MEMBER_ID"));
 		    	session.setAttribute("MEMBER_NO", loginChk.get("MEMBER_NO"));
 		    	session.setAttribute("MEMBER_NAME", loginChk.get("MEMBER_NAME"));
+		    	
+		    	
 		    	
 		    	return "redirect:/main";
 		    }		    		    

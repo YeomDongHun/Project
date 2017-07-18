@@ -214,18 +214,20 @@ public class GoodsController {
 		public String BasketAdd(Model model,int goodsNo,HttpSession session,HttpServletRequest request) throws Exception {
 			
 			Map<String,Object> list = goodsService.selectOneGoodsforBasket(goodsNo);
-			
-			list.put("GOODS_AMOUNT", "1");
+			list.put("BASKET_MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+			list.put("BASKET_GOODS_AMOUNT", 1);
 			
 			if(request.getParameter("GOODS_AMOUNT")!=null){
-				list.put("GOODS_AMOUNT", Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString()));
+				list.put("BASKET_GOODS_AMOUNT", Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString()));
 			}
+			
+			
 			//디테일 페이지 수량 조절
-			if(!list.get("GOODS_AMOUNT").equals("1")){
-				int GOODS_AMOUNT =Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString());
+			if(Integer.parseInt(list.get("BASKET_GOODS_AMOUNT").toString()) != 1){
+				int GOODS_AMOUNT =Integer.parseInt(request.getParameter("BASKET_GOODS_AMOUNT").toString());
 				int GOODS_PRICE = Integer.parseInt(request.getParameter("GOODS_PRICE").toString());
 				
-				list.put("GOODS_AMOUNT", GOODS_AMOUNT);
+				list.put("BASKET_GOODS_AMOUNT", GOODS_AMOUNT);
 				list.put("GOODS_PRICE",GOODS_PRICE );
 				
 				 int sum =Integer.parseInt(list.get("GOODS_KCAL").toString()) * GOODS_AMOUNT;
@@ -241,11 +243,13 @@ public class GoodsController {
 				List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
 				
 				sessionList.add(list);
-				
+				System.out.println("세션 검사====================================================="+list);
 				session.setAttribute("basketList", sessionList);
 				
 				if(!session.getAttribute("MEMBER_NO").equals("0")){
 					//DB인설트
+			         goodsService.basketInsert(list);
+
 				}
 				
 				//jps에서 쓸 Model설정
@@ -258,8 +262,13 @@ public class GoodsController {
 				
 				sessionList.add(list);
 				session.setAttribute("basketList", sessionList);
-				if(session.getAttribute("MEMBER_NO").equals("0")){
+				System.out.println("세션 검사====================================================="+list);
+
+				if(!session.getAttribute("MEMBER_NO").equals("0")){
 					//DB인설트
+			         goodsService.basketInsert(list);
+
+
 				}
 				model.addAttribute("basketList",sessionList);
 				System.out.println(sessionList);
@@ -282,7 +291,8 @@ public class GoodsController {
 			
 			if(!session.getAttribute("MEMBER_NO").equals("0")){
 				//DB딜리트
-			}
+/*				goodsService.basketDelete(map);
+*/			}
 			model.addAttribute("basketList",list);
 
 			return "Goods/Basket/goodsBasket";

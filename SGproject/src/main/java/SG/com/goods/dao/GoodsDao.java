@@ -79,5 +79,11 @@ public class GoodsDao extends AbstractDAO {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> BascketMemberSelect(int MEMBER_NO) throws Exception{
+		return sqlSession.selectList("basket.BascketMemberSelect",MEMBER_NO);
+		
+	}
+	
 
 }

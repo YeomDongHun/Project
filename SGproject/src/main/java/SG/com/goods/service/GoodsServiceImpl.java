@@ -89,6 +89,12 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.selectOneGoodsforBasket(num);
 	}
 
+	@Override
+	public List<Map<String, Object>> BascketMemberSelect(int MEMBER_NO) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.BascketMemberSelect(MEMBER_NO);
+	}
+
 
 
 }

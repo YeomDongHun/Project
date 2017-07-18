@@ -14,10 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import SG.com.goods.service.GoodsServiceImpl;
 import SG.com.goods.service.ToppingServiceImpl;
 
 @Controller
 public class ToppingController {
+	
+	@Resource
+	GoodsServiceImpl goodsService;
 	
 	@Resource
 	ToppingServiceImpl toppingService;
@@ -45,7 +49,7 @@ public class ToppingController {
 		
 		Map<String,Object> list = toppingService.toppingOne(topping);
 		
-		
+		//세션 비교
 		if(session.getAttribute("toppingList")==null || session.getAttribute("toppingList").equals("")){
 			//세션값
 			
@@ -61,7 +65,7 @@ public class ToppingController {
 			System.out.println(sessionList);
 		
 		}else{
-			
+			//존재하는 세션 불러오기
 			List<Map<String,Object>> sessionList =(List<Map<String, Object>>) session.getAttribute("toppingList");
 			
 			sessionList.add(list);
@@ -95,12 +99,22 @@ public class ToppingController {
 	
 	//장바구니 추가
 	@RequestMapping(value = "/BasketDiy")
-	public String BasketDiy(Model model,HttpSession session,HttpServletRequest request) {
+	public String BasketDiy(Model model,HttpSession session,HttpServletRequest request) throws Exception {
 		/*basketList 사이드 장바구니 세션이름*/
 		/*toppingList diy 세션 이름*/
 		/*list 장바구니에 들어갈 DIY*/
+		List<Map<String,Object>> basketList = new ArrayList<Map<String,Object>>();
+
+		
+		if(session.getAttribute("basketList")==null){
+			//세션값
+			session.setAttribute("basketList", basketList);
+		}else{
+			basketList = (List<Map<String, Object>>) session.getAttribute("basketList");
+		}
+		
+		
 		List<Map<String,Object>> toppingList = (List<Map<String, Object>>) session.getAttribute("toppingList");
-		List<Map<String,Object>> basketList = (List<Map<String, Object>>) session.getAttribute("basketList");
 		Map<String,Object> list = new HashMap<String,Object>();
 		
 		System.out.println("토핑 테스트");
@@ -115,18 +129,22 @@ public class ToppingController {
 		request.getParameter("form_kcal");
 		
 		System.out.println(basketList);
-
+		
+		list.put("GOODS_NO", 0);
 		list.put("GOODS_NAME", "DIY샐러드");
 		list.put("GOODS_DETAIL", GOODS_TOPPING);
-		list.put("GOODS_KCAL", 		request.getParameter("form_kcal").toString());
-		list.put("GOODS_PRICE", request.getParameter("form_price").toString());
+		list.put("GOODS_KCAL", 		Integer.parseInt(request.getParameter("form_kcal").toString()));
+		list.put("GOODS_PRICE", Integer.parseInt(request.getParameter("form_price").toString()));
 		list.put("GOODS_THUMBNAIL", "SG_diy.jpg");
-		list.put("GOODS_AMOUNT", 1);
+		list.put("BASKET_GOODS_AMOUNT", 1);
+		list.put("BASKET_MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 		
 		basketList.add(list);
 		
 		System.out.println(basketList);
 		session.setAttribute("basketList", basketList);
+        goodsService.basketInsert(list);
+
 		session.removeAttribute("toppingList");
 		
 		model.addAttribute("basketList",basketList);

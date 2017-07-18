@@ -283,7 +283,7 @@ function dComment(test){
 	</table>
 	
 	<br/>
-	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="javascript:location.href='goodsOrder?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="javascript:location.href='goodsOrderView?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
 	<input type="button" class="btn btn-warning btn-lg" value="basket" onclick="DetailBasket();"/>
 	</div>
 </div>

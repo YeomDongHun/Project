@@ -31,10 +31,10 @@ public class OrderController {
 	
 	
 	//주문 확인 페이지 이동
-	   @RequestMapping(value="/goodsOrder", method=RequestMethod.GET)
+	   @RequestMapping(value="/goodsOrderView", method=RequestMethod.GET)
 	   public String goodsOrder(Model model,HttpServletRequest request, HttpSession session, CommandMap map) throws Exception{
 	      
-	      String tst=request.getParameter("GOODS_NO");
+		   String tst=request.getParameter("GOODS_NO");
 	      int goods_no = Integer.parseInt(tst);
 	      session = request.getSession(false);
 	      

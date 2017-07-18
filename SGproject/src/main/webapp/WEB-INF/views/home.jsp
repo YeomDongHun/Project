@@ -90,6 +90,12 @@ function delGoods(test){
                 </li>
 		                
 			  <c:choose>
+			  		<c:when test="">
+			  		
+			  		
+			  		</c:when>
+			  		
+			  		<c:when test=""></c:when>
 						<c:when test="${fn:length(basketList) > 0}">
 							<c:forEach var="basketList" items="${basketList}" varStatus="stat">
 				                <li>

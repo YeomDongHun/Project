@@ -28,5 +28,8 @@ public interface GoodsService {
 	public void deleteComment(int no);
 
 	public Map<String,Object> selectOneGoodsforBasket(int num) throws Exception;
+	
+	public List<Map<String, Object>> BascketMemberSelect(int MEMBER_NO) throws Exception;
+
 
 }
