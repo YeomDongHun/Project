@@ -166,12 +166,12 @@ public class OrderController {
       
       
       
-      //상세보기에서 구매시 주문 완료 페이지 이동 
+      //주문 완료 페이지 이동 
 	  @SuppressWarnings("unchecked")
       @RequestMapping(value="/goodsOrderSuccess", method=RequestMethod.POST)
       public String orderSuccess(Model model, CommandMap map, HttpServletRequest request, HttpSession session) throws Exception{
 
-    	
+	  //상세보기에서 구매시 주문 완료 페이지 이동=============================================================================================== 
     	  if(session.getAttribute("orderGoods")==null || session.getAttribute("orderGoods")==""){
     		  String member_id=map.get("MEMBER_ID").toString();
     		  System.out.println(member_id);
@@ -252,7 +252,8 @@ public class OrderController {
     	         
     	         //수령자정보
     	         model.addAttribute("deliInfo",selectLastDeli);    	         
-    		  
+    	 
+    	 //장바구니에서 구매시 주문 완료 페이지 이동=============================================================================================== 	  
     	  }else{
     		  
 			//장바구니 받아오기 
