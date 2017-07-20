@@ -184,6 +184,29 @@ function zipfind()
             }
         }).open();
     }
+    
+function doPage(frm, url){
+    var form = frm;
+    var selSize = form.selMenu.length;
+    var arrValue = new Array(selSize);
+    var arrText = new Array(selSize);
+    
+   
+    for (i = 0; i < selSize; i++){
+           var selValue = form.selMenu.options[i].value;
+           var selText = form.selMenu.options[i].text;
+          
+           arrValue[i] = selValue;
+           arrText[i] = selText;
+    }
+    form.arrMenuValue.value = arrValue;
+    form.arrMenuText.value = arrText;
+    form.method = "POST";
+    form.action = url;
+    form.submit();
+}
+
+
 </script>
 
 <style type="text/css">
@@ -226,60 +249,59 @@ function zipfind()
 
 
 <div class="body_center" style=" width:710px; height:auto;">
-
-<div class="body_center" style="height:auto;">
+<form name="frm" action="goodsOrderSuccess" method="post" >
+<div class="body_center" style="height:auto; padding-top:0px;">         
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
-               <h2>상품 정보</h2>
+               <h3>상품 정보</h3>
             </div>
 <div class="body_center" style=" width:680px; height:auto;">            
 <div id="ordert_wrap">
 
 <c:choose>
-      	  <c:when test="${fn:length(orderGoods) > 0}">	
+           <c:when test="${fn:length(orderGoods) > 0}">   
 <table class="ordert_table">
-      	  <thead> 
-	<colgroup>
-	   <col width="150px" />
-	   <col width="150"/>
-	   <col width="130px" />
-	   <col width="120px" />
-	   <col width="70px" />
-	</colgroup>
-	<tr>
-	   <th>이미지</th>
-	   <th>상품정보</th>
-	   <th>토핑</th>
-	    <th>판매가</th>
-	    <th>수량</th>
-	</tr>
-      	</thead>
-	<c:forEach var="orderGoods" items="${orderGoods}" varStatus="stat">
-	
-	<form name="frm" action="goodsOrderSuccess" method="post" >
-	   <input type="hidden" name="ORDER_GOODS_NO" value="${orderGoods.GOODS_NO}"/>
-	   <input type="hidden" name="ORDER_TRADE_TYPE" value="0"/>
-	   <input type="hidden" name="ORDER_TOPPING_NAME" value="${orderGoods.TOPPING_NAME}"/>
-	   <input type="hidden" name="ORDER_GOODS_AMOUNT" value="${orderGoods.GOODS_AMOUNT}"/>   
-	   <input type="hidden" id="dcPointPost" name="dcPoint" value=""/>
-	   <input type="hidden" id="dcMoneyPost" name="ORDER_MONEY" value=""/>
-	   <input type="hidden" id="plusPointPost" name="plusPoint" value=""/>
-	</form> 
-	
+           <thead> 
+   <colgroup>
+      <col width="150px" />
+      <col width="150"/>
+      <col width="130px" />
+      <col width="120px" />
+      <col width="70px" />
+   </colgroup>
+   <tr>
+      <th>이미지</th>
+      <th>상품정보</th>
+      <th>토핑</th>
+       <th>판매가</th>
+       <th>수량</th>
+   </tr>
+         </thead>
+   <c:forEach var="orderGoods" items="${orderGoods}" varStatus="stat">
+   
+   
+      <input type="hidden" name="ORDER_GOODS_NO" value="${orderGoods.GOODS_NO}"/>
+      <input type="hidden" name="ORDER_TRADE_TYPE" value="0"/>
+      <input type="hidden" name="ORDER_TOPPING_NAME" value="${orderGoods.TOPPING_NAME}"/>
+      <input type="hidden" name="ORDER_GOODS_AMOUNT" value="${orderGoods.GOODS_AMOUNT}"/>   
+      <input type="hidden" id="dcPointPost" name="dcPoint" value="0"/>
+      <input type="hidden" id="dcMoneyPost" name="dcMoney" value="${totalMoney}"/>
+      <input type="hidden" id="plusPointPost" name="plusPoint" value="${plusPoint}"/>
+      <input type="hidden" name="totalMoney" value="${totalMoney}"/>    
 
-	<tr> 
+   <tr> 
 
-	   <td><img src="resources/file/goodsFile/${orderGoods.GOODS_THUMBNAIL}" style="width:148px; height:148px" /></td>
-	   <td>${orderGoods.GOODS_NAME}</td>
-	   <td>${orderGoods.TOPPING_NAME }
-	   <td>${orderGoods.GOODS_PRICE}</td>
-	   <td>${orderGoods.GOODS_AMOUNT}</td>
+      <td><img src="resources/file/goodsFile/${orderGoods.GOODS_THUMBNAIL}" style="width:148px; height:148px" /></td>
+      <td>${orderGoods.GOODS_NAME}</td>
+      <td>${orderGoods.TOPPING_NAME }
+      <td>${orderGoods.GOODS_PRICE}</td>
+      <td>${orderGoods.GOODS_AMOUNT}</td>
    </tr>
 
 
-   	</c:forEach>
-   	</table>
-		 </c:when>
+      </c:forEach>
+      </table>
+       </c:when>
                 
                 <c:otherwise>
                     <tr>
@@ -287,25 +309,23 @@ function zipfind()
                     </tr>
                 </c:otherwise>
    </c:choose>
-		
+      
 
 
 <div style="height:15px;"></div>
 </div>
-
-
 </div>
 </section>
 </div>
-</div>
 
 
 
 
-<div class="body_center" style="height:200px;">
+
+<div class="body_center" style="height:235px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
-               <h2>결제 정보</h2>
+               <h3>결제 정보</h3>
             </div>
 <div id="ordert_wrap">
 <table class="ordert_table">
@@ -350,26 +370,26 @@ function zipfind()
 </table>
 <div style="height:10px;"></div>
 </div>    
-
-
+</section>
 </div>
-<div class="body_center" style="height:330px;">
 
+
+<div class="body_center" style="height:340px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
             <div class="main_subject">
-               <h2>주문자 정보</h2>
+               <h3>주문자 정보</h3>
             </div>
             
             
 <div>
 <ul class="section-body">
      <li class="id">
-      <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px;">
+      <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px;">
          <label for="mi">
             <strong>* 주문자 아이디</strong>
          </label>
       </div>
-      <div class="col-lg-21 col-md-20">
+      <div class="col-lg-21 col-md-20" style="width:630px;">
          <input type="text" name="MEMBER_ID" id="" value="${sessionScope.MEMBER_ID}" maxlength="20" class="xx-control" label="" required="required">
          <p class="alert alert-positive"></p>
       </div>
@@ -378,22 +398,22 @@ function zipfind()
    </li>
     
    <li class="name">
-      <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+      <div class="item-label col-lg-3 col-md-4" style=" width:630px;height:23px; font-size:12px; vertical-align:middle;">
          <label for="input-name">
             <strong>* 주문자 이름</strong>
          </label>
       </div>
-      <div class="col-lg-21 col-md-20">
+      <div class="col-lg-21 col-md-20" style="width:630px;">
          <input type="text" id="MEMBER_NAME" class="xx-control" name="DELI_ORDER_NAME" value="${sessionScope.MEMBER_NAME}" required="required" label="이름">
       </div>
       <div style="height:5px;"></div>
    </li>
    <li class="address">
-      <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+      <div class="item-label col-lg-3 col-md-4" style=" width:630px;height:23px; font-size:12px; vertical-align:middle;">
          <strong>* 주문자 주소</strong>
       </div>
-      <div class="col-lg-21 col-md-20">
-         <div class="input-box">
+      <div class="col-lg-21 col-md-20" style="width:630px;">
+         <div class="input-box" >
          <input type="text" id="MEMBER_ZIP"  name="DELI_ORDER_ZIP"  label="우편번호" value="${orderDeli.MEMBER_ZIP}" maxlength="6" required="">
             <span class="button button-dimmed" onclick="zipfind()">주소 찾기</span>
          </div>
@@ -403,12 +423,12 @@ function zipfind()
       <div style="height:5px;"></div>
    </li>
    <li class="cell-phone">
-      <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+      <div class="item-label col-lg-3 col-md-4" style=" width:630px;height:23px; font-size:12px; vertical-align:middle;">
          <label for="input-cell-phone01">
             <strong>* 주문자 핸드폰</strong>
          </label>
       </div>
-      <div class="col-lg-21 col-md-20">
+      <div class="col-lg-21 col-md-20" style="width:630px;">
          <div class="input-box">
             <input type="text" name="DELI_ORDER_PHONE" id="MEMBER_PHONE" label="휴대폰" value="${orderDeli.MEMBER_PHONE}"  maxlength="11" class="xx-control" required="required">
          </div>  
@@ -421,14 +441,14 @@ function zipfind()
 </div>
 
 
-   <div class="body_center" style="height:330px;">
+   <div class="body_center" style="height:300px; padding-top:0px;">
    <section class="input-horizontal list-horizontal section box-shadow">
-               <div class="main_subject"><h2>수령자 정보</h2><input type="checkbox"id="check"onclick="sameDeli()"><strong>주문자 정보와 동일</strong></div>
+               <div class="main_subject"><h3>수령자 정보</h3><input type="checkbox"id="check"onclick="sameDeli()"><strong>주문자 정보와 동일</strong></div>
       <div>
          <ul class="section-body">
             <li class="name">
             
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
                   <label for="input-name">
                      <strong>* 수령자 이름</strong>
                   </label>
@@ -436,7 +456,7 @@ function zipfind()
                
                <div style="height:5px;"></div>
                   
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20" style="width:630px;">
                   <input type="text" id="RECEIVERNAME" class="xx-control" name="DELI_RECEIVE_NAME" value="${RECEIVERNAME}" required="required" label="이름">
                </div>
                
@@ -445,11 +465,11 @@ function zipfind()
             </li>
             
             <li class="address">
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style="width:630px; height:23px; font-size:12px; vertical-align:middle;">
                   <strong>* 수령자 주소</strong>
                </div>
                
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20" style="width:630px;">
                
                   <div class="input-box">
                   <input type="text" id="RECEIVERZIP"  name="DELI_RECEIVE_ZIP"  label="우편번호" value="${RECEIVERZIP}" maxlength="6" required="">
@@ -464,12 +484,12 @@ function zipfind()
             </li>
             
             <li class="cell-phone">
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style=" width:630px;height:23px; font-size:12px; vertical-align:middle;">
                   <label for="input-cell-phone01">
                      <strong>* 수령자 핸드폰</strong>
                   </label>
                </div>
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20" style="width:630px;">
                   <div class="input-box">
                      <input type="text" name="DELI_RECEIVE_PHONE" id="RECEIVERPHONE" label="휴대폰" value="${RECEIVERPHONE}"  maxlength="11" class="xx-control" required="required">
                   </div>
@@ -486,9 +506,10 @@ function zipfind()
 <!--  <a class="effect effect-5" title="배송 확인" onclick="">주문 완료</a>
  -->  
  <input class="effect effect-5" type="submit" onclick="" value="주문완료"/>
+
  </div>
  </div>
-</section>
+ </form>
 </div>
 
 </body>

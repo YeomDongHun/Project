@@ -4,18 +4,6 @@
 <!-- 결제 SQL -->
 <mapper namespace="trade">
 
-<!-- 결제 insert -->
-	<insert id="successInsert" parameterType="hashmap">
 
-INSERT INTO SG_TRADE(
-TRADE_NO,
-TRADE_DELI_NO
-)
-VALUES(
-SG_TRADE_NO_SEQ.NEXTVAL,
-#{TRADE_DELI_NO}
-)
-				
-	</insert>
 
 </mapper>

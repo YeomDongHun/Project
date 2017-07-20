@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page session = "true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -48,16 +50,16 @@
 
 </head>
      <body>
-<div class="body_center" style="height:185px;"> 
+<div class="body_center" style="height:200px;"> 
 <section class="input-horizontal list-horizontal section box-shadow">
 <div style="height:180px; width:660px;">
 <div style="float:left; height:150px; width:170px; margin: 10px;">
 <img id="tku" src="/ordertest/style2/thankU.png"> 
 </div>
 <div style="float:left; height:150px; width:420px; margin: 10px;">
-<h2>고객님의 주문이 완료 되었습니다.</h2> <br>
-<h3>주문 내역 및 배송에 관한 안내는 <a href ='OrderInfo';> 주문조회 </a> 를 통하여 확인 가능합니다.</h3><br><br>
-주문번호 : ${orderInfo.ORDER_NO}<br>
+<h4>고객님의 주문이 완료 되었습니다.</h4> <br>
+<h4>주문 내역 및 배송에 관한 안내는 <a href ='OrderInfo';> 주문조회 </a> 를 통하여 <br>확인 가능합니다.</h4><br><br>
+배송번호 : ${deliInfo.DELI_NO}<br>
 주문일자 : ${orderInfo.ORDER_DATE} <br>
 
 <div>
@@ -66,10 +68,10 @@
 </div>
 </div>
 <form name="frm" action="goodsOrderSuccess" method="post" >
-<div class="body_center" style="height:225px;">
+<div class="body_center" style="height:auto;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
-               <h2>상품 정보</h2>
+               <h3>상품 정보</h3>
             </div>
             
 <div id="ordert_wrap">
@@ -88,12 +90,17 @@
     <th>판매가</th>
     <th>수량</th>
 </tr>
-<tr> 
-   <td height="150px">${orderGoodsInfo.GOODS_THUMBNAI}</td>
-   <td>${orderGoodsInfo.GOODS_NAME}</td>
-   <td>${orderInfo.ORDER_TOPPING_NAME}</td>
-   <td>${orderGoodsInfo.GOODS_PRICE}</td>
-   <td>${orderInfo.ORDER_GOODS_AMOUNT}</tr>
+
+      <c:forEach var="orderGoodsInfo" items="${orderGoodsInfo}" varStatus="stat">
+         <tr> 
+      <td><img src="resources/file/goodsFile/${orderGoodsInfo.GOODS_THUMBNAIL}" style="width:148px; height:148px" /></td>
+      <td>${orderGoodsInfo.GOODS_NAME}</td>
+      <td>${orderGoodsInfo.TOPPING_NAME}
+      <td>${orderGoodsInfo.GOODS_PRICE}</td>
+      <td>${orderGoodsInfo.GOODS_AMOUNT}</td>
+      </tr>
+     </c:forEach>
+
 </table>
 <div style="height:10px;"></div>
 </div>
@@ -101,10 +108,10 @@
 </div>
 
 
-<div class="body_center" style="height:125px;">
+<div class="body_center" style="height:160px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
-               <h2>결제 정보</h2>
+               <h3>결제 정보</h3>
             </div>
 <div id="ordert_wrap">
 <table class="ordert_table">
@@ -123,7 +130,7 @@
 <tr> 
    <td height="50px"><p id="totalMoney">${totalMoney}</p></td>
    <td><p id="dcPoint">${dcPoint}</p></td>
-   <td><p id="dcMoney">${orderInfo.ORDER_MONEY}</p></td>
+   <td><p id="dcMoney">${dcMoney}</p></td>
    <td><p id="plusPoint">${plusPoint}</p></td>
 
 </table>
@@ -142,14 +149,14 @@
 
 
 
-   <div class="body_center" style="height:270px;">
+   <div class="body_center" style="height:300px; padding-top:0px;">
    <section class="input-horizontal list-horizontal section box-shadow">
-               <div class="main_subject"><h2>수령자 정보</h2></div>
+               <div class="main_subject"><h3>수령자 정보</h3></div>
       <div>
          <ul class="section-body">
             <li class="name">
             
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
                   <label for="input-name">
                      <strong>* 수령자 이름</strong>
                   </label>
@@ -157,7 +164,7 @@
                
                <div style="height:5px;"></div>
                   
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20" style="width:630px;">
                   <input type="text" id="DELI_RECEIVE_NAME" class="xx-control" name="DELI_RECEIVE_NAME"  readonly="" value="${deliInfo.DELI_RECEIVE_NAME}" required="required" label="이름">
                </div>
                
@@ -166,11 +173,11 @@
             </li>
             
             <li class="address">
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
                   <strong>* 수령자 주소</strong>
                </div>
                
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20"style="width:630px;">
                
                   <div class="input-box">
                   <input type="text" id="DELI_RECEIVE_ZIP" class="xx-control" name="DELI_RECEIVE_ZIP" label="주소" value="${deliInfo.DELI_RECEIVE_ZIP}" size="48" readonly="" required="">
@@ -184,12 +191,12 @@
             </li>
             
             <li class="cell-phone">
-               <div class="item-label col-lg-3 col-md-4" style="height:23px; font-size:12px; vertical-align:middle;">
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
                   <label for="input-cell-phone01">
                      <strong>* 수령자 핸드폰</strong>
                   </label>
                </div>
-               <div class="col-lg-21 col-md-20">
+               <div class="col-lg-21 col-md-20"style="width:630px;">
                   <div class="input-box" style="height:23px; font-size:12px;">
                      <input type="text" name="DELI_RECEIVE_PHONE" id="DELI_RECEIVE_PHONE" label="휴대폰" value="${deliInfo.DELI_RECEIVE_PHONE}"  maxlength="11" class="xx-control" readonly="" required="required">
                   </div>
@@ -204,8 +211,9 @@
  <div class="body_center" style="clear:both;" class="btnArea">
   <!-- <a class="effect effect-5" title="배송 확인" onclick="">배송 확인</a> -->
   <div style="margin-left:200px;">
-  <input class="effect effect-5" type="submit" onclick="window.location='/SG/main'" value="메인으로"/>
-  <input class="effect effect-5" type="submit" onclick="window.location='/SG/goodsList'" value="계속쇼핑하기"/>
+   <a class="effect effect-5" title="메인으로" onclick="location.href='main'">메인으로</a> 
+   <a class="effect effect-5" title="계속쇼핑하기" onclick="location.href='goodsList'">계속쇼핑하기</a> 
+   
   </div>
  </div>
 </section>

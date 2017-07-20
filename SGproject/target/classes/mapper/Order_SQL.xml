@@ -34,6 +34,33 @@
 				
 	</insert>
 	
+	<insert id="orderInsertBasket" parameterType="hashmap" useGeneratedKeys="true" keyProperty="ORDER_NO">
+
+		INSERT INTO SG_ORDER(
+        ORDER_NO,
+        ORDER_GOODS_NO,
+        ORDER_GOODS_AMOUNT,
+        ORDER_MEMBER_ID,
+        ORDER_MONEY,
+        ORDER_TRADE_TYPE,
+        ORDER_DATE,
+        ORDER_STATE,
+        ORDER_TOPPING_NAME)        
+		
+		VALUES(
+        
+        SG_ORDER_NO_SEQ.NEXTVAL,
+        #{GOODS_NO},
+        #{GOODS_AMOUNT},
+        #{MEMBER_ID},
+        #{ORDER_MONEY},
+        #{ORDER_TRADE_TYPE},
+        SYSDATE,
+        DEFAULT,
+        #{TOPPING_NAME})
+				
+	</insert>
+	
 	
 	
 	<!-- 주문테이블에서 최신 레코드 가져오기 -->
@@ -52,8 +79,17 @@
 	<update id="updateDeli" parameterType="hashmap">
 	
 		UPDATE SG_ORDER
+		SET ORDER_DELI_NO=#{DELI_NO} 
+		where ORDER_NO=#{ORDER_NO}
+	
+	</update>
+	
+	
+		<update id="updateDeliBasket" parameterType="hashmap">
+	
+		UPDATE SG_ORDER
 		SET ORDER_DELI_NO = #{DELI_NO}
-		WHERE ORDER_NO = #{ORDER_NO}
+		WHERE ORDER_MEMBER_ID=#{MEMBER_ID} AND ORDER_DELI_NO is NULL
 	
 	</update>
 	

@@ -90,5 +90,7 @@ public class GoodsDao extends AbstractDAO {
 		
 	}
 	
+	
+	
 
 }

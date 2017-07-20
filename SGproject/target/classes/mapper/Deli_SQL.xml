@@ -7,7 +7,7 @@
 <!-- comment by seo -->
 
 <!-- 배송 insert -->
-<insert id="insertDeli" parameterType="hashmap" useGeneratedKeys="true" keyProperty="DELI_NO">
+<insert id="insertDeli" parameterType="hashmap">
 INSERT INTO SG_DELI
 (
 DELI_NO,
