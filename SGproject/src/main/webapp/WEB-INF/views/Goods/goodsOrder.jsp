@@ -113,7 +113,7 @@ var plusPointPost=document.getElementById("plusPointPost");
 
 
 
-if(usePoint<0)
+if(usePoint=="")
    usePoint=0;
 if(usePoint>myPoint){
    alert("포인트가 부족합니다. 최대 포인트가 적용됩니다."); 
@@ -185,26 +185,6 @@ function zipfind()
         }).open();
     }
     
-function doPage(frm, url){
-    var form = frm;
-    var selSize = form.selMenu.length;
-    var arrValue = new Array(selSize);
-    var arrText = new Array(selSize);
-    
-   
-    for (i = 0; i < selSize; i++){
-           var selValue = form.selMenu.options[i].value;
-           var selText = form.selMenu.options[i].text;
-          
-           arrValue[i] = selValue;
-           arrText[i] = selText;
-    }
-    form.arrMenuValue.value = arrValue;
-    form.arrMenuText.value = arrText;
-    form.method = "POST";
-    form.action = url;
-    form.submit();
-}
 
 
 </script>
