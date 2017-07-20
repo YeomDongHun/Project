@@ -432,7 +432,7 @@ function zipfind()
 
    <div class="body_center" style="height:300px; padding-top:0px;">
    <section class="input-horizontal list-horizontal section box-shadow">
-               <div class="main_subject"><h3>수령자 정보</h3><input type="checkbox"id="check"onclick="sameDeli()"><strong>주문자 정보와 동일</strong></div>
+               <div class="main_subject" style="padding-top:0px;"><h3>수령자 정보</h3><input type="checkbox"id="check"onclick="sameDeli()"><strong>주문자 정보와 동일</strong></div>
       <div>
          <ul class="section-body">
             <li class="name">
