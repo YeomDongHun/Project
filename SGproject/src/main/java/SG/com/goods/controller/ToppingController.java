@@ -136,17 +136,25 @@ public class ToppingController {
 		list.put("GOODS_KCAL", 		Integer.parseInt(request.getParameter("form_kcal").toString()));
 		list.put("GOODS_PRICE", Integer.parseInt(request.getParameter("form_price").toString()));
 		list.put("GOODS_THUMBNAIL", "SG_diy.jpg");
-		list.put("BASKET_GOODS_AMOUNT", 1);
-		list.put("BASKET_MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+		list.put("GOODS_AMOUNT", 1);
+		list.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 		
 		basketList.add(list);
 		
 		System.out.println(basketList);
-		session.setAttribute("basketList", basketList);
-        goodsService.basketInsert(list);
+		
+		
+		
+		
+		
+		if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
+			goodsService.basketInsert(list);
+			basketList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 
+		}
 		session.removeAttribute("toppingList");
 		
+		session.setAttribute("basketList", basketList);
 		model.addAttribute("basketList",basketList);
 		return "redirect:goodsDIY";
 		

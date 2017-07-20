@@ -17,7 +17,7 @@ public interface GoodsService {
 	
 	public void basketInsert(Map<String,Object> map) throws Exception;
 	
-	public void basketDelete(Map<String,Object> map)throws Exception;
+	public void basketDelete(int BASKET_NO)throws Exception;
 
 	public List<Map<String, Object>> wishGoodsList(int no) throws Exception;
 

@@ -1,5 +1,6 @@
 package SG.com.member.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,14 @@ public class LoginController
 		    	session.setAttribute("MEMBER_NO", loginChk.get("MEMBER_NO"));
 		    	session.setAttribute("MEMBER_NAME", loginChk.get("MEMBER_NAME"));
 		    	
-		    	
+		    	//사이드 장바구니 처리
+				List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
+
+		        sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+				session.setAttribute("basketList", sessionList);
+				model.addAttribute("basketList",sessionList);
+			    	
+			    	
 		    	
 		    	return "redirect:/main";
 		    }		    		    

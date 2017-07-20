@@ -53,8 +53,8 @@ public class GoodsDao extends AbstractDAO {
 	    sqlSession.insert("basket.basketInsert", map);
 	}
 	
-	public void basketDelete(Map<String,Object> map)throws Exception{
-		sqlSession.delete("basket.basketDelete",map);
+	public void basketDelete(int BASKET_NO)throws Exception{
+		sqlSession.delete("basket.basketDelete",BASKET_NO);
 	}
 	
 	@SuppressWarnings("unchecked")

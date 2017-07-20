@@ -140,7 +140,6 @@ width:100%;
 
 <div class="container">
 	<div id="loginWrap">
-	        세션 확인 : ${sessionScope.MEMBER_ID}
 	        
 		    <c:choose>
 		    
@@ -167,6 +166,9 @@ width:100%;
     <div id="logoWrap">
     	<a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
     </div>
+    
+    
+    
     
 	<div id="topMenu" style="z-index:0;">
 		<ul>

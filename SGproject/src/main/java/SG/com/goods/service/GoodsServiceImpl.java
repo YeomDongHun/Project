@@ -78,9 +78,9 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void basketDelete(Map<String, Object> map) throws Exception {
+	public void basketDelete(int BASKET_NO) throws Exception {
 		// TODO Auto-generated method stub
-		goodsDao.basketDelete(map);
+		goodsDao.basketDelete(BASKET_NO);
 	}
 
 	@Override

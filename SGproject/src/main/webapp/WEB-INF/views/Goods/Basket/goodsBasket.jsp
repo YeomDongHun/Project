@@ -51,13 +51,15 @@ $.ajax({url: theUrl,
 
 function delGoods(test){
 	var goodsNo =test.getAttribute("id");
-
+	var str =  "basket_no_"+goodsNo;
+	var BASKET_NO = document.getElementById(str).getAttribute("name");
 	var theUrl = "BasketDelete";
 	
  	$.ajax({url: theUrl,  
    		type : "POST", 
    		data : { 
-   			goodsNo : goodsNo
+   			goodsNo : goodsNo,
+   			BASKET_NO:BASKET_NO
    		},
    		success: function(result){ 
    			$("#sideBar").html(result); 
@@ -96,7 +98,21 @@ function delGoods(test){
 				                    <div style="background-color: #212121;width250px; float:left; width: 250px;height: 70px; "> 
 					                    <table style="width: 250px;">
 						                    <tr>
-						                    	<td width="200"><div style="font-size: 20px;color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_NAME }</div>&nbsp;&nbsp;${basketList.BASKET_GOODS_AMOUNT}&nbsp;개<br/><div style="color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_PRICE}원 &nbsp;&nbsp;${basketList.GOODS_KCAL }kcal</div></td><td width="50px;">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" id="${stat.index}" aria-hidden="true" style="color: #FFFFFF;" onclick="delGoods(this);"></span></td>
+						                    	<td width="200"><div style="font-size: 20px;color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_NAME }</div>&nbsp;&nbsp;${basketList.GOODS_AMOUNT}&nbsp;개<br/><div style="color: #FFFFFF;">&nbsp;&nbsp;${basketList.GOODS_PRICE}원 &nbsp;&nbsp;${basketList.GOODS_KCAL }kcal</div></td>
+						                    	<c:if test="${sessionScope.MEMBER_NO != 0}">
+						                  			<td width="50px;">
+						                  				&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" id="${stat.index}" aria-hidden="true" style="color: #FFFFFF;" onclick="delGoods(this);"></span>
+						                  				<input type="hidden" id="basket_no_${stat.index}" name="${basketList.BASKET_NO}"/>
+						                  			</td>
+												</c:if>
+						                    	
+						                    	<c:if test="${sessionScope.MEMBER_NO == 0}">
+						                    		<td width="50px;">
+						                    			&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" id="${stat.index}" aria-hidden="true" style="color: #FFFFFF;" onclick="delGoods(this);"></span>
+						                    			<input type="hidden" id="basket_no_${stat.index}" name="0"/>
+						                    			
+						                    		</td>
+						                    	</c:if>
 						                    </tr>
 					                    </table>
 				                    </div>
@@ -105,7 +121,7 @@ function delGoods(test){
 							</c:forEach>
 							          
 					      <div style="z-index: 1000;margin-top: 40px;  margin-left: 110px;;margin-right: auto;">
-						    <button type="button" class="btn btn-warning">주문하기</button>
+						    <button type="button" class="btn btn-warning" onClick="javascript:location.href='basketOrder';">주문하기</button>
 						  </div>
 						</c:when>
 						                
