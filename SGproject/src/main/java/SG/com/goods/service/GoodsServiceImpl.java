@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import SG.com.goods.dao.GoodsDao;
-import SG.com.member.dao.JoinDao;
+
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -51,7 +51,7 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 	    goodsDao.basketInsert(map);
 	}
-
+	
 	@Override
 	public List<Map<String, Object>> wishGoodsList(int MEMBER_NO) throws Exception {
 		// TODO Auto-generated method stub
@@ -95,6 +95,17 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDao.BascketMemberSelect(MEMBER_NO);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectOneGoodsList(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.selectOneGoodsList(num);
+	}
+	
+	
 
+	
+	
+	
+	
 
 }

@@ -101,5 +101,13 @@
 	]]>
 	</select>
 	
+	 <select id="sumPointInt" parameterType="hashmap" resultType="int">
+	<![CDATA[
+		SELECT 
+			NVL(SUM(POINT_MONEY),0) AS SUM
+			FROM SG_POINT 
+			WHERE POINT_MEMBER_NO = ${MEMBER_NO}
+	]]>
+	</select>
 
 </mapper>

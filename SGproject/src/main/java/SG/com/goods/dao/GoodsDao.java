@@ -52,6 +52,11 @@ public class GoodsDao extends AbstractDAO {
 	public void basketInsert(Map<String, Object> map) throws Exception{
 	    sqlSession.insert("basket.basketInsert", map);
 	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> selectOneGoodsList(int num) throws Exception{
+		return sqlSession.selectList("goods.selectOneGoods",num);
+	}
+
 	
 	public void basketDelete(int BASKET_NO)throws Exception{
 		sqlSession.delete("basket.basketDelete",BASKET_NO);
@@ -84,6 +89,8 @@ public class GoodsDao extends AbstractDAO {
 		return sqlSession.selectList("basket.BascketMemberSelect",MEMBER_NO);
 		
 	}
+	
+	
 	
 
 }

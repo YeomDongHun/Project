@@ -283,7 +283,19 @@ function dComment(test){
 	</table>
 	
 	<br/>
-	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="javascript:location.href='goodsOrderView?GOODS_NO=${goodsDetail.GOODS_NO}'"/>&nbsp;&nbsp;&nbsp;
+	
+	<form action="goodsOrder" method="post" id="Order">
+	<input type="hidden" name="GOODS_NO" value="${goodsDetail.GOODS_NO}"/>
+	<input type="hidden" id=amount_ch name="ORDER_GOODS_AMOUNT" value="1"/>
+	<input type="hidden" name="ORDER_TOPPING_NAME" value="토핑없음"/>
+	<input type="hidden" name="GOODS_POINT" value="${point}"/>	
+	
+
+	</form>
+	
+
+	
+	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
 	<input type="button" class="btn btn-warning btn-lg" value="basket" onclick="DetailBasket();"/>
 	</div>
 </div>
