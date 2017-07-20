@@ -45,7 +45,8 @@
         ORDER_TRADE_TYPE,
         ORDER_DATE,
         ORDER_STATE,
-        ORDER_TOPPING_NAME)        
+        ORDER_TOPPING_NAME
+        )        
 		
 		VALUES(
         
@@ -57,7 +58,8 @@
         #{ORDER_TRADE_TYPE},
         SYSDATE,
         DEFAULT,
-        #{TOPPING_NAME})
+        #{TOPPING_NAME}
+        )
 				
 	</insert>
 	

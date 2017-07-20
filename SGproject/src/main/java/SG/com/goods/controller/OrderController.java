@@ -329,4 +329,69 @@ public class OrderController {
          
          return "goodsOrderSuccess_tiles";
       }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	   //사이드장바구니 구매시  주문 확인 페이지 
+	   @SuppressWarnings("unchecked")
+	@RequestMapping(value="/SideBasketOrder", method=RequestMethod.GET)
+	   public String SideBasketOrder(Model model,CommandMap map, HttpSession session, HttpServletRequest request) throws Exception{
+	      
+	      session = request.getSession(false);
+	      
+	      List<Map<String,Object>> Basketlist = new ArrayList<Map<String,Object>>();
+	      
+	      //비회원일시 로그인 폼으로 
+	      if(session.getAttribute("MEMBER_ID").toString().equals("visitor")){
+	         return "redirect:loginForm";
+	      
+	      }else{
+	         //파라미터 값 받기 
+	    	  Basketlist =  (List<Map<String, Object>>) session.getAttribute("basketList");
+	    	 System.out.println("오더세션검사!!!!!!!!!!!!!!!!!!!!!!!!!!"+Basketlist);
+	    	  }
+	      
+	      
+	            int totalMoney=0;
+	            for(int i=0;i<Basketlist.size();i++){
+	             
+	               totalMoney += Integer.parseInt(Basketlist.get(i).get("GOODS_PRICE").toString());
+	               
+	            }
+	         
+	            
+	          //적립 예정 포인트
+	          int plusPoint = totalMoney/100;
+
+	         //회원 정보 - 주소 가져오기 
+	        map.put("MEMBER_ID", session.getAttribute("MEMBER_ID").toString());
+	         Map<String,Object> orderDeli= memberService.myinfoDetail(map.getMap());
+	         
+	         //나의 포인트 가져오기 
+	         map.put("MEMBER_NO", session.getAttribute("MEMBER_NO"));
+	         Map<String,Object> myPointMap = pointService.sumPoint(map.getMap());
+	         int myPoint=Integer.parseInt(myPointMap.get("SUM").toString());
+	         
+
+	         System.out.println("=============세션 생성==================");
+	         session.setAttribute("orderGoods", Basketlist);
+	         session.setAttribute("orderDeli", orderDeli);
+	         System.out.println(session.getAttribute("orderGoods"));
+	         
+	         
+	         model.addAttribute("orderGoods",Basketlist);
+	         model.addAttribute("totalMoney",totalMoney );
+	         model.addAttribute("myPoint",myPoint);
+	         model.addAttribute("orderDeli",orderDeli);
+	         model.addAttribute("plusPoint",plusPoint);
+	      
+	         
+	         return "goodsOrder_tiles";
+    
+	   }
+	   
 }

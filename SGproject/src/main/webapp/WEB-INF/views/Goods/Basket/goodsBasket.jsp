@@ -23,7 +23,7 @@ function SideBasket(test){
 
 	
 	var goodsNo =test.getAttribute("id");
-
+	var topping_name="토핑 없음";
 
 	var theUrl = "BasketAdd";
 
@@ -31,8 +31,8 @@ function SideBasket(test){
 $.ajax({url: theUrl,  
 	type : "POST", 
 	data : { 
-		goodsNo : goodsNo
-
+		goodsNo : goodsNo,
+		topping_name : topping_name
 	},
 	success: function(result){ 
 		$("#sideBar").html(result); 
@@ -121,7 +121,7 @@ function delGoods(test){
 							</c:forEach>
 							          
 					      <div style="z-index: 1000;margin-top: 40px;  margin-left: 110px;;margin-right: auto;">
-						    <button type="button" class="btn btn-warning" onClick="javascript:location.href='basketOrder';">주문하기</button>
+						    <button type="button" class="btn btn-warning" onClick="javascript:location.href='SideBasketOrder';">주문하기</button>
 						  </div>
 						</c:when>
 						                
