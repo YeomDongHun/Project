@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
 <link rel="stylesheet" href="/SG/resources/file/css/joinForm.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
@@ -96,6 +97,8 @@ function zipfinds()
     }).open();
 }
 
+
+
 function change()
 {
 
@@ -118,6 +121,9 @@ if(usePoint=="")
 if(usePoint>myPoint){
    alert("포인트가 부족합니다. 최대 포인트가 적용됩니다."); 
    usePoint=myPoint;
+}
+if(usePoint>totalMoney){
+	usePoint=totalMoney;
 }
    
 dcPoint = eval(usePoint);
@@ -235,7 +241,7 @@ function zipfind()
 <div class="main_subject">
                <h3>상품 정보</h3>
             </div>
-<div class="body_center" style=" width:680px; height:auto;">            
+<div class="body_center" style=" width:680px; height:auto; padding-top:0px;">            
 <div id="ordert_wrap">
 
 <c:choose>
@@ -302,7 +308,7 @@ function zipfind()
 
 
 
-<div class="body_center" style="height:235px; padding-top:0px;">
+<div class="body_center" style="height:250px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
                <h3>결제 정보</h3>
@@ -354,7 +360,7 @@ function zipfind()
 </div>
 
 
-<div class="body_center" style="height:340px; padding-top:0px;">
+<div class="body_center" style="height:355px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
             <div class="main_subject">
                <h3>주문자 정보</h3>
@@ -368,17 +374,20 @@ function zipfind()
          <label for="mi">
             <strong>* 주문자 아이디</strong>
          </label>
+         <div style="height:5px;"></div>
       </div>
-      <div class="col-lg-21 col-md-20" style="width:630px;">
+      <div class="col-lg-21 col-md-20" style="width:630px; height:25px">
          <input type="text" name="MEMBER_ID" id="" value="${sessionScope.MEMBER_ID}" maxlength="20" class="xx-control" label="" required="required">
          <p class="alert alert-positive"></p>
+         <div style="height:5px;"></div>
       </div>
-      <div style="height:5px;"></div>
+ 
       
    </li>
     
    <li class="name">
       <div class="item-label col-lg-3 col-md-4" style=" width:630px;height:23px; font-size:12px; vertical-align:middle;">
+      <div style="height:5px;"></div>
          <label for="input-name">
             <strong>* 주문자 이름</strong>
          </label>

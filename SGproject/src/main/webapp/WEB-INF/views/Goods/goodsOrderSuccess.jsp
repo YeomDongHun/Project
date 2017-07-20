@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
 <link rel="stylesheet" href="/SG/resources/file/css/joinForm.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
@@ -54,11 +55,11 @@
 <section class="input-horizontal list-horizontal section box-shadow">
 <div style="height:180px; width:660px;">
 <div style="float:left; height:150px; width:170px; margin: 10px;">
-<img id="tku" src="/ordertest/style2/thankU.png"> 
+<img src="resources/file/img/SG_diy.jpg" class="img-circle" style="height:148px; width:148px;" >
 </div>
 <div style="float:left; height:150px; width:420px; margin: 10px;">
-<h4>고객님의 주문이 완료 되었습니다.</h4> <br>
-<h4>주문 내역 및 배송에 관한 안내는 <a href ='OrderInfo';> 주문조회 </a> 를 통하여 <br>확인 가능합니다.</h4><br><br>
+<h4>고객님의 주문이 완료 되었습니다.</h4>
+<h4>주문 내역 및 배송에 관한 안내는 <a href ='mypage';> 주문조회 </a> 를 통하여 <br>확인 가능합니다.</h4><br>
 배송번호 : ${deliInfo.DELI_NO}<br>
 주문일자 : ${orderInfo.ORDER_DATE} <br>
 
@@ -108,7 +109,7 @@
 </div>
 
 
-<div class="body_center" style="height:160px; padding-top:0px;">
+<div class="body_center" style="height:180px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
                <h3>결제 정보</h3>
