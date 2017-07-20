@@ -138,44 +138,6 @@ public class GoodsController {
 		
 	}
 	
-	
-	
-	/*//장바구니
-	@RequestMapping(value="/addBasket",method = RequestMethod.POST)
-	public String basket(Model model,HttpServletRequest request, HttpSession session, CommandMap map) throws Exception{
-	      
-		int member_no = Integer.parseInt(request.getParameter("BASKET_MEMBER_NO").toString());
-	      
-	    String tst  = request.getParameter("BASKET_GOODS_NO");
-	    int basket_goods_no = Integer.parseInt(tst);
-	      
-	      session = request.getSession(false);
-	      
-	      int basket_goods_amount = Integer.parseInt(request.getParameter("BASKET_GOODS_AMOUNT").toString());
-	      String basket_topping_name="토핑없음";
-	      
-	      if(member_no != 0){
-	    	 
-	    	  System.out.println("==============인설트==============");
-	    	 
-	    	  map.put("BASKET_GOODS_NO", basket_goods_no);
-	    	  map.put("BASKET_MEMBER_NO", member_no);
-	    	  map.put("BASKET_GOODS_NAME", goodsService.selectOneGoods(basket_goods_no).get("GOODS_NAME"));
-	    	  map.put("BASKET_GOODS_AMOUNT", basket_goods_amount);
-	    	  map.put("BASKET_TOPPING_NAME", basket_topping_name);
-		      
-	    	  System.out.println(map.getMap());
-
-         goodsService.basketInsert(map.getMap());
-         
-	      }else{
-	         return "redirect:loginForm";
-	      	}
-	      
-	      return "Goods/goodsList";
-	   }
-	   */
-	
 	//카테고리처리
 	@RequestMapping(value="/category",method = RequestMethod.POST)
 	public String category(Model model,CommandMap map,int currentPage,HttpSession session) throws Exception{
@@ -209,106 +171,107 @@ public class GoodsController {
 	
 	//사이드 장바구니
 	//추가
-		@SuppressWarnings({ "unchecked" })
-		@RequestMapping(value = "/BasketAdd")
-		public String BasketAdd(Model model,int goodsNo,HttpSession session,HttpServletRequest request) throws Exception {
-			
-			Map<String,Object> list = goodsService.selectOneGoodsforBasket(goodsNo);
-			list.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
-			list.put("GOODS_AMOUNT", 1);
-			
-			if(request.getParameter("GOODS_AMOUNT")!=null){
-				list.put("GOODS_AMOUNT", Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString()));
-			}
-			
-			
-			//디테일 페이지 수량 조절
-			if(Integer.parseInt(list.get("GOODS_AMOUNT").toString()) != 1){
-				int GOODS_AMOUNT =Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString());
-				int GOODS_PRICE = Integer.parseInt(request.getParameter("GOODS_PRICE").toString());
+			@SuppressWarnings({ "unchecked" })
+			@RequestMapping(value = "/BasketAdd")
+			public String BasketAdd(Model model,int goodsNo,HttpSession session,HttpServletRequest request) throws Exception {
 				
-				list.put("GOODS_AMOUNT", GOODS_AMOUNT);
-				list.put("GOODS_PRICE",GOODS_PRICE );
+				Map<String,Object> list = goodsService.selectOneGoodsforBasket(goodsNo);
+				list.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+				list.put("GOODS_AMOUNT", 1);
 				
-				 int sum =Integer.parseInt(list.get("GOODS_KCAL").toString()) * GOODS_AMOUNT;
-			
-				 list.put("GOODS_KCAL", sum);
-			}
-			
-			//세션없음
-			if(session.getAttribute("basketList")==null){
-				//세션값 생성
+				if(request.getParameter("GOODS_AMOUNT")!=null){
+					list.put("GOODS_AMOUNT", Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString()));
+				}
 				
 				
-				List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
+				//디테일 페이지 수량 조절
+				if(Integer.parseInt(list.get("GOODS_AMOUNT").toString()) != 1){
+					int GOODS_AMOUNT =Integer.parseInt(request.getParameter("GOODS_AMOUNT").toString());
+					int GOODS_PRICE = Integer.parseInt(request.getParameter("GOODS_PRICE").toString());
+					
+					list.put("GOODS_AMOUNT", GOODS_AMOUNT);
+					list.put("GOODS_PRICE",GOODS_PRICE );
+					
+					 int sum =Integer.parseInt(list.get("GOODS_KCAL").toString()) * GOODS_AMOUNT;
 				
-				sessionList.add(list);
-				System.out.println("세션 검사====================================================="+list);
+					 list.put("GOODS_KCAL", sum);
+				}
 				
-				if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
-					//DB인설트
-			         goodsService.basketInsert(list);
-			         sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
-			         
+				//세션없음
+				if(session.getAttribute("basketList")==null){
+					//세션값 생성
+					
+					
+					List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
+					
+					sessionList.add(list);
+					System.out.println("세션 검사====================================================="+list);
+					
+					if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
+						//DB인설트
+				         goodsService.basketInsert(list);
+				         sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+				         
+
+					}
+					
+					//jps에서 쓸 Model설정 & session설정
+					session.setAttribute("basketList", sessionList);
+					model.addAttribute("basketList",sessionList);
+					System.out.println(sessionList);
+				
+				}else{
+					//세션 존재함
+					List<Map<String,Object>> sessionList =(List<Map<String, Object>>) session.getAttribute("basketList");
+					
+					sessionList.add(list);
+					System.out.println("세션 검사====================================================="+list);
+
+					if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
+						//DB인설트
+				         goodsService.basketInsert(list);
+				         sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+
+
+
+					}
+					session.setAttribute("basketList", sessionList);
+					model.addAttribute("basketList",sessionList);
+					System.out.println(sessionList);
 
 				}
 				
-				//jps에서 쓸 Model설정 & session설정
-				session.setAttribute("basketList", sessionList);
-				model.addAttribute("basketList",sessionList);
-				System.out.println(sessionList);
+
+				return "Goods/Basket/goodsBasket";
+			}
 			
-			}else{
-				//세션 존재함
-				List<Map<String,Object>> sessionList =(List<Map<String, Object>>) session.getAttribute("basketList");
+			
+			//제거
+			@SuppressWarnings("unchecked")
+			@RequestMapping(value = "/BasketDelete",method = RequestMethod.POST)
+			public String BasketDelete(Model model,int goodsNo, int BASKET_NO,HttpSession session) throws Exception {
+				System.out.println("삭제처리시작"+goodsNo+"/"+BASKET_NO);
 				
-				sessionList.add(list);
-				System.out.println("세션 검사====================================================="+list);
+				List<Map<String,Object>> list = (List<Map<String, Object>>) session.getAttribute("basketList");
+				System.out.println("basketList세션삭제");
+				list.remove(goodsNo);
+				
+				if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString())!=0){
+					System.out.println("basketListDB삭제");
 
-				if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
-					//DB인설트
-			         goodsService.basketInsert(list);
-			         sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
-
-
+					goodsService.basketDelete(BASKET_NO);
+					list = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 
 				}
-				session.setAttribute("basketList", sessionList);
-				model.addAttribute("basketList",sessionList);
-				System.out.println(sessionList);
+				
+				session.setAttribute("basketList", list);
+				model.addAttribute("basketList",list);
 
+				return "Goods/Basket/goodsBasket";
 			}
 			
-
-			return "Goods/Basket/goodsBasket";
-		}
 		
 		
-		//제거
-		@SuppressWarnings("unchecked")
-		@RequestMapping(value = "/BasketDelete",method = RequestMethod.POST)
-		public String BasketDelete(Model model,int goodsNo, int BASKET_NO,HttpSession session) throws Exception {
-			System.out.println("삭제처리시작"+goodsNo+"/"+BASKET_NO);
-			
-			List<Map<String,Object>> list = (List<Map<String, Object>>) session.getAttribute("basketList");
-			System.out.println("basketList세션삭제");
-			list.remove(goodsNo);
-			
-			if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString())!=0){
-				System.out.println("basketListDB삭제");
-
-				goodsService.basketDelete(BASKET_NO);
-				list = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
-
-			}
-			
-			session.setAttribute("basketList", list);
-			model.addAttribute("basketList",list);
-
-			return "Goods/Basket/goodsBasket";
-		}
-		
-	
 	
 	
 
