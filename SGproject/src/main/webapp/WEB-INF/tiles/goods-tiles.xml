@@ -22,5 +22,13 @@
 	<definition name="goodsDetail_tiles" extends="layout">
 		<put-attribute name="body" value="/WEB-INF/views/Goods/goodsDetail.jsp"/>
 	</definition>
-
+	
+	<definition name="goodsOrder_tiles" extends="layout">
+      <put-attribute name="body" value="/WEB-INF/views/Goods/goodsOrder.jsp"/>
+   </definition>
+   
+   <definition name="goodsOrderSuccess_tiles" extends="layout">
+      <put-attribute name="body" value="/WEB-INF/views/Goods/goodsOrderSuccess.jsp"/>
+   </definition>
+   
 </tiles-definitions>

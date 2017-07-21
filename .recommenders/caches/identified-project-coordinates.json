@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-[[{"location":"C:\\Users\\user1\\.m2\\repository\\javax\\servlet\\javax.servlet-api\\3.1.0\\javax.servlet-api-3.1.0.jar","type":"JAR","hints":{}},"javax.servlet:javax.servlet-api:3.1.0"],[{"location":"C:\\Program Files\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
+[[{"location":"C:\\Users\\user1\\.m2\\repository\\javax\\servlet\\javax.servlet-api\\3.1.0\\javax.servlet-api-3.1.0.jar","type":"JAR","hints":{}},"javax.servlet:javax.servlet-api:3.1.0"],[{"location":"C:\\Java\\dasolgit\\SGproject","type":"PROJECT","hints":{"PROJECT_NAME":"SGproject"}},"SG.com:SG:1.0.0"],[{"location":"C:\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
 =======
-[[{"location":"C:\\Users\\user1\\.m2\\repository\\org\\mybatis\\mybatis-spring\\1.2.2\\mybatis-spring-1.2.2.jar","type":"JAR","hints":{}},"org.mybatis:mybatis-spring:1.2.2"],[{"location":"C:\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"],[{"location":"C:\\Java\\dasolgit\\SGproject","type":"PROJECT","hints":{"PROJECT_NAME":"SGproject"}},"SG.com:SG:1.0.0"]]
->>>>>>> 8de8be7e254ff0bc33f1b50212d293eccf8172b6
+[[{"location":"C:\\Users\\user1\\.m2\\repository\\javax\\servlet\\javax.servlet-api\\3.1.0\\javax.servlet-api-3.1.0.jar","type":"JAR","hints":{}},"javax.servlet:javax.servlet-api:3.1.0"],[{"location":"C:\\Program Files\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
+>>>>>>> 947fdc6560ecb82edc3a36f7bc8dec6e2fdb3e3d

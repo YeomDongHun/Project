@@ -20,7 +20,8 @@
 <body>
  <c:choose>
       	  <c:when test="${fn:length(commentList) > 0}">	
-      	  <table class="type07" width="100%">  
+      	  <div style="font-family: PureunJeonnam;">
+      	  <table class="type07" width="100%" style="font-family: PureunJeonnam;">  
       	  <thead> 
     <tr>
         <th scope="cols">작성자</th>
@@ -59,12 +60,15 @@
 
    	</c:forEach>
    	</table>
+   	</div>
 		 </c:when>
                 
                 <c:otherwise>
+                <div style="font-family: PureunJeonnam;">
                     <tr>
-                        <td colspan="4">아직 작성된 후기가 없어요</td>
+                        <td colspan="4"><strong>아직 작성된 후기가 없어요</strong></td>
                     </tr>
+                </div>
                 </c:otherwise>
    </c:choose>
 		

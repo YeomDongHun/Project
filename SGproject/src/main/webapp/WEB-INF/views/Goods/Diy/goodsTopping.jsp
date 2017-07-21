@@ -10,6 +10,11 @@
 
 <script type="text/javascript">
 
+	function payment(){
+		
+		location.href="PaymentDiy?form_price="+document.getElementById('form_price').value+"&form_kcal="+document.getElementById('form_kcal').value;
+	}
+
 	function calcurate(){
 		var price = document.getElementById("form_price").value;
 		var kcal = document.getElementById("form_kcal").value;
@@ -45,7 +50,7 @@
 					<c:when test="${fn:length(toppingList) > 0}">
 						<c:forEach var="toppingList" items="${toppingList}" varStatus="stat">
 					                          
-							    
+							     
 							<table class="table table-hover">
 							<tr>
 								<td width="80px">							    
@@ -53,14 +58,14 @@
 									<img  class="img-circle" style=" width: 70px;height: 70px;" alt="" src="resources/file/goodsFile/${toppingList.TOPPING_IMG}"/>
 									</div>
 								</td> 
-								<td><h3>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="javascript:location.href='/BasketDiy';" style="margin-top: 20px;"></span></h3>
+								<td><h5>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="delTopping(this);" style="margin-top: 20px;"></span></h5>
 								
 										
 										<br/>
 										&nbsp;${toppingList.TOPPING_PRICE}원  &nbsp;&nbsp;
 										&nbsp;&nbsp;&nbsp;${toppingList.TOPPING_KCAL}kcal</td>
 										        
-										
+										 
 								</tr>
 							
 							</table>
@@ -94,11 +99,11 @@
 					</table>
 					</center>
 					
-					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="document.getElementById('basketForm').submit();">
+					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="javascript:alert('장바구니에 담았습니다');document.getElementById('basketForm').submit();">
 					  <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>BASKET
 					</button>
 					
-					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="">
+					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="payment()">
 					  <span class="	glyphicon glyphicon-credit-card" aria-hidden="true"></span>PAYMENT
 					</button>
 			

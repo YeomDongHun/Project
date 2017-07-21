@@ -7,7 +7,7 @@
 <!-- comment by seo  -->
 
 	<!-- 주문 insert -->
-	<insert id="orderInsert" parameterType="hashmap">
+	<insert id="orderInsert" parameterType="hashmap" useGeneratedKeys="true" keyProperty="ORDER_NO">
 
 		INSERT INTO SG_ORDER(
         ORDER_NO,
@@ -34,6 +34,35 @@
 				
 	</insert>
 	
+	<insert id="orderInsertBasket" parameterType="hashmap" useGeneratedKeys="true" keyProperty="ORDER_NO">
+
+		INSERT INTO SG_ORDER(
+        ORDER_NO,
+        ORDER_GOODS_NO,
+        ORDER_GOODS_AMOUNT,
+        ORDER_MEMBER_ID,
+        ORDER_MONEY,
+        ORDER_TRADE_TYPE,
+        ORDER_DATE,
+        ORDER_STATE,
+        ORDER_TOPPING_NAME
+        )        
+		
+		VALUES(
+        
+        SG_ORDER_NO_SEQ.NEXTVAL,
+        #{GOODS_NO},
+        #{GOODS_AMOUNT},
+        #{MEMBER_ID},
+        #{ORDER_MONEY},
+        #{ORDER_TRADE_TYPE},
+        SYSDATE,
+        DEFAULT,
+        #{TOPPING_NAME}
+        )
+				
+	</insert>
+	
 	
 	
 	<!-- 주문테이블에서 최신 레코드 가져오기 -->
@@ -47,25 +76,39 @@
 	]]>
 	</select>
 	
-	<!-- 배송테이블에서 최신 레코드 가져오기 -->
-	<select id="selectLastDeli" resultType="hashmap">
-	<![CDATA[
-		
-		SELECT * FROM  
- 		(SELECT * FROM SG_DELI  ORDER BY DELI_NO DESC) 
-		WHERE ROWNUM = 1
-		
-	]]>
-	</select>
 	
 	<!-- 주문테이블 배송번호 update -->
 	<update id="updateDeli" parameterType="hashmap">
 	
 		UPDATE SG_ORDER
-		SET ORDER_DELI_NO = #{DELI_NO}
-		WHERE ORDER_NO = #{ORDER_NO}
+		SET ORDER_DELI_NO=#{DELI_NO} 
+		where ORDER_NO=#{ORDER_NO}
 	
 	</update>
+	
+	
+		<update id="updateDeliBasket" parameterType="hashmap">
+	
+		UPDATE SG_ORDER
+		SET ORDER_DELI_NO = #{DELI_NO}
+		WHERE ORDER_MEMBER_ID=#{MEMBER_ID} AND ORDER_DELI_NO is NULL
+	
+	</update>
+	
+	<delete id="deleteBasket" parameterType="int">
+
+	
+	</delete>
+	
+	<!-- 주문테이블에서 최신 레코드 리스트 가져오기 -->
+	<select id="selectLastOrderList" resultType="hashmap">
+	<![CDATA[
+		
+		SELECT * FROM SG_ORDER 
+		WHERE ORDER_MEMBER_ID=#{ORDER_MEMBER_ID} AND ORDER_DELI_NO IS NULL
+		
+	]]>
+	</select>
 	
 	<!-- comment by seo -->
 

@@ -107,7 +107,7 @@ function delTopping(test){
 									      <img src="resources/file/goodsFile/${topping.TOPPING_IMG}" id="${topping.TOPPING_NO }" name="${topping.TOPPING_NAME }" alt="..." onclick="addTopping(this)" class="img-circle" style="width: 70px; height: 70px; "/>
 									      <div class="caption">
 									      
-									        <div style="text-align: center; margin-bottom: 5px;"><h4>${topping.TOPPING_NAME}</h4></div>
+									        <div style="text-align: center; margin-bottom: 5px;"><h5><strong>${topping.TOPPING_NAME}</strong></h5></div>
 									        <div style="text-align: center;"><h5>${topping.TOPPING_PRICE }원</h5></div>
 									 		<div style="text-align: center;"><h6>${topping.TOPPING_KCAL }kcal</h6></div>
 									     

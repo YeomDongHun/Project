@@ -3,20 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 
+
                   
 <input type="hidden" id="currentPage" value="${currentPage }"/>
                 
 <c:choose>
 	<c:when test="${fn:length(goodsList) > 0}">
 		<c:forEach var="goodsList" items="${goodsList}" varStatus="stat">
-	                          
-			  <div style=" width:240px; height:360px; float:left; margin-left: 20px;margin-right: 20px; margin-bottom: 150px;"> 
-			    <div class="thumbnail" style="height:400px;">
+	                   
+			  <div class="SG_ItemBox" style=" width:240px; height:360px; float:left; margin-left: 20px; margin-right: 20px; margin-bottom: 30px;"> 
+			    <div class="thumbnail" style="height:360px;">
+			    <c:if test="${goodsList.COMMENT_RATE ==0 }">
+			    			    	<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>NEW</strong></div>
+			    </c:if>
+			    <c:if test="${goodsList.COMMENT_RATE !=0 }">
+			    	<c:if test="${goodsList.COMMENT_RATE == 5 }">
+			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>BEST</strong></div>
+			    	</c:if>
+			    	<c:if test="${goodsList.COMMENT_RATE != 5 }">
+			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>${goodsList.COMMENT_RATE}</strong></div>
+					</c:if>			   
+			    </c:if>
 			      <img src="resources/file/goodsFile/${goodsList.GOODS_THUMBNAIL}" alt="..." onclick="javascript:location.href='goodsDetail?goodsNo=${goodsList.GOODS_NO}&currentPage=${currentPage}'"/>
 			      <div class="caption">
 			      
-			        <div style="text-align: center;"><h3>${goodsList.GOODS_NAME}</h3></div>
-			        <div style="text-align: right;"><h4>${goodsList.GOODS_PRICE }¿ø</h4></div>
+			        <div style="text-align: center;font-family: PureunJeonnam;"><h4>${goodsList.GOODS_NAME}</h4></div>
+			        <div style="text-align: right;font-family: PureunJeonnam;"><h5>${goodsList.GOODS_PRICE }¿ø</h5></div>
 			     
 			          <div class="basketWish" style="float:left; margin-top: 10px;">
 			          

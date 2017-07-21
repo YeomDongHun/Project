@@ -51,7 +51,7 @@ public class PointDao extends AbstractDAO
 	{
 		return sqlSession.selectList("point.myPointList", map);
 	}
-
+	
 
 
 

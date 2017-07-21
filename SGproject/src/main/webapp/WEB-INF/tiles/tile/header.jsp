@@ -3,26 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
  <html>
  <head>
- <style>
+<style type="text/css">
+@import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
+
 #headerWrap{
 width:100%;
+font-family: PureunJeonnam;
 }
 #logoWrap{
-	width:600px;
-	height:200px;
-	margin-left:auto;
-	margin-right:auto;
+   width:600px;
+   height:200px;
+   margin-left:auto;
+   margin-right:auto;
 }
 #loginWrap{
 
-	height:50px;
-/* 	background-color:blue; */
-	font-family:"Nanum Gothic";
-	
+   height:50px;
+/*    background-color:blue; */
+   font-family: PureunJeonnam;
+   
 }
 
 #loginWrap ul{
-		list-style-type: none;  /* 메인 메뉴 안의 ul 내부의 목록 표시를 없애줌 */
+      list-style-type: none;  /* 메인 메뉴 안의 ul 내부의 목록 표시를 없애줌 */
         margin: 0px;            /* 메인 메뉴 안의 ul의 margin을 없앰 */
         padding: 0px;           /* 메인 메뉴 안의 ul의 padding을 없앰 */
 }
@@ -34,20 +37,20 @@ width:100%;
         vertical-align: middle;     /* 세로 정렬을 가운데로 설정 */
         text-align: center;         /* 텍스트를 가운데로 정렬 */
         margin-right:10px;
-        font-family: "Nanum Gothic";
+        font-family: PureunJeonnam;
 }
 .loginLink{
-		text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
-		font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
+      text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
+      font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
-        font-family: "Nanum Gothic";
+        font-family: PureunJeonnam;
 }
 
 .loginname{
-		text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
-		font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
+      text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
+      font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
-        font-family: "Nanum Gothic";       
+        font-family: PureunJeonnam;      
         float : right;
         margin-right:40px;
         margin-top:10px;
@@ -56,8 +59,8 @@ width:100%;
 #topMenu {
             height: 50px;  /* 메인 메뉴의 높이 */
             width:100%;  /* 메인 메뉴의 넓이 */
-   			margin-left:auto;
-   			margin-right:auto;
+            margin-left:auto;
+            margin-right:auto;
     }
 #topMenu ul {           /* 메인 메뉴 안의 ul을 설정함: 상위메뉴의 ul+하위 메뉴의 ul */
         list-style-type: none;  /* 메인 메뉴 안의 ul 내부의 목록 표시를 없애줌 */
@@ -76,16 +79,16 @@ width:100%;
 .menuLink, .submenuLink {           /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
         text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
         display: block;                     /* a 태그의 클릭 범위를 넓힘 */
-        width: 159px;                       /* 기본 넓이를 150px로 설정 */
+        width: 222px;                       /* 기본 넓이를 150px로 설정 */
         font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
-        font-family: "Nanum Gothic", Dotum; /* 기본 폰트를 영어/한글 순서대로 설정 */
+        font-family: PureunJeonnam, Dotum; /* 기본 폰트를 영어/한글 순서대로 설정 */
     }
 .menuLink {     /* 상위 메뉴의 글씨색을 흰색으로 설정 */
         color: white;
     }
 .topMenuLi:hover .menuLink {    /* 상위 메뉴의 li에 마우스오버 되었을 때 스타일 설정 */
-    	 color: red;                 /* 글씨 색 빨간색 */
+        color: #00CCCF;                 /* 윌포인트색 */
         background-color: #4d4d4d;  /* 배경색을 밝은 회색으로 설정 */
 }
 .submenuLink {          /* 하위 메뉴의 a 태그 스타일 설정 */
@@ -115,7 +118,7 @@ width:100%;
     }
     
 @font-face { /* 나눔고딕 Regular */
-  font-sfamily: 'Nanum Gothic';
+  font-family: PureunJeonnam;
   font-style: normal;
   font-weight: 400;
   src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
@@ -139,73 +142,60 @@ width:100%;
 </div>
 
 <div class="container">
-	<div id="loginWrap">
-	        세션 확인 : ${sessionScope.MEMBER_ID}
-	        
-		    <c:choose>
-		    
-		    <c:when test="${(sessionScope.MEMBER_NO) == 0}">
-		    <ul>		
-		    <li><a class="loginLink" href="loginForm">로그인</a></li>
-		    <li><a class="loginLink" href="joinEmail">회원가입</a></li>
-		   	</ul>	    
-		    </c:when>
-		    
-		    <c:otherwise>
-		    <ul>          		
-		    <li><a class="loginLink" href="logout">로그아웃</a></li>
-		    <li><a class="loginLink" href="mypage">마이페이지</a></li>
-		    <li><a class="loginLink" href="#">장바구니</a></li>
-		    <li><a class="loginLink" href="#">위시리스트</a></li>		    
-		    </ul>
-		    <div class="loginname">${sessionScope.MEMBER_NAME}님 환영합니다!</div>
-		    </c:otherwise>
-		    
-		    </c:choose>
+   <div id="loginWrap">
+           
+          <c:choose>
+             
+          <c:when test="${(sessionScope.MEMBER_NO) == 0}">
+          <ul>      
+          <li><a class="loginLink" href="loginForm">로그인</a></li>
+          <li><a class="loginLink" href="joinEmail">회원가입</a></li>
+            </ul>       
+          </c:when>
+          
+          <c:otherwise>
+          <ul>                
+          <li><a class="loginLink" href="logout">로그아웃</a></li>
+          <li><a class="loginLink" href="mypage">마이페이지</a></li>
+          <li><a class="loginLink" href="#">장바구니</a></li>
+          <li><a class="loginLink" href="#">위시리스트</a></li>          
+          </ul>
+          <div class="loginname">${sessionScope.MEMBER_NAME}님 환영합니다!</div>
+          </c:otherwise>
+          
+          </c:choose>
 
-	</div>
+   </div>
     <div id="logoWrap">
-    	<a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
+       <a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
     </div>
     
-	<div id="topMenu" style="z-index:0;">
-		<ul>
-  			<li class="topMenuLi">
-  				<a class="menuLink" href="goodsList"> 상품 리스트 </a>
-  				<ul class="submenu">
-  					<li><a class="submenuLink" href="goodsList">완제품</a></li>
-  					<li><a class="submenuLink" href="#">육류</a></li>
-  				</ul>
-  			</li> 			
-  		<li>|</li>  
- 			 <li class="topMenuLi"> 
- 				 <a class="menuLink" href="goodsDIY">DIY</a> 
- 			 </li>
-		<li>|</li>	 
-			 <li class="topMenuLi">
-			 	<a class="menuLink" href="myBasketList">장바구니</a>
-			 </li>
- 		<li>|</li>
-  			 <li class="topMenuLi">
-  			 	<a class="menuLink" href="wishList">위시리스트</a>
-  			 </li>
-  		<li>|</li>
-  			<li class="topMenuLi">
-  				<a class="menuLink" href="memberDiyList">나만의 레시피</a>
-  			</li>
-  		<li>|</li>
-		     <li class="topMenuLi">
-		     	<a class="menuLink" href="memberFaqList">고객 센터</a>
-		     </li>
-		<li>|</li>  
-   			 <li class="topMenuLi">
-   			 	<a class="menuLink" href="memberNoticeList">공지 사항</a>
-  				<ul class="submenu">
-  					<li><a class="submenuLink" href="memberQnAList">Q&A</a></li>
-  				</ul>
-   			 </li>
-		</ul>
-	</div>	
+    
+    
+    
+   <div id="topMenu" style="z-index:0;">
+      <ul>
+           <li class="topMenuLi">
+              <a class="menuLink" href="goodsList"> 상품 리스트 </a>
+           </li>          
+        <li>|</li>  
+           <li class="topMenuLi"> 
+              <a class="menuLink" href="goodsDIY">DIY</a> 
+           </li>
+      <li>|</li>    
+           <li class="topMenuLi">
+              <a class="menuLink" href="memberDiyList">나만의 레시피</a>
+           </li>
+        <li>|</li>
+           <li class="topMenuLi">
+              <a class="menuLink" href="memberFaqList">고객 센터</a>
+           </li>
+      <li>|</li>  
+             <li class="topMenuLi">
+                <a class="menuLink" href="memberNoticeList">공지 사항</a>
+             </li>
+      </ul>
+   </div>   
 </div>
 </body>
 </html>

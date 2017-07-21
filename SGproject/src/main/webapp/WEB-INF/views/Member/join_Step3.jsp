@@ -134,6 +134,7 @@ function checkpw()
 </head>
 
 <body>
+<div class="container">
 <div class="body_center">
 <form name="frm" action="/SG/joinSuccess" method="post" >
 <section class="input-horizontal list-horizontal section box-shadow">
@@ -281,6 +282,7 @@ function checkpw()
  </div>
 </section>
 </form>
+</div>
 </div>
 </body>
 </html>

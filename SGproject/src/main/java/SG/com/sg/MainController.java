@@ -1,6 +1,7 @@
 package SG.com.sg;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,16 +23,29 @@ public class MainController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model ,HttpSession session) throws Exception {
+		
+		int currentPage=1;
+		
 		List<Map<String,Object>> list = goodsService.goodsList();
 		
 		if(session.getAttribute("MEMBER_NO")==null){
 		session.setAttribute("MEMBER_ID", "visitor");
 		session.setAttribute("MEMBER_NO", 0);
+		}else if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString())!=0){
+			
+			//사이드 장바구니 처리
+			List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
+	        sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+			session.setAttribute("basketList", sessionList);
+			System.out.println("로그인 세션 생성=============="+sessionList);
 		}
 		
 		model.addAttribute("goodsList",list);
+		model.addAttribute("currentPage",currentPage);
 		return "main_tiles";
 	}
+	
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home2(Model model) {
 		return "home";
