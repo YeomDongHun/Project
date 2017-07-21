@@ -202,6 +202,7 @@ public class OrderController {
     	        DeliMap.put("DELI_RECEIVE_ADDR2", request.getParameter("DELI_RECEIVE_ADDR2"));
     	        DeliMap.put("DELI_RECEIVE_NAME", request.getParameter("DELI_RECEIVE_NAME"));
     	        DeliMap.put("DELI_RECEIVE_PHONE", request.getParameter("DELI_RECEIVE_PHONE"));
+    	        DeliMap.put("DELI_ORDER_MEMO", request.getParameter("DELI_ORDER_MEMO"));
 
     	         orderService.insertDeli(DeliMap);
 
@@ -307,7 +308,8 @@ public class OrderController {
 			DeliList.put("DELI_RECEIVE_ADDR1", request.getParameter("DELI_RECEIVE_ADDR1"));
 			DeliList.put("DELI_RECEIVE_ADDR2", request.getParameter("DELI_RECEIVE_ADDR2"));
 			DeliList.put("DELI_RECEIVE_NAME", request.getParameter("DELI_RECEIVE_NAME"));
- 	       	DeliList.put("DELI_RECEIVE_PHONE", request.getParameter("DELI_RECEIVE_PHONE"));
+			DeliList.put("DELI_RECEIVE_PHONE", request.getParameter("DELI_RECEIVE_PHONE"));
+			DeliList.put("DELI_ORDER_MEMO", request.getParameter("DELI_ORDER_MEMO"));
  	    
  	        
 			orderService.insertDeli(DeliList);

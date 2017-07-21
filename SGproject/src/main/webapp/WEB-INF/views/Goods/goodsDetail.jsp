@@ -255,14 +255,14 @@ function dComment(test){
 	<div class="inform" style="float:right; width:300px;height:300px; background:#FFFFFF; margin-right: 100px;padding-top:15px;margin-top:15px; font-family: PureunJeonnam; ">
 
 	<table class="type05" width="450px" >
-	<tr><td>상품이름</td><td>${goodsDetail.GOODS_NAME}</td></tr>
-	<tr><td>칼로리</td><td>${goodsDetail.GOODS_KCAL} Kcal</td></tr>
-	<tr><td>상품 가격</td><td>${goodsDetail.GOODS_PRICE } 원</td></tr>
-	<tr><td>포인트</td><td>${point} point</td></tr>
-	<tr><td>원산지</td><td>국내산</td></tr>
-	<tr><td>상세 설명</td><td>${goodsDetail.GOODS_DETAIL}</td></tr>
+	<tr><td><strong>상품이름</strong></td><td>${goodsDetail.GOODS_NAME}</td></tr>
+	<tr><td><strong>칼로리</strong></td><td>${goodsDetail.GOODS_KCAL} Kcal</td></tr>
+	<tr><td><strong>판매가</strong></td><td>${goodsDetail.GOODS_PRICE } 원</td></tr>
+	<tr><td><strong>포인트</strong></td><td>${point} point</td></tr>
+	<tr><td><strong>원산지</strong></td><td>국내산</td></tr>
+	<tr><td><strong>상세설명</strong></td><td>${goodsDetail.GOODS_DETAIL}</td></tr>
     <tr>
-    	<td>상품 수량</td>
+    	<td><strong>수량</strong></td>
        	<td>
        	<div>
       		     <img src='resources/file/img/down.ico' style="width: 20px; float: left" onclick="change(-1);">
@@ -271,7 +271,7 @@ function dComment(test){
        </div></td>
     </tr>
     <tr>
-    <td>총 가격</td><td><span id="totalprice">${goodsDetail.GOODS_PRICE }</span>원&nbsp;&nbsp;<span id="totalKcal">${goodsDetail.GOODS_KCAL}</span>Kcal
+    <td><strong>총가격</strong></td><td><span id="totalprice">${goodsDetail.GOODS_PRICE }</span>원&nbsp;&nbsp;<span id="totalKcal">${goodsDetail.GOODS_KCAL}</span>Kcal
     	<input type="hidden" id="totalprice_put" value="${goodsDetail.GOODS_PRICE}"></td>
         <input type="hidden" id="totalKcal_put" value="${goodsDetail.GOODS_KCAL}"></td>
     
@@ -294,8 +294,8 @@ function dComment(test){
 	
 
 	
-	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
-	<input type="button" class="btn btn-warning btn-lg" value="basket" onclick="DetailBasket();"/>
+	<input type="button" class="btn btn-success btn-lg" style="font-family: PureunJeonnam;" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-warning btn-lg" style="font-family: PureunJeonnam;" value="BASKET" onclick="DetailBasket();"/>
 	</div>
 </div>
 
@@ -313,9 +313,9 @@ function dComment(test){
 
 
 <center>
-<div id="comment" class="comment" style="background:#F6F6F6;padding: 20px;width:1000px;margin-left:auto;
+<div id="comment" class="comment" style="background:#F6F6F6;padding: 20px;width:1000px;margin-left:auto;font-family: PureunJeonnam;
    			margin-right:auto;padding: 20px;">
-   			맛있었나요?
+   			<strong>맛있었나요?</strong>
 <p class="star_rating" id="star_rating">
     <a href="#" id="1">★</a>
     <a href="#" id="2">★</a>
@@ -330,7 +330,7 @@ function dComment(test){
    			
 
 <textarea rows="4" cols="100" id="commentContents" name="commentContents"   ></textarea>
-<input type="button" class="btn btn-default" id="button1" value="후기작성" style="height:60pt;width:60pt;margin-bottom: 70px;"  />
+<input type="button" class="btn btn-default" id="button1" value="후기작성" style="height:60pt;width:60pt;margin-bottom: 70px;font-family: PureunJeonnam;"  />
 <input type="hidden" id="commentGoodsNo" name="goodsNo" value="${goodsDetail.GOODS_NO}"/>
 
 </div>

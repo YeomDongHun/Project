@@ -23,6 +23,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model ,HttpSession session) throws Exception {
+		
+		int currentPage=1;
+		
 		List<Map<String,Object>> list = goodsService.goodsList();
 		
 		if(session.getAttribute("MEMBER_NO")==null){
@@ -38,6 +41,7 @@ public class MainController {
 		}
 		
 		model.addAttribute("goodsList",list);
+		model.addAttribute("currentPage",currentPage);
 		return "main_tiles";
 	}
 	

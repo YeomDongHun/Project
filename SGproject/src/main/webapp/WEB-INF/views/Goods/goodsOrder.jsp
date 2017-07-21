@@ -262,7 +262,7 @@ function zipfind()
    </colgroup>
    <tr>
       <th>이미지</th>
-      <th>상품정보</th>
+      <th>상품 이름</th>
       <th>토핑</th>
        <th>판매가</th>
        <th>수량</th>
@@ -313,7 +313,7 @@ function zipfind()
 
 
 
-<div class="body_center" style="height:250px; padding-top:0px;">
+<div class="body_center" style="height:215px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
                <h3>결제 정보</h3>
@@ -365,7 +365,7 @@ function zipfind()
 </div>
 
 
-<div class="body_center" style="height:355px; padding-top:0px;">
+<div class="body_center" style="height:330px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
             <div class="main_subject">
                <h3>주문자 정보</h3>
@@ -435,7 +435,7 @@ function zipfind()
 </div>
 
 
-   <div class="body_center" style="height:300px; padding-top:0px;">
+   <div class="body_center" style="height:305px; padding-top:0px;">
    <section class="input-horizontal list-horizontal section box-shadow">
                <div class="main_subject" style="padding-top:0px;"><h3>수령자 정보</h3><input type="checkbox"id="check"onclick="sameDeli()"><strong>주문자 정보와 동일</strong></div>
       <div>
@@ -490,6 +490,31 @@ function zipfind()
                   <div style="height:10px;"></div> 
                </div>
             </li>
+         </ul> 
+      </div>
+</section>
+</div>
+
+<div class="body_center" style="height:80px; padding-top:0px;">
+   <section class="input-horizontal list-horizontal section box-shadow">
+               <div class="main_subject"><h3>배송시 메세지</h3></div>
+      <div>
+         <ul class="section-body">
+            <li class="name">
+            
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
+                  <label for="input-name">
+                     <strong>* 메모</strong>
+                  </label>
+               </div>
+               
+               <div style="height:5px;"></div>
+                  
+               <div class="col-lg-21 col-md-20" style="width:630px;">
+                  <input type="text" id="DELI_ORDER_MEMO" class="xx-control" name="DELI_ORDER_MEMO">
+              <div style="height:5px;"></div> 
+               </div>                    
+            </li>       
          </ul> 
       </div>
 </section>
