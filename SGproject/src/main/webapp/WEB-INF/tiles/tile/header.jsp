@@ -143,10 +143,9 @@ font-family: PureunJeonnam;
 
 <div class="container">
    <div id="loginWrap">
-           세션 확인 : ${sessionScope.MEMBER_ID}
            
           <c:choose>
-          
+             
           <c:when test="${(sessionScope.MEMBER_NO) == 0}">
           <ul>      
           <li><a class="loginLink" href="loginForm">로그인</a></li>
@@ -170,6 +169,9 @@ font-family: PureunJeonnam;
     <div id="logoWrap">
        <a href="main"><img src="./resources/file/img/SG_Logo.jpg" /></a>
     </div>
+    
+    
+    
     
    <div id="topMenu" style="z-index:0;">
       <ul>

@@ -45,7 +45,7 @@
 					<c:when test="${fn:length(toppingList) > 0}">
 						<c:forEach var="toppingList" items="${toppingList}" varStatus="stat">
 					                          
-							    
+							     
 							<table class="table table-hover">
 							<tr>
 								<td width="80px">							    
@@ -53,14 +53,14 @@
 									<img  class="img-circle" style=" width: 70px;height: 70px;" alt="" src="resources/file/goodsFile/${toppingList.TOPPING_IMG}"/>
 									</div>
 								</td> 
-								<td><h3>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="delTopping(this);" style="margin-top: 20px;"></span></h3>
+								<td><h5>&nbsp;&nbsp;${toppingList.TOPPING_NAME}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${stat.index}"  onclick="delTopping(this);" style="margin-top: 20px;"></span></h5>
 								
 										
 										<br/>
 										&nbsp;${toppingList.TOPPING_PRICE}원  &nbsp;&nbsp;
 										&nbsp;&nbsp;&nbsp;${toppingList.TOPPING_KCAL}kcal</td>
 										        
-										
+										 
 								</tr>
 							
 							</table>

@@ -249,8 +249,6 @@ function dComment(test){
    			margin-right:auto;">
 
 <div class="img" style=" float:left; width: 500px; height: 500px;">
-
-
 <img src="resources/file/goodsFile/${goodsDetail.GOODS_THUMBNAIL}" style="width: 400px; margin-top: 50px;" >
 </div>
 
@@ -258,6 +256,7 @@ function dComment(test){
 
 	<table class="type05" width="450px" >
 	<tr><td>상품이름</td><td>${goodsDetail.GOODS_NAME}</td></tr>
+	<tr><td>칼로리</td><td>${goodsDetail.GOODS_KCAL} Kcal</td></tr>
 	<tr><td>상품 가격</td><td>${goodsDetail.GOODS_PRICE } 원</td></tr>
 	<tr><td>포인트</td><td>${point} point</td></tr>
 	<tr><td>원산지</td><td>국내산</td></tr>
