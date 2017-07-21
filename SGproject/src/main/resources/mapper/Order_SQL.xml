@@ -100,6 +100,16 @@
 	
 	</delete>
 	
+	<!-- 주문테이블에서 최신 레코드 리스트 가져오기 -->
+	<select id="selectLastOrderList" resultType="hashmap">
+	<![CDATA[
+		
+		SELECT * FROM SG_ORDER 
+		WHERE ORDER_MEMBER_ID=#{ORDER_MEMBER_ID} AND ORDER_DELI_NO IS NULL
+		
+	]]>
+	</select>
+	
 	<!-- comment by seo -->
 
 </mapper>

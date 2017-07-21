@@ -125,10 +125,14 @@ if(usePoint>myPoint){
 if(usePoint>totalMoney){
 	usePoint=totalMoney;
 }
+if(myPoint<0){
+	myPoint=0;
+}
    
 dcPoint = eval(usePoint);
 dcMoney= totalMoney-dcPoint;
 plusPoint = parseInt(dcMoney/100);
+myPoint = myPoint-dcPoint;
 
 dcPointPost.setAttribute('value', dcPoint);
 dcMoneyPost.setAttribute('value', dcMoney);
@@ -138,6 +142,7 @@ plusPointPost.setAttribute('value', plusPoint);
   $("#dcPoint").html(dcPoint);
   $("#dcMoney").html(dcMoney);
   $("#plusPoint").html(plusPoint);
+  $("#myPoint").html(myPoint);
 };  
 
 function zipfind() 

@@ -222,7 +222,14 @@ public class OrderController {
     	         orderService.updateDeli(map.getMap());// update SG_ORDER set DELI_NO=#{DELI_NO} where orderno=#{orderno}
 
     	         
-    
+    	         //사용한 포인트 차감(포인트 사용 insert)
+    	         Map<String,Object> pointMap=new HashMap<String,Object>();
+    	         int dcPoint = Integer.parseInt(request.getParameter("dcPoint"));
+    	         pointMap.put("POINT_MONEY", dcPoint*(-1));
+    	         pointMap.put("POINT_MEMBER_NO", session.getAttribute("MEMBER_NO").toString());
+    	         pointMap.put("POINT_ORDER_NO", selectLastOrder.get("ORDER_NO").toString());
+    	         pointService.usePoint(pointMap);
+				
     	        
     	         
     	         //주문완료페이지 뿌려줄 것
@@ -264,19 +271,30 @@ public class OrderController {
 			System.out.println(basketList);
 			
 			//주문 insert
-			System.out.println("-----------------------------------인설트 시작------------------------------------");
 			for(int i=0;i<basketList.size();i++){
 	
 	 	         basketList.get(i).put("ORDER_MONEY", Integer.parseInt(basketList.get(i).get("GOODS_PRICE").toString())-dcPointEach);
 	 	         basketList.get(i).put("ORDER_TRADE_TYPE", Integer.parseInt(request.getParameter("ORDER_TRADE_TYPE").toString()));
 	 	         basketList.get(i).put("MEMBER_ID", session.getAttribute("MEMBER_ID").toString());
 	 	         
-	 	         orderService.orderInsertBasket(basketList.get(i));
-	 			System.out.println("-----------------------------------인설트 끝------------------------------------");
-	 			
-
+	 	         orderService.orderInsertBasket(basketList.get(i));	
 			}
 			
+			//마지막 주문 list 가져오기 
+			Map<String, Object> lastmap = new HashMap<String, Object>();
+			lastmap.put("ORDER_MEMBER_ID", session.getAttribute("MEMBER_ID").toString());
+			List<Map<String,Object>> selectLastOrderList = (List<Map<String, Object>>) orderService.selectLastOrderList(lastmap);
+	         
+			//포인트 사용 insert
+			for(int i=0; i<selectLastOrderList.size();i++){
+				 
+				Map<String,Object> pointMap=new HashMap<String,Object>();
+		         pointMap.put("POINT_MONEY", dcPointEach*(-1));
+		         pointMap.put("POINT_MEMBER_NO", session.getAttribute("MEMBER_NO").toString());
+		         pointMap.put("POINT_ORDER_NO", selectLastOrderList.get(i).get("ORDER_NO").toString());
+		         pointService.usePoint(pointMap);
+				
+			}
 			//배송insert
 			
 			DeliList.put("DELI_MEMBER_ID", session.getAttribute("MEMBER_ID"));
@@ -302,6 +320,7 @@ public class OrderController {
 		    Map<String, Object> selectLastDeli = orderService.selectLastDeli();
     	    int deli_no=Integer.parseInt(selectLastDeli.get("DELI_NO").toString());
     	    map.put("DELI_NO", deli_no);
+    	    
     	    
     	    //주문 배송번호 update
 	 		orderService.updateDeliBasket(map.getMap());	
@@ -364,7 +383,6 @@ public class OrderController {
 	      }else{
 	         //파라미터 값 받기 
 	    	  Basketlist =  (List<Map<String, Object>>) session.getAttribute("basketList");
-	    	 System.out.println("오더세션검사!!!!!!!!!!!!!!!!!!!!!!!!!!"+Basketlist);
 	    	  }
 	      
 	      
