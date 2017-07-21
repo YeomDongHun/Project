@@ -292,10 +292,14 @@ function dComment(test){
 
 	</form>
 	
-
-	
-	<input type="button" class="btn btn-success btn-lg" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
-	<input type="button" class="btn btn-warning btn-lg" value="basket" onclick="DetailBasket();"/>
+		<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="DetailBasket()">
+			<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>BASKET
+		</button>
+					
+		<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="document.getElementById('Order').submit();">
+			 <span class="	glyphicon glyphicon-credit-card" aria-hidden="true"></span>PAYMENT
+		</button>
+		
 	</div>
 </div>
 

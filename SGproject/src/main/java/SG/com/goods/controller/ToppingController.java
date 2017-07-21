@@ -119,8 +119,9 @@ public class ToppingController {
 		for(int i =0;i<toppingList.size();i++){
 			if(i==0){
 				GOODS_TOPPING = toppingList.get(i).get("TOPPING_NAME").toString();
-			}
+			}else{
 				GOODS_TOPPING = GOODS_TOPPING +","+ toppingList.get(i).get("TOPPING_NAME").toString();
+			}
 		}
 		
 		request.getParameter("form_price");

@@ -10,6 +10,11 @@
 
 <script type="text/javascript">
 
+	function payment(){
+		
+		location.href="PaymentDiy?form_price="+document.getElementById('form_price').value+"&form_kcal="+document.getElementById('form_kcal').value;
+	}
+
 	function calcurate(){
 		var price = document.getElementById("form_price").value;
 		var kcal = document.getElementById("form_kcal").value;
@@ -98,7 +103,7 @@
 					  <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>BASKET
 					</button>
 					
-					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="">
+					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="payment()">
 					  <span class="	glyphicon glyphicon-credit-card" aria-hidden="true"></span>PAYMENT
 					</button>
 			

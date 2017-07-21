@@ -229,15 +229,15 @@ public class OrderController {
     	         
     	         //주문완료페이지 뿌려줄 것
     	         
-    	         
     	         //주문번호, 주문일자, 총주문금액
     	         model.addAttribute("orderInfo", selectLastOrder);
     	         
     	         //주문상품번호 가져오기
     	         int order_goods_no=Integer.parseInt(selectLastOrder.get("ORDER_GOODS_NO").toString());
-    	        
+    	         System.out.println("+++++++++++++++++++++++++++++++!!!!!!!!!!!!!!!!!!!!!S"+order_goods_no);
+
     	         //주문상품정보 
-    	         Map<String,Object> orderGoodsInfo = goodsService.selectOneGoods(order_goods_no);
+    	         Map<String,Object> orderGoodsInfo = (Map<String, Object>) session.getAttribute("orderDiyGoods");
     	         orderGoodsInfo.put("TOPPING_NAME", selectLastOrder.get("ORDER_TOPPING_NAME").toString());
     	         List<Map<String,Object>>goodsList = new ArrayList<Map<String,Object>>();
     	         goodsList.add(orderGoodsInfo);
@@ -322,7 +322,7 @@ public class OrderController {
 	 		
 	 		
 	 		
-	 		
+	 		session.removeAttribute("orderDiyGoods");
 			session.removeAttribute("orderGoods");
 			session.removeAttribute("orderDeli");
 			session.removeAttribute("basketList");
@@ -407,5 +407,89 @@ public class OrderController {
 	         return "goodsOrder_tiles";
     
 	   }
+	   
+	   
+	   
+	 //DIY 구매
+		@SuppressWarnings("unchecked")
+		@RequestMapping(value = "/PaymentDiy")
+		public String PaymentDiy(Model model,HttpSession session,HttpServletRequest request) throws Exception {
+			/*basketList 사이드 장바구니 세션이름*/
+			/*toppingList diy 세션 이름*/
+			/*list 장바구니에 들어갈 DIY*/
+	
+			List<Map<String,Object>> toppingList = (List<Map<String, Object>>) session.getAttribute("toppingList");
+			Map<String,Object> list = new HashMap<String,Object>();
+			
+			String GOODS_TOPPING="";
+
+			for(int i =0;i<toppingList.size();i++){
+				if(i==0){
+					GOODS_TOPPING = toppingList.get(i).get("TOPPING_NAME").toString();
+				}else{
+					GOODS_TOPPING = GOODS_TOPPING +","+ toppingList.get(i).get("TOPPING_NAME").toString();
+				}
+			}
+			
+			request.getParameter("form_price");
+			request.getParameter("form_kcal");
+			
+			
+			list.put("GOODS_NO", 0);
+			list.put("GOODS_NAME", "DIY샐러드");
+			list.put("GOODS_DETAIL", GOODS_TOPPING);
+			list.put("TOPPING_NAME", GOODS_TOPPING);
+			list.put("GOODS_KCAL", Integer.parseInt(request.getParameter("form_kcal").toString()));
+			list.put("GOODS_PRICE", Integer.parseInt(request.getParameter("form_price").toString()));
+			list.put("GOODS_THUMBNAIL", "SG_diy.jpg");
+			list.put("GOODS_AMOUNT", 1);
+			list.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+			
+			
+	         
+
+			if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) ==0){
+				return "redirect:loginForm";
+				
+			}
+			
+	         Map<String,Object> orderMap = new HashMap<String,Object>();
+	         orderMap.put("MEMBER_ID", session.getAttribute("MEMBER_ID").toString());
+	         orderMap.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+	         Map<String,Object> orderDeli = memberService.myinfoDetail(orderMap);
+
+	         
+	         
+	       
+	         
+	       
+		
+			int totalMoney = Integer.parseInt(list.get("GOODS_PRICE").toString());
+			int plusPoint = totalMoney/100;
+			
+			   Map<String,Object> myPointMap = pointService.sumPoint(orderMap);
+		         int myPoint=Integer.parseInt(myPointMap.get("SUM").toString());
+		         
+		         System.out.println(list);
+		         
+		         List<Map<String,Object>> orderGoodsList = new ArrayList<Map<String,Object>>();
+		         orderGoodsList.add(list);
+		         
+		         
+		         	session.setAttribute("orderDiyGoods", list);
+			        session.setAttribute("orderDeli", orderDeli);
+			         
+					session.removeAttribute("toppingList");
+			
+		       model.addAttribute("orderGoods",orderGoodsList);
+		         model.addAttribute("totalMoney",totalMoney );
+		         model.addAttribute("myPoint",myPoint);
+		         model.addAttribute("orderDeli",orderDeli);
+		         model.addAttribute("plusPoint",plusPoint);
+			
+			return "goodsOrder_tiles";
+			
+		}
+			
 	   
 }
