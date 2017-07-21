@@ -222,9 +222,7 @@ public class OrderController {
     	         orderService.updateDeli(map.getMap());// update SG_ORDER set DELI_NO=#{DELI_NO} where orderno=#{orderno}
 
     	         
-    	         
-    	         
-
+    
     	        
     	         
     	         //주문완료페이지 뿌려줄 것

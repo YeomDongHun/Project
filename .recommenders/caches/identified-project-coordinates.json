@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{}
-=======
-[[{"location":"C:\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
->>>>>>> a2d78a8df36a4166c3b28e01d5a50cd13f57485d
+[[{"location":"C:\\Users\\user1\\.m2\\repository\\javax\\servlet\\javax.servlet-api\\3.1.0\\javax.servlet-api-3.1.0.jar","type":"JAR","hints":{}},"javax.servlet:javax.servlet-api:3.1.0"],[{"location":"C:\\Java\\dasolgit\\SGproject","type":"PROJECT","hints":{"PROJECT_NAME":"SGproject"}},"SG.com:SG:1.0.0"],[{"location":"C:\\Java\\jre1.8.0_121","type":"JRE","hints":{}},"jre:jre:1.8.0"]]
