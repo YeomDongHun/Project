@@ -12,10 +12,10 @@
 
 <link rel="stylesheet" href="/SG/resources/file/css/main.min.css">
 <link rel="stylesheet" href="/SG/resources/file/css/joinForm.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script charset="UTF-8" type="text/javascript" src="http://s1.daumcdn.net/svc/attach/U03/cssjs/postcode/1484723365148/170118.js"></script>
+
 <script type="text/javascript">
 function sameDeli(){
    var check = document.getElementById("check");

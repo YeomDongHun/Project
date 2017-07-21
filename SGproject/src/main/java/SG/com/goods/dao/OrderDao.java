@@ -63,6 +63,10 @@ public class OrderDao extends AbstractDAO {
 	public void updateDeliBasket(Map<String,Object> map) throws Exception{
 		sqlSession.update("order.updateDeliBasket",map);
 	}
+	
+	public void deleteBasket(int MEMBER_NO)throws Exception{
+		sqlSession.delete("order.deleteBasket",MEMBER_NO);
+	}
 
 
 }

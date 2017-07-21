@@ -78,6 +78,12 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+	@Override
+	public void deleteBasket(int MEMBER_NO) throws Exception {
+		// TODO Auto-generated method stub
+		orderDao.deleteBasket(MEMBER_NO);
+	}
+
 	
 
 

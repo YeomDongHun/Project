@@ -91,6 +91,11 @@ public class GoodsDao extends AbstractDAO {
 	}
 	
 	
+	public int basketNo(int MEMBER_NO)throws Exception{
+		return sqlSession.selectOne("basket.basketNo",MEMBER_NO);
+	}
+	
+	
 	
 
 }

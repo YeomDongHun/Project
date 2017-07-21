@@ -35,6 +35,9 @@ public interface GoodsService {
 	public List<Map<String, Object>> BascketMemberSelect(int MEMBER_NO) throws Exception;
 	
 	public List<Map<String,Object>> selectOneGoodsList(int num) throws Exception;
+	
+	public int basketNo(int MEMBER_NO)throws Exception;
+
 
 
 }
