@@ -17,7 +17,12 @@
 			    			    	<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>NEW</strong></div>
 			    </c:if>
 			    <c:if test="${goodsList.COMMENT_RATE !=0 }">
-			    			    	<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>${goodsList.COMMENT_RATE}</strong></div>
+			    	<c:if test="${goodsList.COMMENT_RATE == 5 }">
+			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>BEST</strong></div>
+			    	</c:if>
+			    	<c:if test="${goodsList.COMMENT_RATE != 5 }">
+			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>${goodsList.COMMENT_RATE}</strong></div>
+					</c:if>			   
 			    </c:if>
 			      <img src="resources/file/goodsFile/${goodsList.GOODS_THUMBNAIL}" alt="..." onclick="javascript:location.href='goodsDetail?goodsNo=${goodsList.GOODS_NO}&currentPage=${currentPage}'"/>
 			      <div class="caption">
