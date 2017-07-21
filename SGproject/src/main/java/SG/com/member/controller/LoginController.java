@@ -68,11 +68,11 @@ public class LoginController
 		    	
 		    	//사이드 장바구니 처리
 				List<Map<String,Object>> sessionList = new ArrayList<Map<String,Object>>();
-
 		        sessionList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 				session.setAttribute("basketList", sessionList);
 				model.addAttribute("basketList",sessionList);
-			    	
+				System.out.println("로그인 세션 생성=============="+sessionList);
+
 			    	
 		    	
 		    	return "redirect:/main";

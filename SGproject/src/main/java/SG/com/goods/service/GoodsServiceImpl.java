@@ -100,6 +100,12 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return goodsDao.selectOneGoodsList(num);
 	}
+
+	@Override
+	public int basketNo(int MEMBER_NO) throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.basketNo(MEMBER_NO);
+	}
 	
 	
 

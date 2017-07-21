@@ -95,6 +95,11 @@
 	
 	</update>
 	
+	<delete id="deleteBasket" parameterType="int">
+
+	
+	</delete>
+	
 	<!-- comment by seo -->
 
 </mapper>

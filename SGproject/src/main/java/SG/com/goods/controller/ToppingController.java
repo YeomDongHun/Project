@@ -32,7 +32,6 @@ public class ToppingController {
 		
 		List<Map<String,Object>> list = toppingService.toppingList();
 		
-		System.out.println(list);
 		model.addAttribute("topping",list);
 		
 		return "goodsDIY_tiles";
@@ -62,7 +61,6 @@ public class ToppingController {
 			
 			//jps에서 쓸 Model설정
 			model.addAttribute("toppingList",sessionList);
-			System.out.println(sessionList);
 		
 		}else{
 			//존재하는 세션 불러오기
@@ -72,7 +70,6 @@ public class ToppingController {
 			session.setAttribute("toppingList", sessionList);
 			
 			model.addAttribute("toppingList",sessionList);
-			System.out.println(sessionList);
 
 		}
 		
@@ -89,7 +86,6 @@ public class ToppingController {
 		List<Map<String,Object>> list = (List<Map<String, Object>>) session.getAttribute("toppingList");
 		list.remove(no);
 		session.setAttribute("toppingList", list);
-		System.out.println("세션삭제");
 		model.addAttribute("toppingList",list);
 		
 		return "Goods/Diy/goodsTopping";
@@ -117,45 +113,42 @@ public class ToppingController {
 		List<Map<String,Object>> toppingList = (List<Map<String, Object>>) session.getAttribute("toppingList");
 		Map<String,Object> list = new HashMap<String,Object>();
 		
-		System.out.println("토핑 테스트");
 		
 		String GOODS_TOPPING="";
 
 		for(int i =0;i<toppingList.size();i++){
-		GOODS_TOPPING = GOODS_TOPPING +","+ toppingList.get(i).get("TOPPING_NAME").toString();
+			if(i==0){
+				GOODS_TOPPING = toppingList.get(i).get("TOPPING_NAME").toString();
+			}
+				GOODS_TOPPING = GOODS_TOPPING +","+ toppingList.get(i).get("TOPPING_NAME").toString();
 		}
 		
 		request.getParameter("form_price");
 		request.getParameter("form_kcal");
 		
-		System.out.println(basketList);
 		
 		list.put("GOODS_NO", 0);
 		list.put("GOODS_NAME", "DIY샐러드");
 		list.put("GOODS_DETAIL", GOODS_TOPPING);
-		list.put("GOODS_KCAL", 		Integer.parseInt(request.getParameter("form_kcal").toString()));
+		list.put("TOPPING_NAME", GOODS_TOPPING);
+		list.put("GOODS_KCAL", Integer.parseInt(request.getParameter("form_kcal").toString()));
 		list.put("GOODS_PRICE", Integer.parseInt(request.getParameter("form_price").toString()));
 		list.put("GOODS_THUMBNAIL", "SG_diy.jpg");
 		list.put("GOODS_AMOUNT", 1);
 		list.put("MEMBER_NO", Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
 		
-		basketList.add(list);
 		
-		System.out.println(basketList);
-		
-		
-		
-		
-		
+
 		if(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()) !=0){
 			goodsService.basketInsert(list);
-			basketList = goodsService.BascketMemberSelect( Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+	         int no = goodsService.basketNo(Integer.parseInt(session.getAttribute("MEMBER_NO").toString()));
+	         list.put("BASKET_NO", no);
 
 		}
 		session.removeAttribute("toppingList");
 		
+		basketList.add(list);
 		session.setAttribute("basketList", basketList);
-		model.addAttribute("basketList",basketList);
 		return "redirect:goodsDIY";
 		
 	}

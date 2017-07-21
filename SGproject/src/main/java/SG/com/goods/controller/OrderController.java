@@ -260,6 +260,9 @@ public class OrderController {
 			int dcPoint = Integer.parseInt(request.getParameter("dcPoint").toString());
 			int dcPointEach = dcPoint/basketList.size();
 			
+			
+			System.out.println(basketList);
+			
 			//주문 insert
 			System.out.println("-----------------------------------인설트 시작------------------------------------");
 			for(int i=0;i<basketList.size();i++){
@@ -270,7 +273,7 @@ public class OrderController {
 	 	         
 	 	         orderService.orderInsertBasket(basketList.get(i));
 	 			System.out.println("-----------------------------------인설트 끝------------------------------------");
-
+	 			
 
 			}
 			
@@ -305,13 +308,24 @@ public class OrderController {
 	 			
 	 		
 	 		System.out.println("basketList=================/n"+basketList);
+	 		
+	 		int num;
+	 		for(int i=0;i<basketList.size();i++){
+	 			
+	 			num=Integer.parseInt(basketList.get(i).get("BASKET_NO").toString());
+				goodsService.basketDelete(num);
 
+	 		}
+
+	 		
+	 		
 	 		
 	 		
 			session.removeAttribute("orderGoods");
 			session.removeAttribute("orderDeli");
-			
+			session.removeAttribute("basketList");
 			//결제 완료 페이지에 뿌려줄 정보 
+			
 			model.addAttribute("deliInfo",selectLastDeli);
 			model.addAttribute("orderInfo", selectLastOrder); // 주문날짜 
 			model.addAttribute("orderGoodsInfo",basketList);
