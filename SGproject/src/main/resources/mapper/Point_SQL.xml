@@ -59,8 +59,8 @@
 		  '포인트 사용', 
 		   SYSDATE, #{POINT_MEMBER_NO}, #{POINT_ORDER_NO})
 	]]>
-	</insert>
-	
+</insert>
+
 <!-- 수동적립 이벤트 등 -->
 <insert id="savePoint" parameterType="hashmap" >
   <![CDATA[

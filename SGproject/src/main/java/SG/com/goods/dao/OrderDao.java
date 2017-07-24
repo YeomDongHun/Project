@@ -68,5 +68,10 @@ public class OrderDao extends AbstractDAO {
 		sqlSession.delete("order.deleteBasket",MEMBER_NO);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> selectLastOrderList(Map<String,Object> map) throws Exception{
+		return sqlSession.selectList("order.selectLastOrderList",map);
+	}
+	
 
 }

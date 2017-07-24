@@ -29,6 +29,8 @@ public interface OrderService {
 	public void updateDeliBasket(Map<String,Object> map) throws Exception;
 	
 	public void deleteBasket(int MEMBER_NO)throws Exception;
+	
+	public List<Map<String,Object>> selectLastOrderList(Map<String,Object> map) throws Exception;
 
 
 

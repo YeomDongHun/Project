@@ -84,6 +84,12 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.deleteBasket(MEMBER_NO);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectLastOrderList(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return orderDao.selectLastOrderList(map);
+	}
+
 	
 
 

@@ -71,7 +71,7 @@
 <form name="frm" action="goodsOrderSuccess" method="post" >
 <div class="body_center" style="height:auto;">
 <section class="input-horizontal list-horizontal section box-shadow">
-<div class="main_subject">
+<div class="main_subject" style="padding-top:0px; margin-top:0px;">
                <h3>상품 정보</h3>
             </div>
             
@@ -109,7 +109,7 @@
 </div>
 
 
-<div class="body_center" style="height:180px; padding-top:0px;">
+<div class="body_center" style="height:170px; padding-top:0px;">
 <section class="input-horizontal list-horizontal section box-shadow">
 <div class="main_subject">
                <h3>결제 정보</h3>
@@ -150,7 +150,7 @@
 
 
 
-   <div class="body_center" style="height:300px; padding-top:0px;">
+   <div class="body_center" style="height:325px; padding-top:0px;">
    <section class="input-horizontal list-horizontal section box-shadow">
                <div class="main_subject"><h3>수령자 정보</h3></div>
       <div>
@@ -205,6 +205,31 @@
                </div>
             </li>
          </ul>
+      </div>
+</section>
+</div>
+
+<div class="body_center" style="height:100px; padding-top:0px;">
+   <section class="input-horizontal list-horizontal section box-shadow">
+               <div class="main_subject"><h3>배송시 메세지</h3></div>
+      <div>
+         <ul class="section-body">
+            <li class="name">
+            
+               <div class="item-label col-lg-3 col-md-4" style="width:630px;height:23px; font-size:12px; vertical-align:middle;">
+                  <label for="input-name">
+                     <strong>* 메모</strong>
+                  </label>
+               </div>
+               
+               <div style="height:5px;"></div>
+                  
+               <div class="col-lg-21 col-md-20" style="width:630px;">
+                  <input type="text" id="DELI_ORDER_MEMO" class="xx-control" name="DELI_ORDER_MEMO" value="${deliInfo.DELI_ORDER_MEMO}" label="메모" readonly="">
+              <div style="height:5px;"></div> 
+               </div>                    
+            </li>       
+         </ul> 
       </div>
 </section>
 </div>
