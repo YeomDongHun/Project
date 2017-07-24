@@ -41,10 +41,10 @@
 </head>
 <body style="height: auto;" onload="calcurate();"  >
 
-<div class="bkform" style="height: auto;">
+<div class="bkform" id="bkform" style="height: auto;">
 	<center>
 
-<div  style=" padding-top: 20px;margin-top: 20px; height: 400px; overflow-y:scroll;"> 
+<div  style=" padding-top: 20px;margin-top: 20px; height: 300px; overflow-y:scroll;"> 
 		
 				<c:choose>
 					<c:when test="${fn:length(toppingList) > 0}">
@@ -77,13 +77,14 @@
 					</c:when>
 				                
 				<c:otherwise>
-				   재료를 선택해 주세요
+				   재료를 선택해 주세요<br/>
+				   양상추는 기본으로 제공 됩니다
 				</c:otherwise>
 			</c:choose>
 					
 			</div>
 			<div style="background-color: #F9F9F9;border-radius: 10px;  height: auto;">
-				<div  style="height: 240px; border-radius:10px; ">
+				<div  style="height: 300px; border-radius:10px; ">
 					<br/>
 				<center>
 					<table border="0" width="70%" style="margin-bottom: 20px;margin-top: 20px; padding-left: 10px;padding-right: 10px;" class="table">

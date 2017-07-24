@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -24,6 +26,14 @@
 
 
 <script type="text/javascript">
+
+
+(function($){
+    $(window).on("load",function(){
+        $(".diy").mCustomScrollbar({theme:"rounded-dots"});
+    });
+})(jQuery);
+
 
 function addTopping(test){
 	var topping =  test.getAttribute("id");
@@ -68,20 +78,21 @@ function delTopping(test){
     });
 }
 
+
 </script>
 </head>
-<body style="height: auto;">
-	<div class="container" style="height: auto;" id="diy">
+<body  >
+	<div class="container" style="height: auto; overflow-y:hidden;" id="diy">
 	<table border="0" width="100% " >
 	<tr >
-		<td colspan="2"><center>만들어 먹어요</center></td>
+		<td colspan="2"><br/></td>
 	</tr>
 		<tr>
 			<td>
 			
 				<div class="goods" style="height: auto; clear:both; ">
 				<div class="goodsimg" >
-				<img src="resources/file/img/SG_diy.jpg" class="img-circle" style="margin-top: 20px; margin-left: 50px" >
+				<img src="resources/file/img/SG_diy.jpg" class="img-circle" style="margin-top: 20px; margin-left: 180px;" >
 				</div>
 				</div>
 			</td>
@@ -107,5 +118,7 @@ function delTopping(test){
 	
 	
 	</div>
+	
+	
 </body>
 </html>
