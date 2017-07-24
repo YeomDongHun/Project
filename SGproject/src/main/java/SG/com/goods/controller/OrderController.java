@@ -240,10 +240,11 @@ public class OrderController {
     	         
     	         //주문상품번호 가져오기
     	         int order_goods_no=Integer.parseInt(selectLastOrder.get("ORDER_GOODS_NO").toString());
-    	         System.out.println("+++++++++++++++++++++++++++++++!!!!!!!!!!!!!!!!!!!!!S"+order_goods_no);
+    	         System.out.println("================order_goods_no======================="+order_goods_no);    	         
 
     	         //주문상품정보 
-    	         Map<String,Object> orderGoodsInfo = (Map<String, Object>) session.getAttribute("orderDiyGoods");
+
+    	         Map<String,Object> orderGoodsInfo = goodsService.selectOneGoods(order_goods_no);
     	         orderGoodsInfo.put("TOPPING_NAME", selectLastOrder.get("ORDER_TOPPING_NAME").toString());
     	         List<Map<String,Object>>goodsList = new ArrayList<Map<String,Object>>();
     	         goodsList.add(orderGoodsInfo);
