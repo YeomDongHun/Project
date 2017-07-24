@@ -58,7 +58,7 @@ font-family: PureunJeonnam;
 
 #topMenu {
             height: 50px;  /* 메인 메뉴의 높이 */
-            width:100%;  /* 메인 메뉴의 넓이 */
+            width:1200px;  /* 메인 메뉴의 넓이 */
             margin-left:auto;
             margin-right:auto;
     }
