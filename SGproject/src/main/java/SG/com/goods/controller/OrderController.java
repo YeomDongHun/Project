@@ -170,7 +170,12 @@ public class OrderController {
 	  @SuppressWarnings("unchecked")
       @RequestMapping(value="/goodsOrderSuccess", method=RequestMethod.POST)
       public String orderSuccess(Model model, CommandMap map, HttpServletRequest request, HttpSession session) throws Exception{
-
+		  
+		  Map<String,Object> count = new HashMap<String,Object>();
+		  
+		  
+		  
+		  
 	  //상세보기에서 구매시 주문 완료 페이지 이동=============================================================================================== 
     	  if(session.getAttribute("orderGoods")==null || session.getAttribute("orderGoods")==""){
     		  String member_id=map.get("MEMBER_ID").toString();
@@ -211,6 +216,9 @@ public class OrderController {
 
     	         //마지막 주문 번호, 배송번호 가져오기
     	         Map<String, Object> selectLastOrder = orderService.selectLastOrder();
+    	         System.out.println("11111111111"+selectLastOrder);
+    	         
+    	         
     	         int order_no=Integer.parseInt(selectLastOrder.get("ORDER_NO").toString());
     	         
     	         map.put("ORDER_NO", order_no);
@@ -234,23 +242,40 @@ public class OrderController {
     	        
     	         
     	         //주문완료페이지 뿌려줄 것
+    	         count.put("GOODS_AMOUNT", Integer.parseInt(map.get("ORDER_GOODS_AMOUNT").toString()));
+    	         count.put("GOODS_NO", Integer.parseInt(map.get("ORDER_GOODS_NO").toString()));
     	         
-    	         //주문번호, 주문일자, 총주문금액
-    	         model.addAttribute("orderInfo", selectLastOrder);
+    	         orderService.updateSellCount(count);
     	         
-    	         //주문상품번호 가져오기
-    	         int order_goods_no=Integer.parseInt(selectLastOrder.get("ORDER_GOODS_NO").toString());
-    	         System.out.println("+++++++++++++++++++++++++++++++!!!!!!!!!!!!!!!!!!!!!S"+order_goods_no);
+    	         //주문완료페이지 뿌려줄 것
+                 
+                 //주문번호, 주문일자, 총주문금액
+                 model.addAttribute("orderInfo", selectLastOrder);
+                 
+                 //주문상품번호 가져오기
+                 int order_goods_no=Integer.parseInt(selectLastOrder.get("ORDER_GOODS_NO").toString());
+                            
 
-    	         //주문상품정보 
-    	         Map<String,Object> orderGoodsInfo = (Map<String, Object>) session.getAttribute("orderDiyGoods");
+                 //주문상품정보 
+
+                 Map<String,Object> orderGoodsInfo = goodsService.selectOneGoods(order_goods_no);
+                 List<Map<String,Object>>goodsList = new ArrayList<Map<String,Object>>();
+
+                 
+    	         //diy주문상품정보 
+    	         if(session.getAttribute("orderDiyGoods")!=null){
+    	         orderGoodsInfo = (Map<String, Object>) session.getAttribute("orderDiyGoods");
     	         orderGoodsInfo.put("TOPPING_NAME", selectLastOrder.get("ORDER_TOPPING_NAME").toString());
-    	         List<Map<String,Object>>goodsList = new ArrayList<Map<String,Object>>();
     	         goodsList.add(orderGoodsInfo);
-    	         model.addAttribute("orderGoodsInfo",goodsList);
+    	         }else{ 	     
+                 orderGoodsInfo.put("TOPPING_NAME", selectLastOrder.get("ORDER_TOPPING_NAME").toString());
+                 goodsList.add(orderGoodsInfo);
+    	         }
 
     	         //총주문금액, 총할인금액, 총결제금액, 
     	         //dcPoint=1000, plusPoint=110, 
+                 model.addAttribute("orderGoodsInfo",goodsList);
+
     	         model.addAttribute("totalMoney", request.getParameter("totalMoney"));
     	         model.addAttribute("dcPoint", request.getParameter("dcPoint"));
     	         model.addAttribute("plusPoint", request.getParameter("plusPoint"));
@@ -278,6 +303,10 @@ public class OrderController {
 	 	         basketList.get(i).put("ORDER_TRADE_TYPE", Integer.parseInt(request.getParameter("ORDER_TRADE_TYPE").toString()));
 	 	         basketList.get(i).put("MEMBER_ID", session.getAttribute("MEMBER_ID").toString());
 	 	         
+	 	         count.put("GOODS_AMOUNT", Integer.parseInt(basketList.get(i).get("GOODS_AMOUNT").toString()));
+    	         count.put("GOODS_NO", Integer.parseInt(basketList.get(i).get("GOODS_NO").toString()));
+    	         
+    	         orderService.updateSellCount(count);
 	 	         orderService.orderInsertBasket(basketList.get(i));	
 			}
 			
