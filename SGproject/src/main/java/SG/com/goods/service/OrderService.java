@@ -32,6 +32,7 @@ public interface OrderService {
 	
 	public List<Map<String,Object>> selectLastOrderList(Map<String,Object> map) throws Exception;
 
+	public void updateSellCount(Map<String,Object> map) throws Exception;
 
 
 }

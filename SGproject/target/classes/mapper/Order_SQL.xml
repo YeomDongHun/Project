@@ -95,6 +95,8 @@
 	
 	</update>
 	
+
+	
 	<delete id="deleteBasket" parameterType="int">
 
 	
@@ -111,5 +113,14 @@
 	</select>
 	
 	<!-- comment by seo -->
+	
+	
+	
+	<update id="updateSellCount" parameterType="hashmap">
+		UPDATE "SG_GOODS" SET 
+		GOODS_AMOUNT = GOODS_AMOUNT-#{GOODS_AMOUNT},
+		GOODS_SELLCOUNT = GOODS_SELLCOUNT+#{GOODS_AMOUNT}
+		WHERE GOODS_NO = #{GOODS_NO}
+	</update>
 
 </mapper>

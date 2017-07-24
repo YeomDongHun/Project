@@ -90,6 +90,12 @@ public class OrderServiceImpl implements OrderService {
 		return orderDao.selectLastOrderList(map);
 	}
 
+	@Override
+	public void updateSellCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		orderDao.updateSellCount(map);
+	}
+
 	
 
 
