@@ -24,7 +24,7 @@ html,body{
 </div>
 
 
-<div style="height:auto; overflow-x:hidden; ">
+<div style="height:auto;">
 <tiles:insertAttribute name="body" />
 </div>
 

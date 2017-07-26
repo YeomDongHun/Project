@@ -72,7 +72,7 @@ function basket_del()
      
    } //else
    	
-}
+}  
  
  //basket ajax paging
  function ajaxPaging(page)
@@ -81,7 +81,7 @@ function basket_del()
 		var dataList =
 		({"PAGE" : page});	
 
-		var url1 = "/SG/myQnaList"";
+		var url1 = "/SG/mybasket";
 		
 	    $.ajax({    
 	     
@@ -108,40 +108,42 @@ function basket_del()
 </head>
 
 <body>
-<div id="wish_wrap">
+<div id="wish_wrap" style="width: 1250px;">
 <div class="wish_title">
-<div class="wish_title_font">
+<div class="wish_title_font" style="padding-bottom:5px;">
 장바구니
 </div>
-</div>
-
-<div class="board_search_table" style="float:left; margin-left:880px; margin-top:30px;">
+<div class="board_search_table" style="float:left; margin-left:84%; padding-top:0px;">
 <input class="button_all" type="button" value="전체선택"/>	
 <input class="button_unall" type="button" value="전체해제"/>
 </div>
+</div>
+
+
 
 
 <form id="frm" action="basketOrder" method="post">
 <table class="wish_table" width="94%">
 <colgroup>
 	<col width="5%" />
-	<col width="10%"/>
+	<col width="15%"/>
+	<col width="15%" />
 	<col width="10%" />
-	<col width="20%" />
+	<col width="5%" />
+	<col width="15%" />
 	<col width="10%" />
-	<col width="10%" />
-	<col width="25%" />
-	<col width="10%" />
+	<col width="5%" />
 </colgroup>
 <tr>
 	<th>NO</th>
-	<th>날짜</th>
+	<th>상품이미지</th>
     <th>상품이름</th>
-    <th>상품이미지</th>
     <th>상품가격</th>
     <th>상품수량</th>
     <th>재료이름</th>
+    <th>날짜</th>
     <th>선택</th>
+   
 </tr>
 
           <c:choose>
@@ -155,17 +157,19 @@ function basket_del()
    				 <c:forEach var="list" items="${basketlist}" varStatus="stat">
                  	<tr> 
                      	<td>${list.RNUM}</td>
-                     	<td>${list.BASKET_REG_DATE}</td>
-                     	<td><a href="goodsDetail?goodsNo=${list.BASKET_GOODS_NO}&currentPage=${gcurrentPage}">
-                     	${list.BASKET_GOODS_NAME}</a></td>
-                        <td>
-                        <img src="resources/file/img/${list.GOODS_THUMBNAIL}" width="120" height="90"
+                     	
+                     	<td>
+                        <img src="resources/file/goodsFile/${list.GOODS_THUMBNAIL}" width="90" height="90"
                         onclick="javascript:location.href=
                         'goodsDetail?goodsNo=${list.BASKET_GOODS_NO}&currentPage=${gcurrentPage}'"/>
                         </td>
+                     	<td><a href="goodsDetail?goodsNo=${list.BASKET_GOODS_NO}&currentPage=${gcurrentPage}">
+                     	${list.BASKET_GOODS_NAME}</a></td>
+                        
                         <td>${list.GOODS_PRICE}</td>
                         <td>${list.BASKET_GOODS_AMOUNT}</td>
                         <td>${list.BASKET_TOPPING_NAME}</td>
+                        <td>${list.BASKET_REG_DATE}</td>
                         <td class="chkclass">
                         <input type="checkbox" id="BASKET_NO" name="BASKET_NO" value="${list.BASKET_NO}"></td>
                         <%-- <input type="hidden" id="BASKET_NO" name="BASKET_NO" value="${list.BASKET_NO}">  --%>
@@ -177,7 +181,7 @@ function basket_del()
            
 </table>
 
-<div class="board_search_table" style="float:left; margin-left:1280px; margin-top:20px;">
+<div class="board_search_table" style="float:left; margin-left:85%; margin-top:20px;">
 <input type="button" id="orderFrm" value="주문하기" onclick="basket_order()">
 <input type="button" id="delFrm" value="삭제하기" onclick="basket_del()"> 
 </div>
