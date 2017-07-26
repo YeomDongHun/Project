@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -144,17 +145,18 @@
     
 </tr>
 
+
+
           <c:choose>
-               <c:when test="${pointList} == null">
- 					<tr>
-                 		<td colspan="7">게시글이 없습니다.</td>
-                 	</tr>
+               <c:when test="${fn:length(pointList) le 0}">
+ 					<tr><td colspan="7" style="text-align:center;">포인트 내역이 없습니다.</td></tr>
                  </c:when>
+                 
                  <c:otherwise>
 
    				 <c:forEach var="pointList"  items="${pointList}" varStatus="stat">
                  	<tr> 
-                     	<td>${stat.count}</td>
+                     	<td>${pointList.RNUM}</td>
                      	<td>${pointList.POINT_DATE}</td> 
                      	<td>${pointList.POINT_MONEY}</td>
                      	<td>${pointList.POINT_CONTENT}</td>
@@ -174,7 +176,7 @@
          <div style="margin-left:150px; float:left;">${sumPoint}원</div>
          </div>
       </div>
-<div class="paging" style="text-align:center; float:left; padding-top:40px; padding-left:550px;">
+<div class="paging" style="text-align:center; float:left; padding-top:40px; padding-left:550px; position:absolute;">
 ${pagingHtml}
 </div>     
 </body>

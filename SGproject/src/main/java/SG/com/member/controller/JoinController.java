@@ -86,7 +86,7 @@ public class JoinController
 		
 		System.out.println("checkNum="+checkNum); //이메일 유/무 check
 		
-		//등록된 이메일이 없을 경우
+		//등록된 이메일이 없을 경우,
 		if(checkNum==0)
 		{
 		
@@ -208,6 +208,7 @@ public class JoinController
 	   return "joinForm";
 	}
 	
+	//아이디 중복 체크
 	@RequestMapping(value="/checkId")
 	public @ResponseBody int checkId(HttpServletRequest request, HttpServletResponse response, CommandMap commandMap) throws Exception
 	{
