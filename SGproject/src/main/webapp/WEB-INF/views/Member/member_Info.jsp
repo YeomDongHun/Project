@@ -16,47 +16,47 @@
 function deleteMember()
 {
     var f = document.frm;
-	var mem_id = f.MEMBER_ID.value;
-	
+   var mem_id = f.MEMBER_ID.value;
+   
    if(!confirm("삭제하시겠습니까?"))
-	   {
-	   return;
-	   }
+      {
+      return;
+      }
    
    else{
-	   var total = ({"MEMBER_ID":mem_id});
-		$.ajax
-		({
-			
-			type: "POST",
-			url: "/SG/memberDeleteAction",
-			data : total,
-			
-			success: function(data)
-			{
-				console.log("로그 내용1");
-				
-				if(data != 0)
-					{
-					alert("그동안 이용해 주셔서 감사합니다.");
-					self.close();
-					opener.location.replace("main"); //부모창 새로고침
-								    
-					}	
-				else
-					{
-				    alert("탈퇴에 실패 함");
-				    self.close();
-					} 
-			
-		     },
-		error: function(e)
-		{
-			alert('error'+e);
-		}
-	});
+      var total = ({"MEMBER_ID":mem_id});
+      $.ajax
+      ({
+         
+         type: "POST",
+         url: "/SG/memberDeleteAction",
+         data : total,
+         
+         success: function(data)
+         {
+            console.log("로그 내용1");
+            
+            if(data != 0)
+               {
+               alert("그동안 이용해 주셔서 감사합니다.");
+               self.close();
+               opener.location.replace("main"); //부모창 새로고침
+                            
+               }   
+            else
+               {
+                alert("탈퇴에 실패 함");
+                self.close();
+               } 
+         
+           },
+      error: function(e)
+      {
+         alert('error'+e);
+      }
+   });
 }
-	
+   
 } 
           
 </script>
@@ -79,7 +79,7 @@ function deleteMember()
       </div>
       <div class="col-lg-21 col-md-20">
          <input type="text" name="MEMBER_ID" id="MEMBER_ID" value="${myInfo.MEMBER_ID}" class="xx-control" label="아이디" readOnly>
-         
+      </div>   
       
    </li>
    
