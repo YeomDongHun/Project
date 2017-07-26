@@ -61,11 +61,12 @@ public class MemberController
       
       Map<String, Object> sumPoint = pointService.sumPoint(commandMap.getMap());
       Map<String, Object> mem_grade = loginService.selectId(commandMap.getMap()); 
-      
+      int sumTradeMoney =memberService.mysumTradeMoney(commandMap.getMap());
       /*String page = pagingHtml(commandMap, 1);
       model.addAttribute("page", page);*/
       model.addAttribute("sumPoint", sumPoint.get("SUM"));
       model.addAttribute("memberGrade", mem_grade.get("MEMBER_GRADE"));
+      model.addAttribute("sumTradeMoney", sumTradeMoney);
       
       return "mypage";
    }
