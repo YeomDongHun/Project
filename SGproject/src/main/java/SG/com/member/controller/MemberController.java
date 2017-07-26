@@ -278,7 +278,7 @@ public class MemberController
          for(int i=0;i<myOrderDetail.size();i++)
          {
               
-             orderUsePoint =+ pointService.orderUsePoint( myOrderDetail.get(i));
+             orderUsePoint =+ pointService.orderUsePoint(myOrderDetail.get(i));
          }
          
     	 model.addAttribute("myOrderDetail", myOrderDetail);
@@ -622,7 +622,7 @@ public class MemberController
     	  System.out.println("==========주문내역 총 게시물 수========== : " + totalCount);
       }
       
-      else
+      else if(session_no == 4)
       {
     	  System.out.println("==========qna 세션 번호========== : " + session_no);
     	  totalCount = memberService.myQnaCnt(commandMap.getMap());

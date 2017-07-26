@@ -9,29 +9,65 @@
 <script type="text/javascript" src="resources/file/js/jquery-2.0.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <link rel="stylesheet" href="/SG/resources/file/css/myBasket.css">
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 
-</script> -->
+function writeform()
+{
+    
+	//나의 정보보기 팝업 창
+	window.open('/SG/myQnaWriteForm','','toolbar=no,menubar=no,location=no,height=950,width=1200'); 
+}
+
+//myqnalist paging
+function ajaxPaging(page)
+{	
+		
+		var dataList =
+		({"PAGE" : page});	
+
+		var url1 = "/SG/myQnaList";
+		
+	    $.ajax({    
+	     
+	    	type : "POST",
+	        url : url1,
+	        data : dataList,
+	        dataType : "text",      
+	        
+	        error : function() {
+	      	  
+	      		alert('오류임!');     	
+	        },
+	       
+	        success : function(data) 
+	        {  
+	      		 $("#wish_wrap").html(data);          		
+	        }
+	        
+	      });        
+
+	}
+</script> 
 
 </head>
 
 <body>
 <div id="wish_wrap">
 <div class="wish_title">
-<div class="wish_title_font">
+<div class="wish_title_font" style="margin-left:40px;">
 나의 QNA 게시판
 </div>
 </div>
 
 
-<table class="wish_table" width="94%">
+<table class="wish_table" width="90%" style="margin-left:40px;">
 <colgroup>
-	<col width="5%" />
-	<col width="10%"/>
+	<col width="10%" />
+	<col width="20%"/>
 	<col width="30%" />
 	<col width="10%" />
 	<col width="20%" />
-	<col width="20%" />
+
 </colgroup>
 <tr>
 	<th>글 번호</th>
@@ -39,7 +75,6 @@
 	<th>글 제목</th>
     <th>조회수</th>
     <th>등록날짜</th>
-    <th></th>
 </tr>
 
           <c:choose>
@@ -62,7 +97,7 @@
                      	</td>
                      	<td>${qnalist.QNA_HITCOUNT}</td>
                         <td>${qnalist.QNA_REGDATE}</td>
-                        <td></td>                      
+               
                     </tr>
                  </c:forEach> 
                  </c:otherwise> 
@@ -71,8 +106,8 @@
            
 </table>
 
-<div class="board_search_table" style="float:left; margin-left:1350px; margin-top:20px;">
-<input type="button" id="writeform" name="writeform" value="글 등록">
+<div class="board_search_table" style="float:left; margin-left:1280px; margin-top:20px;">
+<input type="button" id="writeform" name="writeform" value="글 등록" onclick="javascript:writeform();">
 </div>
 
 <div class="wish_bottom">
@@ -82,6 +117,7 @@
 
 <div class="paging">${pagingHtml}</div>
 </div>
+
 
 </body>
 

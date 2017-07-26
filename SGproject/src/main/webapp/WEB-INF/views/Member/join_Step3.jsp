@@ -80,7 +80,7 @@ function checkId()
 	else
 		{
 		var total = ({"mem_id":mem_id});
-		$.ajaxs
+		$.ajax
 		({
 			
 			type: "POST",

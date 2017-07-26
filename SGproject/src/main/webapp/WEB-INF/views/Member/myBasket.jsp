@@ -83,7 +83,7 @@ function basket_del()
 		var dataList =
 		({"PAGE" : page});	
 
-		var url1 = "/SG/mybasket";
+		var url1 = "/SG/myQnaList"";
 		
 	    $.ajax({    
 	     

@@ -107,8 +107,8 @@
   <select id="orderUsePoint" parameterType="hashmap" resultType="int">
 	<![CDATA[
 	
-	SELECT 
-			POINT_MONEY
+    SELECT 
+			NVL(SUM(POINT_MONEY),0) AS SUM
 			FROM SG_POINT 
 			WHERE POINT_ORDER_NO = #{ORDER_NO}
 		    AND POINT_CONTENT='포인트 사용'
