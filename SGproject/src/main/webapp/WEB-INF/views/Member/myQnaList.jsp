@@ -6,8 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="resources/file/js/jquery-2.0.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <link rel="stylesheet" href="/SG/resources/file/css/myBasket.css">
 <script type="text/javascript">
 
