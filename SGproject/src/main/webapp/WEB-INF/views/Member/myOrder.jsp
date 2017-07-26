@@ -5,13 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="resources/file/js/jquery-2.0.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 <style type="text/css">
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
 #wish_wrap 
 {
-   width: 1500px;
+   width: 1240px;
    font-family: PureunJeonnam;
 }
 .wish_title {text-align: left; color: #212121; padding-top: 50px;}
