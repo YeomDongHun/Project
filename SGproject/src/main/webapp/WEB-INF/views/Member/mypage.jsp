@@ -33,7 +33,7 @@ function tab(num)
             }
          });
    
-  
+        
    
 };
 
@@ -93,7 +93,7 @@ function point_list()
          <div class="line">
             <hr color="#777" width="100%" size="1">
          </div>
-      <div class="personal-account-info container">
+      <div class="personal-account-info" style="width: 1130px;">
    <div class="my-account row">
       <section class="col-xs-24 my-info">
          <div class="section-body">
