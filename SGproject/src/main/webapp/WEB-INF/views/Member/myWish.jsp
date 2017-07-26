@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" href="/SG/resources/file/css/myWish.css">
   
@@ -65,10 +63,10 @@
  
 </script>
 
-</head>
 
-<body>
-<div id="wish_wrap" style="width: 1250px;">
+
+<div class="container">
+<div id="wish_wrap" style="width: 100%;">
 <div class="wish_title">
 <div class="wish_title_font">
 나의 위시리스트</div>
@@ -141,8 +139,8 @@
 </div>
 <div class="paging">${pagingHtml}</div>
 </div>
+</div>
 
-</body>
 <script>
 $(".wish_del").on("click", function(e) //수정
 { 
@@ -152,4 +150,4 @@ $(".wish_del").on("click", function(e) //수정
    wish_del(wish_no);
 });
 </script>
-</html>
+
