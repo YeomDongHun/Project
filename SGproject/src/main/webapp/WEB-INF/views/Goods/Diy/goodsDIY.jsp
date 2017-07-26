@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -24,6 +26,14 @@
 
 
 <script type="text/javascript">
+
+
+(function($){
+    $(window).on("load",function(){
+        $(".diy").mCustomScrollbar({theme:"rounded-dots"});
+    });
+})(jQuery);
+
 
 function addTopping(test){
 	var topping =  test.getAttribute("id");
@@ -68,20 +78,21 @@ function delTopping(test){
     });
 }
 
+
 </script>
 </head>
-<body style="height: auto;">
-	<div class="container" style="height: auto;" id="diy">
+<body  >
+	<div class="container" style="height: auto; overflow-y:hidden;" id="diy">
 	<table border="0" width="100% " >
 	<tr >
-		<td colspan="2"><center>만들어 먹어요</center></td>
+		<td colspan="2"><br/></td>
 	</tr>
 		<tr>
 			<td>
 			
 				<div class="goods" style="height: auto; clear:both; ">
 				<div class="goodsimg" >
-				<img src="resources/file/img/SG_diy.jpg" class="img-circle" style="margin-top: 20px; margin-left: 50px" >
+				<img src="resources/file/img/SG_diy.jpg" class="img-circle" style="margin-top: 20px; margin-left: 180px;" >
 				</div>
 				</div>
 			</td>
@@ -95,41 +106,9 @@ function delTopping(test){
 		</tr>
 		<tr>
 			<td>
+				<jsp:include page="../Diy/goodsDiyTopping.jsp"></jsp:include>
 			
-				<div class="diy" style="clear:both">
-					<div class="container" style="  width: 100%; height: 300px; padding-top: 20px;margin-top: 20px; "> 
-					
-						<c:choose>
-							<c:when test="${fn:length(topping) > 0}">
-								<c:forEach var="topping" items="${topping}" varStatus="stat">
-							                          
-									    <div class="thumbnail imgover" style="width: 100px; height: 115px; float: left; margin-right: 20px;">
-									      <img src="resources/file/goodsFile/${topping.TOPPING_IMG}" id="${topping.TOPPING_NO }" name="${topping.TOPPING_NAME }" alt="..." onclick="addTopping(this)" class="img-circle" style="width: 70px; height: 70px; "/>
-									      <div class="caption">
-									      
-									        <div style="text-align: center; margin-bottom: 5px;"><h5><strong>${topping.TOPPING_NAME}</strong></h5></div>
-									        <div style="text-align: center;"><h5>${topping.TOPPING_PRICE }원</h5></div>
-									 		<div style="text-align: center;"><h6>${topping.TOPPING_KCAL }kcal</h6></div>
-									     
-									         
-									      </div>
-									    </div>
-									
-							   
-							         
-								</c:forEach>
-							</c:when>
-						                
-						<c:otherwise>
-						    <tr>
-						       <td colspan="4">조회된 결과가 없습니다.</td>
-						    </tr>
-						</c:otherwise>
-					</c:choose>
-					
-					</div>
-			
-				</div>
+				
 			</td>
 		</tr>
 	</table>
@@ -139,5 +118,7 @@ function delTopping(test){
 	
 	
 	</div>
+	
+	
 </body>
 </html>

@@ -73,5 +73,10 @@ public class OrderDao extends AbstractDAO {
 		return sqlSession.selectList("order.selectLastOrderList",map);
 	}
 	
+	
+	public void updateSellCount(Map<String,Object> map) throws Exception{
+		sqlSession.update("order.updateSellCount", map);	
+	}
+	
 
 }
