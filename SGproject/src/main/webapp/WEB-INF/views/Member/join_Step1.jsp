@@ -148,13 +148,14 @@ function modal_email()
 
 
 </div>
-</div>
 <div style="margin-bottom:80px;">
 <a href="javascript:modal_email();" class="effect effect-5" 
-    style="padding: 13px 0px; width:140px; margin-left:79%; position:absolute;">	
+    style="padding: 13px 0px; width:140px; margin-left:53%; position:absolute;">	
 	이메일 인증
 	</a>
 </div>
+</div>
+
 
 
 </body>

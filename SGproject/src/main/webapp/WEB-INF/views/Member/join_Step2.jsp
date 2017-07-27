@@ -433,7 +433,7 @@ function joinCheck()
       </div>
          <div style="margin-bottom:80px;"> 
          <a class="effect effect-5" title="다음 단계로 이동" onclick="javascript:joinCheck();" style="padding:15px 0px; width:140px; 
-          margin-left:67%;">
+          margin-left:53%;">
                     다음 단계로 이동</a>
          </div>
    </div>

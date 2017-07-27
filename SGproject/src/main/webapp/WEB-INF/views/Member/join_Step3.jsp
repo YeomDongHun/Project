@@ -270,11 +270,11 @@ function checkpw()
          <input type="button" value="중복확인" onclick="javascript:checkId()"/>
          ${message}
       </div>
-      
+         
    </li>
-   
+                
    <li class="password">
-      <div class="item-label col-lg-3 col-md-4">
+      <div class="item-label col-lg-3 col-md-4" >
          <label for="input-password">
             <strong>* 비밀번호</strong>
          </label>
