@@ -130,30 +130,30 @@ function modal_email()
 
 <body>
 <div class="container">
-<div class="contents1" style="margin-bottom:50px;">         
-         
-      <div class="xans-member-joinAgreement">
-         
-         <div class="agreeArea" style="width:1145px; margin-top:20px;">
-            <h3>샐러드 구쁘다 회원가입을 위해 본인인증을 시작합니다.</h3>
-            <div class="agree">
-            <p>이메일 인증을 통하여 본인인증을 진행할 수 있습니다.<br>
-		본인인증을 위해 입력하신 개인정보는 회원가입을 위해서 확인하는 것이며,<br>
-		수집된 정보는 본인인증 외 어떠한 용도로도 사용되거나 샐러드 구쁘다에 저장되지 않으므로 안심하시기 바랍니다.</p>
-		<br>이메일 인증은 따로 정보를 저장하지 않습니다.<br>해당 이메일로 전송받은 인증 번호를 입력해서 인증을 받는 방법입니다.
+	<div class="contents1" style="margin-bottom:50px;">         
+	         
+	      <div class="xans-member-joinAgreement">
+	         
+	         <div class="agreeArea" style="width:1145px; margin-top:20px;">
+	            <h3>샐러드 구쁘다 회원가입을 위해 본인인증을 시작합니다.</h3>
+	            <div class="agree">
+	            <p>이메일 인증을 통하여 본인인증을 진행할 수 있습니다.<br>
+			본인인증을 위해 입력하신 개인정보는 회원가입을 위해서 확인하는 것이며,<br>
+			수집된 정보는 본인인증 외 어떠한 용도로도 사용되거나 샐러드 구쁘다에 저장되지 않으므로 안심하시기 바랍니다.</p>
+			<br>이메일 인증은 따로 정보를 저장하지 않습니다.<br>해당 이메일로 전송받은 인증 번호를 입력해서 인증을 받는 방법입니다.
+			</div>
 		</div>
+		
 	</div>
 	
-</div>
-
-
-</div>
-<div style="margin-bottom:80px;">
-<a href="javascript:modal_email();" class="effect effect-5" 
-    style="padding: 13px 0px; width:140px; margin-left:53%; position:absolute;">	
-	이메일 인증
-	</a>
-</div>
+	  
+	</div>
+	<div style="margin-bottom:80px; text-align: center; margin-right: 150px;">
+	<a href="javascript:modal_email();" class="effect effect-5" 
+	    style="padding: 13px 0px; width:140px;  ">	
+		이메일 인증
+		</a>
+	</div>
 </div>
 
 
