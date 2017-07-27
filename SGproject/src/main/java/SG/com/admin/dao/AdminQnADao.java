@@ -1,59 +1,46 @@
 package SG.com.admin.dao;
 
-import java.util.List;//¸®½ºÆ® ¾²°Ú´Ù
-import java.util.Map;//¸ÊÀ»¾²°Ú´Ù
+import java.util.List;
+import java.util.Map;//ë§µì„ì“°ê² ë‹¤
 
-import org.mybatis.spring.SqlSessionTemplate;//½ºÇÁ¸µ ÄÁÅ×ÀÌ³Ê¸¦ ¾²°Ú´Ù
-import org.springframework.beans.factory.annotation.Autowired;//¿ÀÅä¿ÍÀÌ¾î(ÂüÁ¶)
-import org.springframework.stereotype.Repository;//ÂüÁ¶
+
+import org.springframework.stereotype.Repository;//ì°¸ì¡°
 
 import SG.com.common.AbstractDAO;
 
 @Repository("adminQnADao")
 public class AdminQnADao extends AbstractDAO {
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	
-	//Q&A¸ñ·ÏÁ¶È¸(È¸¿ø ÀÚ½ÅÀÇ Q&A)
-	public List<Map<String,Object>> memberQnaList(Map<String, Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.memberQnaList",map);
-	}
-	//Q&A»ó¼¼º¸±â
+
+	//Q&Aìƒì„¸ë³´ê¸°
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> qnaDetail(Map<String,Object>map) throws Exception{
-		return sqlSession.selectOne("qnaboard.qnaDetail",map);
+		return (Map<String,Object>)selectOne("qnaboard.qnaDetail",map);
 	}
-	//Q&A¸ñ·ÏÁ¶È¸(°ü¸®ÀÚ)
+	//Q&Aëª©ë¡ì¡°íšŒ(ê´€ë¦¬ì)
+	@SuppressWarnings("unchecked")
 	public List<Map<String,Object>>adminQnaList(Map<String, Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.adminQnaList",map);
+		return(List<Map<String,Object>>)selectList("qnaboard.adminQnaList",map);
 	}
-	//Q&A¸ñ·ÏÁ¶È¸-¾ÆÀÌµğ(°ü¸®ÀÚ)
-	public List<Map<String,Object>>qnaIdSearch(Map<String, Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.qnaIdSearch",map);
+	
+	//Q&Aê²€ìƒ‰(ì‘ì„±ì)
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>qnaSearch0(Map<String,Object>map)throws Exception{
+		return (List<Map<String,Object>>)selectList("qnaboard.qnaSearch0",map);
 	}
-	//Q&A¸ñ·ÏÁ¶È¸-Á¦¸ñ(°ü¸®ÀÚ)
-	public List<Map<String,Object>>qnaTitleSearch(Map<String,Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.qnaTitleSearch",map);
+	//Q&Aê²€ìƒ‰(ì œëª©)
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>>qnaSearch1(Map<String,Object>map)throws Exception{
+		return (List<Map<String,Object>>)selectList("qnaboard.qnaSearch1",map);
 	}
-	//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(´äº¯´ë±â,´äº¯Ã³¸®)
-	public List<Map<String,Object>>qnaCtgSearch0(Map<String,Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.qnaCtgSearch0",map);
-	}
-	//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(»óÇ°¹®ÀÇ,È¨ÆäÀÌÁöÀÌ¿ë¹®ÀÇ)
-	public List<Map<String,Object>>qnaCtgSearch1(Map<String,Object>map)throws Exception{
-		return sqlSession.selectList("qnaboard.qnaCtgSearch1",map);
-	}
-	//Q&Aµî·Ï(È¸¿ø)
-	public void qes(Map<String,Object>map) throws Exception{
-		sqlSession.insert("qnaboard.qes",map);
-	}
-	//Q&A´äº¯µî·Ï(°ü¸®ÀÚ)
+
+	//Q&Aë‹µë³€ë“±ë¡(ê´€ë¦¬ì)
 	public void ans(Map<String,Object>map)throws Exception{
-		sqlSession.update("qnaboard.ans",map);
+		update("qnaboard.ans",map);
 	}
-	//Q&A»èÁ¦
+	//Q&Aì‚­ì œ
 	public void qnaDelete(Map<String,Object>map)throws Exception{
-		sqlSession.delete("qnaboard.qnaDelete",map);
+		delete("qnaboard.qnaDelete",map);
 	}
 
 }

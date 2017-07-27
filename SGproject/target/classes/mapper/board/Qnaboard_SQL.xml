@@ -13,7 +13,7 @@
   QNA_TITLE, 
   QNA_REGDATE, 
   QNA_REPSTATE,
-  QNA_QNA_REPDATE,
+  QNA_REPDATE,
   QNA_HITCOUNT, 
   FROM SG_QNA
   WHERE QNA_MEMBER_NO=
@@ -24,15 +24,17 @@
 <select id="qnaDetail" parameterType="hashmap" resultType="hashmap">
 <![CDATA[
   SELECT 
-  QNA_NO,
+  Q.QNA_NO,
   Q.QNA_CATEGORY,
   Q.QNA_MEMBER_NO,
-  Q.QNA_TITLE, 
+  Q.QNA_CONTENT,
+  Q.QNA_TITLE,
+  Q.QNA_REPCONTENT,
   Q.QNA_REGDATE, 
   Q.QNA_REPSTATE,
-  Q.QNA_QNA_REPDATE,
+  Q.QNA_REPDATE,
   Q.QNA_HITCOUNT,
-  M.MEMBER_NO
+  M.MEMBER_ID
   FROM SG_QNA Q, SG_MEMBER M 
   WHERE Q.QNA_MEMBER_NO = M.MEMBER_NO
   AND QNA_NO=#{QNA_NO} 
@@ -48,7 +50,7 @@
   Q.QNA_TITLE, 
   Q.QNA_REGDATE, 
   Q.QNA_REPSTATE,
-  Q.QNA_QNA_REPDATE,
+  Q.QNA_REPDATE,
   Q.QNA_HITCOUNT, 
   M.MEMBER_ID
   FROM SG_QNA Q,SG_MEMBER M 
@@ -57,7 +59,7 @@
 ]]>
 </select>
 <!-- Q&A목록조회-아이디(관리자)  -->
-<select id="qnaIdSearch" parameterType="hashmap" resultType="hashmap">
+<select id="qnaSearch0" parameterType="hashmap" resultType="hashmap">
 <![CDATA[ 
   SELECT 
   Q.QNA_NO,
@@ -74,7 +76,7 @@
 ]]>
 </select>
 <!-- Q&A목록조회-제목(관리자) -->
-<select id="qnaTitleSearch" parameterType="hashmap" resultType="hashmap">
+<select id="qnaSearch1" parameterType="hashmap" resultType="hashmap">
 <![CDATA[ 
   SELECT 
   Q.QNA_NO,

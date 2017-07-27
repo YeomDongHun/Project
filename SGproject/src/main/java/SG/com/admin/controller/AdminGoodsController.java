@@ -1,16 +1,13 @@
 package SG.com.admin.controller;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-/*import javax.servlet.http.HttpSession;*/
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-/*import org.springframework.web.bind.annotation.RequestMethod;*/
-/*import org.springframework.web.bind.annotation.RequestParam;*/
-/*import org.springframework.web.bind.annotation.ResponseBody;*/
 import org.springframework.ui.Model;
 
 import SG.com.admin.service.AdminGoodsService;
@@ -25,11 +22,11 @@ public class AdminGoodsController {
 	private AdminGoodsService adminGoodsService;
 	
 	
-	//°Ë»ö °ü·Ã º¯¼ö
+	//ê²€ìƒ‰ ê´€ë ¨ ë³€ìˆ˜
 	private int searchNum;
 	private String isSearch;
 
-	//ÆäÀÌÂ¡ °ü·Ã º¯¼ö
+	//í˜ì´ì§• ê´€ë ¨ ë³€ìˆ˜
 	private int currentPage = 1;
 	private int totalCount;
 	private int blockCount = 10;
@@ -38,14 +35,14 @@ public class AdminGoodsController {
 	private Paging page;
 
 	
-	//»óÇ°¸®½ºÆ®(¿ÏÁ¦Ç°)
+	//ìƒí’ˆë¦¬ìŠ¤íŠ¸(ì™„ì œí’ˆ)
 	@RequestMapping(value="/adminGoodsList")
 	public String adminGoodsList(Model model, CommandMap commandMap, HttpServletRequest request) throws Exception{
 
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) { //currentPage°¡ null ÀÌ°Å³ª °ø¹é ÀÌ°Å³ª 0 ÀÏ¶§.
+				|| request.getParameter("currentPage").equals("0")) { //currentPageê°€ null ì´ê±°ë‚˜ ê³µë°± ì´ê±°ë‚˜ 0 ì¼ë•Œ.
 			currentPage = 1;
-		} else { //currentPage¿¡ ´ã°Ü¿À´Â °ªÀÌ ÀÖ´Ù¸é ´ã°Ü¿À´Â °ªÀ¸·Î ¼³Á¤.
+		} else { //currentPageì— ë‹´ê²¨ì˜¤ëŠ” ê°’ì´ ìˆë‹¤ë©´ ë‹´ê²¨ì˜¤ëŠ” ê°’ìœ¼ë¡œ ì„¤ì •.
 			currentPage = Integer.parseInt(request.getParameter("currentPage")); 
 		}
 		
@@ -54,23 +51,50 @@ public class AdminGoodsController {
 		
 		if (request.getParameter("isSearch") != null) {
 			//isSearch = new String(s.getBytes("iso-8859-1"), "utf-8");
+			Map<String,Object>searchMap = new HashMap<String,Object>(); 
 			isSearch=request.getParameter("isSearch");
+			
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
-
-			if (searchNum == 0)// »óÇ°ÀÌ¸§ (°Ë»ö)
+			
+			if (searchNum == 0)// ìƒí’ˆì´ë¦„ (ê²€ìƒ‰)
 				goodsList = adminGoodsService.adminGoodsSearch0(isSearch);
-			else if (searchNum == 1)// »óÇ°¹øÈ£¹øÈ£ (°Ë»ö)
+			else if (searchNum == 1)// ìƒí’ˆë²ˆí˜¸ë²ˆí˜¸ (ê²€ìƒ‰)
 				goodsList = adminGoodsService.adminGoodsSearch1(isSearch);
-			else if (searchNum == 2)// Ä«Å×°í¸®
+			else if (searchNum == 2)// ì¹´í…Œê³ ë¦¬
 				goodsList = adminGoodsService.adminGoodsSearch2(isSearch);
-			else if (searchNum == 3)// ÆÇ¸Å È°¼ºÈ­ or ºñÈ°¼ºÈ­ »óÇ° ±¸ºĞ
+			else if (searchNum == 3)// íŒë§¤ í™œì„±í™” or ë¹„í™œì„±í™” ìƒí’ˆ êµ¬ë¶„
 				goodsList = adminGoodsService.adminGoodsSearch3(isSearch);
-			else if (searchNum == 4)// Àç°í°¡ 0ÀÎ »óÇ°
+			else if (searchNum == 4)// íŒë§¤ëŸ‰ ë§ì€ ìˆœ
 				goodsList = adminGoodsService.adminGoodsSearch4(isSearch);
-			else if (searchNum == 5)// ÆÇ¸Å·® ¸¹Àº ¼ø, Á¶È¸¼ö ¸¹Àº ¼ø Á¤·Ä
+			else if (searchNum == 5)// ì¬ê³ ê°€ 0ì¸ ìƒí’ˆ
 				goodsList = adminGoodsService.adminGoodsSearch5(isSearch);
-			else
-				goodsList = adminGoodsService.adminGoodsList(commandMap.getMap());
+
+		
+			totalCount = goodsList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminGoodsList",searchNum,isSearch);
+			pagingHtml = page.getPagingHtml().toString();
+
+			int lastCount = totalCount;
+
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+
+			goodsList = goodsList.subList(page.getStartCount(), lastCount);
+
+			model.addAttribute("isSearch", isSearch);
+			model.addAttribute("searchNum", searchNum);
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("goodsList",goodsList);
+			
+			return "admin_goodslist";
+			
+		
+		
+		
+		
+		
 		}	
 		
 		totalCount = goodsList.size();
@@ -89,21 +113,20 @@ public class AdminGoodsController {
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("pagingHtml", pagingHtml);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("goodsList", goodsList);	
 		model.addAttribute("goodsList",goodsList);
 		
 		return "admin_goodslist";
 	}
 	
 	
-	//»óÇ°µî·Ï ÆûÀ¸·Î ÀÌµ¿(¿ÏÁ¦Ç°)
+	//ìƒí’ˆë“±ë¡ í¼ìœ¼ë¡œ ì´ë™(ì™„ì œí’ˆ)
 	@RequestMapping(value="/adminGoodsForm")
 	public String adminGoodsForm(Model model)throws Exception{
 		
 		return "admin_goodsForm";
 	}
 	
-	//»óÇ°µî·Ï(¿ÏÁ¦Ç°)
+	//ìƒí’ˆë“±ë¡(ì™„ì œí’ˆ)
 	@RequestMapping(value="/adminGoodsInsert")
 	public String adminGoodsInsert(Model model, CommandMap commandmap, HttpServletRequest request) throws Exception{
 		
@@ -112,29 +135,46 @@ public class AdminGoodsController {
 		return "redirect:/adminGoodsList";
 	}
 	
-	//»óÇ°»ó¼¼º¸±â(¿ÏÁ¦Ç°)
+	//ìƒí’ˆìƒì„¸ë³´ê¸° =>ìˆ˜ì •í¼(ì™„ì œí’ˆ)
 	@RequestMapping(value="/adminGoodsDetail")
 	public String adminGoodsDetail(Model model,CommandMap commandmap,HttpServletRequest request) throws Exception{
 		
-		return "admin_goodsDetail";
+		Map<String,Object> goodsMap = adminGoodsService.adminGoodsDetail(commandmap.getMap());
+		
+		boolean modify = true;
+		
+		model.addAttribute("goods",goodsMap);
+		model.addAttribute("modify",modify);
+		return "admin_goodsModifyForm";
 	}
 	
-	//»óÇ°»èÁ¦(¿ÏÁ¦Ç°)
+	//ìƒí’ˆ ìˆ˜ì •ì²˜ë¦¬
+	@RequestMapping(value="/adminGoodsModify")
+	public String adminGoodsModify(Model model, CommandMap commandmap,HttpServletRequest request) throws Exception{
+		
+		adminGoodsService.adminGoodsModify(commandmap.getMap(), request);
+		
+		return "redirect:/adminGoodsList";
+	}
+	
+	//ìƒí’ˆì‚­ì œ(ì™„ì œí’ˆ)
 	@RequestMapping(value="/adminGoodsDelete")
-	public String adminGoodsDelete(Model model,CommandMap commandmap,HttpServletRequest request) throws Exception{
+	public String adminGoodsDelete(Model model,CommandMap commandmap) throws Exception{
+		
+		adminGoodsService.adminGoodsDelete(commandmap.getMap());
 		
 		return "redirect:/adminGoodsList";
 	}
 	
 	
-		////////////////////////////////ÅäÇÎ °ü·Ã ·ÎÁ÷///////////////////////////	////
+		////////////////////////////////í† í•‘ ê´€ë ¨ ë¡œì§///////////////////////////	////
 	
 	@RequestMapping(value="/adminToppingList")
 	public String adminToppingList(Model model,CommandMap commandmap,HttpServletRequest request)throws Exception{
 		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
-				|| request.getParameter("currentPage").equals("0")) { //currentPage°¡ null ÀÌ°Å³ª °ø¹é ÀÌ°Å³ª 0 ÀÏ¶§.
+				|| request.getParameter("currentPage").equals("0")) { //currentPageê°€ null ì´ê±°ë‚˜ ê³µë°± ì´ê±°ë‚˜ 0 ì¼ë•Œ.
 			currentPage = 1;
-		} else { //currentPage¿¡ ´ã°Ü¿À´Â °ªÀÌ ÀÖ´Ù¸é ´ã°Ü¿À´Â °ªÀ¸·Î ¼³Á¤.
+		} else { //currentPageì— ë‹´ê²¨ì˜¤ëŠ” ê°’ì´ ìˆë‹¤ë©´ ë‹´ê²¨ì˜¤ëŠ” ê°’ìœ¼ë¡œ ì„¤ì •.
 			currentPage = Integer.parseInt(request.getParameter("currentPage")); 
 		}
 		
@@ -146,20 +186,40 @@ public class AdminGoodsController {
 			isSearch=request.getParameter("isSearch");
 			searchNum = Integer.parseInt(request.getParameter("searchNum"));
 
-			if (searchNum == 0)// »óÇ°ÀÌ¸§ (°Ë»ö)
-				toppingList = adminGoodsService.adminGoodsSearch0(isSearch);
-			else if (searchNum == 1)// »óÇ°¹øÈ£¹øÈ£ (°Ë»ö)
-				toppingList = adminGoodsService.adminGoodsSearch1(isSearch);
-			else if (searchNum == 2)// Ä«Å×°í¸®
-				toppingList = adminGoodsService.adminGoodsSearch2(isSearch);
-			else if (searchNum == 3)// ÆÇ¸Å È°¼ºÈ­ or ºñÈ°¼ºÈ­ »óÇ° ±¸ºĞ
-				toppingList = adminGoodsService.adminGoodsSearch3(isSearch);
-			else if (searchNum == 4)// Àç°í°¡ 0ÀÎ »óÇ°
-				toppingList = adminGoodsService.adminGoodsSearch4(isSearch);
-			else if (searchNum == 5)// ÆÇ¸Å·® ¸¹Àº ¼ø, Á¶È¸¼ö ¸¹Àº ¼ø Á¤·Ä
-				toppingList = adminGoodsService.adminGoodsSearch5(isSearch);
-			else
-				toppingList = adminGoodsService.adminGoodsList(commandmap.getMap());
+			if (searchNum == 0)// ìƒí’ˆì´ë¦„ (ê²€ìƒ‰)
+				toppingList = adminGoodsService.adminToppingSearch0(isSearch);
+			else if (searchNum == 1)// ìƒí’ˆë²ˆí˜¸ë²ˆí˜¸ (ê²€ìƒ‰)
+				toppingList = adminGoodsService.adminToppingSearch1(isSearch);
+			else if (searchNum == 2)// ì¹´í…Œê³ ë¦¬
+				toppingList = adminGoodsService.adminToppingSearch2(isSearch);
+			else if (searchNum == 3)// íŒë§¤ í™œì„±í™” or ë¹„í™œì„±í™” ìƒí’ˆ êµ¬ë¶„
+				toppingList = adminGoodsService.adminToppingSearch3(isSearch);
+			else if (searchNum == 4)// íŒë§¤ëŸ‰ìˆœ ì •ë ¬
+				toppingList = adminGoodsService.adminToppingSearch4(isSearch);
+			else if (searchNum == 5)// ì¬ê³  0
+				toppingList = adminGoodsService.adminToppingSearch5(isSearch);
+
+			totalCount = toppingList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminToppingList",searchNum,isSearch);
+			pagingHtml = page.getPagingHtml().toString();
+
+			int lastCount = totalCount;
+
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+
+			toppingList = toppingList.subList(page.getStartCount(), lastCount);
+
+			model.addAttribute("isSearch", isSearch);
+			model.addAttribute("searchNum", searchNum);
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("toppingList",toppingList);
+			
+			return "admin_toppingList";
+		
+		
 		}	
 		
 		totalCount = toppingList.size();
@@ -183,17 +243,48 @@ public class AdminGoodsController {
 		return "admin_toppingList";
 	}
 	
+	//í† í•‘ë“±ë¡ í¼ì´ë™ 
 	@RequestMapping(value="/adminToppingForm")
 	public String adminToppingForm(Model model) throws Exception{
 		
 		return "admin_toppingForm";
 	}
 	
-	//ÅäÇÎµî·Ï
+	//í† í•‘ìƒì„¸ë³´ê¸° ==> ìˆ˜ì •í•˜ê¸°
+	@RequestMapping(value="/adminToppingDetail")
+	public String adminToppingDetail(CommandMap commandMap, Model model) throws Exception{
+	
+		Map<String,Object>toppingMap = adminGoodsService.adminToppingDetail(commandMap.getMap());
+		
+		boolean modify = true;
+		
+		model.addAttribute("topping",toppingMap);
+		model.addAttribute("modify",modify);
+		return "admin_modifyForm";
+	}
+	
+	//í† í•‘ë“±ë¡
 	@RequestMapping(value="/adminToppingInsert")
 	public String adminToppingInsert(Model model, CommandMap commandmap, HttpServletRequest request) throws Exception{
 		
-		adminGoodsService.adminGoodsInsert(commandmap.getMap(), request);
+		adminGoodsService.adminToppingInsert(commandmap.getMap(), request);
+		
+		return "redirect:/adminToppingList";
+	}
+	//í† í•‘ìˆ˜ì •ì²˜ë¦¬
+	@RequestMapping(value="/adminToppingModify")
+	public String adminToppingModifyForm(Model model,CommandMap commandMap,HttpServletRequest request) throws Exception{
+		
+		adminGoodsService.adminToppingModify(commandMap.getMap(),request);
+		
+		return "redirect:/adminToppingList";
+	}
+	
+	//í† í•‘ì‚­ì œ
+	@RequestMapping(value="/adminToppingDelete")
+	public String adminToppingDelete(Model model,CommandMap commandMap, HttpServletRequest request) throws Exception{
+		
+		adminGoodsService.adminToppingDelete(commandMap.getMap(), request);
 		
 		return "redirect:/adminToppingList";
 	}

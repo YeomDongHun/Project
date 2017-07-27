@@ -24,7 +24,7 @@ public class GoodsImageUtils {
 
 		if (multipartHttpServletRequest.getFile("GOODS_THUMBNAIL") != null) { //File의 이름 중 GOODS_THUMBNAIL이 있다면
 			MultipartFile file = multipartHttpServletRequest.getFile("GOODS_THUMBNAIL"); //GOOS_THUMBNAIL이름을 가진 파일을 꺼내서 저장.
-			String fileName = "SG_Thumbnail_" + map.get("GOODS_NO").toString(); //파일이름을 SG_Thumbnail_ + 상품번호로
+			String fileName = "SG_Thumbnail_" +System.currentTimeMillis()+"_"+ map.get("GOODS_NO").toString(); //파일이름을 SG_Thumbnail_ + 상품번호로
 
 			String IMAGEExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); //해당 파일의 '.확장자' 가져옴 (substring메서드는 매개인자로 주어지는 값을 통해 문자열 반환) lastIndexOf메서드는 해당 문자열의 위치 반환 
 
@@ -101,14 +101,14 @@ public class GoodsImageUtils {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 		MultipartFile file = multipartHttpServletRequest.getFile("GOODS_THUMBNAIL");
 
-		String fileName = "Thumbnail_" + map.get("GOODS_NUMBER").toString();
+		String fileName = "SG_Thumbnail_" +System.currentTimeMillis()+"_"+ map.get("GOODS_NO").toString();
 
 		String IMAGEExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
 		File uploadFile = new File(filePath + fileName + IMAGEExtension);
 
-		if (map.get("ORIIGINAL_THUMBNAIL") != null) {
-			String orgFileName = (String) map.get("ORIGINAL_THUMBNAIL");
+		if (map.get("ORIGINAL_GOODS_THUMBNAIL") != null) {
+			String orgFileName = (String) map.get("ORIGINAL_GOODS_THUMBNAIL");
 			File removeFile = new File(filePath + orgFileName);
 			removeFile.delete();
 		}
@@ -122,117 +122,58 @@ public class GoodsImageUtils {
 
 		return map;
 	}
-
-	// 상품이미지 수정
-	public List<Map<String, Object>> parseUpdateImages(Map<String, Object> map, HttpServletRequest request)
+	
+	
+	//이미지 수정
+	public Map<String, Object> goodsImageModify(Map<String, Object> map, HttpServletRequest request)
 			throws Exception {
+
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		MultipartFile file = multipartHttpServletRequest.getFile("IMAGE_IMAGE");
 
-		// System.out.println("IMAGE : "+imageFile);
-		// Iterator<String> iterator =
-		// multipartHttpServletRequest.getFileNames();
+		String fileName = "SG_IMAGE_" +System.currentTimeMillis()+"_"+ map.get("GOODS_NO").toString();
 
-		// MultipartFile multipartFile = null;
-		String IMAGEExtension = null;
+		String IMAGEExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		Map<String, Object> listMap = null;
-		MultipartFile multipartFile = null;
+		File uploadFile = new File(filePath + fileName + IMAGEExtension);
 
-		File file = new File(filePath);
-		if (file.exists() == false) {
-			file.mkdirs(); // �뤃�뜑媛� 議댁옱�븯吏� �븡�쑝硫� �뤃�뜑 �깮�꽦
+		if (map.get("ORIGINAL_IMAGE_IMAGE") != null) {
+			String orgFileName = (String) map.get("ORIGINAL_IMAGE_IMAGE");
+			File removeFile = new File(filePath + orgFileName);
+			removeFile.delete(); //기존 파일 삭제 
 		}
 
-		String[] orgImage = request.getParameterValues("ORIGINAL_IMAGE");
-
-		for (String a : orgImage) {
-
-			if (request.getParameter(a) != null) { 
-		
-				if (multipartHttpServletRequest.getFile("MODIFY_IMAGE_" + a).getSize() > 0) {
-					
-					multipartFile=multipartHttpServletRequest.getFile("MODIFY_IMAGE_" + a);
-					File removeFile = new File(filePath + a);
-					removeFile.delete();
-
-					IMAGEExtension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-					file = new File(filePath + a.substring(0, a.lastIndexOf(".")) + IMAGEExtension);
-					multipartFile.transferTo(file);
-					
-					listMap = new HashMap<String, Object>();
-					listMap.put("IMAGE", a.substring(0, a.lastIndexOf(".")) + IMAGEExtension);
-					listMap.put("ORIGINAL_IMAGE", a);
-
-					listMap.put("GOODS_NUMBER", map.get("GOODS_NUMBER"));
-					list.add(listMap);
-					
-
-				}
-			} else {
-				File removeFile = new File(filePath + a);
-				removeFile.delete();
-			}
+		try {
+			file.transferTo(uploadFile); //새 파일 등록
+		} catch (Exception e) {
 		}
 
-		return list;
+		map.put("IMAGE_IMAGE", fileName + IMAGEExtension); //새 파일이름  Map에 담음.
+		map.put("GOODS_NO", map.get("GOODS_NO"));
+
+		return map;
 	}
 
-	// �뜽�꽕�씪�씠誘몄� �궘�젣
+
+	// 썸네일 이미지 삭제 
 	public void parseDeleteThumbnail(Map<String, Object> map) throws Exception {
 
-		if (map.get("GOODS_THUMBNAIL") != null) {
+		if (map.get("GOODS_THUMBNAIL") != null) {//이미지 파일이 있다면 
 			File removeFile = new File(filePath + map.get("GOODS_THUMBNAIL"));
 			removeFile.delete();
 		}
 
 	}
 	
+	
+	//이미지 삭제 
 	public void parseDeleteImages(Map<String, Object> map) throws Exception {
 
-		if (map.get("IMAGE") != null) {
-				File removeFile = new File(filePath + map.get("IMAGE"));
+		if (map.get("IMAGE_IMAGE") != null) { //이미지 파일이 있다면 
+				File removeFile = new File(filePath + map.get("IMAGE_IMAGE"));
 				removeFile.delete();
 			}
 		
 	}
-
-	/*
-	 * public List<Map<String, Object>> parseUpdateFileInfo(Map<String, Object>
-	 * map, HttpServletRequest request) throws Exception{
-	 * MultipartHttpServletRequest multipartHttpServletRequest =
-	 * (MultipartHttpServletRequest)request; Iterator<String> iterator =
-	 * multipartHttpServletRequest.getFileNames();
-	 * 
-	 * MultipartFile multipartFile = null; String originalFileName = null;
-	 * String originalFileExtension = null; String storedFileName = null;
-	 * 
-	 * List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-	 * Map<String, Object> listMap = null;
-	 * 
-	 * String boardIdx = (String)map.get("IDX"); String requestName = null;
-	 * String idx = null;
-	 * 
-	 * 
-	 * while(iterator.hasNext()){ multipartFile =
-	 * multipartHttpServletRequest.getFile(iterator.next());
-	 * if(multipartFile.isEmpty() == false){ originalFileName =
-	 * multipartFile.getOriginalFilename(); originalFileExtension =
-	 * originalFileName.substring(originalFileName.lastIndexOf("."));
-	 * storedFileName = CommonUtils.getRandomString() + originalFileExtension;
-	 * 
-	 * multipartFile.transferTo(new File(filePath + storedFileName));
-	 * 
-	 * listMap = new HashMap<String,Object>(); listMap.put("IS_NEW", "Y");
-	 * listMap.put("BOARD_IDX", boardIdx); listMap.put("ORIGINAL_FILE_NAME",
-	 * originalFileName); listMap.put("STORED_FILE_NAME", storedFileName);
-	 * listMap.put("FILE_SIZE", multipartFile.getSize()); list.add(listMap); }
-	 * else{ requestName = multipartFile.getName(); idx =
-	 * "IDX_"+requestName.substring(requestName.indexOf("_")+1);
-	 * if(map.containsKey(idx) == true && map.get(idx) != null){ listMap = new
-	 * HashMap<String,Object>(); listMap.put("IS_NEW", "N");
-	 * listMap.put("FILE_IDX", map.get(idx)); list.add(listMap); } } } return
-	 * list; }
-	 */
 
 }

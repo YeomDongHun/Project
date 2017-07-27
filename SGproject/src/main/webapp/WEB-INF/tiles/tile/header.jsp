@@ -202,7 +202,7 @@ font-family: PureunJeonnam;
            </li>
       <li>|</li>    
            <li class="topMenuLi">
-              <a class="menuLink" href="memberDiyList">나만의 레시피</a>
+              <a class="menuLink" href="memberDiyBoardList">나만의 레시피</a>
            </li>
         <li>|</li>
            <li class="topMenuLi">
