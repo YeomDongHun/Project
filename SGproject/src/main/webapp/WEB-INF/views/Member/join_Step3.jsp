@@ -68,45 +68,45 @@
 //아이디 중복 확인
 function checkId()
 {
-	var f = document.frm;
-	
-	var mem_id = f.MEMBER_ID.value;
-	
-	if(mem_id == '')
-		{
-		alert("아이디를 입력하세요");
-		}
-	else
-		{
-		var total = ({"mem_id":mem_id});
-		$.ajax
-		({
-			
-			type: "POST",
-			url: "/SG/checkId",
-			data : total,
-			
-			success: function(data)
-			{
-				console.log("로그 내용1");
-				
-				if(data != 0)
-					{
-					alert("사용중인 아이디입니다. 다른 아이디를 입력해 주세요");
-					}
-				else
-					{
-					alert("사용가능한 아이디 입니다.");
-					} 
-			
-		},
-		error: function(e)
-		{
-			alert('error'+e);
-		}
-	});
+   var f = document.frm;
+   
+   var mem_id = f.MEMBER_ID.value;
+   
+   if(mem_id == '')
+      {
+      alert("아이디를 입력하세요");
+      }
+   else
+      {
+      var total = ({"mem_id":mem_id});
+      $.ajax
+      ({
+         
+         type: "POST",
+         url: "/SG/checkId",
+         data : total,
+         
+         success: function(data)
+         {
+            console.log("로그 내용1");
+            
+            if(data != 0)
+               {
+               alert("사용중인 아이디입니다. 다른 아이디를 입력해 주세요");
+               }
+            else
+               {
+               alert("사용가능한 아이디 입니다.");
+               } 
+         
+      },
+      error: function(e)
+      {
+         alert('error'+e);
+      }
+   });
 }
-	
+   
 }
 
 //비밀번호 일치 확인
@@ -116,12 +116,12 @@ function checkpw()
   
   if(f.MEMBER_PASSWORD.value != f.password_confirm.value)
   {
-	 alert("비밀번호가 일치하지 않습니다.");
-	 
-	 f.MEMBER_PASSWORD.value = "";
-	 f.password_confirm.value = "";
-	 
-	 return false;
+    alert("비밀번호가 일치하지 않습니다.");
+    
+    f.MEMBER_PASSWORD.value = "";
+    f.password_confirm.value = "";
+    
+    return false;
   }
   
  /*  f.action="/SG/joinSuccess";
@@ -146,110 +146,110 @@ function checkpw()
 
 
  .container {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto
 }
 
 @media ( min-width :768px) {
-	.container {
-		width: 750px
-	}
+   .container {
+      width: 750px
+   }
 }
 
 @media ( min-width :992px) {
-	.container {
-		width: 970px
-	}
+   .container {
+      width: 970px
+   }
 }
 
 @media ( min-width :1200px) {
-	.container {
-		width: 1170px;
-	}
+   .container {
+      width: 1170px;
+   }
 }
 
 .container-fluid {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto
 }
 
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
-	.container>.navbar-collapse, .container>.navbar-header {
-	margin-right: -15px;
-	margin-left: -15px
+   .container>.navbar-collapse, .container>.navbar-header {
+   margin-right: -15px;
+   margin-left: -15px
 }
  
 @media ( min-width :768px) {
-	.container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
-		.container>.navbar-collapse, .container>.navbar-header {
-		margin-right: 0;
-		margin-left: 0
-	}
+   .container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
+      .container>.navbar-collapse, .container>.navbar-header {
+      margin-right: 0;
+      margin-left: 0
+   }
 }
 
 @media ( min-width :768px) {
-	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
-		{
-		margin-left: -15px
-	}
+   .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
+      {
+      margin-left: -15px
+   }
 }
 
 
 .container .jumbotron, .container-fluid .jumbotron {
-	padding-right: 15px;
-	padding-left: 15px;
-	border-radius: 6px
+   padding-right: 15px;
+   padding-left: 15px;
+   border-radius: 6px
 }
 
 .jumbotron .container {
-	max-width: 100%
+   max-width: 100%
 }
 
 @media screen and (min-width:768px) {
-	.jumbotron {
-		padding-top: 48px;
-		padding-bottom: 48px
-	}
-	.container .jumbotron, .container-fluid .jumbotron {
-		padding-right: 60px;
-		padding-left: 60px
-	}
-	.jumbotron .h1, .jumbotron h1 {
-		font-size: 63px
-	}
+   .jumbotron {
+      padding-top: 48px;
+      padding-bottom: 48px
+   }
+   .container .jumbotron, .container-fluid .jumbotron {
+      padding-right: 60px;
+      padding-left: 60px
+   }
+   .jumbotron .h1, .jumbotron h1 {
+      font-size: 63px
+   }
 }
 
 .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before,
-	.btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before,
-	.container-fluid:after, .container-fluid:before, .container:after,
-	.container:before, .dl-horizontal dd:after, .dl-horizontal dd:before,
-	.form-horizontal .form-group:after, .form-horizontal .form-group:before,
-	.modal-footer:after, .modal-footer:before, .modal-header:after,
-	.modal-header:before, .nav:after, .nav:before, .navbar-collapse:after,
-	.navbar-collapse:before, .navbar-header:after, .navbar-header:before,
-	.navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after,
-	.panel-body:before, .row:after, .row:before {
-	display: table;
-	content: " "
+   .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before,
+   .container-fluid:after, .container-fluid:before, .container:after,
+   .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before,
+   .form-horizontal .form-group:after, .form-horizontal .form-group:before,
+   .modal-footer:after, .modal-footer:before, .modal-header:after,
+   .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after,
+   .navbar-collapse:before, .navbar-header:after, .navbar-header:before,
+   .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after,
+   .panel-body:before, .row:after, .row:before {
+   display: table;
+   content: " "
 }
 
 .btn-group-vertical>.btn-group:after, .btn-toolbar:after, .clearfix:after,
-	.container-fluid:after, .container:after, .dl-horizontal dd:after,
-	.form-horizontal .form-group:after, .modal-footer:after, .modal-header:after,
-	.nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after,
-	.pager:after, .panel-body:after, .row:after {
-	clear: both
+   .container-fluid:after, .container:after, .dl-horizontal dd:after,
+   .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after,
+   .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after,
+   .pager:after, .panel-body:after, .row:after {
+   clear: both
 }
 </style>
 </head>
 
 <body>
 <div class="container">
-<div class="body_center" style="width:600px;">
+<div class="body_center" style="width:850px; list-style:none;">
 
 <form name="frm" action="/SG/joinSuccess" method="post" >
 <section class="input-horizontal list-horizontal section box-shadow">

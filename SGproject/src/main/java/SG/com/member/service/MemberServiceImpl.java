@@ -46,6 +46,14 @@ public class MemberServiceImpl implements MemberService
 	   return (int)memberDao.mysumTradeMoney(map);
 	}
 	
+	//회원 등급 업데이트
+	@Override
+	public void updateGrade(Map<String, Object> map) throws Exception 
+	{
+		memberDao.updateGrade(map);
+		
+	}
+	
 	//배송번호 별 주문내역 건수 조회
 	@Override
 	public int orderdelicnt(Map<String, Object> map) throws Exception 
@@ -215,5 +223,4 @@ public class MemberServiceImpl implements MemberService
 	{
 	    memberDao.myQnaDelete(map);
 	}
-
 }

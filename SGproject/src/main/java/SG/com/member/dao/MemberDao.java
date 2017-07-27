@@ -43,6 +43,12 @@ public class MemberDao extends AbstractDAO
 		return (int)selectOne("mypage.mysumTradeMoney", map);
 	}
 	
+	//회원 등급 업데이트
+	public void updateGrade(Map<String, Object> map) throws Exception
+	{
+		update("mypage.updateGrade", map);
+	}
+	
 	//-------------------주문내역---------------------------
 	
 	//배송번호 별 주문내역 건수 조회
