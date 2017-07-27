@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -17,55 +18,51 @@ public class AdminQnAServiceImpl implements AdminQnAService {
 	@Resource(name="adminQnADao")
 	private AdminQnADao adminQnADao;
 	
-    //Q&A¸ñ·ÏÁ¶È¸(È¸¿ø ÀÚ½ÅÀÇ Q&A)
-	 public List<Map<String,Object>> memberQnaList(Map<String, Object>map)throws Exception{
-		 return adminQnADao.memberQnaList(map);
-	 }
-	
-	 //Q&A»ó¼¼º¸±â
+
+	 //Q&Aìƒì„¸ë³´ê¸°
 	 public Map<String, Object> qnaDetail(Map<String,Object>map) throws Exception{
 		 return adminQnADao.qnaDetail(map);
 	 }
 	 
-	//Q&A¸ñ·ÏÁ¶È¸(°ü¸®ÀÚ)
+	//Q&Aëª©ë¡ì¡°íšŒ(ê´€ë¦¬ì)
    public List<Map<String,Object>>adminQnaList(Map<String, Object>map)throws Exception{
 	   return adminQnADao.adminQnaList(map);
    }
-		
-	//Q&A¸ñ·ÏÁ¶È¸-¾ÆÀÌµğ(°ü¸®ÀÚ)
+/*		
+	//Q&Aëª©ë¡ì¡°íšŒ-ì•„ì´ë””(ê´€ë¦¬ì)
 	public List<Map<String,Object>>qnaIdSearch(Map<String, Object>map)throws Exception{
       return adminQnADao.qnaIdSearch(map);
 	}
 	
-	//Q&A¸ñ·ÏÁ¶È¸-Á¦¸ñ(°ü¸®ÀÚ)
+	//Q&Aëª©ë¡ì¡°íšŒ-ì œëª©(ê´€ë¦¬ì)
 	public List<Map<String,Object>>qnaTitleSearch(Map<String,Object>map)throws Exception{
 		return adminQnADao.qnaTitleSearch(map);
-	 }
+	 }*/
 		
-	//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(´äº¯´ë±â,´äº¯Ã³¸®)
-	public List<Map<String,Object>>qnaCtgSearch0(Map<String,Object>map)throws Exception{
-		return adminQnADao.qnaCtgSearch0(map);
+	//Q&Aëª©ë¡ì¡°íšŒ-ì•„ì´ë””
+	public List<Map<String,Object>>qnaSearch0(Map<String,Object>map)throws Exception{
+		return adminQnADao.qnaSearch0(map);
 	}
 		
-	//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(»óÇ°¹®ÀÇ,È¨ÆäÀÌÁöÀÌ¿ë¹®ÀÇ)
-	 public List<Map<String,Object>>qnaCtgSearch1(Map<String,Object>map)throws Exception{
-		 return adminQnADao.qnaCtgSearch1(map);
+	//Q&Aëª©ë¡ì¡°íšŒ-ì œëª©
+	 public List<Map<String,Object>>qnaSearch1(Map<String,Object>map)throws Exception{
+		 return adminQnADao.qnaSearch1(map);
 	 }
-		
-	//Q&Aµî·Ï(È¸¿ø)
-	public void qes(Map<String,Object>map) throws Exception{
-		adminQnADao.qes(map);
-	}
-
-	//Q&A´äº¯µî·Ï(°ü¸®ÀÚ)
+	//Q&Aë‹µë³€ë“±ë¡(ê´€ë¦¬ì)
 	public void ans(Map<String,Object>map)throws Exception{
 		adminQnADao.ans(map);
 	}
 		
-	//Q&A»èÁ¦
+	//Q&Aì‚­ì œ
 	 public void qnaDelete(Map<String,Object>map)throws Exception{
 		 adminQnADao.qnaDelete(map);
 	 }
+
+
+
+
+	
+	
 		
 	}
 

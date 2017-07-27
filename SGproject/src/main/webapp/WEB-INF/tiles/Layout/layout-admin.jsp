@@ -94,7 +94,10 @@
                             <a href="#"style="background: #e7e7e7;"><i class="fa fa-dashboard fa-fw"></i>회원관리<span class="fa arrow">▼</span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">- 회원목록</a>
+                                    <a href="/SG/adminMemberListON">- 회원목록</a>
+                                </li>
+                                <li>
+                                    <a href="/SG/adminMemberListOFF">- 탈퇴회원목록</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -104,7 +107,7 @@
                             <a href="#"style="background: #e7e7e7;"><i class="fa fa-bar-chart-o fa-fw"></i>주문관리<span class="fa arrow">▼</span></a>
 							 <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">- 주문목록</a>
+                                    <a href="/SG/adminOrderList">- 주문목록</a>
                                 </li>
 
                             </ul>
@@ -113,17 +116,17 @@
                             <a href="#"style="background: #e7e7e7;"><i class="fa fa-bar-chart-o fa-fw"></i>게시판관리<span class="fa arrow">▼</span></a>
 							 <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/SG/adminNotice">- 공지사항</a>
+                                    <a href="/SG/adminNoticeAdminList">- 공지사항</a>
                                 </li>
                                 <li>
-                                    <a href="/SG/adminDIY">- DIY게시판</a>
+                                    <a href="/SG/adminDiyBoardList">- DIY게시판</a>
                                 </li>
                
                                  <li>
                                     <a href="/SG/adminFaq">- FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="/SG/adminQna">- Q&A</a>
+                                    <a href="/SG/adminQnA">- Q&A</a>
                                 </li>
 
                             </ul>

@@ -6,17 +6,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import org.springframework.stereotype.Service;
 
 import SG.com.admin.dao.AdminGoodsDao;
 import SG.com.common.GoodsImageUtils;
+import SG.com.common.ToppingImageUtils;
 
-import org.springframework.beans.factory.annotation.Autowired;//¿ÀÅä¿ÍÀÌ¾î(ÂüÁ¶)
 
-@Service("adminGoodsService") //ÇØ´ç Å¬·¡½º¸¦ adminGoodsService·Î »ç¿ë
+@Service("adminGoodsService") //í•´ë‹¹ í´ë˜ìŠ¤ë¥¼ adminGoodsServiceë¡œ ì‚¬ìš©
 public class AdminGoodsServiceImpl implements AdminGoodsService{
 	
 	@Resource(name="adminGoodsDao")
@@ -25,54 +22,94 @@ public class AdminGoodsServiceImpl implements AdminGoodsService{
 	@Resource(name="goodsImageUtils")
 	private GoodsImageUtils goodsImageUtils;
 	
-	//»óÇ°¸ñ·Ï
+	@Resource(name="toppingImageUtils")
+	private ToppingImageUtils toppingImageUtils;
+	//ìƒí’ˆëª©ë¡
 	@Override	
 	public List<Map<String,Object>> adminGoodsList(Map<String,Object>map) throws Exception{
 		return adminGoodsDao.adminGoodsList(map);
 	}
 	
-	//»óÇ°µî·Ï
+	@Override
+	public Map<String,Object> adminGoodsDetail(Map<String,Object>map) throws Exception{
+		
+		return adminGoodsDao.adminGoodsDetail(map);
+	}
+	
+	//ìƒí’ˆë“±ë¡
 	@Override
 	public void adminGoodsInsert(Map<String,Object>map,HttpServletRequest request) throws Exception{
 			
-		System.out.println(map +"SG_GOODS : DBÀÛ¾÷Àü");
+		System.out.println(map +"SG_GOODS : DBì‘ì—…ì „");
 		
-		adminGoodsDao.adminGoodsInsert(map); //ÀÌ¹ÌÁöÆÄÀÏÀ» Á¦¿ÜÇÑ µ¥ÀÌÅÍ ÀÔ·Â
+		adminGoodsDao.adminGoodsInsert(map); //ì´ë¯¸ì§€íŒŒì¼ì„ ì œì™¸í•œ ë°ì´í„° ì…ë ¥
 		
-		System.out.println(map +"SG_GOODS : DBÀÛ¾÷ÈÄ");
+		System.out.println(map +"SG_GOODS : DBì‘ì—…í›„");
 		
-		map = goodsImageUtils.goodsThumbnail(map,request); //goodsThumbnail¸Ş¼­µå¸¦ ÅëÇØ  ÆÄÀÏÀÛ¼º ¹× ÆÄÀÏÀÌ¸§À» °¡Á®¿Â ÈÄ
+		map = goodsImageUtils.goodsThumbnail(map,request); //goodsThumbnailë©”ì„œë“œë¥¼ í†µí•´  íŒŒì¼ì‘ì„± ë° íŒŒì¼ì´ë¦„ì„ ê°€ì ¸ì˜¨ í›„
 		
-		adminGoodsDao.goodsThumbnailInsert(map); //Thumbnail ÆÄÀÏ¸íÀÌ ÀúÀåµÈ mapÀ» ¸Å°³ÀÎÀÚ·Î ÁÖ¾î µ¥ÀÌÅÍ ÀÔ·Â.
+		adminGoodsDao.goodsThumbnailInsert(map); //Thumbnail íŒŒì¼ëª…ì´ ì €ì¥ëœ mapì„ ë§¤ê°œì¸ìë¡œ ì£¼ì–´ ë°ì´í„° ì…ë ¥.
 		
-		System.out.println(map+"½æ³×ÀÏ ÀÌ¹ÌÁö µî·Ï¿Ï·á");//ÄÜ¼ÖÃ¢¿¡ Âï¾îº¾½Ã´Ù..
+		System.out.println(map+"ì¸ë„¤ì¼ ì´ë¯¸ì§€ ë“±ë¡ì™„ë£Œ");//ì½˜ì†”ì°½ì— ì°ì–´ë´…ì‹œë‹¤..
 		
-		List<Map<String,Object>> goodsImageList = goodsImageUtils.parseInsertFileInfo(map, request);//parseInsertFileInfo¸Ş¼­µå¸¦ ÅëÇØ ÆÄÀÏ ÀÛ¼º ¹× ÆÄÀÏÀÌ¸§À» °¡Á®¿Â ÈÄ ¸®½ºÆ®<¸Ê>ÇüÅÂ·Î ¸®ÅÏ
+		List<Map<String,Object>> goodsImageList = goodsImageUtils.parseInsertFileInfo(map, request);//parseInsertFileInfoë©”ì„œë“œë¥¼ í†µí•´ íŒŒì¼ ì‘ì„± ë° íŒŒì¼ì´ë¦„ì„ ê°€ì ¸ì˜¨ í›„ ë¦¬ìŠ¤íŠ¸<ë§µ>í˜•íƒœë¡œ ë¦¬í„´
 		
 		if(goodsImageList.size() > 0 ){
-			for(int i = 0; i< goodsImageList.size(); i++){//¹İº¹¹® ½ÇÇà
-				adminGoodsDao.goodsImageInsert(goodsImageList.get(i));//¸®½ºÆ®¾È¿¡ ´ã°ÜÁø mapµéÀ» ÀüºÎ ÀÔ·Â
-				System.out.println(i+"¹øÂ° ÀÌ¹ÌÁö ÀÔ·Â¿Ï·á");//ÄÜ¼Ö¿¡ Âï¾îº¸ÀÚ..
+			for(int i = 0; i< goodsImageList.size(); i++){//ë°˜ë³µë¬¸ ì‹¤í–‰
+				adminGoodsDao.goodsImageInsert(goodsImageList.get(i));//ë¦¬ìŠ¤íŠ¸ì•ˆì— ë‹´ê²¨ì§„ mapë“¤ì„ ì „ë¶€ ì…ë ¥
+				System.out.println(i+"ë²ˆì§¸ ì´ë¯¸ì§€ ì…ë ¥ì™„ë£Œ");//ì½˜ì†”ì— ì°ì–´ë³´ì..
 			}
 		}
 		
 	}
 	
-	// »óÇ° °Ë»ö(»óÇ°¸í)
+	//ìƒí’ˆ ìˆ˜ì •
+	@Override
+	public void adminGoodsModify(Map<String,Object>map,HttpServletRequest request) throws Exception{
+		
+		adminGoodsDao.adminGoodsModify(map); //SG_GOODS í…Œì´ë¸” ìˆ˜ì •  (ì´ë¯¸ì§€ ì œì™¸)
+		
+			System.out.println("+++++1.SG_GOODS í…Œì´ë¸” ìˆ˜ì • ì™„ë£Œ (ì¸ë„¤ì¼ ì»¬ëŸ¼ ì œì™¸)++++++"+map);
+		
+		map = goodsImageUtils.parseUpdateThumbImage(map, request); // ì‹¤ì œ ì´ë¯¸ì§€ íŒŒì¼(ê¸°ì¡´ íŒŒì¼  ì‚­ì œ => ìƒˆ íŒŒì¼ ë“±ë¡) ìˆ˜ì •
+		
+			System.out.println("+++++2.ì‹¤ì œ ì´ë¯¸ì§€íŒŒì¼ ìˆ˜ì • (ê¸°ì¡´ íŒŒì¼ ì‚­ì œ => ìƒˆë¡œìš´ íŒŒì¼ ì €ì¥)++++++"+map);
+		
+		adminGoodsDao.goodsThumbnailInsert(map);// í…Œì´ë¸” ì´ë¯¸ì§€ ì»¬ëŸ¼ ì—…ë°ì´íŠ¸
+			
+			System.out.println("+++++3.SG_GOODS í…Œì´ë¸” ì¸ë„¤ì¼ ì»¬ëŸ¼ ì—…ë°ì´íŠ¸ ì™„ë£Œ++++++"+map);
+			
+		map = goodsImageUtils.goodsImageModify(map, request);
+		
+			System.out.println("IMAGE_IMAGE ìˆ˜ì • ì™„ë£Œ" + map);
+		
+		adminGoodsDao.adminImageModify(map); //SG_IMAGE í…Œì´ë¸” ì—…ë°ì´íŠ¸ 
+			
+	}
+	
+	//ìƒí’ˆì‚­ì œ(GOODS_ONOFF => OFF)
+	@Override
+	public void adminGoodsDelete(Map<String,Object>map) throws Exception{
+		
+		adminGoodsDao.adminGoodsDelete(map);
+		
+	}
+	
+	// ìƒí’ˆ ê²€ìƒ‰(ìƒí’ˆëª…)
 	@Override
 	public List<Map<String, Object>> adminGoodsSearch0(String isSearch) throws Exception {
 
 		return adminGoodsDao.adminGoodsSearch0(isSearch);
 	}
 
-	// »óÇ° °Ë»ö(»óÇ° ¹øÈ£)
+	// ìƒí’ˆ ê²€ìƒ‰(ìƒí’ˆ ë²ˆí˜¸)
 	@Override
 	public List<Map<String, Object>> adminGoodsSearch1(String isSearch) throws Exception {
 
 		return adminGoodsDao.adminGoodsSearch1(isSearch);
 	}
 
-		// »óÇ° °Ë»ö(Ä«Å×°í¸® °Ë»ö)
+		// ìƒí’ˆ ê²€ìƒ‰(ì¹´í…Œê³ ë¦¬ ê²€ìƒ‰)
 		@Override
 		public List<Map<String, Object>> adminGoodsSearch2(String isSearch) throws Exception {
 
@@ -80,7 +117,7 @@ public class AdminGoodsServiceImpl implements AdminGoodsService{
 			return goodsList;
 		}
 
-		// »óÇ° °Ë»ö(ÆÇ¸Å On,Off)
+		// ìƒí’ˆ ê²€ìƒ‰(íŒë§¤ On,Off)
 		@Override
 		public List<Map<String, Object>> adminGoodsSearch3(String isSearch) throws Exception {
 
@@ -88,7 +125,7 @@ public class AdminGoodsServiceImpl implements AdminGoodsService{
 			return goodsList;
 		}
 
-		// »óÇ° °Ë»ö(Àç°í°¡ 0ÀÎ »óÇ°)
+		// ìƒí’ˆ ê²€ìƒ‰(ì¬ê³ ê°€ 0ì¸ ìƒí’ˆ)
 		@Override
 		public List<Map<String, Object>> adminGoodsSearch4(String isSearch) throws Exception {
 
@@ -96,20 +133,109 @@ public class AdminGoodsServiceImpl implements AdminGoodsService{
 			return goodsList;
 		}
 
-		// »óÇ° Á¤·Ä(ÆÇ¸Å·®¼ø)
+		// ìƒí’ˆ ì •ë ¬(íŒë§¤ëŸ‰ìˆœ)
 		@Override
 		public List<Map<String, Object>> adminGoodsSearch5(String isSearch) throws Exception {
 			List<Map<String, Object>> goodsList = adminGoodsDao.adminGoodsSearch5(isSearch);
 			return goodsList;
 		}
 		
-		////////////////////////////////////////ÅäÇÎ////////////////////////////////////////
+		////////////////////////////////////////í† í•‘////////////////////////////////////////
 		
-		//ÅäÇÎ Á¶È¸ 
+		//í† í•‘ ì¡°íšŒ 
 		@Override
 		public List<Map<String,Object>> adminToppingList(Map<String,Object>map) throws Exception{
 			List<Map<String,Object>> toppingList = adminGoodsDao.adminToppingList(map);
 			return toppingList;
 		}
-	
+		@Override
+		public Map<String,Object> adminToppingDetail(Map<String,Object>map) throws Exception{
+			return adminGoodsDao.adminToppingDetail(map);
+		}
+		
+		
+		//í† í•‘ ë“±ë¡
+		@Override 
+		public void adminToppingInsert(Map<String,Object>map,HttpServletRequest request) throws Exception{
+			
+			adminGoodsDao.adminToppingInsert(map); //í† í•‘ ë“±ë¡ (ì´ë¯¸ì§€x)
+			
+			System.out.println("++++++++í† í•‘ì¶”ê°€(ì´ë¯¸ì§€x)+++++++"+map);
+			
+			map = toppingImageUtils.toppingImageInsert(map, request); //ì´ë¯¸ì§€íŒŒì¼ í´ë˜ìŠ¤ë¥¼ í†µí•´ ì´ë¯¸ì§€ë¥¼ ê²½ë¡œì— ì €ì¥ ì‹œí‚¤ê³  ë§µì— ì €ì¥
+			
+			
+			adminGoodsDao.adminToppingImageInsert(map); //ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
+		}
+		
+		//í† í•‘ ìˆ˜ì •
+		@Override
+		public void adminToppingModify(Map<String,Object>map,HttpServletRequest request) throws Exception{
+			
+			adminGoodsDao.adminToppingModify(map);
+			System.out.println("++++++SG_TOPPING ìˆ˜ì •ì™„ë£Œ"+map);
+			
+			map = toppingImageUtils.toppingImageUpdate(map, request);
+			
+			adminGoodsDao.adminToppingImageInsert(map);
+			System.out.println("++++++SG_TOPPING(ì´ë¯¸ì§€ ì»¬ëŸ¼) ìˆ˜ì •ì™„ë£Œ"+map);
+		}
+		//í† í•‘ì‚­ì œ
+		@Override
+		public void adminToppingDelete(Map<String,Object>map,HttpServletRequest request) throws Exception{
+			
+			adminGoodsDao.adminToppingDelete(map);; //í…Œì´ë¸” ë°ì´í„° ì‚­ì œ
+			
+			System.out.println(map);
+			
+			toppingImageUtils.toppingImageDelete(map); //ì‹¤ì œ ì €ì¥ëœ íŒŒì¼ ì‚­ì œ 
+			
+		}
+		// í† í•‘ê²€ìƒ‰(ìƒí’ˆëª…) 
+		@Override
+		public List<Map<String, Object>> adminToppingSearch0(String isSearch) throws Exception {
+
+			return adminGoodsDao.adminToppingSearch0(isSearch);
+		}
+
+		// í† í•‘ ê²€ìƒ‰(ìƒí’ˆ ë²ˆí˜¸)
+		@Override
+		public List<Map<String, Object>> adminToppingSearch1(String isSearch) throws Exception {
+
+			return adminGoodsDao.adminToppingSearch1(isSearch);
+		}
+
+		// í† í•‘ ê²€ìƒ‰(ì¹´í…Œê³ ë¦¬ ê²€ìƒ‰)
+		@Override
+		public List<Map<String, Object>> adminToppingSearch2(String isSearch) throws Exception {
+
+			List<Map<String, Object>> toppinglist = adminGoodsDao.adminToppingSearch2(isSearch);
+		return toppinglist;
+		}
+
+		// í† í•‘ ê²€ìƒ‰(íŒë§¤ On,Off)
+		@Override
+		public List<Map<String, Object>> adminToppingSearch3(String isSearch) throws Exception {
+
+			List<Map<String, Object>> toppinglist = adminGoodsDao.adminToppingSearch3(isSearch);
+		return toppinglist;
+		
+		}
+ 
+		// í† í•‘ ê²€ìƒ‰(íŒë§¤ìˆ˜ëŸ‰)
+		@Override
+		public List<Map<String, Object>> adminToppingSearch4(String isSearch) throws Exception {
+
+			List<Map<String, Object>> toppinglist = adminGoodsDao.adminToppingSearch4(isSearch);
+			return toppinglist;
+		}
+		
+		
+		// í† í•‘ ì •ë ¬(ì¬ê³ =0)
+		@Override
+		public List<Map<String, Object>> adminToppingSearch5(String isSearch) throws Exception {
+			List<Map<String, Object>> toppinglist = adminGoodsDao.adminToppingSearch5(isSearch);
+			return toppinglist;
+		}
+
 }

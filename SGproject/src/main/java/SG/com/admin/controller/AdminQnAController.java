@@ -1,6 +1,7 @@
 package SG.com.admin.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,10 @@ import org.springframework.ui.Model;
 /*import org.springframework.validation.BindingResult;*/
 
 import SG.com.admin.service.AdminQnAService;
-//Resource°¡ ¾È¸ÔÈû
+//Resourceê°€ ì•ˆë¨¹í˜
 import SG.com.common.CommandMap;
-//ÆäÀÌÂ¡ import
+import SG.com.common.Paging;
+//í˜ì´ì§• import
 
 @Controller
 public class AdminQnAController {
@@ -27,124 +29,116 @@ public class AdminQnAController {
 	@Resource(name= "adminQnAService")
 	private AdminQnAService adminQnAService;
 	
-	//°Ë»ö
+	//ê²€ìƒ‰
 	private int searchNum;
-	private int categoryNum;
 	private String isSearch;
+	
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockPage = 5;
+	private String pagingHtml;
+	private Paging page;
 	
 @RequestMapping(value="/adminQnA")
 public String adminQnA( CommandMap commandMap, Model model , HttpServletRequest request)throws Exception{	
-		List<Map<String, Object>>list = adminQnAService.adminQnaList(commandMap.getMap());
-		//Äõ¸®¹®À¸·Î ½ÇÇàµÇ´Â ¸®½ÃÆ®·Î »Ì¾Æ³½ µ¥ÀÌÅÍ¸¦ list º¯¼ö·Î ¼±¾ğÇØ¼­ "list"¶ó´Â ÀÌ¸§À¸·Î ¾²±âÀ§ÇÑ
-		//ÀÛ¾÷
-		isSearch = request.getParameter("isSearch");//³Ñ¾î¿À´Â Å°¿öµå¸¦ ²¨³»¼­ ÀúÀå
-		categoryNum = Integer.parseInt(request.getParameter("categoryNum"));
-		searchNum = Integer.parseInt(request.getParameter("searchNum"));
-		//isSearch´Â "isSearch"¶ó´Â °ªÀ¸·Î ¹Ş¾Æ¿Â´Ù.°Ë»ö°ª
-		if(isSearch !=null){//°Ë»ö°ªÀÌ  ÀÖÀ¸¸é
-			if (searchNum == 0) {//¾ÆÀÌµğ·Î Á¶È¸
-				commandMap.put("¾ÆÀÌµğ", isSearch);
-				list = adminQnAService.qnaIdSearch(commandMap.getMap());
-				}
-				//¾ÆÀÌµğ¿¡ µû¸¥ Ä«Å×°í¸® ½ÃÀÛ				
-				/*===========================================================*/
-				//Äõ¸®¹®´ç Ä«Å×°í¸® ´Ù¸£°Ô ºĞ·ù//
-				if (categoryNum == 0) { 
-					commandMap.put("Ä«Å×°í¸®", 0 );
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 1) { // »óÇ°¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
 
-					commandMap.put("QNA_CATEGORY", "»óÇ°¹®ÀÇ");
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 2) { // ¹è¼Û¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
-					commandMap.put("QNA_CATEGORY", "¹è¼Û¹®ÀÇ");
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 3) { // ÀÔ±İ¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
-					commandMap.put("QNA_CATEGORY", "ÀÔ±İ¹®ÀÇ");
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 4) { // ±³È¯&¹İÇ°¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
-					commandMap.put("QNA_CATEGORY", "±³È¯&¹İÇ°¹®ÀÇ");
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 5) { // ±âÅ¸¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
-					commandMap.put("QNA_CATEGORY", "±âÅ¸¹®ÀÇ");
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				else if (categoryNum == 6) { // ±âÅ¸¿¡ ÇØ´çÇÏ´Â Q&A ¸ñ·Ï ºÒ·¯¿À±â
-					list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-				}
-				
-
-			
-			if (searchNum == 1) {//Á¦¸ñ¿¡ µû¸¥ °Ë»ö
-				commandMap.put("Á¦¸ñ", isSearch);
-				list = adminQnAService.qnaCtgSearch1(commandMap.getMap());
-			
-			}
-		}
-		    model.addAttribute("isSearch", isSearch);
-		    model.addAttribute("searchNum",searchNum);
-		    model.addAttribute("categoryNum",categoryNum );
-		    model.addAttribute("list", list);
-		    
-		    return "admin_QnA";
+	if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+			|| request.getParameter("currentPage").equals("0")) {
+		currentPage = 1;
+		//ë°›ì•„ì˜¤ëŠ” í˜„ì œí˜ì´ì§€ê°€ ì—†ìœ¼ë©´ í˜ì´ì§€ 1ë¶€í„°ì‹œì‘
+	} else {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		//ë°›ì•„ì˜¤ëŠ” í˜„ì œí˜ì´ì§€ê°€ ìˆìœ¼ë©´ ì¸íŠ¸ê°’ìœ¼ë¡œí•´ì„œ í˜„ì œí˜ì´ì§€ ê°’ì„¤ì •
 	}
-	//Q&A¸ñ·ÏÁ¶È¸(Q&A¿¡ ´ëÇÑÀüÃ¼ÀûÀÎ ¸ñ·ÏÀº °ü¸®ÀÚÆäÀÌÁö¿¡¼­µµ º¸¿©¾ÆÇÔ)
-	//*url mapping=/adminQnA
-	//*¸Ş¼Òµå adminQnA()
-	//*tiles adminQnA->adminQnA.jsp
-		    
- @RequestMapping(value = "/adminAnswerForm")
-public String adminAnswerForm(CommandMap commandMap, Model model, HttpServletRequest request  )throws Exception{
-		    	if(request.getParameter("QNA_NO")!=null){
-		    		//±Û¹øÈ£°¡ ÀÖÀ»¶§
-		    		Map<String, Object> qna=adminQnAService.qnaDetail(commandMap.getMap());
-		    		//Äõ¸®¹®À» qna¿¡ ÀúÀå
-		    		model.addAttribute("qna", qna);
-		    		//qna·Î ÀúÀåµÇ¼­ view ÆäÀÌÁö¿¡ »Ñ·ÁÁÜ
-		    	}
-		    	return "adminAnswerForm";
-		    	
-		    	
-		    	
-		    }
-		    
-			
-			
-	//Q&A ´äº¯Æû ÀÌµ¿
-	//*url mapping=/adminAnswerForm
-	//*¸Ş¼Òµå adminAnswerForm()
-	//*tiles adminAnswerForm->adminAnswerForm.jsp
+	List<Map<String, Object>>qnalist = adminQnAService.adminQnaList(commandMap.getMap());
+	
+	isSearch = request.getParameter("isSearch");
+	commandMap.put("isSearch",isSearch);
+	if (isSearch != null) {//ê²€ìƒ‰ê°’ì´ ìˆìœ¼ë©´
 
-		    //ÀÏ´Üº¸·ù
-@RequestMapping(value="/adminAnswer")
-public String adminAnswer(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
-		  adminQnAService.ans(commandMap.getMap());
-		   return "adminQnA";
-		    
-		    
+		commandMap.put("isSearch", isSearch);
+		searchNum = Integer.parseInt(request.getParameter("searchNum"));
+	   //searchNum= ë°›ì•„ì™€ì„œ ì¸íŠ¸ê°’ìœ¼ë¡œ ë°”ê¾¸ëŠ” ì‘ì—…
+
+
+		if (searchNum == 0) { //ì‘ì„±ì
+			qnalist = adminQnAService.qnaSearch0(commandMap.getMap());
+		} else if (searchNum == 1) { //ì¹´í…Œê³ ë¦¬
+			qnalist = adminQnAService.qnaSearch1(commandMap.getMap());
+		}
+		
+		totalCount = qnalist.size();
+		page = new Paging(currentPage, totalCount, blockCount, blockPage, "AdminQnA", searchNum, isSearch);
+		pagingHtml = page.getPagingHtml().toString();
+
+		int lastCount = totalCount;
+
+		if (page.getEndCount() < totalCount)
+			lastCount = page.getEndCount() + 1;
+
+		qnalist = qnalist.subList(page.getStartCount(), lastCount);
+
+		model.addAttribute("isSearch", isSearch);
+		model.addAttribute("searchNum", searchNum);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("pagingHtml", pagingHtml);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("qnalist", qnalist);
+		
+		return "admin_qnalist";
+		
+
+}else{
+
+
+	totalCount = qnalist.size();
+
+	page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminQnA", searchNum, isSearch);
+	pagingHtml = page.getPagingHtml().toString();
+
+	int lastCount = totalCount;
+
+	if (page.getEndCount() < totalCount)
+		lastCount = page.getEndCount() + 1;
+
+	qnalist = qnalist.subList(page.getStartCount(), lastCount);
+
+	model.addAttribute("totalCount", totalCount);
+	model.addAttribute("pagingHtml", pagingHtml);
+	model.addAttribute("currentPage", currentPage);
+	model.addAttribute("qnalist", qnalist);
+				
+	return "admin_qnalist";
+	}
+}
+
+		   
+		@RequestMapping(value = "/adminAnswerForm")
+ 		public String adminAnswerForm(CommandMap commandMap, Model model, HttpServletRequest request  )throws Exception{
+		
+		commandMap.put("QNA_NO", request.getParameter("QNA_NO"));
+		Map<String,Object> qna = adminQnAService.qnaDetail(commandMap.getMap());
+				
+		model.addAttribute("qna",qna);
+		return "adminAnswer_Form";
 		    	
 		    }
-    //Q&A ´äº¯
-	//*url mapping=/adminAnswer
-	//*¸Ş¼Òµå adminAnswer()
-	//*tiles adminQnA->adminQnA.jsp
 		    
-@RequestMapping(value="/adminAnswerDelete")
-public String adminAnswerDelete(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
-	adminQnAService.qnaDelete(commandMap.getMap());
-	return "adminQnA";
-		    	
+		@RequestMapping(value="/adminAnswer")
+		public String adminAnswer(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
+		  adminQnAService.ans(commandMap.getMap());//ì—¬ê¸°ì—ë‹¤ê°€ ë‹µë³€ìƒíƒœ ë³€ê²½ì—ëŒ€í•œ ì¿¼ë¦¬ë¬¸ ë„£ì–´ì¤˜ì•¼í•´ìš”
+		   return "redirect:/adminQnA";
+ 	
+		    }
+
+		@RequestMapping(value="/adminAnswerDelete")
+		public String adminAnswerDelete(CommandMap commandMap, Model model, HttpServletRequest request)throws Exception{
+			adminQnAService.qnaDelete(commandMap.getMap());
+			return "redirect:/adminQnA";
+
 		    }
 	
 	
-	//Q&A »èÁ¦
-	//*url mapping=/adminAnswerDelete
-	//*¸Ş¼Òµå adminAnswerDelete()
-	//*tiles adminQnA ->adminQnA.jsp
 	}
 

@@ -257,7 +257,7 @@ function checkpw()
                <h2>회원정보</h2>
             </div>
 
-<ul class="section-body">
+<ul class="section-body" style="list-style: none;">
    <li class="id">
       <div class="item-label col-lg-3 col-md-4">
          <label for="mi">

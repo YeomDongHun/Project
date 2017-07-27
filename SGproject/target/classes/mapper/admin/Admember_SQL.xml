@@ -3,5 +3,149 @@
 
 <!-- 관리자페이지 회원 SQL -->
 <mapper namespace="admember">
+<select id="adminMemberListON"  resultType="hashMap">
+SELECT 
+M.MEMBER_NO,
+M.MEMBER_ID,
+M.MEMBER_GRADE,
+M.MEMBER_NAME,
+M.MEMBER_BIRTHDAY,
+M.MEMBER_EMAIL,
+M.MEMBER_ZIP,
+M.MEMBER_ADDR1,
+M.MEMBER_ADDR2,
+M.MEMBER_HEIGHT,
+M.MEMBER_WEIGHT,
+M.MEMBER_REGDATE,
+P.SUM_POINT_MONEY
+FROM SG_MEMBER M LEFT OUTER JOIN(SELECT SUM(POINT_MONEY)AS SUM_POINT_MONEY,POINT_MEMBER_NO FROM SG_POINT P GROUP BY P.POINT_MEMBER_NO)P
+ON M.MEMBER_NO = P.POINT_MEMBER_NO
+where M.MEMBER_ONOFF = 0
+</select>
+
+
+
+
+
+
+<!-- 관리자페이지 회원 포인트 SQL -->
+<select id="adminMemberPoint" parameterType="hashMap" resultType="hashMap">
+SELECT 
+M.MEMBER_NO,
+M.MEMBER_ID,
+P.SUM_POINT_MONEY
+FROM SG_MEMBER M LEFT OUTER JOIN(SELECT SUM(POINT_MONEY)AS SUM_POINT_MONEY,POINT_MEMBER_NO FROM SG_POINT P GROUP BY P.POINT_MEMBER_NO)P
+ON M.MEMBER_NO = P.POINT_MEMBER_NO
+where M.MEMBER_ONOFF = 0 AND M.MEMBER_NO = #{MEMBER_NO}
+</select>
+
+<!-- 맴버 검색(아이디)0  ON-->
+<select id="adminMembersearch0" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT 
+M.MEMBER_NO,
+M.MEMBER_ID,
+M.MEMBER_GRADE,
+M.MEMBER_NAME,
+M.MEMBER_BIRTHDAY,
+M.MEMBER_EMAIL,
+M.MEMBER_ZIP,
+M.MEMBER_ADDR1,
+M.MEMBER_ADDR2,
+M.MEMBER_HEIGHT,
+M.MEMBER_WEIGHT,
+M.MEMBER_REGDATE,
+P.SUM_POINT_MONEY
+FROM SG_MEMBER M LEFT OUTER JOIN(SELECT SUM(POINT_MONEY)AS SUM_POINT_MONEY,POINT_MEMBER_NO FROM SG_POINT P GROUP BY P.POINT_MEMBER_NO)P
+ON M.MEMBER_NO = P.POINT_MEMBER_NO
+where M.MEMBER_ONOFF = 0 AND MEMBER_ID LIKE '%' || #{isSearch} || '%'
+ORDER BY MEMBER_NO ASC
+]]>
+</select>
+
+
+<!-- 맴버 검색(이름)1 ON -->
+<select id="adminMembersearch1" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT 
+M.MEMBER_NO,
+M.MEMBER_ID,
+M.MEMBER_GRADE,
+M.MEMBER_NAME,
+M.MEMBER_BIRTHDAY,
+M.MEMBER_EMAIL,
+M.MEMBER_ZIP,
+M.MEMBER_ADDR1,
+M.MEMBER_ADDR2,
+M.MEMBER_HEIGHT,
+M.MEMBER_WEIGHT,
+M.MEMBER_REGDATE,
+P.SUM_POINT_MONEY
+FROM SG_MEMBER M LEFT OUTER JOIN(SELECT SUM(POINT_MONEY)AS SUM_POINT_MONEY,POINT_MEMBER_NO FROM SG_POINT P GROUP BY P.POINT_MEMBER_NO)P
+ON M.MEMBER_NO = P.POINT_MEMBER_NO
+where M.MEMBER_ONOFF = 0 AND MEMBER_NAME LIKE '%' || #{isSearch} || '%'
+ORDER BY MEMBER_NO ASC
+]]>
+</select>
+
+
+
+<!-- MEMBER 탈퇴  -->
+
+<update id="adminMemberDelete" parameterType="hashmap" >
+<![CDATA[
+
+ UPDATE SG_MEMBER
+ SET MEMBER_ONOFF = 1
+ WHERE MEMBER_NO = #{MEMBER_NO}
+]]>
+</update>
+
+<!-- 탈퇴 회원 목록 SQL -->
+<select id="adminMemberListOFF" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT * FROM SG_MEMBER
+WHERE MEMBER_ONOFF = 1
+]]>
+</select>
+
+<!-- 탈퇴 회원 목록 아이디로검색 -->
+<select id="adminMembersearch0F" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT * FROM SG_MEMBER
+WHERE MEMBER_ONOFF = 1 AND MEMBER_ID LIKE '%' || #{isSearch} || '%' 
+]]>
+</select>
+
+<!-- 탈퇴 회원 목록 이름으로 검색 -->
+<select id="adminMembersearch1F" parameterType="hashMap" resultType="hashMap">
+SELECT * FROM SG_MEMBER
+WHERE MEMBER_ONOFF = 1 AND MEMBER_NAME LIKE '%' || #{isSearch} || '%' 
+</select>
+
+
+
+
+
+
+<insert id="adminMemberPointInsert" parameterType="hashMap">
+<![CDATA[
+INSERT INTO SG_POINT 
+(POINT_NO, 
+POINT_MONEY, 
+POINT_CONTENT, 
+POINT_DATE,
+POINT_MEMBER_NO
+)
+VALUES 
+( SG_POINT_NO_SEQ.NEXTVAL, 
+#{POINT_MONEY}, 
+#{POINT_CONTENT}, 
+SYSDATE,
+#{POINT_MEMBER_NO} 
+)
+
+]]>
+</insert>
 
 </mapper>

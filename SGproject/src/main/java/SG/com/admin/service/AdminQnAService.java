@@ -3,39 +3,29 @@ package SG.com.admin.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface AdminQnAService {
-	
-	     //Q&A¸ñ·ÏÁ¶È¸(È¸¿ø ÀÚ½ÅÀÇ Q&A)
-		 List<Map<String,Object>> memberQnaList(Map<String, Object>map)throws Exception;
-		
-		 //Q&A»ó¼¼º¸±â
-		 Map<String, Object> qnaDetail(Map<String,Object>map) throws Exception;
+	//Q&Aìƒì„¸ë³´ê¸°
+	Map<String, Object> qnaDetail(Map<String,Object>map) throws Exception;
 		 
-		//Q&A¸ñ·ÏÁ¶È¸(°ü¸®ÀÚ)
-	    List<Map<String,Object>>adminQnaList(Map<String, Object>map)throws Exception;
+	//Q&Aëª©ë¡ì¡°íšŒ(ê´€ë¦¬ì)
+	List<Map<String,Object>>adminQnaList(Map<String, Object>map)throws Exception;
 			
-		//Q&A¸ñ·ÏÁ¶È¸-¾ÆÀÌµğ(°ü¸®ÀÚ)
-		List<Map<String,Object>>qnaIdSearch(Map<String, Object>map)throws Exception;
-		
-		//Q&A¸ñ·ÏÁ¶È¸-Á¦¸ñ(°ü¸®ÀÚ)
-		 List<Map<String,Object>>qnaTitleSearch(Map<String,Object>map)throws Exception;
 			
-		//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(´äº¯´ë±â,´äº¯Ã³¸®)
-		 List<Map<String,Object>>qnaCtgSearch0(Map<String,Object>map)throws Exception;
+	//Q&Aëª©ë¡ì¡°íšŒ-ì¹´í…Œê³ ë¦¬(ë‹µë³€ëŒ€ê¸°,ë‹µë³€ì²˜ë¦¬)
+	List<Map<String,Object>>qnaSearch0(Map<String,Object>map)throws Exception;
 			
-		//Q&A¸ñ·ÏÁ¶È¸-Ä«Å×°í¸®(»óÇ°¹®ÀÇ,È¨ÆäÀÌÁöÀÌ¿ë¹®ÀÇ)
-		 List<Map<String,Object>>qnaCtgSearch1(Map<String,Object>map)throws Exception;
+	//Q&Aëª©ë¡ì¡°íšŒ-ì¹´í…Œê³ ë¦¬(ìƒí’ˆë¬¸ì˜,í™ˆí˜ì´ì§€ì´ìš©ë¬¸ì˜)
+	 List<Map<String,Object>>qnaSearch1(Map<String,Object>map)throws Exception;
 			
-		//Q&Aµî·Ï(È¸¿ø)
-		 void qes(Map<String,Object>map) throws Exception;
-	
-		//Q&A´äº¯µî·Ï(°ü¸®ÀÚ)
-		 void ans(Map<String,Object>map)throws Exception;
+	//Q&Aë‹µë³€ë“±ë¡(ê´€ë¦¬ì)
+	void ans(Map<String,Object>map)throws Exception;
 			
-		//Q&A»èÁ¦
-		 void qnaDelete(Map<String,Object>map)throws Exception;
+	//Q&Aì‚­ì œ
+	void qnaDelete(Map<String,Object>map)throws Exception;
 			
-		}
+}
 
 
 

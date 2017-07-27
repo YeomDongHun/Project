@@ -9,76 +9,84 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 /*import FaqImageUtils;*/
-//ÀÌ¹ÌÁö import ½ÃÅ³ Util¾ÆÁ÷ ¾È¸¸µë
+//ì´ë¯¸ì§€ import ì‹œí‚¬ Utilì•„ì§ ì•ˆë§Œë“¬
 import SG.com.admin.dao.AdminFaqDao;
 import SG.com.admin.service.AdminFaqService;
+import SG.com.common.FaqImageUtils;
 
 
-//¾Æ·¡¿¡ AdminFaqServiceImpÀÌ ÄÄÆÛ·±Æ® ½ºÄËÀÌ µÇ¼­ »ç¿ë°¡´ÉÇÏ¸é
-//@Service¸¦ adminFaqService¶ó´Â ÀÌ¸§À¸·Î »ç¿ëÇÏ°Ú´Ù¶ó´Â °ÍÀÌ´Ù
+//ì•„ë˜ì— AdminFaqServiceImpì´ ì»´í¼ëŸ°íŠ¸ ìŠ¤ì¼„ì´ ë˜ì„œ ì‚¬ìš©ê°€ëŠ¥í•˜ë©´
+//@Serviceë¥¼ adminFaqServiceë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ì‚¬ìš©í•˜ê² ë‹¤ë¼ëŠ” ê²ƒì´ë‹¤
 @Service("adminFaqService")
-public class AdminFaqServiceImpl implements AdminFaqService {//ÀÎÅÍÆäÀÌ½º ¸Ş´ºÆÇ
+public class AdminFaqServiceImpl implements AdminFaqService {//ì¸í„°í˜ì´ìŠ¤ ë©”ë‰´íŒ
 	
-/*	@Resource(name="ÀÌ¹ÌÁöÀ¯Æ¿")
-	private faqImageUtils faqImageUtils;*/
-	
-	@Resource(name="AdminFaqDao")
+	@Resource(name="adminFaqDao")
 	private AdminFaqDao adminFaqDao;
 	
-	//FAQ¸ñ·ÏÁ¶È¸
+	@Resource
+	private FaqImageUtils faqImageUtils;
+	//FAQëª©ë¡ì¡°íšŒ
 	@Override	
 	public List<Map<String,Object>> faqList(Map<String,Object>map) throws Exception{
 		return adminFaqDao.faqList(map);
 	}
 	
-	//FAQ»ó¼¼º¸±â
+	//FAQìƒì„¸ë³´ê¸°
 	@Override
 	public Map<String, Object> faqDetail(Map<String,Object>map) throws Exception{
 		adminFaqDao.faqUpdateHitCnt(map);
-		Map<String, Object> resultMap = new HashMap<String,Object>();
 		Map<String, Object> tempMap = adminFaqDao.faqDetail(map);
-		resultMap.put("map", tempMap);
-		//»ó¼¼º¸±â(¸Ê¿¡´Ù°¡ ¸ÊÀ» ´ã´ÂÀÛ¾÷À»ÇÔ)
-		//»ó¼¼º¸±â°¡ ¿©·¯°Ô°¡ ÀÖÀ¸´Ï±ñ ÀÌ·±ÀÛ¾÷À»ÇÑµí?(¹°¾îº¸±â)
-		return resultMap;
+		return tempMap;
 		
 	}
 	
-	 //FAQ°Ë»ö Á¦¸ñ=0
+	 //FAQê²€ìƒ‰ ì œëª©=0
 	@Override
-	public List<Map<String,Object>> faqSearch0(Map<String,Object>map, String isSearch) throws Exception{
-		return adminFaqDao.faqSearch0(map, isSearch);
+	public List<Map<String,Object>> faqSearch0(Map<String,Object>map) throws Exception{
+		return adminFaqDao.faqSearch0(map);
 	}
-	//isSearch °ªÀ¸·Î ¹Ş¾Æ¿Ã·Á°í ÇÏ±â‹š¹®¿¡ isSearch¸¦ ¼³Á¤
+	//isSearch ê°’ìœ¼ë¡œ ë°›ì•„ì˜¬ë ¤ê³  í•˜ê¸°ë–„ë¬¸ì— isSearchë¥¼ ì„¤ì •
 	
-	//FAQ°Ë»ö ³»¿ë=1
+	//FAQê²€ìƒ‰ ë‚´ìš©=1
 	@Override
-	public List<Map<String,Object>> faqSearch1(Map<String,Object>map,String isSearch) throws Exception{
-		return adminFaqDao.faqSearch1(map, isSearch);
-	}
-	
-	//FAQ°Ë»ö Ä«Å×°í¸®=2
-	@Override
-	public List<Map<String,Object>> faqSearch2(Map<String,Object>map,String isSearch) throws Exception{
-		return adminFaqDao.faqSearch2(map, isSearch);
+	public List<Map<String,Object>> faqSearch1(Map<String,Object>map) throws Exception{
+		return adminFaqDao.faqSearch1(map);
 	}
 	
-	//FAQµî·Ï
+	//FAQê²€ìƒ‰ ì¹´í…Œê³ ë¦¬=2
+	@Override
+	public List<Map<String,Object>> faqSearch2(Map<String,Object>map) throws Exception{
+		return adminFaqDao.faqSearch2(map);
+	}
+	
+	//FAQë“±ë¡
 	@Override
 	public void faqWrite(Map<String,Object>map, HttpServletRequest request)throws Exception{
+		
 		adminFaqDao.faqWrite(map);
+		
+		map = faqImageUtils.faqImageInsert(map, request); //ë§µì— ì´ë¯¸ì§€ ì¶”ê°€
+		
+		System.out.println(map+"FAQ ì´ë¯¸ì§€ í™•ì¸í•´ë³´ì..");
+		
+		adminFaqDao.faqImageInsert(map);
+	
 	}
 	
-	//FAQ¼öÁ¤
+	//FAQìˆ˜ì •
 	@Override
 	public void faqModify(Map<String,Object>map)throws Exception{
 		adminFaqDao.faqModify(map);
 	}
 	
-	//FAQ»èÁ¦
+	//FAQì‚­ì œ
 	@Override
 	public void faqDelete(Map<String,Object>map)throws Exception{
 		adminFaqDao.faqDelete(map);
+		
+		faqImageUtils.faqImageDelete(map);
+		
+		
 	}
 
 	@Override

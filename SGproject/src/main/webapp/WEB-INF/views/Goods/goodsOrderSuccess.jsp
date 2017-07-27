@@ -59,15 +59,15 @@
 </div>
 <div style="float:left; height:150px; width:420px; margin: 10px;">
 <h4>고객님의 주문이 완료 되었습니다.</h4>
-<h4>주문 내역 및 배송에 관한 안내는 <a href ='mypage';> 주문조회 </a> 를 통하여 <br>확인 가능합니다.</h4><br>
-배송번호 : ${deliInfo.DELI_NO}<br>
+<h4>주문 내역 및 배송에 관한 안내는 <a href ='mypage';> 주문조회 </a> 를 통하여 <br>확인 가능합니다.</h4><h5><br></h5>
+<h5>배송번호 : ${deliInfo.DELI_NO}<br>
 주문일자 : ${orderInfo.ORDER_DATE} <br>
+입금계좌 : 우리은행 1004-555-987895 예금주 염동훈<br></h5>
 
-<div>
 </div>
 </div>
 </div>
-</div>
+
 <form name="frm" action="goodsOrderSuccess" method="post" >
 <div class="body_center" style="height:auto;">
 <section class="input-horizontal list-horizontal section box-shadow">

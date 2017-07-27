@@ -43,26 +43,25 @@ function delchk(){
 						<div class="col-sm-6">
 							<a href="/SG/adminGoodsList"><button type="button" class="btn btn-outline btn-default">전체상품</button></a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
-								<option value ="">--카테고리--</option>
-								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=완제품">완제품</option>
-								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=음료">음료</option>
-								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=드레싱">드레싱</option>
+								<option value ="">--상품종류--</option>
+								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=1">완제품</option>
+								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=2">음료</option>
+								<option value ="/SG/adminGoodsList?searchNum=2&isSearch=3">드레싱</option>
 							</select>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
-								<option value ="">--상품정렬--</option>
+								<option value ="">--노출여부--</option>
 								<option value ="/SG/adminGoodsList?searchNum=3&isSearch=0">판매ON</option>
 								<option value ="/SG/adminGoodsList?searchNum=3&isSearch=1">판매OFF</option>
 							</select>			
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--상품정렬--</option>
-								<option value ="/SG/adminGoodsList?searchNum=4&isSearch=GOODS_SELLCOUNT">판매수량순</option>
-								<option value ="/SG/adminGoodsList?searchNum=5&isSearch=GOODS_AMOUNT">재고0</option>
+								<option value ="/SG/adminGoodsList?searchNum=4&isSearch=GOODS_AMOUNT">재고0</option>
+								<option value ="/SG/adminGoodsList?searchNum=5&isSearch=GOODS_SELLCOUNT">판매수량순</option>
 							</select>											
 						</div>
 						<div class="col-sm-6" style="text-align:right;">
 							<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">총 상품수 : ${totalCount}</div>
-						</div>
-						
+						</div>						
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
@@ -87,13 +86,32 @@ function delchk(){
 								</thead>
 								<tbody>
 								<c:forEach var="goodsList"  items="${goodsList}" varStatus="stat">
-								<c:url var="viewURL" value="/goods/goodsModifyForm" >
+								<c:url var="GoodsDetail" value="/adminGoodsDetail" >
 									<c:param name="GOODS_NO" value="${goodsList.GOODS_NO}" />
+								</c:url>
+								<c:url var="GoodsDelete" value="/adminGoodsDelete" >
+									<c:param name="GOODS_NO" value="${goodsList.GOODS_NO}" />
+									<c:param name="GOODS_THUMBNAIL" value="${goodsList.GOODS_THUMBNAIL}"/>
+									<c:param name="IMAGE_IMAGE" value="${goodsList.IMAGE_IMAGE }"/>
 								</c:url>									
+																	
 									<tr class="gradeA even" role="row">
 										<td style="text-align:center;vertical-align:middle;">${goodsList.GOODS_NO}</td>										
 										<td style="text-align:center;vertical-align:middle;"><img src="resources/file/goodsFile/${goodsList.GOODS_THUMBNAIL}" width="60" height="60"/></td>
-										<td style="text-align:center;vertical-align:middle;">${goodsList.GOODS_TYPE}</td>
+									<c:choose>	
+										<c:when test="${goodsList.GOODS_TYPE == 0}">
+											<td style="text-align:center;vertical-align:middle;">샐러드</td>
+										</c:when>
+										<c:when test="${goodsList.GOODS_TYPE == 1}">
+											<td style="text-align:center;vertical-align:middle;">음료수</td>
+										</c:when>
+										<c:when test="${goodsList.GOODS_TYPE == 2}">
+											<td style="text-align:center;vertical-align:middle;">드레싱</td>
+										</c:when>
+										<c:otherwise>
+											<td style="text-align:center;vertical-align:middle;">기타</td>
+										</c:otherwise>																													
+									</c:choose>	
 										<td style="text-align:center;vertical-align:middle;">${goodsList.GOODS_NAME}</td>
 										<c:choose>
 											<c:when test="${goodsList.GOODS_ONOFF == 0}">
@@ -104,17 +122,14 @@ function delchk(){
 											</c:otherwise>
 										</c:choose>
 										<td style="text-align:center;vertical-align:middle;"><fmt:formatNumber value="${goodsList.GOODS_KCAL}" type="number"/>kcal</td>
-										<td style="text-align:center;vertical-align:middle;"><fmt:formatNumber value="${goodsList.GOODS_PRICE}" type="number"/>원<div style='display:none;'>${goodsList.GOODS_NO}</div></td>							
+										<td style="text-align:center;vertical-align:middle;"><fmt:formatNumber value="${goodsList.GOODS_PRICE}" type="number"/>원</td>							
 										<td style="text-align:center;vertical-align:middle;">${goodsList.GOODS_AMOUNT}개</td>
 										<td style="text-align:center;vertical-align:middle;">${goodsList.GOODS_SELLCOUNT}개</td>
 										<td style="text-align:center;vertical-align:middle;"><fmt:formatDate value="${goodsList.GOODS_DATE}" pattern="YY.MM.dd HH:mm" /></td>										
 										<td style="text-align:center;vertical-align:middle;">
-											<a href="${viewURL}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png"></a>&nbsp;&nbsp;
-										<c:url var="viewURL2" value="/goods/goodsDelete" >
-											<c:param name="GOODS_NO" value="${goodsList.GOODS_NO}" />							
-										</c:url>	
-										 <a href="${viewURL2}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/32px-Trash_font_awesome.svg.png" onclick="return delchk()"></a><div style='display:none;'>${goodsList.GOODS_NO}</div></td>									
-									</tr>
+											<a href="${GoodsDetail}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png"></a>&nbsp;&nbsp;
+										 <a href="${GoodsDelete}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/32px-Trash_font_awesome.svg.png" onclick="return delchk()"></a></td>									
+										</tr>
 								</c:forEach>
 								<!--  등록된 상품이 없을때 -->
 									<c:if test="${fn:length(goodsList) le 0}">
