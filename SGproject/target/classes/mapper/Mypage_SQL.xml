@@ -41,6 +41,17 @@
    ]]>
 </update>
 
+<!-- 회원등급 업데이트   -->
+<update  id="updateGrade" parameterType="hashmap">
+   <![CDATA[
+    UPDATE SG_MEMBER
+    SET
+        MEMBER_GRADE = ${member_grade}
+                    
+    WHERE MEMBER_NO = #{MEMBER_NO}
+   ]]>
+</update>
+
 <!-- 배송번호 별 주문 건수 조회 -->
 <select id="orderdelicnt" parameterType="hashmap" resultType="int">
 	<![CDATA[

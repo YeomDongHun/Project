@@ -55,16 +55,72 @@ public class MemberController
    {
       String mem_num = session.getAttribute("MEMBER_NO").toString(); //세션에서 회원번호 가져오기
       String mem_id = session.getAttribute("MEMBER_ID").toString(); //세션에서 회원아이디 가져오기
+      String point_content = "회원 등업 포인트 지급";
       
       commandMap.getMap().put("MEMBER_NO", mem_num); //회원번호 commandMap에 넣기
       commandMap.getMap().put("MEMBER_ID", mem_id); //회원 아이디 commandMap에 넣기
       
       Map<String, Object> sumPoint = pointService.sumPoint(commandMap.getMap());
-      Map<String, Object> mem_grade = loginService.selectId(commandMap.getMap()); 
+      Map<String, Object> mem_grade = loginService.selectId(commandMap.getMap());
+      
+      int member_grade = Integer.parseInt(mem_grade.get("MEMBER_GRADE").toString());
+      
       int sumTradeMoney = memberService.mysumTradeMoney(commandMap.getMap());
       
+      //그린 -> 핑크
+      if(member_grade == 0 && sumTradeMoney >= 100000 && sumTradeMoney < 250000)
+      {
+    	 
+         commandMap.getMap().put("member_grade", 1);
+    	 memberService.updateGrade(commandMap.getMap());
+    		  
+    	 commandMap.getMap().put("POINT_MONEY", 30000);
+    	 commandMap.getMap().put("POINT_CONTENT", point_content);
+         commandMap.getMap().put("POINT_MEMBER_NO", mem_num);
+    	 pointService.savePoint(commandMap.getMap());
+      }
+      
+      //핑크 -> 골드
+      else if(member_grade == 1 && sumTradeMoney >= 250000 && sumTradeMoney < 450000)
+      {
+    	  commandMap.getMap().put("member_grade", 2);
+    	  memberService.updateGrade(commandMap.getMap());
+    		  
+    	  commandMap.getMap().put("POINT_MONEY", 70000);
+    	  commandMap.getMap().put("POINT_CONTENT", point_content);
+    	  commandMap.getMap().put("POINT_MEMBER_NO", mem_num);
+    	  pointService.savePoint(commandMap.getMap());
+      }
+      
+      //골드 -> 다이아몬드
+      else if(member_grade == 2 && sumTradeMoney >= 450000 && sumTradeMoney < 600000)
+      {
+    	   commandMap.getMap().put("member_grade", 3);
+    	   memberService.updateGrade(commandMap.getMap());
+    		  
+    	   commandMap.getMap().put("POINT_MONEY", 150000);
+    	   commandMap.getMap().put("POINT_CONTENT", point_content);
+    	   commandMap.getMap().put("POINT_MEMBER_NO", mem_num);
+    	   pointService.savePoint(commandMap.getMap());
+    	  
+      }
+      
+      //다이아몬드 -> vip
+      else if(member_grade == 3 && sumTradeMoney > 600000)
+      {
+    	  commandMap.getMap().put("member_grade", 4);
+    	  memberService.updateGrade(commandMap.getMap());
+    		  
+    	  commandMap.getMap().put("POINT_MONEY", 250000);
+    	  commandMap.getMap().put("POINT_CONTENT", point_content);
+    	  commandMap.getMap().put("POINT_MEMBER_NO", mem_num);
+    	  pointService.savePoint(commandMap.getMap());
+      }
+      
+      Map<String, Object> mem_grade_update = loginService.selectId(commandMap.getMap());
+      
       model.addAttribute("sumPoint", sumPoint.get("SUM"));
-      model.addAttribute("memberGrade", mem_grade.get("MEMBER_GRADE"));
+      model.addAttribute("memberGrade", mem_grade_update.get("MEMBER_GRADE"));
       model.addAttribute("sumTradeMoney", sumTradeMoney);
       
       return "mypage";

@@ -52,27 +52,28 @@ function ajaxPaging(page)
 <body>
 <div id="wish_wrap">
 <div class="wish_title">
-<div class="wish_title_font" style="margin-left:40px;">
+<div class="wish_title_font" style="margin-left:40px; margin-bottom:20px;">
 나의 QNA 게시판
 </div>
 </div>
 
 
-<table class="wish_table" width="90%" style="margin-left:40px;">
+<table class="wish_table" width="94%" style="margin-left:40px; line-height:50px;">
 <colgroup>
 	<col width="10%" />
 	<col width="20%"/>
 	<col width="30%" />
-	<col width="10%" />
+	<col width="7%" />
 	<col width="20%" />
-
+    <col width="10%" />
 </colgroup>
-<tr>
+<tr style="line-height:20px;">
 	<th>글 번호</th>
 	<th>카테고리</th>
 	<th>글 제목</th>
     <th>조회수</th>
     <th>등록날짜</th>
+    <th>답변상태</th>
 </tr>
 
           <c:choose>
@@ -95,7 +96,7 @@ function ajaxPaging(page)
                      	</td>
                      	<td>${qnalist.QNA_HITCOUNT}</td>
                         <td>${qnalist.QNA_REGDATE}</td>
-               
+                        <td>${qnalist.QNA_REPSTATE}</td>
                     </tr>
                  </c:forEach> 
                  </c:otherwise> 

@@ -22,6 +22,8 @@ public interface MemberService
 	 
 	 //회원별 총 누적금액
 	 int mysumTradeMoney(Map<String, Object> map) throws Exception;
+	 
+	 void updateGrade(Map<String, Object> map) throws Exception;
 	
 	 //-------------------주문내역---------------------------
 	 //배송번호 별 주문내역 건수 조회
