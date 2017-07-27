@@ -1,110 +1,163 @@
 package SG.com.admin.controller;
 
 
-import java.util.HashMap;//ÇØ½¬¸Ê¾µ°Í
-import java.util.List;//¸®½ºÆ®¾µ°Í
-import java.util.Map;//¸Ê¾µ°Í
+import java.util.HashMap;//í•´ì‰¬ë§µì“¸ê²ƒ
+import java.util.List;//ë¦¬ìŠ¤íŠ¸ì“¸ê²ƒ
+import java.util.Map;//ë§µì“¸ê²ƒ
 
-import javax.annotation.Resource;//¾î³ëÅ×ÀÌ¼Ç Resource¾µ°Í
-import javax.servlet.http.HttpServletRequest;//request¾µ°Í
+import javax.annotation.Resource;//ì–´ë…¸í…Œì´ì…˜ Resourceì“¸ê²ƒ
+import javax.servlet.http.HttpServletRequest;//requestì“¸ê²ƒ
 
-import org.springframework.stereotype.Controller;//ÀÌ°ÍÀÌ ÄÁÆ®·Ñ·¯´Ù
+import org.springframework.stereotype.Controller;//ì´ê²ƒì´ ì»¨íŠ¸ë¡¤ëŸ¬ë‹¤
 import org.springframework.web.bind.annotation.RequestMapping;
-//ÀÌ°ÍÀÌ 
 import org.springframework.ui.Model;
 
 
 import SG.com.common.CommandMap;
 /*import spring.kh.siroragi.Paging;*/
-//ÆäÀÌÂ¡
-
+//í˜ì´ì§•
+import SG.com.common.Paging;
 import SG.com.admin.service.AdminFaqService;
 
-@Controller//ÄÁÆ®·Ñ·¯¸¦ ¼³Á¤ÇÏ¸é ½ºÇÁ¸µ ÄÁÅ×ÀÌ³Ê¿¡¼­ °´Ã¼·Î ¸¸µé¾îÁ®¼­ »ç¿ë°¡´É
+@Controller//ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì„¤ì •í•˜ë©´ ìŠ¤í”„ë§ ì»¨í…Œì´ë„ˆì—ì„œ ê°ì²´ë¡œ ë§Œë“¤ì–´ì ¸ì„œ ì‚¬ìš©ê°€ëŠ¥
 public class AdminFaqController {
+	
+	//ê²€ìƒ‰ ë„˜ë²„ì™€,ê²€ìƒ‰ ê°’(String)ì„ ë°›ì•„ì˜¤ê¸°ìœ„í•œ ë³€ìˆ˜
+	private int searchNum;
+	String isSearch;
+	
+	//í˜ì´ì§• ê´€ë ¨ ë³€ìˆ˜
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 10;
+	private int blockPage = 10;
+	private String pagingHtml;
+	private Paging page;
+	
 	
 	@Resource(name="adminFaqService")
 	private AdminFaqService adminFaqService;
 	
-	//°Ë»ö ³Ñ¹ö¿Í,°Ë»ö °ª(String)À» ¹Ş¾Æ¿À±âÀ§ÇÑ º¯¼ö
-	private int searchNum;
-	String isSearch;
-	
-	//°ü¸®ÀÚ ÆäÀÌÁö·Î ÀÌµ¿ *¼öÁ¤»çÇ× Èå¸§µµ¿¡ ³Ö¾î¾ßÇÔ*
+	//ê´€ë¦¬ì í˜ì´ì§€ë¡œ ì´ë™ *ìˆ˜ì •ì‚¬í•­ íë¦„ë„ì— ë„£ì–´ì•¼í•¨*
 	@RequestMapping(value = "/admin" )
 	public String list(){
-		return "adminForm";//adminMain.jsp·Î ÀÌµ¿ÇÏ°Ô ¼³Á¤
+		return "adminForm";//adminMain.jspë¡œ ì´ë™í•˜ê²Œ ì„¤ì •
 	}
-	//FAQ°ü¸®ÀÚ ÆäÀÌÁö·Î ÀÌµ¿(¸ñ·ÏÀÌµ¿)
+	//FAQê´€ë¦¬ì í˜ì´ì§€ë¡œ ì´ë™(ëª©ë¡ì´ë™)
 	@RequestMapping(value="/adminFaq")
 	public String adminFaq(Model model,CommandMap commandMap, HttpServletRequest request)throws Exception{
 		
-		List<Map<String,Object>> list = adminFaqService.faqList(commandMap.getMap());
-		String search = request.getParameter("isSearch");
+		String isSearch = request.getParameter("isSearch");
+		
 		Map<String, Object> isSearchMap = new HashMap<String, Object>();
+		Map<String, Object> categoryMap = new HashMap<String, Object>();
+		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) { //currentPageê°€ null ì´ê±°ë‚˜ ê³µë°± ì´ê±°ë‚˜ 0 ì¼ë•Œ.
+			currentPage = 1;
+		} else { //currentPageì— ë‹´ê²¨ì˜¤ëŠ” ê°’ì´ ìˆë‹¤ë©´ ë‹´ê²¨ì˜¤ëŠ” ê°’ìœ¼ë¡œ ì„¤ì •.
+			currentPage = Integer.parseInt(request.getParameter("currentPage")); 
+		}
+		
+		
+		List<Map<String,Object>> faqList = adminFaqService.faqList(commandMap.getMap());
 		
 		if(request.getParameter("isSearch") !=null){
-			isSearch = new String(search.getBytes("iso-885901"), "utf-8");
-			//¹Ş¾Æ¿À´Â°ª utf-8·Î ¹Ù²Ù´Â ÀÛ¾÷
-			searchNum = Integer.parseInt(request.getParameter("searchNum"));
-			//ÆÄ¶ó¹ÌÅÍ¸¦ ¹Ş¾Æ¿Ã‹š String °ªÀ¸·Î ³¯¶ó¿À´Â°É int·Î ¹Ù²Ù´ÂÀÛ¾÷
-			isSearchMap.put("isSearch",isSearch);
-			//HashMap¿¡ "isSearch"¶ó´Â ÀÌ¸§À¸·Î utf-8·Î ÀÎÄÚµùµÈ isSearch°ªÀ» ³Ö¾îÁÜ
 			
-			if(searchNum == 0){//±ÛÁ¦¸ñ=0
-				list = adminFaqService.faqSearch0(isSearchMap ,isSearch);
-				//isSearch¸¦ ³Ö¾î¾ßÇÏ´Â ÀÌÀ¯ ¸Ş¼Òµå¸¦ map¸¸ ³ÖÀ»¼öÀÖ´Â°É ¸¸µé¸éµÇ´Âµ¥
-				//¸Ş¼­µå¸¦ ¸¸µé‹š map,isSearch¸¦ ¹Ş¾Æ¾ß ¾µ¼öÀÖ°Ô²û ¼³Á¤ÇØ³õÀ½
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			isSearchMap.put("isSearch",isSearch);
+			
+			if(searchNum == 0){//ê¸€ì œëª©=0
+				faqList = adminFaqService.faqSearch0(isSearchMap);
 				}
-			if(searchNum == 1){//±Û³»¿ë=1
-				list = adminFaqService.faqSearch1(isSearchMap, isSearch);
+			if(searchNum == 1){//ê¸€ë‚´ìš©=1
+				faqList = adminFaqService.faqSearch1(isSearchMap);
 			}
-			if(searchNum == 2){//Ä«Å×°í¸®=2
-				list = adminFaqService.faqSearch2(isSearchMap, isSearch);
-			}
-			System.out.println(list);
-			model.addAttribute("list",list);
+			System.out.println(faqList);
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminFaq");
+			pagingHtml = page.getPagingHtml().toString();
+			
+			
+			model.addAttribute("list",faqList);
 			
 			return "admin_faq";
 			
 			
-		}else{//°Ë»ö °ªÀÌ ¾øÀ»¶§
+		}else if(request.getParameter("category") != null){
+			String ctg = request.getParameter("category");
+			System.out.println(ctg);
 			
-			model.addAttribute("list",list);
+			categoryMap.put("FAQ_CATEGORY", ctg);
+			faqList = adminFaqService.faqSearch2(categoryMap);
+			
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage,"adminFaq",ctg);
+			pagingHtml = page.getPagingHtml().toString();
+			
+			model.addAttribute("category",ctg);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage",currentPage);
+			model.addAttribute("list",faqList);
+			return "admin_faq";
+		
+		}else{//ê²€ìƒ‰ ê°’ì´ ì—†ì„ë•Œ
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "adminFaq");
+			pagingHtml = page.getPagingHtml().toString();
+
+			int lastCount = totalCount;
+
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+
+			faqList = faqList.subList(page.getStartCount(), lastCount);
+
+			model.addAttribute("isSearch", isSearch);
+			model.addAttribute("searchNum", searchNum);
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("list",faqList);
 			return "admin_faq";
 		}
 	}
 	
-	//FAQµî·ÏÆû
+	//FAQë“±ë¡í¼
 	@RequestMapping(value="/adminFaqForm")
 	public String adminFaqForm(){
-		return "/Admin/adminFaqForm";
-	}//jsp¿¡¼­ µî·ÏÆû¿¡¼­ submitÇØ¼­ db·Î insertµÈ°ÍÀ» ¾Æ·¡ FAQµî·Ï¿¡¼­
-	//¸Ê¿¡¼­ ²¨³»¿Í¼­ ¸®´ÙÀÌ·ºÆ®·Î tiles°ÉÁö¾Ê°í url¿¡´Ù°¡ ºÁ·Î ½÷ÁÜ
+		return "admin_FaqForm";
+	}//jspì—ì„œ ë“±ë¡í¼ì—ì„œ submití•´ì„œ dbë¡œ insertëœê²ƒì„ ì•„ë˜ FAQë“±ë¡ì—ì„œ
+	//ë§µì—ì„œ êº¼ë‚´ì™€ì„œ ë¦¬ë‹¤ì´ë ‰íŠ¸ë¡œ tilesê±¸ì§€ì•Šê³  urlì—ë‹¤ê°€ ë´ë¡œ ì´ì¤Œ
 	
-	//FAQµî·Ï
+	//FAQë“±ë¡
 	@RequestMapping(value = "/adminFaqWrite")
 	public String adminFaqWrite(CommandMap commandMap, HttpServletRequest request) throws Exception {
+		
+		System.out.println(commandMap.getMap());
 		adminFaqService.faqWrite(commandMap.getMap(), request);
-		//¸Ê¿¡¼­ ²¨³»¾µ¶§ Ç×»ó À¯ÀÇÇÒÁ¡Àº jsp¿¡¼­ db¿¡¼­ ¼³Á¤µÈ typeµé°ú ¸ÅÇÎÀÌµÇ´ÂÁö
-		//¸¦ ÀÚ¼¼È÷ ºÁ¾ßÇÑ´Ù
+		//ë§µì—ì„œ êº¼ë‚´ì“¸ë•Œ í•­ìƒ ìœ ì˜í• ì ì€ jspì—ì„œ dbì—ì„œ ì„¤ì •ëœ typeë“¤ê³¼ ë§¤í•‘ì´ë˜ëŠ”ì§€
+		//ë¥¼ ìì„¸íˆ ë´ì•¼í•œë‹¤
 
 		return "redirect:/adminFaq";
 	}
-	//FAQ ¼öÁ¤Æû ÀÌµ¿
-	@RequestMapping(value = "/adminNoticeModifyForm")
-	public String adminFaqModifyForm(Model model,CommandMap commandMap) throws Exception {
-
+	//FAQ ìˆ˜ì •í¼ ì´ë™
+	@RequestMapping(value = "/adminFaqModifyForm")
+	public String adminFaqModifyForm(Model model,CommandMap commandMap,HttpServletRequest request) throws Exception {
+		commandMap.put("FAQ_NO", request.getParameter("FAQ_NO"));
+		boolean modify = true;
 		Map<String, Object> map = adminFaqService.faqDetail(commandMap.getMap());
-		//»ó¼¼º¸±â¿¡ ´ëÇÑ °ÍÀ» Ä¿¸Çµå ¸Ê¿¡¼­ ²¨³»¿È
-		model.addAttribute("map", map.get("map"));
-		//»ó¼¼º¸±â¿¡ µé¾îÀÖ´Â Á¤º¸¸¦ ²¨³»¼­ map¿¡ ´Ù½ÃÀúÀå
-
-		return "adminNoticeModifyForm";
+		//ìƒì„¸ë³´ê¸°ì— ëŒ€í•œ ê²ƒì„ ì»¤ë§¨ë“œ ë§µì—ì„œ êº¼ë‚´ì˜´
+		model.addAttribute("map", map);
+		model.addAttribute("modify",modify);
+		//ìƒì„¸ë³´ê¸°ì— ë“¤ì–´ìˆëŠ” ì •ë³´ë¥¼ êº¼ë‚´ì„œ mapì— ë‹¤ì‹œì €ì¥
+		System.out.println(map);
+		System.out.println("ì™„ë£Œ");
+		return "admin_FaqForm";
 	}
 	
 
-	// FAQ ¼öÁ¤
+	// FAQ ìˆ˜ì •
 	@RequestMapping(value = "/adminFaqModify")
 	public String adminFaqModify(Model model, CommandMap commandMap) throws Exception {
 
@@ -115,7 +168,7 @@ public class AdminFaqController {
 		return "redirect:/adminFaq";
 	}
 	
-	// FAQ »èÁ¦ÇÏ±â
+	// FAQ ì‚­ì œí•˜ê¸°
 	@RequestMapping(value = "/adminFaqDelete")
 	public String adminFaqDelete(CommandMap commandMap) throws Exception {
 

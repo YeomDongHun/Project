@@ -8,44 +8,83 @@ import javax.servlet.http.HttpServletRequest;
 public interface AdminGoodsService {
 	
 	
-		//»óÇ°¸ñ·Ï(¿ÏÁ¦Ç°)
+		//ìƒí’ˆëª©ë¡(ì™„ì œí’ˆ)
 		List<Map<String,Object>> adminGoodsList(Map<String,Object>map) throws Exception;
-
-		// »óÇ° °Ë»ö(»óÇ° ÀÌ¸§)
+		
+		
+		//ìƒí’ˆ ìƒì„¸ë³´ê¸°(ì™„ì œí’ˆ)	
+		Map<String,Object> adminGoodsDetail(Map<String,Object>map) throws Exception;
+		
+		// ìƒí’ˆ ê²€ìƒ‰(ìƒí’ˆ ì´ë¦„)
 		public List<Map<String, Object>> adminGoodsSearch0(String isSearch) throws Exception;
 
-		// »óÇ° °Ë»ö(»óÇ° ¹øÈ£)
+		// ìƒí’ˆ ê²€ìƒ‰(ìƒí’ˆ ë²ˆí˜¸)
 		public List<Map<String, Object>> adminGoodsSearch1(String isSearch) throws Exception;
 
-		// »óÇ° °Ë»ö(Ä«Å×°í¸® °Ë»ö)
+		// ìƒí’ˆ ê²€ìƒ‰(ì¹´í…Œê³ ë¦¬ ê²€ìƒ‰)
 		public List<Map<String, Object>> adminGoodsSearch2(String isSearch) throws Exception;
 
-		// »óÇ° °Ë»ö(ÆÇ¸Å ON or OFF)
+		// ìƒí’ˆ ê²€ìƒ‰(íŒë§¤ ON or OFF)
 		public List<Map<String, Object>> adminGoodsSearch3(String isSearch) throws Exception;
 
-		// »óÇ° °Ë»ö(Àç°í°¡ 0ÀÎ »óÇ°)
+		// ìƒí’ˆ ê²€ìƒ‰(ì¬ê³ ê°€ 0ì¸ ìƒí’ˆ)
 		public List<Map<String, Object>> adminGoodsSearch4(String isSearch) throws Exception;
 				
-		// »óÇ° Á¤·Ä(ÆÇ¸Å·®¼ø)
+		// ìƒí’ˆ ì •ë ¬(íŒë§¤ëŸ‰ìˆœ)
 		public List<Map<String, Object>> adminGoodsSearch5(String isSearch) throws Exception;
 		
-		//»óÇ° µî·Ï
+		//ìƒí’ˆ ë“±ë¡
 		public void adminGoodsInsert(Map<String,Object>map, HttpServletRequest request) throws Exception;
-		/*// »óÇ° ¼öÁ¤ ÆûÀ¸·Î ÀÌµ¿
+		
+		//ìƒí’ˆ ìˆ˜ì •
+		public void adminGoodsModify(Map<String,Object>map, HttpServletRequest request) throws Exception;
+		
+		//ìƒí’ˆ ì‚­ì œ(GOODS_ONOFF = > OFF)
+		public void adminGoodsDelete(Map<String,Object>map) throws Exception;
+		
+		/*// ìƒí’ˆ ìˆ˜ì • í¼ìœ¼ë¡œ ì´ë™
 		public List<Map<String, Object>> goodsModifyForm(Map<String, Object> map) throws Exception;
 		
 		public List<Map<String, Object>> goodsModifyFormImage(Map<String, Object> map) throws Exception;
-		// »óÇ° ¼öÁ¤
+		// ìƒí’ˆ ìˆ˜ì •
 		public void goodsModify(Map<String, Object> map, HttpServletRequest request) throws Exception;
 
-		// »óÇ° »èÁ¦
+		// ìƒí’ˆ ì‚­ì œ
 		public void goodsDelete(Map<String, Object> map) throws Exception;
 */	
 		
-		//ÅäÇÎ Á¶È¸
-		public List<Map<String,Object>> adminToppingList(Map<String,Object>map)throws Exception;
+		//í† í•‘ ì¡°íšŒ
+		public List<Map<String,Object>>adminToppingList(Map<String,Object>map)throws Exception;
 		
-		//ÅäÇÎ µî·Ï
-		//public void adminToppingInsert(Map<String,Object>map,HttpServletRequest request) throws Exception;
+		//í† í•‘ ìƒì„¸ë³´ê¸°
+		public Map<String,Object> adminToppingDetail(Map<String,Object>map)throws Exception;
+		
+		//í† í•‘ ë“±ë¡
+		public void adminToppingInsert(Map<String,Object>map,HttpServletRequest request) throws Exception;
+				
+		//í† í•‘ ìˆ˜ì •		
+		public void adminToppingModify(Map<String,Object>map,HttpServletRequest request) throws Exception;
+		
+		//í† í•‘ ì‚­ì œ
+		public void adminToppingDelete(Map<String,Object>map,HttpServletRequest request) throws Exception;
+		
+		//í† í•‘ ê²€ìƒ‰(ìƒí’ˆ ì´ë¦„)
+		public List<Map<String, Object>> adminToppingSearch0(String isSearch) throws Exception;
+
+		//í† í•‘ ê²€ìƒ‰(ìƒí’ˆ ë²ˆí˜¸)
+		public List<Map<String, Object>> adminToppingSearch1(String isSearch) throws Exception;
+
+		//í† í•‘ ê²€ìƒ‰(ì¹´í…Œê³ ë¦¬ ê²€ìƒ‰)
+		public List<Map<String, Object>> adminToppingSearch2(String isSearch) throws Exception;
+
+		//í† í•‘ ê²€ìƒ‰(íŒë§¤ ON or OFF)
+		public List<Map<String, Object>> adminToppingSearch3(String isSearch) throws Exception;
+
+		//í† í•‘ ê²€ìƒ‰(ì¬ê³ ê°€ 0ì¸ ìƒí’ˆ)
+		public List<Map<String, Object>> adminToppingSearch4(String isSearch) throws Exception;
+				
+		//í† í•‘ ì •ë ¬(íŒë§¤ëŸ‰ìˆœ)
+		public List<Map<String, Object>> adminToppingSearch5(String isSearch) throws Exception;
+		
 	
 }

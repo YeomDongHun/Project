@@ -176,7 +176,7 @@ function WishAdd(test){
     <button id="2" type="button" class="btn btn-default" onclick="javascript:CategoryOn(this);">Beverage</button>
   </div>
   <div class="btn-group" role="group">
-    <button id="3" type="button" class="btn btn-default" onclick="javascript:CategoryOn(this)">Side Dish</button>
+    <button id="3" type="button" class="btn btn-default" onclick="javascript:CategoryOn(this)">Other</button>
   </div>
   <div class="btn-group" role="group">
     <button id="4" type="button" class="btn btn-default" onclick="javascript:CategoryOn(this)">Package</button>

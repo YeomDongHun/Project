@@ -12,61 +12,114 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import SG.com.common.CommandMap;
-//import ÆäÀÌÂ¡
-
-import SG.com.admin.service.AdminFaqService;
+//import í˜ì´ì§•
+import SG.com.common.Paging;
+import SG.com.board.service.MemberFaqService;
 
 @Controller
 public class MemberFaqController {
 	
-	@Resource(name="adminFaqService")
-	private AdminFaqService adminFaqService;
+	@Resource(name="memberFaqService")
+	private MemberFaqService memberFaqService;
 	
 	
-	private int searchNum;//¸ñ·ÏÀ» ±¸ºĞÇÏ´Â º¯¼ö
-	private String isSearch;//°Ë»ö°ªÀ» ¹Ş¾Æ¿À°Ô²û º¯¼ö ¼³Á¤
+	private int searchNum;//ëª©ë¡ì„ êµ¬ë¶„í•˜ëŠ” ë³€ìˆ˜
+	private String isSearch;//ê²€ìƒ‰ê°’ì„ ë°›ì•„ì˜¤ê²Œë” ë³€ìˆ˜ ì„¤ì •
+	
+	
+	//í˜ì´ì§• ê´€ë ¨ ë³€ìˆ˜
+	private int currentPage = 1;
+	private int totalCount;
+	private int blockCount = 5;
+	private int blockPage = 10;
+	private String pagingHtml;
+	private Paging page;
+	
 	
 	@RequestMapping(value = "/memberFaqList")
 	public String memberFaqList(Model model,CommandMap commandMap, HttpServletRequest request)throws Exception{
 	
-	List<Map<String, Object>>list = adminFaqService.faqList(commandMap.getMap()); //faqList¿¡ ´ã°ÜÀÖ´Â list°¡ »Ñ·ÁÁ®ÀÖ´Â Á¤º¸¸¦ 
-	model.addAttribute("list",list);
-	/*String search = request.getParameter("isSearch");*/
-	Map<String, Object>isSearchMap = new HashMap<String, Object>();
-	
-	if(request.getParameter("isSearch") != null){//°Ë»ö°ªÀÌ ÀÖÀ»‹š
-		isSearch=request.getParameter("isSearch");
-		searchNum=Integer.parseInt(request.getParameter("searchNum"));
-		isSearchMap.put("isSearch", isSearch);
+		String isSearch = request.getParameter("isSearch");
 		
-		if(searchNum == 0){//±ÛÁ¦¸ñ
-			list = adminFaqService.faqSearch0(isSearchMap, isSearch);
-		}
-		if(searchNum == 1){//±Û³»¿ë
-			list = adminFaqService.faqSearch1(isSearchMap, isSearch);
-		}
-		if(searchNum == 2){//Ä«Å×°í¸® °Ë»ö
-			list = adminFaqService.faqSearch2(isSearchMap, isSearch);
-		}
-		model.addAttribute("list",list);
+		Map<String, Object> isSearchMap = new HashMap<String, Object>();
+		Map<String, Object> categoryMap = new HashMap<String, Object>();
 		
+		if (request.getParameter("currentPage") == null || request.getParameter("currentPage").trim().isEmpty()
+				|| request.getParameter("currentPage").equals("0")) { //currentPageê°€ null ì´ê±°ë‚˜ ê³µë°± ì´ê±°ë‚˜ 0 ì¼ë•Œ.
+			currentPage = 1;
+		} else { //currentPageì— ë‹´ê²¨ì˜¤ëŠ” ê°’ì´ ìˆë‹¤ë©´ ë‹´ê²¨ì˜¤ëŠ” ê°’ìœ¼ë¡œ ì„¤ì •.
+			currentPage = Integer.parseInt(request.getParameter("currentPage")); 
+		}
+		
+		
+		List<Map<String,Object>> faqList = memberFaqService.memberfaqList(commandMap.getMap());
+		
+		if(request.getParameter("isSearch") !=null){
+			
+			searchNum = Integer.parseInt(request.getParameter("searchNum"));
+			isSearchMap.put("isSearch",isSearch);
+			
+			if(searchNum == 0){//ê¸€ì œëª©=0
+				faqList = memberFaqService.memberfaqSearch0(isSearchMap);
+				}
+			if(searchNum == 1){//ê¸€ë‚´ìš©=1
+				faqList = memberFaqService.memberfaqSearch1(isSearchMap);
+			}
+			System.out.println(faqList);
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "memberFaqList",searchNum,isSearch);
+			pagingHtml = page.getPagingHtml().toString();
+			
+			
+			model.addAttribute("list",faqList);
+			
+			return "memberFaqList_tiles";
+			
+			
+		}else if(request.getParameter("category") != null){
+			String ctg = request.getParameter("category");
+			System.out.println(ctg);
+			
+			categoryMap.put("FAQ_CATEGORY", ctg);
+			faqList = memberFaqService.memberfaqSearch2(categoryMap);
+			
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage,"memberFaqList",ctg);
+			pagingHtml = page.getPagingHtml().toString();
+			
+			model.addAttribute("category",ctg);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage",currentPage);
+			model.addAttribute("list",faqList);
+			return "memberFaqList_tiles";
+		
+		}else{//ê²€ìƒ‰ ê°’ì´ ì—†ì„ë•Œ
+			totalCount = faqList.size();
+			page = new Paging(currentPage, totalCount, blockCount, blockPage, "memberFaqList");
+			pagingHtml = page.getPagingHtml().toString();
 
-	
-	
-	return "memberFaqList_tiles";
-	}else{
-		
-	 return "memberFaqList_tiles";
-	}
+			int lastCount = totalCount;
+
+			if (page.getEndCount() < totalCount)
+				lastCount = page.getEndCount() + 1;
+
+			faqList = faqList.subList(page.getStartCount(), lastCount);
+
+			model.addAttribute("isSearch", isSearch);
+			model.addAttribute("searchNum", searchNum);
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("pagingHtml", pagingHtml);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("list",faqList);
+			return "memberFaqList_tiles";
+		}
 		
 	}
 
     @RequestMapping(value="/memberFaqDetail")
     public String faqDetail(Model model, CommandMap commandMap)throws Exception{
-    	Map<String, Object>map = adminFaqService.faqDetail(commandMap.getMap());
+    	Map<String, Object>map = memberFaqService.memberfaqDetail(commandMap.getMap());
     	model.addAttribute("map",map.get("map"));
-    	
- 
     	
     	return "memberFAqDetail";
     }

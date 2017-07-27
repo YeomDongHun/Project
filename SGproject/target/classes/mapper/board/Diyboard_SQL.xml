@@ -3,5 +3,169 @@
 
 <!-- DIY 게시판 SQL -->
 <mapper namespace="diyboard">
+<!--게시글 목록조회  -->
+<select id="diyboardList" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT
+	 s.DIY_CONTENT,
+	 s.DIY_HITCOUNT,
+	 s.DIY_IMAGE,
+	 s.DIY_MEMBER_ID,
+	 s.DIY_NO,
+	 s.DIY_REGDATE,
+	 s.DIY_TITLE,
+	 c.DIY_RATE,
+	 c.DIY_COUNT
+FROM SG_DIY_BOARD s LEFT OUTER JOIN (SELECT ROUND(AVG(DIYCMT_RATE),0) AS DIY_RATE, COUNT(DIY_NO) AS DIY_COUNT,DIY_NO FROM SG_DIYCMT  c group by DIY_NO) c
+ON s.DIY_NO =c.DIY_NO 
+ ]]>
+ </select>
+ <!-- 아이디 -->
+ <select id="diyboardSearch0" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+ SELECT
+ *
+ FROM SG_DIY_BOARD
+ WHERE DIY_MEMBER_ID LIKE '%' || #{isSearch} || '%'
+ 
+ ]]>
+ </select>
+ 
+ <!-- 제목 -->
+ <select id="diyboardSearch1" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+ SELECT
+ *
+ FROM SG_DIY_BOARD
+ WHERE DIY_TITLE LIKE '%' || #{isSearch} || '%'
+ 
+ ]]>
+ 
+ </select>
+ 
+<select id="diyboardDetail" parameterType="hashMap" resultType="hashMap">
+<![CDATA[
+SELECT*FROM SG_DIY_BOARD
+WHERE DIY_NO = #{DIY_NO}
+]]>
+</select>
+<!--조회수 증가  -->
+<update id="hitCount" parameterType="hashMap">
+<![CDATA[
+UPDATE SG_DIY_BOARD SET
+DIY_HITCOUNT=DIY_HITCOUNT+1
+WHERE DIY_NO = #{DIY_NO}
 
+]]>
+</update>
+
+<select id="diyCommentList" parameterType="integer" resultType="hashmap">
+<![CDATA[
+SELECT
+        DIYCMT_NO,
+        DIYCMT_ID,
+        DIY_NO,
+        DIYCMT_CONTENT,
+        DIYCMT_RATE,
+        DIYCMT_REGDATE
+FROM
+		SG_DIYCMT
+WHERE DIY_NO = #{diyno}
+
+]]>
+</select>
+
+<!--댓글 평균 점수 RATE-->
+<select id="memberRateAvg" parameterType="integer" resultType="hashMap">
+<![CDATA[
+SELECT 
+ROUND(AVG(C.DIYCMT_RATE),0)RATE
+FROM 
+SG_DIYCMT C, SG_DIY_BOARD B 
+WHERE B.DIY_NO=#{B.DIY_NO}
+]]>
+
+</select>
+
+
+ 
+<insert id="diyInsert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="DIY_NO">
+		<selectKey keyProperty="DIY_NO" resultType="integer" order="BEFORE">
+			SELECT SG_DIY_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+
+
+<![CDATA[
+ INSERT INTO SG_DIY_BOARD(
+        DIY_NO,
+        DIY_CONTENT,
+        DIY_HITCOUNT,
+        DIY_TITLE,
+        DIY_REGDATE,
+        DIY_MEMBER_ID)
+ VALUES
+ (
+ 		#{DIY_NO},
+        #{DIY_CONTENT},
+        default,
+        #{DIY_TITLE},
+        SYSDATE,
+        #{DIY_MEMBER_ID})
+
+ ]]>
+ </insert>
+ 
+ <insert id="diyInsertComment" parameterType="hashmap" >
+ 	<![CDATA[
+ 	INSERT INTO SG_DIYCMT (
+        DIYCMT_NO,
+        DIYCMT_ID,
+        DIY_NO,
+        DIYCMT_CONTENT,
+        DIYCMT_RATE,
+        DIYCMT_REGDATE
+        )
+ 	VALUES
+		(
+		SG_DIYCMT_NO_SEQ.NEXTVAL,
+ 		#{DIYCMT_ID},
+ 		#{DIY_NO},
+ 		#{DIYCMT_CONTENT},
+ 		#{DIYCMT_RATE},
+		 SYSDATE
+		 )
+ 	]]>
+ </insert>
+ 
+ <update id="diyImageInsert" parameterType="hashmap">
+ <![CDATA[
+  UPDATE SG_DIY_BOARD SET
+  DIY_IMAGE = #{DIY_IMAGE}
+  WHERE DIY_NO = #{DIY_NO}
+  ]]>
+ </update>
+ 
+ <update id="diyModify" parameterType="hashmap">
+    <![CDATA[
+   UPDATE SG_DIY_BOARD SET
+  	 DIY_TITLE = #{DIY_TITLE},
+  	 DIY_CONTENT = #{DIY_CONTENT},
+  	 DIY_REGDATE = SYSDATE
+   WHERE DIY_NO = #{DIY_NO}
+   ]]>
+ </update>
+ 
+ <delete id="diyCmtDelete" parameterType="hashmap">
+  <![CDATA[
+  DELETE FROM SG_DIYCMT 
+  WHERE DIY_NO = #{DIY_NO}
+  ]]>
+ </delete>
+ 
+ <delete id="diyDelete" parameterType="hashmap">
+  <![CDATA[
+  DELETE FROM SG_DIY_BOARD 
+  WHERE DIY_NO = #{DIY_NO}
+  ]]>
+ </delete>
 </mapper>

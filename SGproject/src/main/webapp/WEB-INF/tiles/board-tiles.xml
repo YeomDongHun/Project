@@ -25,6 +25,18 @@
 	
    <definition name="memberFaqList_tiles" extends="layout">
 	  <put-attribute name="body" value="/WEB-INF/views/Board/FAQBoard/memberFaqList.jsp"/>	
+   </definition>
+   
+   <definition name="memberdiyboardList_tiles" extends="layout">
+   	  <put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
+   </definition>
+   
+   <definition name="memberdiyBoardDetail_tiles" extends="layout">
+   		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyDetail.jsp"/>
+   </definition>
+   
+   <definition name="memberdiyBoardForm_tiles" extends="layout">
+   	<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyInsertForm.jsp"/>
    </definition>	
 
 </tiles-definitions>

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<table class="table table-bordered">
+</table>
 
 </body>
 </html>

@@ -41,22 +41,22 @@ function delchk(){
 					class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 					<div class="row" style="margin-bottom:5px;">
 						<div class="col-sm-6">
-							<a href="/SG/admintoppingList"><button type="button" class="btn btn-outline btn-default">전체상품</button></a>
+							<a href="/SG/adminToppingList"><button type="button" class="btn btn-outline btn-default">전체상품</button></a>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--카테고리--</option>
-								<option value ="/SG/admintoppingList?searchNum=2&isSearch=완제품">육류</option>
-								<option value ="/SG/admintoppingList?searchNum=2&isSearch=음료">채소</option>
-								<option value ="/SG/admintoppingList?searchNum=2&isSearch=드레싱">드레싱</option>
+								<option value ="/SG/adminToppingList?searchNum=2&isSearch=0">육류</option>
+								<option value ="/SG/adminToppingList?searchNum=2&isSearch=1">채소</option>
+								<option value ="/SG/adminToppingList?searchNum=2&isSearch=2">드레싱</option>
 							</select>
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--상품정렬--</option>
-								<option value ="/SG/admintoppingList?searchNum=3&isSearch=0">판매ON</option>
-								<option value ="/SG/admintoppingList?searchNum=3&isSearch=1">판매OFF</option>
+								<option value ="/SG/adminToppingList?searchNum=3&isSearch=0">판매ON</option>
+								<option value ="/SG/adminToppingList?searchNum=3&isSearch=1">판매OFF</option>
 							</select>			
 							<select class="form-control" name="select" onchange="window.open(value,'_self');">
 								<option value ="">--상품정렬--</option>
-								<option value ="/SG/admintoppingList?searchNum=4&isSearch=TOPPING_SELLCOUNT">판매수량순</option>
-								<option value ="/SG/admintoppingList?searchNum=5&isSearch=TOPPING_AMOUNT">재고0</option>
+								<option value ="/SG/adminToppingList?searchNum=4&isSearch=TOPPING_SELLCOUNT">판매수량순</option>
+								<option value ="/SG/adminToppingList?searchNum=5&isSearch=TOPPING_AMOUNT">재고0</option>
 							</select>											
 						</div>
 						<div class="col-sm-6" style="text-align:right;">
@@ -87,12 +87,17 @@ function delchk(){
 								</thead>
 								<tbody>
 								<c:forEach var="toppingList"  items="${toppingList}" varStatus="stat">
-								<c:url var="viewURL" value="/TOPPING/TOPPINGModifyForm" >
+								<c:url var="ToppingDetail" value="/adminToppingDetail" >
 									<c:param name="TOPPING_NO" value="${toppingList.TOPPING_NO}" />
-								</c:url>									
+								</c:url>
+								<c:url var="ToppingDelete" value="/adminToppingDelete" >
+									<c:param name="TOPPING_NO" value="${toppingList.TOPPING_NO}" />
+									<c:param name="TOPPING_IMG" value="${toppingList.TOPPING_IMG }"/>
+								</c:url>
+																	
 									<tr class="gradeA even" role="row">
 										<td style="text-align:center;vertical-align:middle;">${toppingList.TOPPING_NO}</td>										
-										<td style="text-align:center;vertical-align:middle;"><img src="resources/file/goodsFile/${toppingList.TOPPING_THUMBNAIL}" width="60" height="60" /></td>
+										<td style="text-align:center;vertical-align:middle;"><img src="resources/file/goodsFile/${toppingList.TOPPING_IMG}" width="60" height="60" /></td>
 										<td style="text-align:center;vertical-align:middle;">${toppingList.TOPPING_TYPE}</td>
 										<td style="text-align:center;vertical-align:middle;">${toppingList.TOPPING_NAME}</td>
 										<c:choose>
@@ -107,13 +112,10 @@ function delchk(){
 										<td style="text-align:center;vertical-align:middle;"><fmt:formatNumber value="${toppingList.TOPPING_PRICE}" type="number"/>원<div style='display:none;'>${toppingList.TOPPING_NO}</div></td>							
 										<td style="text-align:center;vertical-align:middle;">${toppingList.TOPPING_AMOUNT}개</td>
 										<td style="text-align:center;vertical-align:middle;">${toppingList.TOPPING_SELLCOUNT}개</td>
-										<td style="text-align:center;vertical-align:middle;"><fmt:formatDate value="${toppingList.TOPPING_DATE}" pattern="YY.MM.dd HH:mm" /></td>										
+										<td style="text-align:center;vertical-align:middle;"><fmt:formatDate value="${toppingList.TOPPING_REGDATE}" pattern="YY.MM.dd HH:mm" /></td>										
 										<td style="text-align:center;vertical-align:middle;">
-											<a href="${viewURL}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png"></a>&nbsp;&nbsp;
-										<c:url var="viewURL2" value="/TOPPING/TOPPINGDelete" >
-											<c:param name="TOPPING_NO" value="${toppingList.TOPPING_NO}" />							
-										</c:url>	
-										 <a href="${viewURL2}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/32px-Trash_font_awesome.svg.png" onclick="return delchk()"></a><div style='display:none;'>${toppingList.TOPPING_NO}</div></td>									
+											<a href="${ToppingDetail}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/32px-Cog_font_awesome.svg.png"></a>&nbsp;&nbsp;
+										 <a href="${ToppingDelete}"><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/32px-Trash_font_awesome.svg.png" onclick="return delchk()"></a></td>									
 									</tr>
 								</c:forEach>
 								<!--  등록된 상품이 없을때 -->

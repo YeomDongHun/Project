@@ -16,8 +16,7 @@
 	<definition name="admin_faq" extends="layoutAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/Admin/adminFaq.jsp"/>
 	</definition>
-	
-	<definition name="admin_qna" extends="layoutAdmin">
+	<definition name="admin_qnalist" extends="layoutAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/Admin/QnABoard/adminQnA.jsp"/>
 	</definition>
 	
@@ -29,6 +28,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/Admin/adminGoodsForm.jsp"/>
 	</definition>
 	
+	<definition name="admin_goodsModifyForm" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminGoodsForm.jsp"/>
+	</definition>
+	
 	<definition name="admin_toppingList" extends="layoutAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/Admin/adminToppingList.jsp"/>
 	</definition>
@@ -36,5 +39,58 @@
 	<definition name="admin_toppingForm" extends="layoutAdmin">
 		<put-attribute name="body" value="/WEB-INF/views/Admin/adminToppingForm.jsp"/>
 	</definition>
+	
+	<definition name="admin_modifyForm" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminToppingForm.jsp"/>
+	</definition>
+	
+	<definition name="admin_noticeList" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminNoticeAdminList.jsp"/>
+	</definition>
+	
+	<definition name="admin_orderList" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminOrderList.jsp"/>
+	</definition>
+	
+	<definition name="noticeList_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/Board/NoticeBoard/memberNoticeList.jsp"/>
+	</definition>
+	
+	<definition name="admin_noticeDetail" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Board/NoticeBoard/memberNoticeDetail.jsp"/>
+	</definition>
+	
+	<definition name="admin_FaqForm" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminFaqForm.jsp"/>
+	</definition>
+	
+	<definition name="admin_NoticeForm" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminNoticeForm.jsp"/>
+	</definition>
+	
+	<definition name="adminAnswer_Form" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/QnABoard/adminAnswerForm.jsp"/>
+	</definition>
+	
+	<definition name="admin_OrderView" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminOrderDetail.jsp"/>
+	</definition>
+	
+	<definition name="admin_DiyBoardList" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Board/DIYBoard/memberDiyList.jsp"/>
+	</definition>
+	
+		<definition name="admin_memberList" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminMemberListON.jsp"/>
+	</definition>
+	
+	<definition name="admin_memberListOFF" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminMemberListOFF.jsp"/>
+	</definition>
+	
+	<definition name="admin_memberpoint" extends="layoutAdmin">
+		<put-attribute name="body" value="/WEB-INF/views/Admin/adminMemberPoint.jsp"/>
+	</definition>
 
+	
 </tiles-definitions>

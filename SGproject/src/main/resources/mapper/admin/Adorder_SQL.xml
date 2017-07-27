@@ -3,5 +3,259 @@
 
 <!-- 관리자페이지 주문 SQL -->
 <mapper namespace="adorder">
+	<select id="adOrderList" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT 
+    O.ORDER_NO,
+    O.ORDER_MONEY,
+    O.ORDER_DATE,
+    O.ORDER_TRADE_TYPE,
+    O.ORDER_TOPPING_NAME,
+    O.ORDER_STATE,
+    O.ORDER_GOODS_NO,
+    O.ORDER_MEMBER_ID,
+    G.GOODS_NAME,
+    G.GOODS_THUMBNAIL,
+    D.DELI_INVOICE_NO,
+    D.DELI_NO
+FROM SG_ORDER O, SG_GOODS G, SG_DELI D
+WHERE O.ORDER_GOODS_NO = G.GOODS_NO
+ AND O.ORDER_DELI_NO = D.DELI_NO
+ GROUP BY O.ORDER_NO, O.ORDER_MONEY,O.ORDER_DATE, O.ORDER_TRADE_TYPE, 
+ O.ORDER_TOPPING_NAME,O.ORDER_GOODS_NO, O.ORDER_STATE, G.GOODS_NAME, G.GOODS_THUMBNAIL, D.DELI_INVOICE_NO, 
+ O.ORDER_MEMBER_ID, D.DELI_NO   
+ORDER BY O.ORDER_DATE DESC            
+ ]]>
+</select>
+
+<!-- 배송번호에 주문이 몇개 있는지 확인 하기 위한 셀렉문 -->	
+<select id="adminDeliOrderList" parameterType="Integer" resultType="hashmap">
+	<![CDATA[
+SELECT
+	ORDER_NO,
+	ORDER_STATE,
+	ORDER_MONEY,
+	ORDER_DELI_NO	
+FROM
+	SG_ORDER
+WHERE ORDER_DELI_NO = #{ORDER_DELI_NO}	
+	 ]]>	
+</select>
+
+<!-- 주문상세보기 -->
+<select id="adOrderDetail" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT 
+            O.ORDER_NO,
+            O.ORDER_DELI_NO,
+            O.ORDER_MONEY, 
+            O.ORDER_DATE, 
+            O.ORDER_TRADE_TYPE, 
+            O.ORDER_TOPPING_NAME, 
+            O.ORDER_STATE, 
+         O.ORDER_GOODS_AMOUNT,
+            G.GOODS_NAME,
+            G.GOODS_THUMBNAIL, 
+         D.DELI_INVOICE_NO, 
+         D.DELI_ORDER_NAME,
+         D.DELI_RECEIVE_ZIP, 
+         D.DELI_RECEIVE_ADDR1, 
+         D.DELI_RECEIVE_ADDR2, 
+          D.DELI_RECEIVE_NAME, 
+         D.DELI_RECEIVE_PHONE, 
+         D.DELI_ORDER_MEMO,
+            C.SUM_ORDER_MONEY
+
+          FROM SG_ORDER O,
+               SG_GOODS G,
+            SG_DELI D,
+            (SELECT SUM(ORDER_MONEY) AS SUM_ORDER_MONEY 
+                FROM SG_ORDER 
+                WHERE ORDER_DELI_NO=#{ORDER_DELI_NO}) C
+                     
+          WHERE O.ORDER_MEMBER_ID = #{MEMBER_ID}
+                AND O.ORDER_GOODS_NO = G.GOODS_NO
+                AND O.ORDER_DELI_NO = D.DELI_NO
+             AND O.ORDER_DELI_NO = #{ORDER_DELI_NO}
+          
+          ORDER BY O.ORDER_DATE DESC   
+]]>
+</select>
+<!-- 카테고리 주문상태 검색 -->
+<select id="adOrderSearch0" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+
+SELECT 
+    O.ORDER_NO,
+    O.ORDER_MONEY,
+    O.ORDER_DATE,
+    O.ORDER_TRADE_TYPE,
+    O.ORDER_TOPPING_NAME,
+    O.ORDER_STATE,
+    O.ORDER_GOODS_NO,
+    O.ORDER_MEMBER_ID,
+    G.GOODS_NAME,
+    G.GOODS_THUMBNAIL,
+    D.DELI_INVOICE_NO,
+    D.DELI_NO
+FROM SG_ORDER O, SG_GOODS G, SG_DELI D
+WHERE O.ORDER_GOODS_NO = G.GOODS_NO
+ AND O.ORDER_DELI_NO = D.DELI_NO
+ AND O.ORDER_STATE = #{isSearch}
+ GROUP BY O.ORDER_NO, O.ORDER_MONEY,O.ORDER_DATE, O.ORDER_TRADE_TYPE, 
+ O.ORDER_TOPPING_NAME,O.ORDER_GOODS_NO, O.ORDER_STATE, G.GOODS_NAME, G.GOODS_THUMBNAIL, D.DELI_INVOICE_NO, 
+ O.ORDER_MEMBER_ID, D.DELI_NO   
+ORDER BY O.ORDER_DATE DESC   
+ ]]>
+</select>
+
+<!-- 카테고리 결제방법 검색 -->
+<select id="adOrderSearch1" parameterType="hashmap" resultType="hashmap">
+<![CDATA[
+SELECT 
+    O.ORDER_NO,
+    O.ORDER_MONEY,
+    O.ORDER_DATE,
+    O.ORDER_TRADE_TYPE,
+    O.ORDER_TOPPING_NAME,
+    O.ORDER_STATE,
+    O.ORDER_GOODS_NO,
+    O.ORDER_MEMBER_ID,
+    G.GOODS_NAME,
+    G.GOODS_THUMBNAIL,
+    D.DELI_INVOICE_NO,
+    D.DELI_NO
+FROM SG_ORDER O, SG_GOODS G, SG_DELI D
+WHERE O.ORDER_GOODS_NO = G.GOODS_NO
+ AND O.ORDER_DELI_NO = D.DELI_NO
+ AND O.ORDER_TRADE_TYPE = #{isSearch}
+ GROUP BY O.ORDER_NO, O.ORDER_MONEY,O.ORDER_DATE, O.ORDER_TRADE_TYPE, 
+ O.ORDER_TOPPING_NAME,O.ORDER_GOODS_NO, O.ORDER_STATE, G.GOODS_NAME, G.GOODS_THUMBNAIL, D.DELI_INVOICE_NO, 
+ O.ORDER_MEMBER_ID, D.DELI_NO   
+ORDER BY O.ORDER_DATE DESC   
+ ]]>
+</select>
+
+<!-- 주문자 검색 -->
+<select id="adOrderSearch2" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[ 
+	
+	SELECT 
+    O.ORDER_NO,
+    O.ORDER_MONEY,
+    O.ORDER_DATE,
+    O.ORDER_TRADE_TYPE,
+    O.ORDER_TOPPING_NAME,
+    O.ORDER_STATE,
+    O.ORDER_GOODS_NO,
+    O.ORDER_MEMBER_ID,
+    G.GOODS_NAME,
+    G.GOODS_THUMBNAIL,
+    D.DELI_INVOICE_NO,
+    D.DELI_NO
+FROM SG_ORDER O, SG_GOODS G, SG_DELI D
+WHERE O.ORDER_GOODS_NO = G.GOODS_NO
+ AND O.ORDER_DELI_NO = D.DELI_NO
+ AND O.ORDER_MEMBER_ID LIKE '%'||#{isSearch}||'%'
+ GROUP BY O.ORDER_NO, O.ORDER_MONEY,O.ORDER_DATE, O.ORDER_TRADE_TYPE, 
+ O.ORDER_TOPPING_NAME,O.ORDER_GOODS_NO, O.ORDER_STATE, G.GOODS_NAME, G.GOODS_THUMBNAIL, D.DELI_INVOICE_NO, 
+ O.ORDER_MEMBER_ID, D.DELI_NO   
+ORDER BY O.ORDER_DATE DESC   
+
+	]]>
+</select>
+
+<!-- 배송번호 검색 -->
+<select id="adOrderSearch3" parameterType="hashmap" resultType="hashmap">
+	<![CDATA[ 
+	 	SELECT 
+    O.ORDER_NO,
+    O.ORDER_MONEY,
+    O.ORDER_DATE,
+    O.ORDER_TRADE_TYPE,
+    O.ORDER_TOPPING_NAME,
+    O.ORDER_STATE,
+    O.ORDER_GOODS_NO,
+    O.ORDER_MEMBER_ID,
+    G.GOODS_NAME,
+    G.GOODS_THUMBNAIL,
+    D.DELI_INVOICE_NO,
+    D.DELI_NO
+FROM SG_ORDER O, SG_GOODS G, SG_DELI D
+WHERE O.ORDER_GOODS_NO = G.GOODS_NO
+ AND O.ORDER_DELI_NO = D.DELI_NO
+ AND O.ORDER_DELI_NO LIKE '%'||#{isSearch}||'%'
+ GROUP BY O.ORDER_NO, O.ORDER_MONEY,O.ORDER_DATE, O.ORDER_TRADE_TYPE, 
+ O.ORDER_TOPPING_NAME,O.ORDER_GOODS_NO, O.ORDER_STATE, G.GOODS_NAME, G.GOODS_THUMBNAIL, D.DELI_INVOICE_NO, 
+ O.ORDER_MEMBER_ID, D.DELI_NO   
+ORDER BY O.ORDER_DATE DESC   
+	]]>
+</select>
+
+
+
+
+<!-- 결제정보 입력 -->	
+<insert id="adminTradeInsert" parameterType="hashmap">
+	<![CDATA[
+INSERT INTO SG_TRADE(
+TRADE_NO,
+TRADE_TYPE,
+TRADE_DATE,
+TRADE_MONEY,
+TRADE_MEMBER_ID,
+TRADE_DELI_NO
+
+)
+VALUES(
+SG_TRADE_NO_SEQ.NEXTVAL,
+#{TRADE_TYPE},
+SYSDATE,
+#{ORDER_MONEY},
+#{TRADE_MEMBER_ID},
+#{ORDER_DELI_NO}
+)
+	]]>
+</insert>
+
+<!-- 구매금액에 따른 포인트 입력 -->
+<insert id="adOrderPointInsert" parameterType="hashmap">
+<![CDATA[
+INSERT INTO SG_POINT 
+                (POINT_NO, 
+                 POINT_MONEY, 
+                 POINT_CONTENT, 
+                 POINT_DATE,
+                 POINT_MEMBER_NO,
+                 POINT_ORDER_NO
+                 )
+        VALUES 
+                ( SG_POINT_NO_SEQ.NEXTVAL, 
+                  #{POINT_MONEY}, 
+                  '구매 포인트 적립', 
+                   SYSDATE,
+                  (SELECT MEMBER_NO FROM SG_MEMBER WHERE MEMBER_ID = #{POINT_MEMBER_ID}), 
+                   #{POINT_ORDER_NO}
+                  )
+]]>
+</insert>
+
+<!-- 주문상태변경 -->
+<update id="adOrderStateUpdate" parameterType="hashmap">
+<![CDATA[
+UPDATE SG_ORDER SET
+ORDER_STATE = #{ORDER_STATE}
+WHERE ORDER_DELI_NO = #{ORDER_DELI_NO}
+]]>
+</update>
+
+<!-- 송장번호 입력 -->
+<update id="adOrderDeliUpdate" parameterType="hashmap">
+<![CDATA[
+UPDATE SG_DELI SET
+DELI_INVOICE_NO = #{DELI_INVOICE_NO}
+WHERE DELI_NO = #{DELI_NO}
+]]>
+</update>
 
 </mapper>
