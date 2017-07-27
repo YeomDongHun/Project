@@ -84,6 +84,26 @@ font-family: PureunJeonnam;
         font-weight: bold;                  /* 폰트를 굵게 설정 */
         font-family: PureunJeonnam, Dotum;  /* 기본 폰트를 영어/한글 순서대로 설정 */
     }
+    
+    @media ( min-width :768px) {
+	.menuLink, .submenuLink {
+		width: 125px
+	}
+}
+
+@media ( min-width :992px) {
+	.menuLink, .submenuLink {
+		width: 175px
+	}
+}
+
+@media ( min-width :1200px) {
+	.menuLink, .submenuLink {
+		width: 225px;
+	}
+}
+    
+    
 .menuLink {     /* 상위 메뉴의 글씨색을 흰색으로 설정 */
         color: white;
     }
