@@ -86,7 +86,7 @@ function point_list()
 <title>mypage게시판</title>
 </head>
 <body>
-<div class="mypage_member_wrap">
+<div class="mypage_member_wrap" style="width:1170px;">
          <div class="board_title">
             <div class="title_font1"><a href="#" style="text-decoration: none;color:black;">My Page</a></div>
          </div>
@@ -183,7 +183,7 @@ function point_list()
          </div>
       </section>
       
-         <div class="category">
+         <div class="category" style="padding-left:220px;">
          <ul>
             <li><a href="#myorder" onclick="javascript:tab(1)">주문내역</a></li>
             <li><a href="#mywish" onclick="javascript:tab(2)">위시리스트</a></li>

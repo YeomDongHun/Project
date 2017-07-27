@@ -11,7 +11,7 @@
          
       <div class="xans-member-joinAgreement">
          
-         <div class="agreeArea">
+         <div class="agreeArea" style="width:1170px; margin-left:170px">
             <h3>샐러드 구쁘다 의 가족이 되어주셔서 진심으로 감사드립니다..</h3>
             <div class="agree">
             <p>당신의 건강한 라이프를 위해 신선한 제품만을 제공하겠습니다.<br>
@@ -20,7 +20,7 @@
       <br>지금 바로 샐러드 구쁘다에서 건강을  UP!UP!해보세요!! 
       </div>
    </div>
-   <div class="btnArea">   
+   <div class="btnArea" style="width:900px;">   
     <a href="loginForm" class="effect effect-5">
    로그인 하기
    </a>

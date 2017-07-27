@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="/SG/resources/file/css/myWish.css">
-
+  <link rel="stylesheet" href="/SG/resources/file/css/myWish.css">
+  
 <script type="text/javascript">
- 
+   
  function wish_del(wish_no)
  {
 	 
@@ -68,7 +68,7 @@
 </head>
 
 <body>
-<div id="wish_wrap">
+<div id="wish_wrap" style="width: 1250px;">
 <div class="wish_title">
 <div class="wish_title_font">
 나의 위시리스트</div>
