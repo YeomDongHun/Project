@@ -6,7 +6,22 @@
  
  <select id="adgoodsList" parameterType="hashmap" resultType="hashmap">
 	<![CDATA[ 
-	 SELECT * FROM SG_GOODS
+	  SELECT
+ 	T.GOODS_NO,
+ 	T.GOODS_NAME,
+ 	T.GOODS_PRICE,
+ 	T.GOODS_DETAIL,
+ 	T.GOODS_THUMBNAIL,
+ 	T.GOODS_DATE,
+ 	T.GOODS_ONOFF,
+ 	T.GOODS_COUNT,
+ 	T.GOODS_KCAL,
+ 	T.GOODS_TYPE,
+ 	T.GOODS_AMOUNT,
+ 	T.GOODS_SELLCOUNT,
+ 	I.IMAGE_IMAGE
+ FROM SG_GOODS T,SG_IMAGE I
+ WHERE T.GOODS_NO = I.IMAGE_GOODS_NO
 	]]>
  </select>
   <!-- 토핑 조회 -->
@@ -14,6 +29,35 @@
 	<![CDATA[ 
 	 SELECT * FROM SG_TOPPING
 	]]>
+ </select>
+ <select id="adToppingDetail" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+SELECT*FROM SG_TOPPING
+WHERE TOPPING_NO = #{TOPPING_NO}
+ 
+ ]]> 
+ </select>
+ 
+ <select id="adgoodsDetail" parameterType="hashmap" resultType="hashmap">
+ <![CDATA[
+ SELECT
+ 	T.GOODS_NO,
+ 	T.GOODS_NAME,
+ 	T.GOODS_PRICE,
+ 	T.GOODS_DETAIL,
+ 	T.GOODS_THUMBNAIL,
+ 	T.GOODS_DATE,
+ 	T.GOODS_ONOFF,
+ 	T.GOODS_COUNT,
+ 	T.GOODS_KCAL,
+ 	T.GOODS_TYPE,
+ 	T.GOODS_AMOUNT,
+ 	T.GOODS_SELLCOUNT,
+ 	I.IMAGE_IMAGE
+ FROM SG_GOODS T,SG_IMAGE I
+ WHERE T.GOODS_NO = I.IMAGE_GOODS_NO
+ AND T.GOODS_NO = #{GOODS_NO}
+ ]]> 
  </select>
  
  <!-- 상품명 검색 -->
@@ -30,7 +74,7 @@
 	]]>
  </select>
 
-<!-- 카테고리 0=완제품, 1=음료, 2=몰라...-->
+<!-- 카테고리 0=완제품, 1=음료, 2=드레싱...-->
  <select id="adgoodsListSearch2" parameterType="String" resultType="hashmap">
 	<![CDATA[ 
 	 SELECT * FROM SG_GOODS WHERE GOODS_TYPE = #{isSearch}
@@ -44,19 +88,75 @@
 	]]>
  </select>
  
- <!-- 재고가 0 인 상품 -->
+  <!-- 재고가 0 인 상품 -->
   <select id="adgoodsListSearch4" parameterType="String" resultType="hashmap">
 	<![CDATA[ 
-	 SELECT * FROM SG_GOODS WHERE #{isSearch} = 0
+	 SELECT * FROM SG_GOODS WHERE #{isSearch} = '0'
 	]]>
  </select>
  
+ 
+ 
  <!-- 판매량 순 -->
-  <select id="adgoodsListSearch5" parameterType="String" resultType="hashmap">
+ <select id="adgoodsListSearch5" parameterType="String" resultType="hashmap">
 	<![CDATA[ 
 	 SELECT * FROM SG_GOODS ORDER BY #{isSearch} DESC
 	]]>
  </select>
+ 
+ 
+ <!-- 토핑명 검색 -->
+ <select id="adToppingListSearch0" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE TOPPING_NAME LIKE '%'||#{isSearch}||'%'
+	]]>
+ </select>
+ 
+<!-- 토핑번호 -->
+ <select id="adToppingListSearch1" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE TOPPING_NO LIKE '%'||#{isSearch}||'%'
+	]]>
+ </select>
+
+<!-- 토핑 => 카테고리 0=완제품, 1=음료, 2=드레싱...-->
+ <select id="adToppingListSearch2" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE TOPPING_TYPE = #{isSearch}
+	]]>
+ </select>
+ 
+<!--  토핑=> 판매 On Off -->
+  <select id="adToppingListSearch3" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE TOPPING_ONOFF = #{isSearch}
+	]]>
+ </select>
+ 
+  <!--토핑=>  재고가 0 인 상품 -->
+  <select id="adToppingListSearch4" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE #{isSearch} = '0'
+	]]>
+ </select>
+
+ 
+ 
+ <!--토핑 => 판매량 순 -->
+ <select id="adtoppingListSearch4" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING ORDER BY #{isSearch} DESC
+	]]>
+ </select>
+ 
+  <!--토핑=>  재고가 0 인 상품 -->
+ <select id="adToppingListSearch5" parameterType="String" resultType="hashmap">
+	<![CDATA[ 
+	 SELECT * FROM SG_TOPPING WHERE #{isSearch} = '0'
+	]]>
+ </select>
+ 
+ 
  
 
  
@@ -76,7 +176,8 @@ INSERT INTO SG_GOODS (
 	GOODS_ONOFF,
 	GOODS_KCAL,
 	GOODS_TYPE,
-	GOODS_AMOUNT
+	GOODS_AMOUNT,
+	GOODS_SELLCOUNT
 	) 
 VALUES (
 	#{GOODS_NO},
@@ -87,12 +188,50 @@ VALUES (
 	#{GOODS_ONOFF},
 	#{GOODS_KCAL},
 	#{GOODS_TYPE},
-	#{GOODS_AMOUNT}
+	#{GOODS_AMOUNT},
+	0
 	)
 	]]>
 </insert>
 
-<insert id="insertGoodsImage" parameterType="hashmap">
+<insert id="adToppingInsert" parameterType="hashmap" useGeneratedKeys="true" keyProperty="TOPPING_NO">
+		<selectKey keyProperty="TOPPING_NO" resultType="integer" order="BEFORE">
+			SELECT SG_TOPPING_NO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+
+<![CDATA[ 
+INSERT INTO SG_TOPPING
+(
+	TOPPING_NO, 
+	TOPPING_NAME, 
+	TOPPING_PRICE, 
+	TOPPING_KCAL, 
+	TOPPING_DETAIL, 
+	TOPPING_AMOUNT, 
+	TOPPING_SELLCOUNT, 
+	TOPPING_TYPE, 
+	TOPPING_REGDATE, 
+	TOPPING_ONOFF) 
+VALUES
+(
+	#{TOPPING_NO}, 
+	#{TOPPING_NAME}, 
+	#{TOPPING_PRICE}, 
+	#{TOPPING_KCAL}, 
+	#{TOPPING_DETAIL}, 
+	#{TOPPING_AMOUNT}, 
+	0, 
+	#{TOPPING_TYPE}, 
+	SYSDATE,
+	#{TOPPING_ONOFF}
+	)
+	]]>
+</insert>
+
+
+
+
+<insert id="insertGoodsImage" parameterType="hashmap" useGeneratedKeys="true" keyProperty="GOODS_NO">
 		<selectKey keyProperty="GOODS_NO" resultType="integer" order="BEFORE">
 			SELECT SG_GOODS_NO_SEQ.CURRVAL FROM DUAL
 		</selectKey>
@@ -110,6 +249,21 @@ VALUES(
 ]]>
 </insert>
 
+<update id="adgoodsModify" parameterType="hashmap">
+<![CDATA[ 
+UPDATE SG_GOODS SET
+	GOODS_NAME = #{GOODS_NAME},
+	GOODS_PRICE = #{GOODS_PRICE},
+	GOODS_DETAIL = #{GOODS_DETAIL},
+	GOODS_DATE = SYSDATE,
+	GOODS_ONOFF = #{GOODS_ONOFF},
+	GOODS_KCAL = #{GOODS_KCAL},
+	GOODS_TYPE = #{GOODS_TYPE},
+	GOODS_AMOUNT = #{GOODS_AMOUNT}
+WHERE
+	GOODS_NO = #{GOODS_NO}	
+]]>
+</update>
 
 <update id="updateGoodsThumbnail" parameterType="hashmap">
 <![CDATA[ 
@@ -120,6 +274,59 @@ WHERE
 ]]>
 </update>
 
+<update id="adImageModify" parameterType="hashmap">
+<![CDATA[ 
+UPDATE SG_IMAGE SET
+	IMAGE_IMAGE = #{IMAGE_IMAGE}
+WHERE
+	IMAGE_GOODS_NO = #{GOODS_NO}	
 
+]]>
+</update>
+
+<update id="adToppingModify" parameterType="hashmap">
+<![CDATA[
+UPDATE SG_TOPPING SET
+	TOPPING_NAME=#{TOPPING_NAME}, 
+	TOPPING_PRICE=#{TOPPING_PRICE}, 
+	TOPPING_KCAL=#{TOPPING_KCAL},
+	TOPPING_DETAIL=#{TOPPING_DETAIL},
+	TOPPING_AMOUNT=#{TOPPING_AMOUNT},
+	TOPPING_TYPE=#{TOPPING_TYPE},
+	TOPPING_REGDATE=SYSDATE,
+	TOPPING_ONOFF=#{TOPPING_ONOFF}
+WHERE TOPPING_NO=#{TOPPING_NO}
+]]>
+</update>
+
+<update id="adToppingImageUpdate" parameterType="hashmap">
+<![CDATA[ 
+UPDATE SG_TOPPING SET
+	TOPPING_IMG = #{TOPPING_IMG}
+WHERE
+	TOPPING_NO = #{TOPPING_NO}	
+]]>
+</update>
+
+<update id="adGoodsDelete" parameterType="hashmap">
+<![CDATA[ 
+UPDATE SG_GOODS SET
+	GOODS_ONOFF = 1
+WHERE
+	GOODS_NO = #{GOODS_NO}
+]]>
+
+</update>
+
+<delete id="adGoodsImageDelete" parameterType="hashmap">
+	DELETE FROM SG_IMAGE
+	WHERE IMAGE_GOODS_NO = #{GOODS_NO}
+</delete>
+
+<delete id="adToppingDelete" parameterType="hashmap">
+	DELETE FROM SG_TOPPING
+	WHERE TOPPING_NO = #{TOPPING_NO}
+
+</delete>
 
 </mapper>

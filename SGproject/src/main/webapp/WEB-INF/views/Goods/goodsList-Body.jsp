@@ -17,14 +17,22 @@
 			    			    	<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>NEW</strong></div>
 			    </c:if>
 			    <c:if test="${goodsList.COMMENT_RATE !=0 }">
+			    
 			    	<c:if test="${goodsList.COMMENT_RATE == 5 }">
 			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>BEST</strong></div>
 			    	</c:if>
 			    	<c:if test="${goodsList.COMMENT_RATE != 5 }">
 			    		<div style="width:40px;height:40px;background-color: #C90000;color:#FFFFFF; text-align: center; padding-top: 10px; position: absolute;z-index: 0;"><strong>${goodsList.COMMENT_RATE}</strong></div>
+					
 					</c:if>			   
-			    </c:if>
+			    </c:if>  
+			 	 <div style="margin-left:15px;margin-top:70px;; position: absolute;">
+				     <c:if test="${goodsList.GOODS_AMOUNT == 0 }">
+				    	 <img src="resources/file/img/sorry.png" alt="..." onclick="javascript:location.href='goodsDetail?goodsNo=${goodsList.GOODS_NO}&currentPage=${currentPage}'" width="200px;"/>
+				    </c:if>
+			    </div>
 			      <img src="resources/file/goodsFile/${goodsList.GOODS_THUMBNAIL}" alt="..." onclick="javascript:location.href='goodsDetail?goodsNo=${goodsList.GOODS_NO}&currentPage=${currentPage}'"/>
+			    
 			      <div class="caption">
 			      
 			        <div style="text-align: center;font-family: PureunJeonnam;"><h4>${goodsList.GOODS_NAME}</h4></div>
@@ -32,10 +40,11 @@
 			     
 			          <div class="basketWish" style="float:left; margin-top: 10px;">
 			          
+			    	<c:if test="${goodsList.GOODS_AMOUNT != 0 }">
 			         	<div class="basket" style="margin:auto; padding-left:10px;float:left;">
 			        		 <img id="${goodsList.GOODS_NO}" src="resources/file/img/basket.ico" width="20" height="20" onclick="SideBasket(this)"/>
 			        	</div>
-			         
+			         </c:if>
 			              <c:if test="${sessionScope.MEMBER_NO !=0 }">
 			        		<c:choose>
 			        

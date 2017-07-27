@@ -4,6 +4,18 @@
 <!-- 상품 SQL -->
 <mapper namespace="goods">
 
+<select id="mainList" resultType="hashmap">
+<![CDATA[
+		select rownum, GOODS_NO,GOODS_NAME,GOODS_PRICE,GOODS_DETAIL,GOODS_THUMBNAIL,GOODS_DATE,
+		GOODS_ONOFF, GOODS_COUNT,GOODS_KCAL, GOODS_TYPE,GOODS_AMOUNT,GOODS_SELLCOUNT, nvl(COMMENT_RATE,0) as COMMENT_RATE
+		from SG_GOODS LEFT JOIN (select ROUND(AVG(COMMENT_RATE),1) AS COMMENT_RATE,COMMENT_GOODS_NO  
+									From SG_COMMENT 
+									group by COMMENT_GOODS_NO) ON GOODS_NO = COMMENT_GOODS_NO
+									WHERE GOODS_ONOFF = 0 and rownum <9
+									ORDER BY comment_rate desc
+]]>
+</select>
+
 <select id="goodsList" resultType="hashmap">
 	<![CDATA[
 		
@@ -39,7 +51,7 @@ from SG_GOODS LEFT JOIN (select ROUND(AVG(COMMENT_RATE),1) AS COMMENT_RATE,COMME
 	<![CDATA[
 		
 	select * from SG_GOODS
-	where GOODS_NO = #{GOODS_NO} and WHERE GOODS_ONOFF = 0
+	where GOODS_NO = #{GOODS_NO} and  GOODS_ONOFF = 0
 	]]>
 	</select>
 	

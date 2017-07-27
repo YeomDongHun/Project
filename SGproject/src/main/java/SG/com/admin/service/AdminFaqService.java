@@ -5,34 +5,33 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface AdminFaqService {//ÀÎÅÍÆäÀÌ½º ¸Ş´ºÆÇ
+public interface AdminFaqService {//ì¸í„°í˜ì´ìŠ¤ ë©”ë‰´íŒ
 	
-	//FAQ¸ñ·ÏÁ¶È¸
+	//FAQëª©ë¡ì¡°íšŒ
 	List<Map<String,Object>> faqList(Map<String,Object>map) throws Exception;
 	
-	//FAQ»ó¼¼º¸±â
+	//FAQìƒì„¸ë³´ê¸°
 	Map<String, Object> faqDetail(Map<String,Object>map) throws Exception;
 	
-	//FAQ°Ë»ö Á¦¸ñ=0
-	List<Map<String,Object>> faqSearch0(Map<String,Object>map,String isSearch) throws Exception;
-	//isSearch °ªÀ¸·Î ¹Ş¾Æ¿Ã·Á°í ÇÏ±â‹š¹®¿¡ isSearch¸¦ ¼³Á¤
+	//FAQê²€ìƒ‰ ì œëª©=0
+	List<Map<String,Object>> faqSearch0(Map<String,Object>map) throws Exception;
 	
-	//FAQ°Ë»ö ³»¿ë=1
-	List<Map<String,Object>> faqSearch1(Map<String,Object>map,String isSearch) throws Exception;
+	//FAQê²€ìƒ‰ ë‚´ìš©=1
+	List<Map<String,Object>> faqSearch1(Map<String,Object>map) throws Exception;
 	
-	//FAQ°Ë»ö Ä«Å×°í¸®=2
-	List<Map<String,Object>> faqSearch2(Map<String,Object>map,String isSearch) throws Exception;
+	//FAQê²€ìƒ‰ ì¹´í…Œê³ ë¦¬=2
+	List<Map<String,Object>> faqSearch2(Map<String,Object>map) throws Exception;
 	
-	//FAQµî·Ï
+	//FAQë“±ë¡
 	void faqWrite(Map<String,Object>map, HttpServletRequest request)throws Exception;
 	
-	//FAQ¼öÁ¤
+	//FAQìˆ˜ì •
 	void faqModify(Map<String,Object>map)throws Exception;
 	
-	//FAQ»èÁ¦
+	//FAQì‚­ì œ
 	void faqDelete(Map<String,Object>map)throws Exception;
 	
-	//FAQÁ¶È¸¼ö ¾÷µ¥ÀÌÆ®
+	//FAQì¡°íšŒìˆ˜ ì—…ë°ì´íŠ¸
 	void faqUpdateHitCnt(Map<String,Object>map) throws Exception;
 }
 	

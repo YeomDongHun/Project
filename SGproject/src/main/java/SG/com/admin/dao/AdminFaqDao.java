@@ -7,55 +7,61 @@ import org.springframework.stereotype.Repository;
 
 import SG.com.common.AbstractDAO;
 
-@Repository("AdminFaqDao")//ÄÁÅ×ÀÌ³Ê¿¡ ³Ö´Â Repository
+@Repository("adminFaqDao")//ì»¨í…Œì´ë„ˆì— ë„£ëŠ” Repository
 public class AdminFaqDao extends AbstractDAO {
 	
-	//ÀüÃ¼ ¸®½ºÆ®
-	@SuppressWarnings("unchecked")//°æ°í ¹«½Ã
+	//ì „ì²´ ë¦¬ìŠ¤íŠ¸
+	@SuppressWarnings("unchecked")//ê²½ê³  ë¬´ì‹œ
 	public List<Map<String,Object>> faqList(Map<String,Object>map)throws Exception{
 		return (List<Map<String,Object>>) selectList("faqboard.faqList", map);
 	}
-	//FAQ»ó¼¼º¸±â
+	//FAQìƒì„¸ë³´ê¸°
 	@SuppressWarnings("unchecked")
 	public Map<String,Object> faqDetail(Map<String,Object>map)throws Exception{
 		return(Map<String,Object>) selectOne("faqboard.faqDetail",map);
 		
 	}
 	
-	//FAQ°Ë»ö(Á¦¸ñ)=0
+	//FAQê²€ìƒ‰(ì œëª©)=0
 	@SuppressWarnings("unchecked")
-	public List<Map<String,Object>> faqSearch0(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch0("faqboard.faqSearch0",map, isSearch);
+	public List<Map<String,Object>> faqSearch0(Map<String,Object>map){
+		return (List<Map<String,Object>>) selectList("faqboard.faqSearch0",map);
 		
 	}
-	//FAQ°Ë»ö(³»¿ë)=1
+	//FAQê²€ìƒ‰(ë‚´ìš©)=1
 	@SuppressWarnings("unchecked")
-	public List<Map<String,Object>> faqSearch1(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch1("faqboard.faqSearch1",map, isSearch);
+	public List<Map<String,Object>> faqSearch1(Map<String,Object>map){
+		return (List<Map<String,Object>>) selectList("faqboard.faqSearch1",map);
 		
 	}
-	//FAQ°Ë»ö(Ä«Å×°í¸®)=2
+	//FAQê²€ìƒ‰(ì¹´í…Œê³ ë¦¬)=2
 	@SuppressWarnings("unchecked")
-	public List<Map<String,Object>> faqSearch2(Map<String,Object>map, String isSearch){
-		return (List<Map<String,Object>>) faqSearch2("faqboard.faqSearch2",map, isSearch);
+	public List<Map<String,Object>> faqSearch2(Map<String,Object>map){
+		return (List<Map<String,Object>>) selectList("faqboard.faqSearch2",map);
 		
 	}
 	
-	//FAQµî·Ï
+	//FAQë“±ë¡
 	public void faqWrite(Map<String, Object>map) throws Exception{
 		insert("faqboard.faqWrite",map);
 	}
 	
-	//FAQ¼öÁ¤	
+	//FAQë“±ë¡(ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸)
+	
+	public void faqImageInsert(Map<String,Object>map) throws Exception{
+		update("faqboard.faqInsertImage",map);
+	}
+	
+	//FAQìˆ˜ì •	
 	public void faqModify(Map<String, Object>map)throws Exception{
 		update("faqboard.faqModify",map);
 	}
 	
-	//FAQÁ¶È¸¼ö
+	//FAQì¡°íšŒìˆ˜
 	public void faqUpdateHitCnt(Map<String,Object>map) throws Exception{
 		update("faqboard.faqUpdateHitCnt",map);
 	}
-	//FAQ»èÁ¦
+	//FAQì‚­ì œ
 	public void faqDelete(Map<String, Object>map) throws Exception{
 		delete("faqboard.faqDelete",map);
 	}

@@ -3,5 +3,128 @@
 
 <!-- NOTICE 게시판 SQL -->
 <mapper namespace="notice">
+<!--공지사항 목록조회  -->
+<select id="noticeList" resultType="hashMap" parameterType="hashMap">
+<![CDATA[
+SELECT 
+NOTICE_NO,
+NOTICE_REGDATE,
+NOTICE_HITCOUNT,
+NOTICE_TITLE,
+NOTICE_TYPE
+FROM SG_NOTICE 
+ORDER BY NOTICE_TYPE
+ ]]>
+
+</select>
+
+<!--공지사항 상세보기  -->
+<select id="noticeDetail" resultType="hashMap" parameterType="hashMap">
+<![CDATA[ 
+
+SELECT * FROM SG_NOTICE WHERE NOTICE_NO=#{NOTICE_NO}
+
+]]>
+
+</select>
+<!--공지사항 검색(제목) -->
+<select id="searchTitle" resultType="hashMap" parameterType="hashMap">
+<![CDATA[ 
+SELECT
+NOTICE_NO,
+NOTICE_REGDATE,
+NOTICE_HITCOUNT,
+NOTICE_TITLE,
+NOTICE_TYPE
+FROM SG_NOTICE 
+WHERE  NOTICE_TITLE LIKE '%' || #{isSearch} || '%'
+ORDER BY NOTICE_NO ASC
+]]>
+
+</select>
+<!--공지사항 검색(내용)  -->
+<select id="searchContent" resultType="hashMap" parameterType="hashMap">
+<![CDATA[ 
+SELECT
+        NOTICE_NO,
+        NOTICE_REGDATE,
+        NOTICE_HITCOUNT,
+        NOTICE_TITLE,
+        NOTICE_TYPE
+ FROM SG_NOTICE 
+ WHERE NOTICE_CONTENT LIKE '%' || #{isSearch} || '%'
+ ORDER BY NOTICE_NO ASC
+
+]]>
+
+</select>
+
+<!--공지사항 등록 -->
+<insert id="noticeInsert" parameterType="hashmap" useGeneratedKeys="true" keyProperty="NOTICE_NO">
+<selectKey keyProperty="NOTICE_NO" resultType="integer" order="BEFORE">
+			SELECT SG_NOTICE_NO_SEQ.NEXTVAL FROM DUAL
+</selectKey>
+<![CDATA[
+ INSERT INTO SG_NOTICE(
+        NOTICE_NO,
+        NOTICE_CONTENT,
+        NOTICE_REGDATE,
+        NOTICE_HITCOUNT,
+        NOTICE_TITLE,
+        NOTICE_TYPE)
+ VALUES
+        (
+        #{NOTICE_NO},
+        #{NOTICE_CONTENT},
+        SYSDATE,
+        DEFAULT,
+        #{NOTICE_TITLE},
+        #{NOTICE_TYPE}
+        ) ]]>
+
+</insert>
+
+<!--이미지 등록  -->
+<update id="noticeImageUpdate" parameterType="hashMap">
+<![CDATA[
+UPDATE SG_NOTICE SET 
+NOTICE_IMAGE=#{NOTICE_IMAGE}
+WHERE NOTICE_NO=#{NOTICE_NO}
+
+]]>
+</update>
+<!-- 공지사항 수정 -->
+<select id="noticeUpdate"  parameterType="hashMap">
+<![CDATA[ 
+ UPDATE SG_NOTICE 
+ SET 
+        NOTICE_CONTENT = #{NOTICE_CONTENT},
+        NOTICE_TITLE = #{NOTICE_TITLE}, 
+        NOTICE_TYPE = #{NOTICE_TYPE},
+        NOTICE_REGDATE = SYSDATE
+ WHERE NOTICE_NO = #{NOTICE_NO}
+
+]]>
+
+</select>
+<!-- 공지사항 게시글 조회수업데이트  -->
+<select id="noticeHitcount" parameterType="hashMap">
+<![CDATA[ 
+UPDATE SG_NOTICE
+SET
+ NOTICE_HITCOUNT = NOTICE_HITCOUNT+1
+ WHERE NOTICE_NO = #{NOTICE_NO}
+]]>
+
+</select>
+
+<!-- 공지사항 삭제  -->
+<select id="noticeDelete" parameterType="hashMap">
+<![CDATA[
+DELETE FROM SG_NOTICE WHERE NOTICE_NO=#{NOTICE_NO}
+ ]]>
+
+</select>
+
 
 </mapper>

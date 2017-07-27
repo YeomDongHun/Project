@@ -15,6 +15,11 @@ public class GoodsDao extends AbstractDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> mainList() throws Exception{
+		return sqlSession.selectList("goods.mainList");
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> goodsList() throws Exception {
@@ -94,6 +99,8 @@ public class GoodsDao extends AbstractDAO {
 	public int basketNo(int MEMBER_NO)throws Exception{
 		return sqlSession.selectOne("basket.basketNo",MEMBER_NO);
 	}
+	
+	
 	
 	
 	
