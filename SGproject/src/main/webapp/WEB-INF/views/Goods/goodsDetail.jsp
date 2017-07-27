@@ -210,6 +210,8 @@ function DetailBasket(){
 
 
 function dComment(test){
+	if(confirm("삭제 하시겠습니까?")){
+
 	var COMMETN_NO = test.getAttribute("id");
 	var COMMENT_ID = test.getAttribute("name");
 	var commentNo = $("#commentGoodsNo").val();
@@ -224,7 +226,6 @@ function dComment(test){
    			COMMENT_NO:commentNo
    		},
    		success: function(result){ 
-   			alert("삭제 했습니다.");
    			$("#commentList").html(result); 
 
    		},
@@ -234,7 +235,7 @@ function dComment(test){
     	
     });
     	
-	
+	}
 }
 
 

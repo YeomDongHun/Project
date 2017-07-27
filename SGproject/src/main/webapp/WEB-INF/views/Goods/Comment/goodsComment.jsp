@@ -53,7 +53,9 @@
         <td>${commentList.COMMENT_REGDATE}
         &nbsp;
         &nbsp;
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" id="${commentList.COMMENT_NO}" name="${commentList.COMMENT_ID}" onclick="dComment(this)"></span>
+        <c:if test="${(sessionScope.MEMBER_ID)==(commentList.COMMENT_ID) }">
+        	<span class="glyphicon glyphicon-remove" aria-hidden="true" id="${commentList.COMMENT_NO}" name="${commentList.COMMENT_ID}" onclick="dComment(this)"></span>
+        </c:if>
         </td>
         
     </tr>

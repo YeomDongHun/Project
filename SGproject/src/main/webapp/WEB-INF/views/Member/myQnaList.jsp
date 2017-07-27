@@ -50,7 +50,7 @@ function ajaxPaging(page)
 </head>
 
 <body>
-<div id="wish_wrap" style="width:1200px;">
+<div id="wish_wrap">
 <div class="wish_title">
 <div class="wish_title_font" style="margin-left:40px;">
 나의 QNA 게시판
@@ -58,7 +58,7 @@ function ajaxPaging(page)
 </div>
 
 
-<table class="wish_table" width="90%" style="margin-left:40px; line-height:50px;">
+<table class="wish_table" width="90%" style="margin-left:40px;">
 <colgroup>
 	<col width="10%" />
 	<col width="20%"/>
@@ -67,7 +67,7 @@ function ajaxPaging(page)
 	<col width="20%" />
 
 </colgroup>
-<tr style="line-height:20px;">
+<tr>
 	<th>글 번호</th>
 	<th>카테고리</th>
 	<th>글 제목</th>
@@ -104,7 +104,7 @@ function ajaxPaging(page)
            
 </table>
 
-<div class="board_search_table" style="float:left; margin-left:90%; margin-top:20px;">
+<div class="board_search_table" style="float:left; margin-left:1100px; margin-top:20px;">
 <input type="button" id="writeform" name="writeform" value="글 등록" onclick="javascript:writeform();">
 </div>
 

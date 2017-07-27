@@ -10,9 +10,19 @@
 
 <script type="text/javascript">
 
+	function checkDiy(){
+		if(${(sessionScope.toppingList) ==null}  || ${(sessionScope.toppingList)==""} ){
+			alert("양배추만 먹고 살순 없잖아");
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 	function payment(){
-		
+		if(checkDiy()){
 		location.href="PaymentDiy?form_price="+document.getElementById('form_price').value+"&form_kcal="+document.getElementById('form_kcal').value;
+		}
 	}
 
 	function calcurate(){
@@ -100,7 +110,7 @@
 					</table>
 					</center>
 					
-					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="javascript:alert('장바구니에 담았습니다');document.getElementById('basketForm').submit();">
+					<button type="button" class="btn btn-default btn-lg" style="margin-left: 10px;margin-right: 10px;" onclick="javascript:if(checkDiy()){alert('장바구니에 담았습니다');document.getElementById('basketForm').submit();}">
 					  <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>BASKET
 					</button>
 					

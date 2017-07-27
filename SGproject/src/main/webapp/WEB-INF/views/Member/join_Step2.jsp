@@ -6,6 +6,7 @@
 
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 
 <link rel="stylesheet" type="text/css" href="/SG/resources/file/css/joinAgreement.css" />
@@ -40,7 +41,119 @@ function joinCheck()
    }
       
 </script>
+ <style type="text/css">
+.mygrade{
+   padding-top:5px;
+   padding-bottom:5px;
+   left:90px;
+   position: absolute;
+   top: 5px;
+   bottom:9px;
+   
+  
+}
 
+
+ .container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto
+}
+
+@media ( min-width :768px) {
+	.container {
+		width: 750px
+	}
+}
+
+@media ( min-width :992px) {
+	.container {
+		width: 970px
+	}
+}
+
+@media ( min-width :1200px) {
+	.container {
+		width: 1170px;
+	}
+}
+
+.container-fluid {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
+	.container>.navbar-collapse, .container>.navbar-header {
+	margin-right: -15px;
+	margin-left: -15px
+}
+ 
+@media ( min-width :768px) {
+	.container-fluid>.navbar-collapse, .container-fluid>.navbar-header,
+		.container>.navbar-collapse, .container>.navbar-header {
+		margin-right: 0;
+		margin-left: 0
+	}
+}
+
+@media ( min-width :768px) {
+	.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand
+		{
+		margin-left: -15px
+	}
+}
+
+
+.container .jumbotron, .container-fluid .jumbotron {
+	padding-right: 15px;
+	padding-left: 15px;
+	border-radius: 6px
+}
+
+.jumbotron .container {
+	max-width: 100%
+}
+
+@media screen and (min-width:768px) {
+	.jumbotron {
+		padding-top: 48px;
+		padding-bottom: 48px
+	}
+	.container .jumbotron, .container-fluid .jumbotron {
+		padding-right: 60px;
+		padding-left: 60px
+	}
+	.jumbotron .h1, .jumbotron h1 {
+		font-size: 63px
+	}
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before,
+	.btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before,
+	.container-fluid:after, .container-fluid:before, .container:after,
+	.container:before, .dl-horizontal dd:after, .dl-horizontal dd:before,
+	.form-horizontal .form-group:after, .form-horizontal .form-group:before,
+	.modal-footer:after, .modal-footer:before, .modal-header:after,
+	.modal-header:before, .nav:after, .nav:before, .navbar-collapse:after,
+	.navbar-collapse:before, .navbar-header:after, .navbar-header:before,
+	.navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after,
+	.panel-body:before, .row:after, .row:before {
+	display: table;
+	content: " "
+}
+
+.btn-group-vertical>.btn-group:after, .btn-toolbar:after, .clearfix:after,
+	.container-fluid:after, .container:after, .dl-horizontal dd:after,
+	.form-horizontal .form-group:after, .modal-footer:after, .modal-header:after,
+	.nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after,
+	.pager:after, .panel-body:after, .row:after {
+	clear: both
+}
+</style>
 </head>
 <body>
 
@@ -318,9 +431,8 @@ function joinCheck()
          
       </div>
       </div>
-         <div style="margin-bottom:80px;"> 
-         <a class="effect effect-5" title="다음 단계로 이동" onclick="javascript:joinCheck();" style="padding:15px 0px; width:140px; 
-          margin-left:67%;">
+         <div style="margin-bottom:80px; text-align: center; margin-right: 150px;"> 
+         <a class="effect effect-5" title="다음 단계로 이동" onclick="javascript:joinCheck();" style="padding:15px 0px; width:140px; ">
                     다음 단계로 이동</a>
          </div>
    </div>

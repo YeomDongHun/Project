@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <style type="text/css">
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
 #faq_admin_wrap {
@@ -118,9 +118,7 @@
 </style>
 
 
-</head>
-
-<body>
+<div class="contanier">
 <div id="faq_admin_wrap">
 <div class="faq_admin_title">
 <div class="title_font1"><a href="#" style="text-align:center;text-decoration: none;color:black;">나의 포인트 내역</a></div>
@@ -139,7 +137,7 @@
 <tr>
 	<th>NO</th>
     <th>날짜</th>
-    <th>포인트</th>
+    <th width="200px;">포인트</th>
     <th>포인트 내용</th>
     
 </tr>
@@ -171,13 +169,11 @@
          <label for="sumPoint">
             <strong>총 포인트</strong>
          </label>
-         <%-- <input type="text" name="sumPoint" id="sumPoint" label="총포인트" value="${sumPoint}" readOnly class="xx-control"> --%>
          <div style="margin-left:150px; float:left;">${sumPoint}원</div>
          </div>
       </div>
 <div class="paging" style="text-align:center; float:left; padding-top:40px; padding-left:550px; position:absolute;">
 ${pagingHtml}
-</div>     
-</body>
-
-</html>
+</div>  
+   
+</div>
