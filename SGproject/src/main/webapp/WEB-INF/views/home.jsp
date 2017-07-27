@@ -9,14 +9,10 @@
 <head>
 
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
- --><link rel="stylesheet" href="resources/file/css/SiderBar.css" type="text/css" />
-<!-- 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>  -->
+<link rel="stylesheet" href="resources/file/css/SiderBar.css" type="text/css" />
+
 <script src="resources/file/js/SiderBarJs.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- -->
+
 
 <script type="text/javascript">
 <!--

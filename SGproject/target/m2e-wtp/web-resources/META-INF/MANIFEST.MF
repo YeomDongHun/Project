@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: user1
+=======
+Built-By: ektha
+>>>>>>> 191fcf420ab3f08b74e0c7dbd1809dd09c5c71dd
 Build-Jdk: 1.8.0_121
 Created-By: Maven Integration for Eclipse
 
