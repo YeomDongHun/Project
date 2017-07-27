@@ -55,10 +55,15 @@
 </div>
 
 <!-- body 부분 리스트  -->
+
 <div style="margin-top: 60px; overflow-x:hidden; overflow-y:auto;">
   <div class="container" style="overflow-x:hidden; overflow-y:auto;" >
+  
+  <div style="margin-bottom: 30px;">  
+  <img src="resources/file/img/titleBest.png"/>
+</div>
+
   <input type="hidden" id="currentPage" value="${currentPage }"/>
-                
 <c:choose>
 	<c:when test="${fn:length(goodsList) > 0}">
 		<c:forEach var="goodsList" items="${goodsList}" varStatus="stat">
@@ -93,6 +98,10 @@
 	    </tr>
 	</c:otherwise>
 </c:choose>
+<div>
+<a href="memberDiyBoardList"><img src="resources/file/img/CommentS2.png" style="width:100%; "/></a>
+
+</div>
 </div>
 
 </body>

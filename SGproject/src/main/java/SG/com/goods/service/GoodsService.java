@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface GoodsService {
+	public List<Map<String,Object>> mainList() throws Exception;
 
 	public List<Map<String, Object>> goodsList() throws Exception ;
 	

@@ -8,7 +8,7 @@
 <style>
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
    /* body */
-   .faq_member_wrap {width: 1500px; margin-left:auto; margin-right:auto;}
+   .faq_member_wrap {width: 1170px; margin-left:auto; margin-right:auto;}
    .board_title {text-align: center; color: #212121; padding-top: 50px;}
    .board_title div {padding-bottom: 10px;}
    .title_font1 {font-family: Orbitron; font-size: 24px; font-weight: bold;}
@@ -16,7 +16,7 @@
    .line {margin: 0 50px 0 50px;}
    .board_table thead th {text-align: center; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; padding: 8px 0; background: #f5f5f5;}
    .board_table tbody td { text-align: center;  border-bottom: 1px solid #e5e5e5; padding: 5px 0;}
-   .board_main {width: 1500px; padding-top: 30px; padding-bottom: 30px;}
+   .board_main {width: 1170px; padding-top: 30px; padding-bottom: 30px;}
    .board_table {font-family: PureunJeonnam; font-size: 12px; color: #212121;}
    .board_table tbody tr td a {color: #212121; text-decoration: none;}
    .board_table tbody tr td a:HOVER {color: #aaa;}
@@ -148,5 +148,6 @@
             </form>
          </div>
         </div> 
+
 </body>
 </html>

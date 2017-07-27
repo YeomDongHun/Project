@@ -26,7 +26,7 @@ public class MainController {
 		
 		int currentPage=1;
 		
-		List<Map<String,Object>> list = goodsService.goodsList();
+		List<Map<String,Object>> list = goodsService.mainList();
 		
 		if(session.getAttribute("MEMBER_NO")==null){
 		session.setAttribute("MEMBER_ID", "visitor");

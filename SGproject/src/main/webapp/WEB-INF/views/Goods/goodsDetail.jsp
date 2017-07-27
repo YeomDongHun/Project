@@ -300,8 +300,9 @@ function dComment(test){
 	</c:if>
 	<c:if test="${goodsDetail.GOODS_AMOUNT !=0 }">
 	<input type="button" class="btn btn-success btn-lg" style="font-family: PureunJeonnam;" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
-	</c:if>
+	
 	<input type="button" class="btn btn-warning btn-lg" style="font-family: PureunJeonnam;" value="BASKET" onclick="DetailBasket();"/>
+	</c:if>
 	</div>
 </div>
 
@@ -316,31 +317,36 @@ function dComment(test){
 	</div>
 
 
-
-
 <center>
-<div id="comment" class="comment" style="background:#F6F6F6;padding: 20px;width:1000px;margin-left:auto;font-family: PureunJeonnam;
-   			margin-right:auto;padding: 20px;">
-   			<strong>맛있었나요?</strong>
-<p class="star_rating" id="star_rating">
-    <a href="#" id="1">★</a>
-    <a href="#" id="2">★</a>
-    <a href="#" id="3">★</a>
-    <a href="#" id="4">★</a>
-    <a href="#" id="5">★</a>
-</p>
+<c:if test="${sessionScope.MEMBER_NO ==0 }">
+	<div style="text-align: center;background-color: #F6F6F6; width: 1000px;">
+		후기를 작성하기 위해선 로그인이 필요합니다.
+	</div>
+</c:if>
+<c:if test="${sessionScope.MEMBER_NO !=0 }">
 
-
-   			
-   			
-   			
-
-<textarea rows="4" cols="100" id="commentContents" name="commentContents"   ></textarea>
-<input type="button" class="btn btn-default" id="button1" value="후기작성" style="height:60pt;width:60pt;margin-bottom: 70px;font-family: PureunJeonnam;"  />
-<input type="hidden" id="commentGoodsNo" name="goodsNo" value="${goodsDetail.GOODS_NO}"/>
-
-</div>
-
+	<div id="comment" class="comment" style="background:#F6F6F6;padding: 20px;width:1000px;margin-left:auto;font-family: PureunJeonnam;
+	   			margin-right:auto;padding: 20px;">
+	   			<strong>맛있었나요?</strong>
+		<p class="star_rating" id="star_rating">
+		    <a href="#" id="1">★</a>
+		    <a href="#" id="2">★</a>
+		    <a href="#" id="3">★</a>
+		    <a href="#" id="4">★</a>
+		    <a href="#" id="5">★</a>
+		</p>
+		
+		
+		   			
+		   			
+		   			
+		
+		<textarea rows="4" cols="100" id="commentContents" name="commentContents"   ></textarea>
+		<input type="button" class="btn btn-default" id="button1" value="후기작성" style="height:60pt;width:60pt;margin-bottom: 70px;font-family: PureunJeonnam;"  />
+		<input type="hidden" id="commentGoodsNo" name="goodsNo" value="${goodsDetail.GOODS_NO}"/>
+	
+	</div>
+</c:if>
 <div id="commentList" style="width:1000px;margin-left:auto; margin-right:auto;"><jsp:include page="Comment/goodsComment.jsp"></jsp:include></div>
 </center>
 </body>

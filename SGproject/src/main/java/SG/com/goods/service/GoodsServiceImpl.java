@@ -106,6 +106,12 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return goodsDao.basketNo(MEMBER_NO);
 	}
+
+	@Override
+	public List<Map<String, Object>> mainList() throws Exception {
+		// TODO Auto-generated method stub
+		return goodsDao.mainList();
+	}
 	
 	
 
