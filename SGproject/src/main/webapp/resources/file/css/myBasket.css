@@ -2,11 +2,11 @@
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
 #wish_wrap 
 {
-	width: 1500px;
+	width: 1170px;
 	font-family: PureunJeonnam;
 }
 .wish_title {text-align: left; color: #212121; padding-top: 50px; }
-.wish_title div {padding-top: 20px; padding-bottom:10px; width:400px; float:left; }
+.wish_title div {padding-top: 20px; width:400px; float:left; }
 .wish_title_font {font-family: PureunJeonnam; font-size: 25px; font-weight: bold;}
 .title_font2 {font-family: PureunJeonnam; font-size: 20px; color: #999;}
 .wish_table{
@@ -75,10 +75,9 @@
 .wish_bottom_font {font-family: PureunJeonnam; font-size: 20px;}
 
 /* 검색 css */
-.board_search_table{font-family: PureunJeonnam; font-size: 12px; color: #212121;}
+.board_search_table{font-family: PureunJeonnam; font-size: 12px; color: #212121; font-weight:bold;}
 .board_search_table thead th{text-align: center; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; padding: 2px 0; background: #f5f5f5;}
 .board_search_table input[type=text]{width:200px;height: 20px;padding-left:13px; }
 .board_search_table input[type=button]{border:1px solid silver; background-color: white; padding:2px 6px; border-radius:5px;}
 .board_search_table input[type=button]:HOVER{background-color: #e5e5e5;  }
 
-.button_all{font-family: PureunJeonnam; font-size:15px; text-align:center;}

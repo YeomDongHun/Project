@@ -2,15 +2,19 @@
     pageEncoding="EUC-KR"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
+
 <!DOCTYPE html>
-<div class="diy" style="clear:both">
-					<div class="container" style="  width: 500px; height: 300px; padding-top: 20px;margin-top: 20px; "> 
+				  <!--  content -->
+
+<div class="diy" id="diy" style="clear:both">
+					<div class="container" style="  width: 570px; height: 300px; overflow-y:scroll; padding-top: 20px;margin-top: 20px; "> 
 					
 						<c:choose>
 							<c:when test="${fn:length(topping) > 0}">
 								<c:forEach var="topping" items="${topping}" varStatus="stat">
 							                          
-									    <div class="thumbnail imgover" style="width: 100px; height: 115px; float: left; margin-right: 20px;">
+									    <div class="thumbnail imgover" style="width: 100px; height: 115px; float: left; margin-right: 20px; margin-bottom: 50px;">
 									      <img src="resources/file/goodsFile/${topping.TOPPING_IMG}" id="${topping.TOPPING_NO }" name="${topping.TOPPING_NAME }" alt="..." onclick="addTopping(this)" class="img-circle" style="width: 70px; height: 70px; "/>
 									      <div class="caption">
 									      
@@ -37,3 +41,6 @@
 					</div>
 			
 				</div>
+				
+	
+				

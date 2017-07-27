@@ -476,6 +476,7 @@ public class OrderController {
 				}else{
 					GOODS_TOPPING = GOODS_TOPPING +","+ toppingList.get(i).get("TOPPING_NAME").toString();
 				}
+				
 			}
 			
 			request.getParameter("form_price");

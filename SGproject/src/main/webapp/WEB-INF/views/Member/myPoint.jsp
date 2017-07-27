@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="resources/file/js/jquery-2.0.0.min.js"></script>
 <style type="text/css">
 @import url('//cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css');
 #faq_admin_wrap {
-	width: 1500px;
+	width: 1240px;
 	font-family: PureunJeonnam;
 }
 .faq_admin_title {text-align: left; color: #212121; padding-top: 50px;}
@@ -144,17 +144,18 @@
     
 </tr>
 
+
+
           <c:choose>
-               <c:when test="${pointList} == null">
- 					<tr>
-                 		<td colspan="7">게시글이 없습니다.</td>
-                 	</tr>
+               <c:when test="${fn:length(pointList) le 0}">
+ 					<tr><td colspan="7" style="text-align:center;">포인트 내역이 없습니다.</td></tr>
                  </c:when>
+                 
                  <c:otherwise>
 
    				 <c:forEach var="pointList"  items="${pointList}" varStatus="stat">
                  	<tr> 
-                     	<td>${stat.count}</td>
+                     	<td>${pointList.RNUM}</td>
                      	<td>${pointList.POINT_DATE}</td> 
                      	<td>${pointList.POINT_MONEY}</td>
                      	<td>${pointList.POINT_CONTENT}</td>
@@ -174,7 +175,7 @@
          <div style="margin-left:150px; float:left;">${sumPoint}원</div>
          </div>
       </div>
-<div class="paging" style="text-align:center; float:left; padding-top:40px; padding-left:550px;">
+<div class="paging" style="text-align:center; float:left; padding-top:40px; padding-left:550px; position:absolute;">
 ${pagingHtml}
 </div>     
 </body>

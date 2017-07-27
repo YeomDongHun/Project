@@ -79,10 +79,10 @@ font-family: PureunJeonnam;
 .menuLink, .submenuLink {           /* 상위 메뉴와 하위 메뉴의 a 태그에 공통으로 설정할 스타일 */
         text-decoration:none;               /* a 태그의 꾸밈 효과 제거 */
         display: block;                     /* a 태그의 클릭 범위를 넓힘 */
-        width: 222px;                       /* 기본 넓이를 150px로 설정 */
+        width: 225px;                       /* 기본 넓이를 150px로 설정 */
         font-size: 15px;                    /* 폰트 사이즈를 12px로 설정 */
         font-weight: bold;                  /* 폰트를 굵게 설정 */
-        font-family: PureunJeonnam, Dotum; /* 기본 폰트를 영어/한글 순서대로 설정 */
+        font-family: PureunJeonnam, Dotum;  /* 기본 폰트를 영어/한글 순서대로 설정 */
     }
 .menuLink {     /* 상위 메뉴의 글씨색을 흰색으로 설정 */
         color: white;
@@ -156,9 +156,7 @@ font-family: PureunJeonnam;
           <c:otherwise>
           <ul>                
           <li><a class="loginLink" href="logout">로그아웃</a></li>
-          <li><a class="loginLink" href="mypage">마이페이지</a></li>
-          <li><a class="loginLink" href="#">장바구니</a></li>
-          <li><a class="loginLink" href="#">위시리스트</a></li>          
+          <li><a class="loginLink" href="mypage">마이페이지</a></li>       
           </ul>
           <div class="loginname">${sessionScope.MEMBER_NAME}님 환영합니다!</div>
           </c:otherwise>

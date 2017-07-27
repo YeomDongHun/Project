@@ -293,8 +293,13 @@ function dComment(test){
 	</form>
 	
 
+	<c:if test="${goodsDetail.GOODS_AMOUNT == 0 }">
+	<input type="button" class="btn btn-error btn-lg" style="font-family: PureunJeonnam;" value="SOLD OUT" onclick=""/>&nbsp;&nbsp;&nbsp;
 	
+	</c:if>
+	<c:if test="${goodsDetail.GOODS_AMOUNT !=0 }">
 	<input type="button" class="btn btn-success btn-lg" style="font-family: PureunJeonnam;" value="BUY" onclick="document.getElementById('Order').submit();"/>&nbsp;&nbsp;&nbsp;
+	</c:if>
 	<input type="button" class="btn btn-warning btn-lg" style="font-family: PureunJeonnam;" value="BASKET" onclick="DetailBasket();"/>
 	</div>
 </div>
